@@ -5,109 +5,92 @@ package body PSX.DMA is
 
    use type Interfaces.Unsigned_32;
 
-   procedure Reset (DMA : out DMA_State) is
-   begin
-      DMA.Channels :=
-        (others =>
-           (Base_Address => 0, Block_Control => 0, Channel_Control => 0));
+   DMA_BASE : constant Word32 := 16#1F80_1080#;
 
-      DMA.DPCR := 0;
-      DMA.DICR := 0;
+   DMA6_MADR : constant Word32 := DMA_BASE + 16#60#;
+   DMA6_BCR  : constant Word32 := DMA_BASE + 16#64#;
+   DMA6_CHCR : constant Word32 := DMA_BASE + 16#68#;
+
+   procedure Reset (Memory : in out PSX.Memory.Memory_State) is
+   begin
+      Memory.DMA_Registers := (others => 0);
    end Reset;
 
-   function Channel_Enabled (DMA : DMA_State; Index : Natural) return Boolean
-   is
-      Shift : constant Natural := Index * 4;
+   function Read_DMA_Register
+     (Memory : PSX.Memory.Memory_State; Address : Word32) return Word32 is
    begin
-      return (Interfaces.Shift_Right (DMA.DPCR, Shift) and 16#8#) /= 0;
-   end Channel_Enabled;
+      return Memory.DMA_Registers ((Address - DMA_BASE) / 4);
+   end Read_DMA_Register;
 
-   function Channel_Active (DMA : DMA_State; Index : Natural) return Boolean is
+   procedure Write_DMA_Register
+     (Memory  : in out PSX.Memory.Memory_State;
+      Address : Word32;
+      Value   : Word32) is
    begin
-      return (DMA.Channels (Index).Channel_Control and 16#0100_0000#) /= 0;
-   end Channel_Active;
+      Memory.DMA_Registers ((Address - DMA_BASE) / 4) := Value;
+   end Write_DMA_Register;
 
-   function Sync_Mode (DMA : DMA_State; Index : Natural) return Word32 is
+   procedure Process_OTC (Memory : in out PSX.Memory.Memory_State) is
+      MADR : Word32;
+      BCR  : Word32;
+      CHCR : Word32;
+
+      Address : Word32;
+      Count   : Word32;
+      Next    : Word32;
    begin
-      return
-        Interfaces.Shift_Right (DMA.Channels (Index).Channel_Control, 9)
-        and 16#3#;
-   end Sync_Mode;
+      MADR := Read_DMA_Register (Memory, DMA6_MADR);
+      BCR := Read_DMA_Register (Memory, DMA6_BCR);
+      CHCR := Read_DMA_Register (Memory, DMA6_CHCR);
 
-   function Block_Size (DMA : DMA_State; Index : Natural) return Word32 is
-   begin
-      return DMA.Channels (Index).Block_Control and 16#FFFF#;
-   end Block_Size;
-
-   function Block_Count (DMA : DMA_State; Index : Natural) return Word32 is
-   begin
-      return Interfaces.Shift_Right (DMA.Channels (Index).Block_Control, 16);
-   end Block_Count;
-
-   procedure Transfer_Channel
-     (DMA    : in out DMA_State;
-      Memory : in out PSX.Memory.Memory_State;
-      Index  : Natural)
-   is
-      Channel : DMA_Channel renames DMA.Channels (Index);
-
-      Address : Word32 := Channel.Base_Address;
-      Count   : Word32 := 0;
-      Total   : Word32 := 0;
-
-      Step : Word32 := 4;
-   begin
-
-      --  Only implement normal CPU-memory transfers for now.
-      --  This gives us the foundation for the real DMA controller.
-
-      if Sync_Mode (DMA, Index) /= 0 then
+      --  Channel 6 must be active.
+      if (CHCR and 16#0100_0000#) = 0 then
          return;
       end if;
 
-      if Block_Size (DMA, Index) = 0 then
+      --  OTC uses manual mode.
+      if ((CHCR and 16#0000_0600#) /= 0) then
          return;
       end if;
 
-      Total := Block_Size (DMA, Index);
+      --  Number of words to transfer.
+      Count := BCR and 16#0000_FFFF#;
 
-      while Count < Total loop
+      if Count = 0 then
+         return;
+      end if;
 
-         --  DMA direction:
-         --  bit 0 = 0 : device -> RAM
-         --  bit 0 = 1 : RAM -> device
-         --
-         --  Device endpoints are not implemented yet.
-         --  Therefore, for now, only safely consume the DMA request.
+      Address := MADR;
 
-         if (Channel.Channel_Control and 16#1#) = 0 then
-            null;
-         else
-            null;
-         end if;
+      while Count > 1 loop
 
-         Count := Count + 1;
-         Address := Address + Step;
+         Next := Address - 4;
+
+         PSX.Memory.Write_32 (Memory, Address, Next);
+
+         Address := Next;
+         Count := Count - 1;
 
       end loop;
 
-      --  Clear START/ACTIVE.
-      Channel.Channel_Control := Channel.Channel_Control and not 16#0100_0000#;
+      --  Last OTC entry terminates the linked list.
+      PSX.Memory.Write_32 (Memory, Address, 16#00FF_FFFF#);
 
-   end Transfer_Channel;
+      --  DMA finished.
+      CHCR := CHCR and not 16#0100_0000#;
 
-   procedure Process
-     (DMA : in out DMA_State; Memory : in out PSX.Memory.Memory_State) is
+      Write_DMA_Register (Memory, DMA6_CHCR, CHCR);
+
+   end Process_OTC;
+
+   procedure Process (Memory : in out PSX.Memory.Memory_State) is
+      CHCR : Word32;
    begin
+      CHCR := Read_DMA_Register (Memory, DMA6_CHCR);
 
-      for I in 0 .. Channel_Count - 1 loop
-
-         if Channel_Enabled (DMA, I) and then Channel_Active (DMA, I) then
-            Transfer_Channel (DMA, Memory, I);
-         end if;
-
-      end loop;
-
+      if (CHCR and 16#0100_0000#) /= 0 then
+         Process_OTC (Memory);
+      end if;
    end Process;
 
 end PSX.DMA;

@@ -17,6 +17,7 @@ project Psxada_Tests extends "../psxada.gpr" is
       "psx_cpu_step_tests.adb",
       "psx_spu_tests.adb",
       "psx_dma_register_tests.adb",
+      "psx_dma_otc_tests.adb",
       "psx_bios_tests.adb");
 
 end Psxada_Tests;

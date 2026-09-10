@@ -1,0 +1,2 @@
+psx-dma.adb:2:06: warning: redundant with clause in body [-gnatwr]
+psx-dma.adb:52:10: (style) redundant parentheses [-gnatyx]

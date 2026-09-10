@@ -77,8 +77,8 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-memory.ads	20260909210835 83d9ae8d psx.memory%s
-D psx-memory.adb	20260910014306 61709290 psx.memory%b
+D psx-memory.ads	20260910015316 83d9ae8d psx.memory%s
+D psx-memory.adb	20260910015316 61709290 psx.memory%b
 D psx-types.ads		20260824220912 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s

@@ -44,12 +44,12 @@ RN
 RV NO_IO
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_dma_register_tests%b  psx_dma_register_tests.adb  42392f59 NE OO SU IU
+U psx_dma_otc_tests%b	psx_dma_otc_tests.adb	737b6acc NE OO SU IU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
-W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
+W psx.dma%s		psx-dma.adb		psx-dma.ali
 W psx.memory%s		psx-memory.adb		psx-memory.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
@@ -66,9 +66,10 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
+D psx-dma.ads		20260910171829 246d433d psx.dma%s
 D psx-memory.ads	20260910015316 83d9ae8d psx.memory%s
 D psx-types.ads		20260824220912 f83f461c psx.types%s
-D psx_dma_register_tests.adb  20260910014744 9c2179d7 psx_dma_register_tests%b
+D psx_dma_otc_tests.adb	20260910172100 181f86be psx_dma_otc_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -84,34 +85,39 @@ D s-traent.ads		20260610194523 c81cbf8c system.traceback_entries%s
 D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
-G c Z b b [psx_dma_register_tests standard 6 11 none]
-G r c none [psx_dma_register_tests standard 6 11 none] [reset psx__memory 24 14 none]
-G r c none [psx_dma_register_tests standard 6 11 none] [write_32 psx__memory 48 14 none]
-G r c none [psx_dma_register_tests standard 6 11 none] [read_32 psx__memory 34 13 none]
+G c Z b b [psx_dma_otc_tests standard 6 11 none]
+G r c none [psx_dma_otc_tests standard 6 11 none] [reset psx__memory 24 14 none]
+G r c none [psx_dma_otc_tests standard 6 11 none] [write_32 psx__memory 48 14 none]
+G r c none [psx_dma_otc_tests standard 6 11 none] [process psx__dma 10 14 none]
+G r c none [psx_dma_otc_tests standard 6 11 none] [read_32 psx__memory 34 13 none]
 X 1 ada.ads
-18K9*Ada 22e8 16|2r6 10r8
+18K9*Ada 22e8 17|1r6 8r8
 X 9 a-textio.ads
-58K13*Text_IO 785e16 16|2w10 10r12
-565U14*Put_Line 16|16s4 26s7 28s7 37s7 39s7 48s7 50s7 59s7 61s7 64s4
+58K13*Text_IO 785e16 17|1w10 8r12
+565U14*Put_Line 17|18s4 45s7 47s7 53s7 55s7 61s7 63s7 69s7 71s7 77s7 79s7
+. 82s4
 X 11 interfac.ads
-47K9*Interfaces 247e15 16|1w6 8r13
-92M9*Unsigned_32 16|8r24
+92M9*Unsigned_32
 X 13 psx.ads
-1K9*PSX 3e8 16|3r6 4r6 12r13 13r13 18r4 21r4 23r13 32r4 34r13 43r4 45r13
-. 54r4 56r13
-X 14 psx-memory.ads
-3K13*Memory 55e15 16|3w10 12r17 18r8 21r8 23r17 32r8 34r17 43r8 45r17 54r8
-. 56r17
-17R9*Memory_State 22e14 16|12r24
-24U14*Reset 16|18s15
-34V13*Read_32{15|7M12} 16|23s24 34s24 45s24 56s24
-48U14*Write_32 16|21s15 32s15 43s15 54s15
-X 15 psx-types.ads
-3K13*Types 12e14 16|4w10 13r17
-7M12*Word32{11|92M9} 16|13r23
-X 16 psx_dma_register_tests.adb
-6U11*PSX_DMA_REGISTER_TESTS 6b11 66l5 66t27
-12r4 Memory{14|17R9} 18m22 21m25 21r25 23r33 32m25 32r25 34r33 43m25 43r25
-. 45r33 54m25 54r25 56r33
-13m4 Value{15|7M12} 23m4 25r7 34m4 36r7 45m4 47r7 56m4 58r7
+1K9*PSX 3e8 17|2r6 3r6 4r6 9r13 11r13 13r29 15r12 20r4 24r4 27r4 30r4 33r4
+. 42r13 50r13 58r13 66r13 74r13
+X 14 psx-dma.ads
+4K13*DMA 12e12 17|2w10 33r8
+10U14*Process 17|33s12
+X 15 psx-memory.ads
+3K13*Memory 55e15 17|3w10 11r17 20r8 24r8 27r8 30r8 42r17 50r17 58r17 66r17
+. 74r17
+17R9*Memory_State 22e14 17|11r24
+24U14*Reset 17|20s15
+34V13*Read_32{16|7M12} 17|42s24 50s24 58s24 66s24 74s24
+48U14*Write_32 17|24s15 27s15 30s15
+X 16 psx-types.ads
+3K13*Types 12e14 17|4w10 9r17 13r33 15r16
+7M12*Word32{11|92M9} 17|9r23 13r39 15r22
+X 17 psx_dma_otc_tests.adb
+6U11*PSX_DMA_OTC_TESTS 6b11 84l5 84t22
+11r4 Memory{15|17R9} 20m22 24m25 24r25 27m25 27r25 30m25 30r25 33m21 33r21
+. 42r33 50r33 58r33 66r33 74r33
+13m4 Start_Address{16|7M12} 24r48
+15m4 Value{16|7M12} 42m4 44r7 50m4 52r7 58m4 60r7 66m4 68r7 74m4 76r8
 

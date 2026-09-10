@@ -1,0 +1,112 @@
+V "GNAT Lib v16"
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx.dma%b		psx-dma.adb		81f7ab39 NE OO PK IU
+W interfaces%s		interfac.ads		interfac.ali
+W psx%s			psx.ads			psx.ali
+W psx.memory%s		psx-memory.adb		psx-memory.ali
+
+U psx.dma%s		psx-dma.ads		30818a82 EE NE OO PK IU
+W psx%s			psx.ads			psx.ali
+W psx.memory%s		psx-memory.adb		psx-memory.ali
+W psx.types%s		psx-types.ads		psx-types.ali
+
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-dma.ads		20260910171829 246d433d psx.dma%s
+D psx-dma.adb		20260910171801 b752bf48 psx.dma%b
+D psx-memory.ads	20260910015316 83d9ae8d psx.memory%s
+D psx-types.ads		20260824220912 f83f461c psx.types%s
+D system.ads		20260610194523 8a611ac3 system%s
+G a e
+G c Z s b [reset psx__dma 8 14 none]
+G c Z s b [process psx__dma 10 14 none]
+G r c none [process psx__dma 10 14 none] [write_32 psx__memory 48 14 none]
+X 1 interfac.ads
+47K9*Interfaces 247e15 4|1w6 6r13
+92M9*Unsigned_32 4|6r24
+X 2 psx.ads
+1K9*PSX 3e8 3|1r6 2r6 4r9 6r22 8r37 10r39 12r5 4|2r6 4r14 14r37 20r16 26r24
+. 33r43 69r10 77r7 86r39 96r5
+X 3 psx-dma.ads
+4K13*DMA 2|1k9 3|12l9 12e12 4|4b18 96l9 96t12
+6M12*Word32{6|7M12} 4|8r24 10r25 11r25 12r25 20r51 20r66 27r17 28r17 34r14
+. 35r14 36r14 38r17 39r17 40r17 87r14
+8U14*Reset 8=21 4|14b14 17l8 17t13
+8r21 Memory{5|17R9} 4|14b21 16m7
+10U14*Process 10=23 4|86b14 94l8 94t15
+10r23 Memory{5|17R9} 4|86b23 89r34 92m23
+X 4 psx-dma.adb
+8m4 DMA_BASE{3|6M12} 10r35 11r35 12r35 22r47 30r40
+10m4 DMA6_MADR{3|6M12} 42r42
+11m4 DMA6_BCR{3|6M12} 43r41
+12m4 DMA6_CHCR{3|6M12} 44r42 82r35 89r42
+19V13 Read_DMA_Register{3|6M12} 19b13 20>7 20>41 23l8 23t25 42s15 43s14 44s15
+. 89s15
+20r7 Memory{5|17R9} 22r14
+20m41 Address{3|6M12} 22r37
+25U14 Write_DMA_Register 25b14 26=7 27>7 28>7 31l8 31t26 82s7
+26r7 Memory{5|17R9} 30m7
+27m7 Address{3|6M12} 30r30
+28m7 Value{3|6M12} 30r58
+33U14 Process_OTC 33b14 33=27 84l8 84t19 92s10
+33r27 Memory{5|17R9} 42r34 43r33 44r34 69m31 77m28 82m27
+34m7 MADR{3|6M12} 42m7 63r18
+35m7 BCR{3|6M12} 43m7 57r16
+36m7 CHCR{3|6M12} 44m7 47r11 52r12 80m7 80r15 82r46
+38m7 Address{3|6M12} 63m7 67r18 69r39 71m10 77r36
+39m7 Count{3|6M12} 57m7 59r10 65r13 72m10 72r19
+40m7 Next{3|6M12} 67m10 69r48 71r21
+87m7 CHCR{3|6M12} 89m7 91r11
+X 5 psx-memory.ads
+3K13*Memory 3|1w10 8r41 10r43 4|2w10 14r41 20r20 26r28 33r47 69r14 77r11
+. 86r43 5|55e15
+5A9*DMA_Register_Array(6|7M12)<1|92M9>
+17R9*Memory_State 3|8r48 10r50 4|14r48 20r27 26r35 33r54 86r50 5|22e14
+21a7*DMA_Registers{5A9} 4|16m14 22r21 30m14
+48U14*Write_32 4|69s21 77s18
+X 6 psx-types.ads
+3K13*Types 3|2w10 6r26 6|12e14
+7M12*Word32{1|92M9} 3|6r32
+
