@@ -3,6 +3,7 @@ with PSX.CPU.Execute;
 with PSX.CPU.Fetch;
 with PSX.CPU.Instruction;
 with PSX.Types;
+with PSX.DMA;
 
 package body PSX.CPU.Step is
 
@@ -96,6 +97,7 @@ package body PSX.CPU.Step is
          CPU.In_Delay_Slot := Is_Control_Transfer;
 
       end if;
+      PSX.DMA.Process (Memory);
 
    end Step;
 

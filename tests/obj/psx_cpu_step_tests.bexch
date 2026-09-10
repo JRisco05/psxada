@@ -9,6 +9,7 @@ b__psx_cpu_step_tests.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-types.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
+/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-dma.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-register.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-instruction.o
