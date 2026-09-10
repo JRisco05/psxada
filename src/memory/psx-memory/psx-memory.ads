@@ -2,6 +2,9 @@ with PSX.Types;
 
 package PSX.Memory is
 
+   type DMA_Register_Array is
+     array (PSX.Types.Word32 range 0 .. 16#7F#) of PSX.Types.Word32;
+
    type Memory_Array is
      array (PSX.Types.Word32 range 0 .. 16#001F_FFFF#) of PSX.Types.Word8;
 
@@ -12,9 +15,10 @@ package PSX.Memory is
      array (PSX.Types.Word32 range 0 .. 16#0007_FFFF#) of PSX.Types.Word8;
 
    type Memory_State is record
-      Data       : Memory_Array;
-      Scratchpad : Scratchpad_Array;
-      BIOS       : BIOS_Array;
+      Data          : Memory_Array;
+      Scratchpad    : Scratchpad_Array;
+      BIOS          : BIOS_Array;
+      DMA_Registers : DMA_Register_Array;
    end record;
 
    procedure Reset (Memory : out Memory_State);

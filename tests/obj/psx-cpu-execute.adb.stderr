@@ -1,5 +1,4 @@
-psx-cpu-execute.adb:94:80: (style) this line is too long: 81 [-gnatyM]
-psx-cpu-execute.adb:147:65: (style) bad casing of "Rs_Index" declared at line 107 [-gnatyr]
-psx-cpu-execute.adb:624:27: (style) "and then" required [-gnatyB]
-psx-cpu-execute.adb:644:27: (style) "and then" required [-gnatyB]
+psx-cpu-execute.adb:145:65: (style) bad casing of "Rs_Index" declared at line 105 [-gnatyr]
+psx-cpu-execute.adb:622:27: (style) "and then" required [-gnatyB]
+psx-cpu-execute.adb:642:27: (style) "and then" required [-gnatyB]
 psx-cpu-execute.ads:1:06: warning: unnecessary with of ancestor [-gnatwr]

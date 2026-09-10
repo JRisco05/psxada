@@ -46,7 +46,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_cpu_execute_tests%b  psx_cpu_execute_tests.adb  2cea6282 NE OO SU
+U psx_cpu_execute_tests%b  psx_cpu_execute_tests.adb  361b9f3f NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -78,10 +78,10 @@ D psx-cpu.ads		20260908151228 7c10720c psx.cpu%s
 D psx-cpu-execute.ads	20260829222429 4b6c299f psx.cpu.execute%s
 D psx-cpu-fetch.ads	20260902161056 1bdf6dc0 psx.cpu.fetch%s
 D psx-cpu-instruction.ads  20260824213207 a548a6bb psx.cpu.instruction%s
-D psx-memory.ads	20260906031938 99285330 psx.memory%s
+D psx-memory.ads	20260909210835 83d9ae8d psx.memory%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
 D psx-types.ads		20260824220912 f83f461c psx.types%s
-D psx_cpu_execute_tests.adb  20260909033146 d488fb79 psx_cpu_execute_tests%b
+D psx_cpu_execute_tests.adb  20260909211353 d488fb79 psx_cpu_execute_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -104,9 +104,9 @@ G r c none [psx_cpu_execute_tests standard 12 11 none] [reset psx__cpu 39 14 non
 G r c none [psx_cpu_execute_tests standard 12 11 none] [write psx__register 15 14 none]
 G r c none [psx_cpu_execute_tests standard 12 11 none] [execute psx__cpu__execute 7 14 none]
 G r c none [psx_cpu_execute_tests standard 12 11 none] [read psx__register 11 13 none]
-G r c none [psx_cpu_execute_tests standard 12 11 none] [reset psx__memory 20 14 none]
+G r c none [psx_cpu_execute_tests standard 12 11 none] [reset psx__memory 24 14 none]
 G r c none [psx_cpu_execute_tests standard 12 11 none] [enter_exception psx__cpu 40 14 none]
-G r c none [psx_cpu_execute_tests standard 12 11 none] [write_32 psx__memory 44 14 none]
+G r c none [psx_cpu_execute_tests standard 12 11 none] [write_32 psx__memory 48 14 none]
 G r c none [psx_cpu_execute_tests standard 12 11 none] [fetch psx__cpu__fetch 7 13 none]
 X 1 ada.ads
 18K9*Ada 22e8 21|1r6 23r10 29r4 30r4 48r4 66r4 83r4 101r4 119r4 137r4 155r4
@@ -290,10 +290,10 @@ X 17 psx-cpu-instruction.ads
 . 1534m9 1551m9 1568m9 1585m9 1605m9 1624m9 1643m9 1662m9 1681m9 1700m9 1744m9
 . 1761m9 1799m9 1822m9 1843r17
 X 18 psx-memory.ads
-3K13*Memory 51e15 21|7w10 17r17 55r8 1835r8 1839r8
-14R9*Memory_State 18e14 21|17r24
-20U14*Reset 21|55s15 1835s15
-44U14*Write_32 21|1839s15
+3K13*Memory 55e15 21|7w10 17r17 55r8 1835r8 1839r8
+17R9*Memory_State 22e14 21|17r24
+24U14*Reset 21|55s15 1835s15
+48U14*Write_32 21|1839s15
 X 19 psx-register.ads
 3K13*Register 20e17 21|6w10 38r8 46r11 57r8 64r16 74r8 81r16 91r8 99r11 109r8
 . 110r8 117r16 127r8 128r8 135r16 145r8 146r8 153r16 163r8 164r8 171r16 181r8
@@ -408,7 +408,7 @@ X 21 psx_cpu_execute_tests.adb
 . 1788r12 1790r12 1792r12 1797m4 1801m29 1801r29 1803r12 1808m19 1810m4 1811m4
 . 1812m4 1812r15 1813m4 1814m4 1817m29 1817r29 1819r12 1824m29 1824r29 1826r12
 . 1834m19 1837m4 1841r33 1845r12
-17r4 Memory{18|14R9} 43m34 43r34 55m22 62m34 62r34 79m34 79r34 96m34 96r34
+17r4 Memory{18|17R9} 43m34 43r34 55m22 62m34 62r34 79m34 79r34 96m34 96r34
 . 115m34 115r34 133m34 133r34 151m34 151r34 169m34 169r34 187m34 187r34 205m34
 . 205r34 223m34 223r34 242m34 242r34 260m34 260r34 278m34 278r34 299m34 299r34
 . 327m34 327r34 345m34 345r34 363m34 363r34 384m34 384r34 407m34 407r34 425m34

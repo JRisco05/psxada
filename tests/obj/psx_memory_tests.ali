@@ -46,7 +46,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_memory_tests%b	psx_memory_tests.adb	bf3b04be NE OO SU
+U psx_memory_tests%b	psx_memory_tests.adb	a5caf903 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -68,7 +68,7 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-memory.ads	20260906031938 99285330 psx.memory%s
+D psx-memory.ads	20260909210835 83d9ae8d psx.memory%s
 D psx-types.ads		20260824220912 f83f461c psx.types%s
 D psx_memory_tests.adb	20260909022934 7bd2af8d psx_memory_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
@@ -87,13 +87,13 @@ D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_memory_tests standard 10 11 none]
-G r c none [psx_memory_tests standard 10 11 none] [reset psx__memory 20 14 none]
-G r c none [psx_memory_tests standard 10 11 none] [write_8 psx__memory 34 14 none]
-G r c none [psx_memory_tests standard 10 11 none] [read_8 psx__memory 22 13 none]
-G r c none [psx_memory_tests standard 10 11 none] [write_16 psx__memory 39 14 none]
-G r c none [psx_memory_tests standard 10 11 none] [read_16 psx__memory 26 13 none]
-G r c none [psx_memory_tests standard 10 11 none] [write_32 psx__memory 44 14 none]
-G r c none [psx_memory_tests standard 10 11 none] [read_32 psx__memory 30 13 none]
+G r c none [psx_memory_tests standard 10 11 none] [reset psx__memory 24 14 none]
+G r c none [psx_memory_tests standard 10 11 none] [write_8 psx__memory 38 14 none]
+G r c none [psx_memory_tests standard 10 11 none] [read_8 psx__memory 26 13 none]
+G r c none [psx_memory_tests standard 10 11 none] [write_16 psx__memory 43 14 none]
+G r c none [psx_memory_tests standard 10 11 none] [read_16 psx__memory 30 13 none]
+G r c none [psx_memory_tests standard 10 11 none] [write_32 psx__memory 48 14 none]
+G r c none [psx_memory_tests standard 10 11 none] [read_32 psx__memory 34 13 none]
 X 1 ada.ads
 18K9*Ada 22e8 16|2r6 12r8
 X 9 a-textio.ads
@@ -111,27 +111,27 @@ X 13 psx.ads
 . 110r7 114r7 118r7 123r4 126r7 130r7 134r7 139r4 142r7 147r4 150r7 164r7
 . 168r7 172r7 177r4 180r7 183r4 186r7 191r7 194r7
 X 14 psx-memory.ads
-3K13*Memory 51e15 16|3w10 14r17 31r8 34r8 36r15 39r8 42r11 45r8 48r11 53r11
+3K13*Memory 55e15 16|3w10 14r17 31r8 34r8 36r15 39r8 42r11 45r8 48r11 53r11
 . 57r11 62r11 66r11 70r11 74r11 78r8 80r8 83r11 87r8 89r8 92r11 96r11 101r8
 . 104r11 107r8 110r11 114r11 118r11 123r8 126r11 130r11 134r11 139r8 142r11
 . 147r8 150r11 164r11 168r11 172r11 177r8 180r11 183r8 186r11 191r11 194r11
-11A9*BIOS_Array(15|5M12)<11|92M9>
-14R9*Memory_State 18e14 16|14r24
-17a7*BIOS{11A9} 16|158m11 159m11 160m11 161m11
-20U14*Reset 16|31s15
-22V13*Read_8{15|5M12} 16|36s22 53s18 57s18 62s18 66s18 70s18 74s18 92s18
+14A9*BIOS_Array(15|5M12)<11|92M9>
+17R9*Memory_State 22e14 16|14r24
+20a7*BIOS{14A9} 16|158m11 159m11 160m11 161m11
+24U14*Reset 16|31s15
+26V13*Read_8{15|5M12} 16|36s22 53s18 57s18 62s18 66s18 70s18 74s18 92s18
 . 96s18 104s18 114s18 118s18 168s18 172s18 180s18 191s18
-26V13*Read_16{15|6M12} 16|42s18
-30V13*Read_32{15|7M12} 16|48s18 83s18 110s18 126s18 130s18 134s18 142s18
+30V13*Read_16{15|6M12} 16|42s18
+34V13*Read_32{15|7M12} 16|48s18 83s18 110s18 126s18 130s18 134s18 142s18
 . 150s18 164s18 186s18 194s18
-34U14*Write_8 16|34s15 87s15 89s15 101s15 177s15
-39U14*Write_16 16|39s15
-44U14*Write_32 16|45s15 78s15 80s15 107s15 123s15 139s15 147s15 183s15
+38U14*Write_8 16|34s15 87s15 89s15 101s15 177s15
+43U14*Write_16 16|39s15
+48U14*Write_32 16|45s15 78s15 80s15 107s15 123s15 139s15 147s15 183s15
 X 15 psx-types.ads
 3K13*Types 12e14 16|4w10
 X 16 psx_memory_tests.adb
 10U11*PSX_Memory_Tests 10b11 200l5 200t21
-14r4 Memory{14|14R9} 31m22 34m24 34r24 36r30 39m25 39r25 42r27 45m25 45r25
+14r4 Memory{14|17R9} 31m22 34m24 34r24 36r30 39m25 39r25 42r27 45m25 45r25
 . 48r27 53r26 57r26 62r26 66r26 70r26 74r26 78m25 78r25 80m25 80r25 83r27
 . 87m24 87r24 89m24 89r24 92r26 96r26 101m24 101r24 104r26 107m25 107r25
 . 110r27 114r26 118r26 123m25 123r25 126r27 130r27 134r27 139m25 139r25 142r27

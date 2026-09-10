@@ -47,7 +47,7 @@ begin
    Ada.Text_IO.Put_Line ("");
 
    --------------------------------------------------
-   -- VERIFY RESET VECTOR
+   --  VERIFY RESET VECTOR
    --------------------------------------------------
 
    Print_Hex ("Reset PC     = ", CPU.PC);
@@ -61,7 +61,7 @@ begin
    Ada.Text_IO.Put_Line ("");
 
    --------------------------------------------------
-   -- EXECUTE BIOS
+   --  EXECUTE BIOS
    --------------------------------------------------
 
    for Step_Number in 0 .. 20000 loop
@@ -73,7 +73,7 @@ begin
       begin
 
          --------------------------------------------------
-         -- FETCH CURRENT INSTRUCTION FOR TRACE
+         --  FETCH CURRENT INSTRUCTION FOR TRACE
          --------------------------------------------------
 
          Inst := PSX.CPU.Fetch.Fetch (CPU, Memory);
@@ -114,13 +114,13 @@ begin
          Print_Hex ("  TARGET   = ", PSX.CPU.Instruction.Target (Inst));
 
          --------------------------------------------------
-         -- EXECUTE ONE CPU STEP
+         --  EXECUTE ONE CPU STEP
          --------------------------------------------------
 
          PSX.CPU.Step.Step (CPU, Memory);
 
          --------------------------------------------------
-         -- STATE AFTER STEP
+         --  STATE AFTER STEP
          --------------------------------------------------
 
          Print_Hex ("  -> PC       = ", CPU.PC);

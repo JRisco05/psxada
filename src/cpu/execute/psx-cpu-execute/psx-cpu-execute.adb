@@ -90,8 +90,6 @@ package body PSX.CPU.Execute is
 
    end Multiply_Signed;
 
-   --  procedure Execute
-   --    (CPU : in out PSX.CPU.CPU_State; Inst : PSX.CPU.Instruction.Instruction)
    procedure Execute
      (CPU    : in out PSX.CPU.CPU_State;
       Memory : in out PSX.Memory.Memory_State;

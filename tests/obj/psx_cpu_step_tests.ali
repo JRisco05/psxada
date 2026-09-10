@@ -46,7 +46,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_cpu_step_tests%b	psx_cpu_step_tests.adb	f42840e3 NE OO SU
+U psx_cpu_step_tests%b	psx_cpu_step_tests.adb	eed9bd5e NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -76,7 +76,7 @@ D psx-cpu.ads		20260908151228 7c10720c psx.cpu%s
 D psx-cpu-fetch.ads	20260902161056 1bdf6dc0 psx.cpu.fetch%s
 D psx-cpu-instruction.ads  20260824213207 a548a6bb psx.cpu.instruction%s
 D psx-cpu-step.ads	20260902161630 a5d24bbb psx.cpu.step%s
-D psx-memory.ads	20260906031938 99285330 psx.memory%s
+D psx-memory.ads	20260909210835 83d9ae8d psx.memory%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
 D psx-types.ads		20260824220912 f83f461c psx.types%s
 D psx_cpu_step_tests.adb  20260909034908 e2f4bb3c psx_cpu_step_tests%b
@@ -97,13 +97,13 @@ D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_cpu_step_tests standard 10 11 none]
 G r c none [psx_cpu_step_tests standard 10 11 none] [reset psx__cpu 39 14 none]
-G r c none [psx_cpu_step_tests standard 10 11 none] [reset psx__memory 20 14 none]
-G r c none [psx_cpu_step_tests standard 10 11 none] [load_bios psx__memory 49 14 none]
+G r c none [psx_cpu_step_tests standard 10 11 none] [reset psx__memory 24 14 none]
+G r c none [psx_cpu_step_tests standard 10 11 none] [load_bios psx__memory 53 14 none]
 G r c none [psx_cpu_step_tests standard 10 11 none] [fetch psx__cpu__fetch 7 13 none]
 G r c none [psx_cpu_step_tests standard 10 11 none] [step psx__cpu__step 6 14 none]
 G r c none [psx_cpu_step_tests standard 10 11 none] [read psx__register 11 13 none]
 G r c none [psx_cpu_step_tests standard 10 11 none] [write psx__register 15 14 none]
-G r c none [psx_cpu_step_tests standard 10 11 none] [write_32 psx__memory 44 14 none]
+G r c none [psx_cpu_step_tests standard 10 11 none] [write_32 psx__memory 48 14 none]
 X 1 ada.ads
 18K9*Ada 22e8 21|1r6 14r8 34r10 41r4 42r4 108r4 135r4 174r4 216r4 251r4 323r4
 . 360r4 394r4 432r4 466r4 504r4 538r4 576r4 610r4 648r4 691r4 717r4 743r4
@@ -189,20 +189,20 @@ X 17 psx-cpu-step.ads
 . 452s17 458s17 486s17 494s17 524s17 530s17 558s17 566s17 596s17 602s17 630s17
 . 638s17 674s17 682s17 707s17 733s17 758s17 782s17 805s17 837s17 844s17
 X 18 psx-memory.ads
-3K13*Memory 51e15 21|3w10 19r17 55r8 59r8 70r8 72r8 115r8 124r8 142r8 148r8
+3K13*Memory 55e15 21|3w10 19r17 55r8 59r8 70r8 72r8 115r8 124r8 142r8 148r8
 . 154r8 181r8 187r8 193r8 223r8 232r8 235r8 258r8 267r8 270r8 295r8 304r8
 . 307r8 330r8 339r8 342r8 367r8 375r8 378r8 401r8 409r8 412r8 439r8 447r8
 . 450r8 473r8 481r8 484r8 511r8 519r8 522r8 545r8 553r8 556r8 583r8 591r8
 . 594r8 617r8 625r8 628r8 655r8 669r8 672r8 705r8 731r8 756r8 780r8 803r8
 . 831r8 834r8
-14R9*Memory_State 18e14 21|19r24
-20U14*Reset 21|55s15 70s15 115s15 142s15 181s15 223s15 258s15 295s15 330s15
+17R9*Memory_State 22e14 21|19r24
+24U14*Reset 21|55s15 70s15 115s15 142s15 181s15 223s15 258s15 295s15 330s15
 . 367s15 401s15 439s15 473s15 511s15 545s15 583s15 617s15 655s15
-44U14*Write_32 21|124s15 148s15 154s15 187s15 193s15 232s15 235s15 267s15
+48U14*Write_32 21|124s15 148s15 154s15 187s15 193s15 232s15 235s15 267s15
 . 270s15 304s15 307s15 339s15 342s15 375s15 378s15 409s15 412s15 447s15 450s15
 . 481s15 484s15 519s15 522s15 553s15 556s15 591s15 594s15 625s15 628s15 669s15
 . 672s15 705s15 731s15 756s15 780s15 803s15 831s15 834s15
-49U14*Load_BIOS 21|59s15 72s15
+53U14*Load_BIOS 21|59s15 72s15
 X 19 psx-register.ads
 3K13*Register 20e17 21|4w10 79r11 94r11 104r11 121r8 122r8 129r11 151r8 152r8
 . 168r11 190r8 191r8 202r11 209r11 229r8 230r8 246r11 264r8 265r8 282r11
@@ -248,7 +248,7 @@ X 21 psx_cpu_step_tests.adb
 . 784r12 786r12 788r12 790r16 798m19 799m4 800m4 805m23 805r23 807r16 809r12
 . 811r12 813r12 821m19 822m4 823m4 825m24 825r24 826m24 826r24 837m23 837r23
 . 839r12 841r12 844m23 844r23 847r11 849r12 852r7 854r12
-19r4 Memory{18|14R9} 55m22 59m26 59r26 61r38 70m22 72m26 72r26 76m28 76r28
+19r4 Memory{18|17R9} 55m22 59m26 59r26 61r38 70m22 72m26 72r26 76m28 76r28
 . 91m28 91r28 101m28 101r28 115m22 124m25 124r25 126m28 126r28 142m22 148m25
 . 148r25 154m25 154r25 156m28 156r28 165m28 165r28 181m22 187m25 187r25 193m25
 . 193r25 195m28 195r28 206m28 206r28 223m22 232m25 232r25 235m25 235r25 237m28

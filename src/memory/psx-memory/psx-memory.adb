@@ -52,6 +52,7 @@ package body PSX.Memory is
       Memory.Data := (others => 0);
       Memory.Scratchpad := (others => 0);
       Memory.BIOS := (others => 0);
+      Memory.DMA_Registers := (others => 0);
    end Reset;
 
    function Read_8
@@ -109,11 +110,6 @@ package body PSX.Memory is
       B3 : constant PSX.Types.Word32 :=
         PSX.Types.Word32 (Read_8 (Memory, Address + 3));
    begin
-
-      if Address >= 16#1F80_1000# and then Address <= 16#1F80_1FFF# then
-         Ada.Text_IO.Put_Line
-           ("HW READ32  " & PSX.Types.Word32'Image (Address));
-      end if;
 
       if Address >= 16#1F80_1000# and then Address <= 16#1F80_1FFF# then
          Ada.Text_IO.Put_Line
