@@ -98,29 +98,35 @@ package body PSX.Memory is
      (Memory : Memory_State; Address : PSX.Types.Word32)
       return PSX.Types.Word32
    is
-      B0 : constant PSX.Types.Word32 :=
-        PSX.Types.Word32 (Read_8 (Memory, Address));
-
-      B1 : constant PSX.Types.Word32 :=
-        PSX.Types.Word32 (Read_8 (Memory, Address + 1));
-
-      B2 : constant PSX.Types.Word32 :=
-        PSX.Types.Word32 (Read_8 (Memory, Address + 2));
-
-      B3 : constant PSX.Types.Word32 :=
-        PSX.Types.Word32 (Read_8 (Memory, Address + 3));
+      DMA_Base : constant PSX.Types.Word32 := 16#1F80_1080#;
+      DMA_End  : constant PSX.Types.Word32 := 16#1F80_10FF#;
+      Index    : PSX.Types.Word32;
    begin
+      if Address >= DMA_Base and then Address <= DMA_End then
+         Index := (Address - DMA_Base) / 4;
+         return Memory.DMA_Registers (Index);
 
-      if Address >= 16#1F80_1000# and then Address <= 16#1F80_1FFF# then
-         Ada.Text_IO.Put_Line
-           ("HW READ32  " & PSX.Types.Word32'Image (Address));
+      else
+         declare
+            B0 : constant PSX.Types.Word32 :=
+              PSX.Types.Word32 (Read_8 (Memory, Address));
+
+            B1 : constant PSX.Types.Word32 :=
+              PSX.Types.Word32 (Read_8 (Memory, Address + 1));
+
+            B2 : constant PSX.Types.Word32 :=
+              PSX.Types.Word32 (Read_8 (Memory, Address + 2));
+
+            B3 : constant PSX.Types.Word32 :=
+              PSX.Types.Word32 (Read_8 (Memory, Address + 3));
+         begin
+            return
+              B0
+              or Interfaces.Shift_Left (B1, 8)
+              or Interfaces.Shift_Left (B2, 16)
+              or Interfaces.Shift_Left (B3, 24);
+         end;
       end if;
-
-      return
-        B0
-        or Interfaces.Shift_Left (B1, 8)
-        or Interfaces.Shift_Left (B2, 16)
-        or Interfaces.Shift_Left (B3, 24);
    end Read_32;
 
    procedure Write_8
@@ -168,34 +174,39 @@ package body PSX.Memory is
    procedure Write_32
      (Memory  : in out Memory_State;
       Address : PSX.Types.Word32;
-      Value   : PSX.Types.Word32) is
+      Value   : PSX.Types.Word32)
+   is
+      DMA_Base : constant PSX.Types.Word32 := 16#1F80_1080#;
+      DMA_End  : constant PSX.Types.Word32 := 16#1F80_10FF#;
+      Index    : PSX.Types.Word32;
    begin
-      if Address >= 16#1F80_1000# and then Address <= 16#1F80_1FFF# then
-         Ada.Text_IO.Put_Line
-           ("HW WRITE32 "
-            & PSX.Types.Word32'Image (Address)
-            & " = "
-            & PSX.Types.Word32'Image (Value));
+      if Address >= DMA_Base and then Address <= DMA_End then
+
+         Index := (Address - DMA_Base) / 4;
+         Memory.DMA_Registers (Index) := Value;
+
+      else
+
+         declare
+            B0 : constant PSX.Types.Word8 :=
+              PSX.Types.Word8 (Value and 16#FF#);
+
+            B1 : constant PSX.Types.Word8 :=
+              PSX.Types.Word8 (Interfaces.Shift_Right (Value, 8) and 16#FF#);
+
+            B2 : constant PSX.Types.Word8 :=
+              PSX.Types.Word8 (Interfaces.Shift_Right (Value, 16) and 16#FF#);
+
+            B3 : constant PSX.Types.Word8 :=
+              PSX.Types.Word8 (Interfaces.Shift_Right (Value, 24) and 16#FF#);
+         begin
+            Write_8 (Memory, Address, B0);
+            Write_8 (Memory, Address + 1, B1);
+            Write_8 (Memory, Address + 2, B2);
+            Write_8 (Memory, Address + 3, B3);
+         end;
+
       end if;
-      Write_8 (Memory, Address, PSX.Types.Word8 (Value and 16#0000_00FF#));
-
-      Write_8
-        (Memory,
-         Address + 1,
-         PSX.Types.Word8
-           (Interfaces.Shift_Right (Value, 8) and 16#0000_00FF#));
-
-      Write_8
-        (Memory,
-         Address + 2,
-         PSX.Types.Word8
-           (Interfaces.Shift_Right (Value, 16) and 16#0000_00FF#));
-
-      Write_8
-        (Memory,
-         Address + 3,
-         PSX.Types.Word8
-           (Interfaces.Shift_Right (Value, 24) and 16#0000_00FF#));
    end Write_32;
 
    procedure Load_BIOS (Memory : in out Memory_State; Path : String) is

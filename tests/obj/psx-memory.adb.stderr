@@ -1,2 +1,3 @@
 psx-memory.adb:4:06: warning: redundant with clause [-gnatwr]
+psx-memory.adb:5:09: warning: unit "Ada.Text_IO" is not referenced [-gnatwu]
 psx-memory.adb:9:04: warning: use clause for type "Interfaces.Unsigned_8" has no effect [-gnatwu]

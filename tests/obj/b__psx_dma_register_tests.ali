@@ -25,12 +25,12 @@ RV NO_IMPLICIT_LOOPS
 RV NO_ELABORATION_CODE
 RV NO_OBSOLESCENT_FEATURES
 
-U ada_main%b		b__psx_memory_tests.adb	c1a5f688 OO PK IL
+U ada_main%b		b__psx_dma_register_tests.adb  99da3389 OO PK IL
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 Z system%s		system.ads		system.ali
 
-U ada_main%s		b__psx_memory_tests.ads	e06883d2 EE NE OO PK IL
+U ada_main%s		b__psx_dma_register_tests.ads  49199ecd EE NE OO PK IL
 W system%s		system.ads		system.ali
 W system.parameters%s	s-parame.adb		s-parame.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
@@ -38,8 +38,8 @@ W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 D ada.ads		20260610194523 76789da1 ada%s
 D a-except.ads		20260610194523 8699d7ff ada.exceptions%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
-D b__psx_memory_tests.ads  20260910014756 9c254bb8 ada_main%s
-D b__psx_memory_tests.adb  20260910014756 db196acf ada_main%b
+D b__psx_dma_register_tests.ads  20260910014757 355456a7 ada_main%s
+D b__psx_dma_register_tests.adb  20260910014757 2a17b2d1 ada_main%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-parame.ads		20260610194523 a1aeab5c system.parameters%s
 D s-secsta.ads		20260610194523 578279f5 system.secondary_stack%s
@@ -57,7 +57,7 @@ X 1 ada.ads
 18K9*Ada 22e8 5|6r6
 X 2 a-except.ads
 44K13*Exceptions 309e19 5|6w10
-X 4 b__psx_memory_tests.ads
+X 4 b__psx_dma_register_tests.ads
 6K9*ada_main 401l5 401e13 5|8b14 260l5 260t13
 8i4*gnat_argc{integer} 12m22 12r22 5|233r10 234m10
 9m4*gnat_argv{6|67M9} 13m22 13r22 5|235m10
@@ -201,7 +201,7 @@ X 4 b__psx_memory_tests.ads
 273m4*u00116{42M9} 274r22
 275m4*u00117{42M9} 276r22
 277m4*u00118{42M9} 278r22
-X 5 b__psx_memory_tests.adb
+X 5 b__psx_dma_register_tests.adb
 10i4 E016{short_integer} 10m46 10r46 179m7 179r15
 11i4 E012{short_integer} 11m46 11r46 178m7 178r15
 12i4 E010{short_integer} 12m46 12r46 173m7 173r15
@@ -259,7 +259,7 @@ X 5 b__psx_memory_tests.adb
 131p7*Finalize_Library_Objects{85P9} 132m25 132r25 168m7
 133i7*Binder_Sec_Stacks_Count{natural} 134m27 134r27 163m7
 135m7*Default_Sized_SS_Pool{6|67M9} 136m27 136r27 164m7
-213U14 Ada_Main_Program 214b<ada,_ada_psx_memory_tests>24 241s7
+213U14 Ada_Main_Program 214b<ada,_ada_psx_dma_register_tests>24 241s7
 222U17*Initialize 222>29 223b<c,__gnat_initialize>25 239s7
 222m29 Addr{6|67M9}
 225U17*Finalize 226b<c,__gnat_finalize>25 243s7

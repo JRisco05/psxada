@@ -28,10 +28,10 @@ package body ada_main is
    E074 : Short_Integer; pragma Import (Ada, E074, "ada__text_io_E");
    E118 : Short_Integer; pragma Import (Ada, E118, "psx__memory_E");
    E113 : Short_Integer; pragma Import (Ada, E113, "psx__register_E");
-   E125 : Short_Integer; pragma Import (Ada, E125, "psx__cpu__instruction_E");
-   E129 : Short_Integer; pragma Import (Ada, E129, "psx__cpu__execute_E");
+   E124 : Short_Integer; pragma Import (Ada, E124, "psx__cpu__instruction_E");
+   E128 : Short_Integer; pragma Import (Ada, E128, "psx__cpu__execute_E");
    E116 : Short_Integer; pragma Import (Ada, E116, "psx__cpu__fetch_E");
-   E127 : Short_Integer; pragma Import (Ada, E127, "psx__cpu__step_E");
+   E126 : Short_Integer; pragma Import (Ada, E126, "psx__cpu__step_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
 
@@ -214,10 +214,10 @@ package body ada_main is
       E074 := E074 + 1;
       E118 := E118 + 1;
       E113 := E113 + 1;
-      E125 := E125 + 1;
-      E129 := E129 + 1;
+      E124 := E124 + 1;
+      E128 := E128 + 1;
       E116 := E116 + 1;
-      E127 := E127 + 1;
+      E126 := E126 + 1;
    end adainit;
 
    procedure Ada_Main_Program;

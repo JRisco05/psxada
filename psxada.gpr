@@ -16,6 +16,7 @@ project Psxada is
       "src/spu/channel",
       "src/memory/psx-memory/",
       "src/state/",
+      "src/dma/",
       "bios/",
       "tests/cpu/execute",
       "tests/cpu/register",
@@ -23,6 +24,7 @@ project Psxada is
       "tests/memory/",
       "tests/bios/",
       "tests/spu/",
+      "tests/dma/",
       "config/");
 
    for Object_Dir use "obj/" & Psxada_Config.Build_Profile;

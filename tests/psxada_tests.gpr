@@ -4,6 +4,7 @@ project Psxada_Tests extends "../psxada.gpr" is
      ("cpu/execute/",
       "memory/",
       "spu/",
+      "dma/",
       "bios/");
 
    for Object_Dir use "obj";
@@ -15,6 +16,7 @@ project Psxada_Tests extends "../psxada.gpr" is
       "psx_memory_tests.adb",
       "psx_cpu_step_tests.adb",
       "psx_spu_tests.adb",
+      "psx_dma_register_tests.adb",
       "psx_bios_tests.adb");
 
 end Psxada_Tests;

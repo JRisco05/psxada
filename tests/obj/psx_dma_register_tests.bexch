@@ -1,5 +1,5 @@
 [GENERATED OBJECT FILE]
-b__psx_spu_tests.o
+b__psx_dma_register_tests.o
 [PROJECT FILES]
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/psxada_tests.gpr
 20260910014450 81dc921eb20a522fee45a64c28b0d2f8
@@ -8,12 +8,12 @@ b__psx_spu_tests.o
 [BOUND OBJECT FILES]
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-types.o
-/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-spu.o
-/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_spu_tests.o
+/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
+/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_dma_register_tests.o
 [GENERATED SOURCE FILES]
-b__psx_spu_tests.ads
-b__psx_spu_tests.adb
-b__psx_spu_tests.ali
+b__psx_dma_register_tests.ads
+b__psx_dma_register_tests.adb
+b__psx_dma_register_tests.ali
 [RESULTING OPTIONS]
 -L/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/
 -L/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/

@@ -258,7 +258,7 @@ package ada_main is
    pragma Export (C, u00108, "system__file_control_blockS");
    u00109 : constant Version_32 := 16#6f0a212e#;
    pragma Export (C, u00109, "psxS");
-   u00110 : constant Version_32 := 16#7e23a635#;
+   u00110 : constant Version_32 := 16#0eb817e9#;
    pragma Export (C, u00110, "psx__memoryB");
    u00111 : constant Version_32 := 16#14ecc9bf#;
    pragma Export (C, u00111, "psx__memoryS");
@@ -270,14 +270,12 @@ package ada_main is
    pragma Export (C, u00114, "system__communicationB");
    u00115 : constant Version_32 := 16#c51bd61d#;
    pragma Export (C, u00115, "system__communicationS");
-   u00116 : constant Version_32 := 16#d13cd62d#;
-   pragma Export (C, u00116, "system__img_unsS");
-   u00117 : constant Version_32 := 16#06249ef3#;
-   pragma Export (C, u00117, "psx__typesS");
-   u00118 : constant Version_32 := 16#a56a70fa#;
-   pragma Export (C, u00118, "system__memoryB");
-   u00119 : constant Version_32 := 16#92f586d9#;
-   pragma Export (C, u00119, "system__memoryS");
+   u00116 : constant Version_32 := 16#06249ef3#;
+   pragma Export (C, u00116, "psx__typesS");
+   u00117 : constant Version_32 := 16#a56a70fa#;
+   pragma Export (C, u00117, "system__memoryB");
+   u00118 : constant Version_32 := 16#92f586d9#;
+   pragma Export (C, u00118, "system__memoryS");
 
    --  BEGIN ELABORATION ORDER
    --  ada%s
@@ -313,7 +311,6 @@ package ada_main is
    --  system.wch_cnv%s
    --  system.wch_cnv%b
    --  system.img_int%s
-   --  system.img_uns%s
    --  system.traceback%s
    --  system.traceback%b
    --  system.secondary_stack%s
