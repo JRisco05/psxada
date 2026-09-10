@@ -1,0 +1,13 @@
+psx-cpu-execute-tests.adb:8:11: warning: file name does not match unit name, should be "psx_cpu_execute_tests.adb" [enabled by default]
+psx-cpu-execute-tests.adb:27:07: (style) space required [-gnatyc]
+psx-cpu-execute-tests.adb:34:07: (style) space required [-gnatyc]
+psx-cpu-execute-tests.adb:39:49: error: operator for type "Interfaces.Unsigned_32" is not directly visible
+psx-cpu-execute-tests.adb:39:49: error: use clause would make operation legal
+psx-cpu-execute-tests.adb:44:07: (style) space required [-gnatyc]
+psx-cpu-execute-tests.adb:51:07: (style) space required [-gnatyc]
+psx-cpu-execute-tests.adb:56:49: error: operator for type "Interfaces.Unsigned_32" is not directly visible
+psx-cpu-execute-tests.adb:56:49: error: use clause would make operation legal
+psx-cpu-execute-tests.adb:61:07: (style) space required [-gnatyc]
+psx-cpu-execute-tests.adb:68:07: (style) space required [-gnatyc]
+psx-cpu-execute-tests.adb:74:44: error: operator for type "Interfaces.Unsigned_32" is not directly visible
+psx-cpu-execute-tests.adb:74:44: error: use clause would make operation legal

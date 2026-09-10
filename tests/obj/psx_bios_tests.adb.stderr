@@ -1,0 +1,6 @@
+psx_bios_tests.adb:50:07: (style) space required [-gnatyc]
+psx_bios_tests.adb:64:07: (style) space required [-gnatyc]
+psx_bios_tests.adb:76:13: (style) space required [-gnatyc]
+psx_bios_tests.adb:117:13: (style) space required [-gnatyc]
+psx_bios_tests.adb:123:13: (style) space required [-gnatyc]
+psx_bios_tests.adb:137:15: warning: variable "E" is not referenced [-gnatwu]

@@ -1,0 +1,1 @@
+psx_cpu_execute_tests.adb:2:06: (style) bad casing of "Interfaces" declared at interfac.ads:47 [-gnatyr]

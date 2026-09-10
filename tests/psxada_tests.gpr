@@ -1,0 +1,20 @@
+project Psxada_Tests extends "../psxada.gpr" is
+
+   for Source_Dirs use
+     ("cpu/execute/",
+      "memory/",
+      "spu/",
+      "bios/");
+
+   for Object_Dir use "obj";
+
+   for Exec_Dir use "bin";
+
+   for Main use
+     ("psx_cpu_execute_tests.adb",
+      "psx_memory_tests.adb",
+      "psx_cpu_step_tests.adb",
+      "psx_spu_tests.adb",
+      "psx_bios_tests.adb");
+
+end Psxada_Tests;

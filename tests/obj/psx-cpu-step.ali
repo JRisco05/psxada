@@ -1,0 +1,129 @@
+V "GNAT Lib v16"
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx.cpu.step%b	psx-cpu-step.adb	fc437a27 NE OO PK IU
+W interfaces%s		interfac.ads		interfac.ali
+W psx%s			psx.ads			psx.ali
+W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
+W psx.cpu.execute%s	psx-cpu-execute.adb	psx-cpu-execute.ali
+W psx.cpu.fetch%s	psx-cpu-fetch.adb	psx-cpu-fetch.ali
+W psx.cpu.instruction%s	psx-cpu-instruction.adb	psx-cpu-instruction.ali
+W psx.types%s		psx-types.ads		psx-types.ali
+
+U psx.cpu.step%s	psx-cpu-step.ads	3cfa188b EE NE OO PK IU
+W psx%s			psx.ads			psx.ali
+W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
+W psx.memory%s		psx-memory.adb		psx-memory.ali
+
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-cpu.ads		20260908151228 7c10720c psx.cpu%s
+D psx-cpu-execute.ads	20260829222429 4b6c299f psx.cpu.execute%s
+D psx-cpu-fetch.ads	20260902161056 1bdf6dc0 psx.cpu.fetch%s
+D psx-cpu-instruction.ads  20260824213207 a548a6bb psx.cpu.instruction%s
+D psx-cpu-step.ads	20260902161630 a5d24bbb psx.cpu.step%s
+D psx-cpu-step.adb	20260909034650 c5446ca5 psx.cpu.step%b
+D psx-memory.ads	20260906031938 99285330 psx.memory%s
+D psx-register.ads	20260824212926 4d5fe43c psx.register%s
+D psx-types.ads		20260824220912 f83f461c psx.types%s
+D system.ads		20260610194523 8a611ac3 system%s
+G a e
+G c Z s b [step psx__cpu__step 6 14 none]
+G r c none [step psx__cpu__step 6 14 none] [fetch psx__cpu__fetch 7 13 none]
+G r c none [step psx__cpu__step 6 14 none] [opcode psx__cpu__instruction 11 13 none]
+G r c none [step psx__cpu__step 6 14 none] [funct psx__cpu__instruction 21 13 none]
+G r c none [step psx__cpu__step 6 14 none] [rt psx__cpu__instruction 15 13 none]
+G r c none [step psx__cpu__step 6 14 none] [execute psx__cpu__execute 7 14 none]
+G r c none [step psx__cpu__step 6 14 none] [enter_exception psx__cpu 40 14 none]
+X 1 interfac.ads
+47K9*Interfaces 247e15 8|1w6 9r13
+92M9*Unsigned_32 8|9r24
+X 2 psx.ads
+1K9*PSX 3e8 7|1r6 2r6 4r9 7r20 7r55 9r5 8|2r6 3r6 4r6 5r6 7r14 12r20 12r55
+. 14r31 15r40 16r40 18r31 19r31 24r15 26r23 27r22 45r13 46r20 60r40 64r7
+. 71r43 80r37 85r10 102r5
+X 3 psx-cpu.ads
+4K13*CPU 2|1k9 3|43e12 7|1w10 4r13 7r24 9r9 8|2r10 3r10 4r10 7r18 12r24 14r35
+. 24r19 26r27 27r26 45r17 46r24 64r11 85r14 102r9
+12R9*CPU_State 37e14 7|7r28 8|12r28
+16m7*PC{8M12} 8|15r64 91m14
+22m7*Next_PC{8M12} 8|16r64 60m11 70r43 71m14
+26b7*In_Delay_Slot{boolean} 8|17r55 96m14
+33m7*EPC{8M12} 8|80m17 82m17
+36b7*Exception_Pending{boolean} 8|75r14
+40U14*Enter_Exception 8|85s18
+X 4 psx-cpu-execute.ads
+5K17*Execute 12e20 8|2w14 64r15
+7U14*Execute 8|64s23
+X 5 psx-cpu-fetch.ads
+5K17*Fetch 11e18 8|3w14 24r23
+7V13*Fetch{6|7R9} 8|24s29
+X 6 psx-cpu-instruction.ads
+3K17*Instruction 27e24 8|4w14 14r39 26r31 27r30 45r21 46r28
+7R9*Instruction 9e14 8|14r51
+11V13*Opcode{5M12} 8|26s43
+15V13*Rt{5M12} 8|45s33 46s40
+21V13*Funct{5M12} 8|27s42
+X 7 psx-cpu-step.ads
+4K17*Step 3|4k13 7|9l13 9e17 8|7b22 102l13 102t17
+6U14*Step 7=7 7=39 8|11b14 100l8 100t12
+7r7 CPU{3|12R9} 8|12b7 15r60 16r60 17r51 24r36 60m7 64m32 70r39 71m10 75r10
+. 80m13 82m13 85m35 91m10 96m10
+7r39 Memory{9|14R9} 8|12b39 24r41 64m37
+X 8 psx-cpu-step.adb
+14r7 Inst{6|7R9} 24m7 26r51 27r49 45r37 46r44 64r45
+15m7 Current_PC{11|7M12} 80r24 82r24
+16m7 Current_Next_PC{11|7M12} 60r22 70r53 71r25 91r20
+17b7 Current_In_Delay_Slot{boolean} 79r13
+18m7 Opcode_Value{11|7M12} 26m7 34r10 35r17 36r17 37r17 38r17 39r17 43r13
+. 51r13
+19m7 Funct_Value{11|7M12} 27m7 51r40 51r64
+20b7 Is_Control_Transfer{boolean} 41m10 48m13 54m10 70r10 96r31
+X 9 psx-memory.ads
+3K13*Memory 7|2w10 7r59 8|12r59 9|51e15
+14R9*Memory_State 7|7r66 8|12r66 9|18e14
+X 11 psx-types.ads
+3K13*Types 8|5w10 15r44 16r44 18r35 19r35 60r44 71r47 80r41 11|12e14
+7M12*Word32{1|92M9} 8|15r50 16r50 18r41 19r41 60r50 71r53 80r47
+

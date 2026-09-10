@@ -1,0 +1,67 @@
+with Interfaces;
+with Ada.Text_IO;
+with PSX.SPU;
+
+procedure PSX_SPU_Tests is
+
+   use Ada.Text_IO;
+   use type Interfaces.Unsigned_8;
+   use type Interfaces.Unsigned_16;
+
+   SPU : PSX.SPU.SPU_State;
+
+   procedure Check (Condition : Boolean; Message : String) is
+   begin
+      if Condition then
+         Put_Line ("PASS: " & Message);
+      else
+         Put_Line ("FAIL: " & Message);
+      end if;
+   end Check;
+
+begin
+
+   Put_Line ("Testing PSX.SPU...");
+   New_Line;
+
+   -- Reset del SPU
+   PSX.SPU.Reset (SPU);
+
+   Check (SPU.Control = 0, "SPU Control reset");
+
+   Check (SPU.Status = 0, "SPU Status reset");
+
+   Check (SPU.Transfer_Address = 0, "SPU Transfer Address reset");
+
+   Check (SPU.Transfer_Control = 0, "SPU Transfer Control reset");
+
+   Check (SPU.IRQ_Address = 0, "SPU IRQ Address reset");
+
+   -- Verificar que la RAM del SPU está inicializada en cero
+   Check (SPU.RAM (0) = 0, "SPU RAM address 0 reset");
+
+   Check (SPU.RAM (16#0001_0000#) = 0, "SPU RAM address 0x10000 reset");
+
+   Check (SPU.RAM (16#0007_FFFF#) = 0, "SPU RAM last address reset");
+
+   -- Escritura y lectura de la RAM
+   SPU.RAM (16#0000_0000#) := 16#12#;
+   SPU.RAM (16#0001_0000#) := 16#34#;
+   SPU.RAM (16#0007_FFFF#) := 16#AB#;
+
+   Check (SPU.RAM (16#0000_0000#) = 16#12#, "SPU RAM write/read address 0");
+
+   Check
+     (SPU.RAM (16#0001_0000#) = 16#34#, "SPU RAM write/read address 0x10000");
+
+   Check (SPU.RAM (16#0007_FFFF#) = 16#AB#, "SPU RAM write/read last address");
+
+   -- Verificar que las posiciones son independientes
+   Check (SPU.RAM (16#0000_0001#) = 0, "SPU RAM independent address 1");
+
+   Check (SPU.RAM (16#0001_0001#) = 0, "SPU RAM independent address 2");
+
+   New_Line;
+   Put_Line ("SPU basic tests completed.");
+
+end PSX_SPU_Tests;

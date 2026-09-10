@@ -1,0 +1,11 @@
+name = "psxada"
+description = ""
+version = "0.1.0-dev"
+
+authors = ["Jonathan Risco"]
+maintainers = ["Jonathan Risco <example@example.com>"]
+licenses = "MIT"
+website = ""
+tags = []
+
+executables = ["psxada"]

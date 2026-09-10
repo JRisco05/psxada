@@ -1,0 +1,7 @@
+/obj/
+/bin/
+/alire/
+/bios/
+/config/
+trace_bios.txt
+trace_bios_hw.txt

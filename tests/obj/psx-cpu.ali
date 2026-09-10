@@ -1,0 +1,107 @@
+V "GNAT Lib v16"
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_IMPLICIT_LOOPS
+
+U psx.cpu%b		psx-cpu.adb		781033b6 NE OO PK IU
+W interfaces%s		interfac.ads		interfac.ali
+W psx%s			psx.ads			psx.ali
+
+U psx.cpu%s		psx-cpu.ads		a67af102 EB NE OO PK IU
+W psx%s			psx.ads			psx.ali
+W psx.register%s	psx-register.adb	psx-register.ali
+W psx.types%s		psx-types.ads		psx-types.ali
+
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-cpu.ads		20260908151228 7c10720c psx.cpu%s
+D psx-cpu.adb		20260907034222 9511b87b psx.cpu%b
+D psx-register.ads	20260824212926 4d5fe43c psx.register%s
+D psx-types.ads		20260824220912 f83f461c psx.types%s
+D system.ads		20260610194523 8a611ac3 system%s
+G a e
+G c Z s b [reset psx__cpu 39 14 none]
+G c Z s b [enter_exception psx__cpu 40 14 none]
+G c Z s b [return_from_exception psx__cpu 41 14 none]
+G c Z s s [cpu_stateIP psx__cpu 12 9 none]
+X 1 interfac.ads
+47K9*Interfaces 247e15 4|1w6 5r13 6r13 25r9 42r9
+81M9*Unsigned_8 4|5r24
+92M9*Unsigned_32 4|6r24
+154V13*Shift_Left{92M9} 4|25s20
+159V13*Shift_Right{92M9} 4|42s20
+X 2 psx.ads
+1K9*PSX 3e8 3|1r6 2r6 4r9 8r22 13r19 43r5 4|3r14 46r5
+X 3 psx-cpu.ads
+4K13*CPU 2|1k9 3|43l9 43e12 4|3b18 46l9 46t12
+8M12*Word32{6|7M12} 16r12 22r17 28r12 29r12 32r16 33r16
+10E9*Exception_Code 10e59 34r16
+10n28*None{10E9} 4|18r20
+10n34*Syscall{10E9}
+10n43*Break{10E9}
+10n50*Overflow{10E9}
+12R9*CPU_State 37e14 39r31 40r44 41r50 4|8r31 22r44 39r50
+13a7*Registers{5|9A9} 4|10m11
+16m7*PC{8M12} 4|11m11 30m11
+22m7*Next_PC{8M12} 4|12m11 32m11
+26b7*In_Delay_Slot{boolean} 4|13m11 34m11
+28m7*HI{8M12} 4|14m11
+29m7*LO{8M12} 4|15m11
+32m7*Status{8M12} 4|16m11 24m11 25r36 28m11 28r25 41m11 42r37 43r17
+33m7*EPC{8M12} 4|17m11
+34e7*Cause{10E9} 4|18m11
+36b7*Exception_Pending{boolean} 4|19m11 36m11
+39U14*Reset 39<21 4|8b14 20l8 20t13
+39r21 CPU{12R9} 4|8b21 10m7 11m7 12m7 13m7 14m7 15m7 16m7 17m7 18m7 19m7
+40U14*Enter_Exception 40=31 4|22b14 37l8 37t23
+40r31 CPU{12R9} 4|22b31 24m7 25r32 28m7 28r21 30m7 32m7 34m7 36m7
+41U14*Return_From_Exception 41=37 4|39b14 44l8 44t29
+41r37 CPU{12R9} 4|39b37 41m7 42r33 43r13
+X 5 psx-register.ads
+3K13*Register 3|1w10 13r23 5|20e17
+9A9*Register_Array(5M12)<7I9> 3|13r32
+X 6 psx-types.ads
+3K13*Types 3|2w10 8r26 6|12e14
+7M12*Word32{1|92M9} 3|8r32
+

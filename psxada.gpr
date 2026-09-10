@@ -1,0 +1,49 @@
+with "config/psxada_config.gpr";
+
+project Psxada is
+
+   for Source_Dirs use
+     ("src/psx/",
+      "src/types/psx-types/",
+      "src/psxada/",
+      "src/cpu/psx-cpu/",
+      "src/cpu/register/",
+      "src/cpu/instruction/psx-instruction/",
+      "src/cpu/execute/psx-cpu-execute/",
+      "src/cpu/fetch",
+      "src/cpu/step",
+      "src/spu/",
+      "src/spu/channel",
+      "src/memory/psx-memory/",
+      "src/state/",
+      "bios/",
+      "tests/cpu/execute",
+      "tests/cpu/register",
+      "tests/cpu/step",
+      "tests/memory/",
+      "tests/bios/",
+      "tests/spu/",
+      "config/");
+
+   for Object_Dir use "obj/" & Psxada_Config.Build_Profile;
+
+   for Create_Missing_Dirs use "True";
+
+   for Exec_Dir use "bin";
+
+   for Main use ("psxada.adb");
+
+   package Compiler is
+      for Default_Switches ("Ada")
+      use Psxada_Config.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es");
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end Psxada;

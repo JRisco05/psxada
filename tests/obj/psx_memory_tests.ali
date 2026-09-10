@@ -1,0 +1,145 @@
+V "GNAT Lib v16"
+M P W=8
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx_memory_tests%b	psx_memory_tests.adb	bf3b04be NE OO SU
+W ada%s			ada.ads			ada.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W psx%s			psx.ads			psx.ali
+W psx.memory%s		psx-memory.adb		psx-memory.ali
+W psx.types%s		psx-types.ads		psx-types.ali
+
+D ada.ads		20260610194523 76789da1 ada%s
+D a-except.ads		20260610194523 8699d7ff ada.exceptions%s
+D a-ioexce.ads		20260610194523 40018c65 ada.io_exceptions%s
+D a-stream.ads		20260610194523 cb01a8f8 ada.streams%s
+D a-string.ads		20260610194523 90ac6797 ada.strings%s
+D a-sttebu.ads		20260610194523 f1ad67a2 ada.strings.text_buffers%s
+D a-stuten.ads		20260610194523 c6ced0ae ada.strings.utf_encoding%s
+D a-tags.ads		20260610194523 2dbf449c ada.tags%s
+D a-textio.ads		20260610194523 34ef47de ada.text_io%s
+D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-memory.ads	20260906031938 99285330 psx.memory%s
+D psx-types.ads		20260824220912 f83f461c psx.types%s
+D psx_memory_tests.adb	20260909022934 7bd2af8d psx_memory_tests%b
+D system.ads		20260610194523 8a611ac3 system%s
+D s-crtl.ads		20260610194523 823b6536 system.crtl%s
+D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
+D s-ficobl.ads		20260610194523 dc5161d4 system.file_control_block%s
+D s-parame.ads		20260610194523 a1aeab5c system.parameters%s
+D s-putima.ads		20260610194523 1b989439 system.put_images%s
+D s-secsta.ads		20260610194523 578279f5 system.secondary_stack%s
+D s-soflin.ads		20260610194523 5d88fdea system.soft_links%s
+D s-stache.ads		20260610194523 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20260610194523 1c9580f6 system.standard_library%s
+D s-stoele.ads		20260610194523 ccded4e8 system.storage_elements%s
+D s-traent.ads		20260610194523 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
+D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
+G a e
+G c Z b b [psx_memory_tests standard 10 11 none]
+G r c none [psx_memory_tests standard 10 11 none] [reset psx__memory 20 14 none]
+G r c none [psx_memory_tests standard 10 11 none] [write_8 psx__memory 34 14 none]
+G r c none [psx_memory_tests standard 10 11 none] [read_8 psx__memory 22 13 none]
+G r c none [psx_memory_tests standard 10 11 none] [write_16 psx__memory 39 14 none]
+G r c none [psx_memory_tests standard 10 11 none] [read_16 psx__memory 26 13 none]
+G r c none [psx_memory_tests standard 10 11 none] [write_32 psx__memory 44 14 none]
+G r c none [psx_memory_tests standard 10 11 none] [read_32 psx__memory 30 13 none]
+X 1 ada.ads
+18K9*Ada 22e8 16|2r6 12r8
+X 9 a-textio.ads
+58K13*Text_IO 785e16 16|2w10 12r12
+284U14*New_Line 16|29s4 197s4
+565U14*Put_Line 16|19s10 21s10 28s4 198s4
+X 11 interfac.ads
+47K9*Interfaces 247e15 16|1w6 6r10 7r10 8r10
+81M9*Unsigned_8 16|6r21
+84M9*Unsigned_16 16|7r21
+92M9*Unsigned_32 16|8r21
+X 13 psx.ads
+1K9*PSX 3e8 16|3r6 4r6 14r13 31r4 34r4 36r11 39r4 42r7 45r4 48r7 53r7 57r7
+. 62r7 66r7 70r7 74r7 78r4 80r4 83r7 87r4 89r4 92r7 96r7 101r4 104r7 107r4
+. 110r7 114r7 118r7 123r4 126r7 130r7 134r7 139r4 142r7 147r4 150r7 164r7
+. 168r7 172r7 177r4 180r7 183r4 186r7 191r7 194r7
+X 14 psx-memory.ads
+3K13*Memory 51e15 16|3w10 14r17 31r8 34r8 36r15 39r8 42r11 45r8 48r11 53r11
+. 57r11 62r11 66r11 70r11 74r11 78r8 80r8 83r11 87r8 89r8 92r11 96r11 101r8
+. 104r11 107r8 110r11 114r11 118r11 123r8 126r11 130r11 134r11 139r8 142r11
+. 147r8 150r11 164r11 168r11 172r11 177r8 180r11 183r8 186r11 191r11 194r11
+11A9*BIOS_Array(15|5M12)<11|92M9>
+14R9*Memory_State 18e14 16|14r24
+17a7*BIOS{11A9} 16|158m11 159m11 160m11 161m11
+20U14*Reset 16|31s15
+22V13*Read_8{15|5M12} 16|36s22 53s18 57s18 62s18 66s18 70s18 74s18 92s18
+. 96s18 104s18 114s18 118s18 168s18 172s18 180s18 191s18
+26V13*Read_16{15|6M12} 16|42s18
+30V13*Read_32{15|7M12} 16|48s18 83s18 110s18 126s18 130s18 134s18 142s18
+. 150s18 164s18 186s18 194s18
+34U14*Write_8 16|34s15 87s15 89s15 101s15 177s15
+39U14*Write_16 16|39s15
+44U14*Write_32 16|45s15 78s15 80s15 107s15 123s15 139s15 147s15 183s15
+X 15 psx-types.ads
+3K13*Types 12e14 16|4w10
+X 16 psx_memory_tests.adb
+10U11*PSX_Memory_Tests 10b11 200l5 200t21
+14r4 Memory{14|14R9} 31m22 34m24 34r24 36r30 39m25 39r25 42r27 45m25 45r25
+. 48r27 53r26 57r26 62r26 66r26 70r26 74r26 78m25 78r25 80m25 80r25 83r27
+. 87m24 87r24 89m24 89r24 92r26 96r26 101m24 101r24 104r26 107m25 107r25
+. 110r27 114r26 118r26 123m25 123r25 126r27 130r27 134r27 139m25 139r25 142r27
+. 147m25 147r25 150r27 158m4 159m4 160m4 161m4 164r27 168r26 172r26 177m24
+. 177r24 180r26 183m25 183r25 186r27 191r26 194r27
+16U14 Check 16b14 16>21 16>42 24l8 24t13 36s4 41s4 47s4 52s4 56s4 61s4 65s4
+. 69s4 73s4 82s4 91s4 95s4 103s4 109s4 113s4 117s4 125s4 129s4 133s4 141s4
+. 149s4 163s4 167s4 171s4 179s4 185s4 190s4 193s4
+16b21 Condition{boolean} 18r10
+16a42 Name{string} 19r31 21r31
+

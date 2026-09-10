@@ -1,0 +1,1 @@
+psx-cpu.adb:5:04: warning: use clause for type "Interfaces.Unsigned_8" has no effect [-gnatwu]
