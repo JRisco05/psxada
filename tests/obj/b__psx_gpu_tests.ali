@@ -25,12 +25,12 @@ RV NO_IMPLICIT_LOOPS
 RV NO_ELABORATION_CODE
 RV NO_OBSOLESCENT_FEATURES
 
-U ada_main%b		b__psx_spu_tests.adb	3c123fe4 OO PK IL
+U ada_main%b		b__psx_gpu_tests.adb	acc0bf44 OO PK IL
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 Z system%s		system.ads		system.ali
 
-U ada_main%s		b__psx_spu_tests.ads	8f5a2e1a EE NE OO PK IL
+U ada_main%s		b__psx_gpu_tests.ads	2a04f196 EE NE OO PK IL
 W system%s		system.ads		system.ali
 W system.parameters%s	s-parame.adb		s-parame.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
@@ -38,8 +38,8 @@ W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 D ada.ads		20260610194523 76789da1 ada%s
 D a-except.ads		20260610194523 8699d7ff ada.exceptions%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
-D b__psx_spu_tests.ads	20260911050940 f317e670 ada_main%s
-D b__psx_spu_tests.adb	20260911050940 499c0e6b ada_main%b
+D b__psx_gpu_tests.ads	20260911052203 564939fc ada_main%s
+D b__psx_gpu_tests.adb	20260911052203 7c105147 ada_main%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-parame.ads		20260610194523 a1aeab5c system.parameters%s
 D s-secsta.ads		20260610194523 578279f5 system.secondary_stack%s
@@ -57,7 +57,7 @@ X 1 ada.ads
 18K9*Ada 22e8 5|6r6
 X 2 a-except.ads
 44K13*Exceptions 309e19 5|6w10
-X 4 b__psx_spu_tests.ads
+X 4 b__psx_gpu_tests.ads
 6K9*ada_main 389l5 389e13 5|8b14 250l5 250t13
 8i4*gnat_argc{integer} 12m22 12r22 5|223r10 224m10
 9m4*gnat_argv{6|67M9} 13m22 13r22 5|225m10
@@ -197,7 +197,7 @@ X 4 b__psx_spu_tests.ads
 265m4*u00112{42M9} 266r22
 267m4*u00113{42M9} 268r22
 269m4*u00114{42M9} 270r22
-X 5 b__psx_spu_tests.adb
+X 5 b__psx_gpu_tests.adb
 10i4 E016{short_integer} 10m46 10r46 171m7 171r15
 11i4 E012{short_integer} 11m46 11r46 170m7 170r15
 12i4 E010{short_integer} 12m46 12r46 165m7 165r15
@@ -253,7 +253,7 @@ X 5 b__psx_spu_tests.adb
 123p7*Finalize_Library_Objects{77P9} 124m25 124r25 160m7
 125i7*Binder_Sec_Stacks_Count{natural} 126m27 126r27 155m7
 127m7*Default_Sized_SS_Pool{6|67M9} 128m27 128r27 156m7
-203U14 Ada_Main_Program 204b<ada,_ada_psx_spu_tests>24 231s7
+203U14 Ada_Main_Program 204b<ada,_ada_psx_gpu_tests>24 231s7
 212U17*Initialize 212>29 213b<c,__gnat_initialize>25 229s7
 212m29 Addr{6|67M9}
 215U17*Finalize 216b<c,__gnat_finalize>25 233s7

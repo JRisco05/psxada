@@ -1,0 +1,111 @@
+V "GNAT Lib v16"
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx.gpu%b		psx-gpu.adb		08d6e36b NE OO PK IU
+W psx%s			psx.ads			psx.ali
+
+U psx.gpu%s		psx-gpu.ads		1d14801a EE NE OO PK IU
+W psx%s			psx.ads			psx.ali
+W psx.types%s		psx-types.ads		psx-types.ali
+
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-gpu.ads		20260911051125 8a21e728 psx.gpu%s
+D psx-gpu.adb		20260911051147 82f70443 psx.gpu%b
+D psx-types.ads		20260824220912 f83f461c psx.types%s
+D system.ads		20260610194523 8a611ac3 system%s
+G a e
+G c Z s b [reset psx__gpu 21 14 none]
+G c Z s b [write_gp0 psx__gpu 23 14 none]
+G c Z s b [write_gp1 psx__gpu 25 14 none]
+G c Z s b [read_status psx__gpu 27 13 none]
+G c Z s b [write_vram psx__gpu 29 14 none]
+G c Z s b [read_vram psx__gpu 32 13 none]
+G c Z s s [Tvram_arrayBIP psx__gpu 11 4 none]
+G c Z s s [gpu_stateIP psx__gpu 14 9 none]
+X 1 interfac.ads
+84M9*Unsigned_16
+92M9*Unsigned_32
+X 2 psx.ads
+1K9*PSX 3e8 3|1r6 3r9 5r22 6r22 35r5 4|1r14 51r5
+X 3 psx-gpu.ads
+3K13*GPU 2|1k9 3|35l9 35e12 4|1b18 51l9 51t12
+5M12*Word16{5|6M12} 12r65 30r65 33r57 4|27r65 38r74
+6M12*Word32{5|7M12} 15r16 16r16 17r16 23r57 25r57 27r50 4|11r57 16r57 21r50
+8N4*VRAM_WIDTH 12r32 4|30r39 33r14 41r39 44r14
+9N4*VRAM_HEIGHT 12r45 4|33r38 44r38
+11A9*VRAM_Array(5M12)<integer> 18r16
+14R9*GPU_State 19e14 21r31 23r38 25r38 27r32 30r20 33r13 4|3r31 11r38 16r38
+. 21r32 27r20 38r30
+15m7*GP0{6M12} 4|5m11 13m11
+16m7*GP1{6M12} 4|6m11 18m11
+17m7*Status{6M12} 4|7m11 23r18
+18a7*VRAM{11A9} 4|8m11 34m14 45r21
+21U14*Reset 21<21 4|3b14 9l8 9t13
+21r21 GPU{14R9} 4|3b21 5m7 6m7 7m7 8m7
+23U14*Write_GP0 23=25 23>49 4|11b14 14l8 14t17
+23r25 GPU{14R9} 4|11b25 13m7
+23m49 Value{6M12} 4|11b49 13r18
+25U14*Write_GP1 25=25 25>49 4|16b14 19l8 19t17
+25r25 GPU{14R9} 4|16b25 18m7
+25m49 Value{6M12} 4|16b49 18r18
+27V13*Read_Status{6M12} 27>26 4|21b13 24l8 24t19
+27r26 GPU{14R9} 4|21b26 23r14
+29U14*Write_VRAM 30=7 30>31 30>44 30>57 4|26b14 36l8 36t18
+30r7 GPU{14R9} 4|27b7 34m10
+30i31 X{natural} 4|27b31 30r52 33r10
+30i44 Y{natural} 4|27b44 30r35 33r34
+30m57 Value{5M12} 4|27b57 34r30
+32V13*Read_VRAM{5M12} 33>7 33>24 33>37 4|38b13 49l8 49t17
+33r7 GPU{14R9} 4|38b24 45r17
+33i24 X{natural} 4|38b41 41r52 44r10
+33i37 Y{natural} 4|38b54 41r35 44r34
+X 4 psx-gpu.adb
+30i7 Index{natural} 34r20
+41i7 Index{natural} 45r27
+X 5 psx-types.ads
+3K13*Types 3|1w10 5r26 6r26 5|12e14
+6M12*Word16{1|84M9} 3|5r32
+7M12*Word32{1|92M9} 3|6r32
+

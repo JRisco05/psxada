@@ -12,6 +12,7 @@ project Psxada is
       "src/cpu/execute/psx-cpu-execute/",
       "src/cpu/fetch",
       "src/cpu/step",
+      "src/gpu/",
       "src/spu/",
       "src/spu/channel",
       "src/memory/",
@@ -24,6 +25,7 @@ project Psxada is
       "tests/memory/",
       "tests/bios/",
       "tests/spu/",
+      "tests/gpu/",
       "tests/dma/",
       "config/");
 
