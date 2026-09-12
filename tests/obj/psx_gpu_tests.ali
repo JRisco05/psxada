@@ -68,7 +68,7 @@ D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
 D psx-gpu.ads		20260911051125 8a21e728 psx.gpu%s
-D psx-types.ads		20260824220912 f83f461c psx.types%s
+D psx-types.ads		20260911215536 f83f461c psx.types%s
 D psx_gpu_tests.adb	20260911052157 04800757 psx_gpu_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s

@@ -59,8 +59,8 @@ W psx.memory%s		psx-memory.adb		psx-memory.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260908151228 7c10720c psx.cpu%s
-D psx-cpu-execute.ads	20260829222429 4b6c299f psx.cpu.execute%s
+D psx-cpu.ads		20260911215034 7c10720c psx.cpu%s
+D psx-cpu-execute.ads	20260911215034 4b6c299f psx.cpu.execute%s
 D psx-cpu-fetch.ads	20260902161056 1bdf6dc0 psx.cpu.fetch%s
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
 D psx-cpu-step.ads	20260902161630 a5d24bbb psx.cpu.step%s
@@ -68,7 +68,7 @@ D psx-cpu-step.adb	20260910172648 9bdfab60 psx.cpu.step%b
 D psx-dma.ads		20260910171829 246d433d psx.dma%s
 D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
-D psx-types.ads		20260824220912 f83f461c psx.types%s
+D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
 G c Z s b [step psx__cpu__step 6 14 none]

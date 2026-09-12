@@ -53,7 +53,7 @@ D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
 D psx-register.adb	20260824211050 ea2beebf psx.register%b
-D psx-types.ads		20260824220912 f83f461c psx.types%s
+D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
 G c Z s b [read psx__register 11 13 none]

@@ -48,7 +48,7 @@ W psx%s			psx.ads			psx.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-types.ads		20260824220912 f83f461c psx.types%s
+D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
 X 1 interfac.ads

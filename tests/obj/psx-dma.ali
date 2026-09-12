@@ -57,7 +57,7 @@ D psx.ads		20260824210455 6f0a212e psx%s
 D psx-dma.ads		20260910171829 246d433d psx.dma%s
 D psx-dma.adb		20260910171801 b752bf48 psx.dma%b
 D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
-D psx-types.ads		20260824220912 f83f461c psx.types%s
+D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
 G c Z s b [reset psx__dma 8 14 none]
