@@ -6,7 +6,7 @@ project Psxada is
      ("src/psx/",
       "src/types/",
       "src/psxada/",
-      "src/cpu/psx-cpu/",
+      "src/cpu/",
       "src/cpu/register/",
       "src/cpu/instruction/",
       "src/cpu/execute/",

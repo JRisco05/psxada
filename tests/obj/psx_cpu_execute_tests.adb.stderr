@@ -1,1 +1,6 @@
-psx_cpu_execute_tests.adb:2:06: (style) bad casing of "Interfaces" declared at interfac.ads:47 [-gnatyr]
+psx_cpu_execute_tests.adb:3:06: error: file "psx-cpu.ads" does not contain expected unit
+psx_cpu_execute_tests.adb:3:06: error: expected unit "Psx.Cpu (spec)"
+psx_cpu_execute_tests.adb:3:06: error: found unit "Psx.Gpu (spec)"
+psx_cpu_execute_tests.adb:4:06: error: file "psx-cpu.ads" does not contain unit "Psx.Cpu (spec)"
+psx_cpu_execute_tests.adb:5:06: error: file "psx-cpu.ads" does not contain unit "Psx.Cpu (spec)"
+psx_cpu_execute_tests.adb:8:06: error: file "psx-cpu.ads" does not contain unit "Psx.Cpu (spec)"
