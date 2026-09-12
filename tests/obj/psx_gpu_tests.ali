@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_gpu_tests%b	psx_gpu_tests.adb	d360187c NE OO SU
+U psx_gpu_tests%b	psx_gpu_tests.adb	33e2c63f NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -67,7 +67,7 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-gpu.ads		20260911051125 8a21e728 psx.gpu%s
+D psx-gpu.ads		20260912120110 6aa3396b psx.gpu%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D psx_gpu_tests.adb	20260911052157 04800757 psx_gpu_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
@@ -86,12 +86,12 @@ D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_gpu_tests standard 6 11 none]
-G r c none [psx_gpu_tests standard 6 11 none] [reset psx__gpu 21 14 none]
-G r c none [psx_gpu_tests standard 6 11 none] [read_status psx__gpu 27 13 none]
-G r c none [psx_gpu_tests standard 6 11 none] [write_gp0 psx__gpu 23 14 none]
-G r c none [psx_gpu_tests standard 6 11 none] [write_gp1 psx__gpu 25 14 none]
-G r c none [psx_gpu_tests standard 6 11 none] [write_vram psx__gpu 29 14 none]
-G r c none [psx_gpu_tests standard 6 11 none] [read_vram psx__gpu 32 13 none]
+G r c none [psx_gpu_tests standard 6 11 none] [reset psx__gpu 29 14 none]
+G r c none [psx_gpu_tests standard 6 11 none] [read_status psx__gpu 35 13 none]
+G r c none [psx_gpu_tests standard 6 11 none] [write_gp0 psx__gpu 31 14 none]
+G r c none [psx_gpu_tests standard 6 11 none] [write_gp1 psx__gpu 33 14 none]
+G r c none [psx_gpu_tests standard 6 11 none] [write_vram psx__gpu 37 14 none]
+G r c none [psx_gpu_tests standard 6 11 none] [read_vram psx__gpu 40 13 none]
 X 1 ada.ads
 18K9*Ada 22e8 16|1r6 17r10 19r10 27r10 29r10 35r4 65r4
 X 9 a-textio.ads
@@ -105,24 +105,24 @@ X 13 psx.ads
 1K9*PSX 3e8 16|2r6 3r6 11r10 14r33 14r60 24r33 24r60 37r4 43r34 45r4 49r4
 . 53r4 55r39 57r4 59r43 61r4 63r40
 X 14 psx-gpu.ads
-3K13*GPU 35e12 16|2w10 11r14 37r8 43r38 45r8 49r8 53r8 55r43 57r8 59r47 61r8
+3K13*GPU 43e12 16|2w10 11r14 37r8 43r38 45r8 49r8 53r8 55r43 57r8 59r47 61r8
 . 63r44
-14R9*GPU_State 19e14 16|11r18
-15m7*GP0{6M12} 16|39r31 47r43
-16m7*GP1{6M12} 16|41r31 51r43
-21U14*Reset 16|37s12
-23U14*Write_GP0 16|45s12
-25U14*Write_GP1 16|49s12
-27V13*Read_Status{6M12} 16|43s42
-29U14*Write_VRAM 16|53s12 57s12 61s12
-32V13*Read_VRAM{5M12} 16|55s47 59s51 63s48
+17R9*GPU_State 27e14 16|11r18
+18m7*GP0{7M12} 16|39r31 47r43
+19m7*GP1{7M12} 16|41r31 51r43
+29U14*Reset 16|37s12
+31U14*Write_GP0 16|45s12
+33U14*Write_GP1 16|49s12
+35V13*Read_Status{7M12} 16|43s42
+37U14*Write_VRAM 16|53s12 57s12 61s12
+40V13*Read_VRAM{6M12} 16|55s47 59s51 63s48
 X 15 psx-types.ads
 3K13*Types 12e14 16|3w10 14r37 14r64 24r37 24r64
 6M12*Word16{11|84M9} 16|24r43 24r70
 7M12*Word32{11|92M9} 16|14r43 14r70
 X 16 psx_gpu_tests.adb
 6U11*PSX_GPU_Tests 6b11 67l5 67t18
-11r4 GPU{14|14R9} 37m19 39r27 41r27 43r55 45m23 45r23 47r39 49m23 49r23 51r39
+11r4 GPU{14|17R9} 37m19 39r27 41r27 43r55 45m23 45r23 47r39 49m23 49r23 51r39
 . 53m24 53r24 55r58 57m24 57r24 59r62 61m24 61r24 63r59
 13U14 Check 13b14 14>7 14>22 14>51 21l8 21t13 39s4 41s4 43s4 47s4 51s4
 14a7 Name{string} 17r43 19r43

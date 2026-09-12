@@ -2,6 +2,7 @@ with PSX.Types;
 
 package PSX.GPU is
 
+   subtype Word8 is PSX.Types.Word8;
    subtype Word16 is PSX.Types.Word16;
    subtype Word32 is PSX.Types.Word32;
 
@@ -11,11 +12,18 @@ package PSX.GPU is
    type VRAM_Array is
      array (Natural range 0 .. VRAM_WIDTH * VRAM_HEIGHT - 1) of Word16;
 
+   type GP0_Data_Array is array (Natural range 0 .. 15) of Word32;
+
    type GPU_State is record
       GP0    : Word32;
       GP1    : Word32;
       Status : Word32;
       VRAM   : VRAM_Array;
+
+      GP0_Command        : Word8;
+      GP0_Expected_Words : Natural;
+      GP0_Received_Words : Natural;
+      GP0_Data           : GP0_Data_Array;
    end record;
 
    procedure Reset (GPU : out GPU_State);
