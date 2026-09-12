@@ -1,43 +1,43 @@
+with PSX.Register;
 with PSX.Types;
 
-package PSX.GPU is
+package PSX.CPU is
 
-   subtype Word8 is PSX.Types.Word8;
-   subtype Word16 is PSX.Types.Word16;
+   pragma Elaborate_Body;
+
    subtype Word32 is PSX.Types.Word32;
 
-   VRAM_WIDTH  : constant := 1024;
-   VRAM_HEIGHT : constant := 512;
+   type Exception_Code is (None, Syscall, Break, Overflow);
 
-   type VRAM_Array is
-     array (Natural range 0 .. VRAM_WIDTH * VRAM_HEIGHT - 1) of Word16;
+   type CPU_State is record
+      Registers : PSX.Register.Register_Array;
 
-   type GP0_Data_Array is array (Natural range 0 .. 15) of Word32;
+      --  Program Counter
+      PC : Word32;
 
-   type GPU_State is record
-      GP0    : Word32;
-      GP1    : Word32;
+      --  Next Program Counter.
+      --
+      --  This models the next instruction address used by the
+      --  MIPS R3000A branch-delay mechanism.
+      Next_PC : Word32;
+
+      --  Indicates that the current instruction is executing
+      --  in the branch delay slot.
+      In_Delay_Slot : Boolean;
+
+      HI : Word32;
+      LO : Word32;
+
+      --  Coprocessor 0 / exception state
       Status : Word32;
-      VRAM   : VRAM_Array;
+      EPC    : Word32;
+      Cause  : Exception_Code;
 
-      GP0_Command        : Word8;
-      GP0_Expected_Words : Natural;
-      GP0_Received_Words : Natural;
-      GP0_Data           : GP0_Data_Array;
+      Exception_Pending : Boolean;
    end record;
 
-   procedure Reset (GPU : out GPU_State);
+   procedure Reset (CPU : out CPU_State);
+   procedure Enter_Exception (CPU : in out CPU_State);
+   procedure Return_From_Exception (CPU : in out CPU_State);
 
-   procedure Write_GP0 (GPU : in out GPU_State; Value : Word32);
-
-   procedure Write_GP1 (GPU : in out GPU_State; Value : Word32);
-
-   function Read_Status (GPU : GPU_State) return Word32;
-
-   procedure Write_VRAM
-     (GPU : in out GPU_State; X : Natural; Y : Natural; Value : Word16);
-
-   function Read_VRAM
-     (GPU : GPU_State; X : Natural; Y : Natural) return Word16;
-
-end PSX.GPU;
+end PSX.CPU;

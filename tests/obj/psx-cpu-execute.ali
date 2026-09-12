@@ -63,7 +63,7 @@ D ada.ads		20260610194523 76789da1 ada%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260911215034 7c10720c psx.cpu%s
+D psx-cpu.ads		20260912021652 7c10720c psx.cpu%s
 D psx-cpu-execute.ads	20260911215034 4b6c299f psx.cpu.execute%s
 D psx-cpu-execute.adb	20260911215034 44b2f1a6 psx.cpu.execute%b
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s

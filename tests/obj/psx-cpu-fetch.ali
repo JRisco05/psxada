@@ -55,7 +55,7 @@ W psx.memory%s		psx-memory.adb		psx-memory.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260911215034 7c10720c psx.cpu%s
+D psx-cpu.ads		20260912021652 7c10720c psx.cpu%s
 D psx-cpu-fetch.ads	20260902161056 1bdf6dc0 psx.cpu.fetch%s
 D psx-cpu-fetch.adb	20260902161229 27d7a885 psx.cpu.fetch%b
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
