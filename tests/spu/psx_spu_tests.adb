@@ -61,6 +61,44 @@ begin
 
    Check (SPU.RAM (16#0001_0001#) = 0, "SPU RAM independent address 2");
 
+   -- Verificar los 24 canales
+
+   Check (SPU.Channels'Length = 24, "SPU has 24 channels");
+
+   Check (SPU.Channels (0).Volume_Left = 0, "Channel 0 Volume Left reset");
+
+   Check (SPU.Channels (0).Volume_Right = 0, "Channel 0 Volume Right reset");
+
+   Check (SPU.Channels (0).Pitch = 0, "Channel 0 Pitch reset");
+
+   Check (SPU.Channels (0).Start_Address = 0, "Channel 0 Start Address reset");
+
+   Check (not SPU.Channels (0).Key_On, "Channel 0 Key On reset");
+
+   Check (not SPU.Channels (0).Key_Off, "Channel 0 Key Off reset");
+
+   Check (SPU.Channels (23).Volume_Left = 0, "Channel 23 Volume Left reset");
+
+   Check (SPU.Channels (23).Volume_Right = 0, "Channel 23 Volume Right reset");
+
+   Check (SPU.Channels (23).Pitch = 0, "Channel 23 Pitch reset");
+
+   Check
+     (SPU.Channels (23).Start_Address = 0, "Channel 23 Start Address reset");
+
+   -- Verificar independencia entre canales
+
+   SPU.Channels (0).Volume_Left := 16#1234#;
+   SPU.Channels (23).Volume_Left := 16#ABCD#;
+
+   Check (SPU.Channels (0).Volume_Left = 16#1234#, "Channel 0 independent");
+
+   Check (SPU.Channels (23).Volume_Left = 16#ABCD#, "Channel 23 independent");
+
+   Check (SPU.Channels (1).Volume_Left = 0, "Channel 1 unaffected");
+
+   Check (SPU.Channels (22).Volume_Left = 0, "Channel 22 unaffected");
+
    New_Line;
    Put_Line ("SPU basic tests completed.");
 
