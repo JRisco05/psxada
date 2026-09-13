@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_gpu_tests%b	psx_gpu_tests.adb	a50edb9e NE OO SU
+U psx_gpu_tests%b	psx_gpu_tests.adb	9026a329 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -69,7 +69,7 @@ D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
 D psx-gpu.ads		20260913045019 b6e8db0d psx.gpu%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
-D psx_gpu_tests.adb	20260913130851 4e27f890 psx_gpu_tests%b
+D psx_gpu_tests.adb	20260913181614 7b0f8027 psx_gpu_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -93,10 +93,10 @@ G r c none [psx_gpu_tests standard 6 11 none] [write_gp1 psx__gpu 40 14 none]
 G r c none [psx_gpu_tests standard 6 11 none] [write_vram psx__gpu 44 14 none]
 G r c none [psx_gpu_tests standard 6 11 none] [read_vram psx__gpu 47 13 none]
 X 1 ada.ads
-18K9*Ada 22e8 16|1r6 18r10 20r10 28r10 30r10 36r4 86r4
+18K9*Ada 22e8 16|1r6 18r10 20r10 28r10 30r10 36r4 129r4
 X 9 a-textio.ads
-58K13*Text_IO 785e16 16|1w10 18r14 20r14 28r14 30r14 36r8 86r8
-565U14*Put_Line 16|18s22 20s22 28s22 30s22 36s16 86s16
+58K13*Text_IO 785e16 16|1w10 18r14 20r14 28r14 30r14 36r8 129r8
+565U14*Put_Line 16|18s22 20s22 28s22 30s22 36s16 129s16
 X 11 interfac.ads
 47K9*Interfaces 247e15 16|4w6 8r13 9r13
 81M9*Unsigned_8
@@ -105,10 +105,12 @@ X 11 interfac.ads
 X 13 psx.ads
 1K9*PSX 3e8 16|2r6 3r6 12r10 15r33 15r60 25r33 25r60 38r4 44r34 46r4 50r4
 . 52r4 54r37 56r28 58r28 60r4 62r31 64r32 66r4 70r4 74r4 76r39 78r4 80r43
-. 82r4 84r40
+. 82r4 84r40 87r4 90r4 93r4 97r4 99r39 101r39 104r4 107r4 110r4 113r4 114r4
+. 115r4 117r45 119r45 121r45 123r45 125r45 127r45
 X 14 psx-gpu.ads
 3K13*GPU 50e12 16|2w10 12r14 38r8 44r38 46r8 50r8 52r8 60r8 66r8 70r8 74r8
-. 76r43 78r8 80r47 82r8 84r44
+. 76r43 78r8 80r47 82r8 84r44 87r8 90r8 93r8 97r8 99r43 101r43 104r8 107r8
+. 110r8 113r8 114r8 115r8 117r49 119r49 121r49 123r49 125r49 127r49
 5M12*Word8{15|5M12}
 17R9*GPU_State 34e14 16|12r18
 19m7*GP0{7M12} 16|40r31 48r43
@@ -118,12 +120,14 @@ X 14 psx-gpu.ads
 30i7*GP0_Y{natural} 16|58r50
 31i7*GP0_Width{natural} 16|62r53
 32i7*GP0_Height{natural} 16|64r54
-36U14*Reset 16|38s12 50s12
-38U14*Write_GP0 16|46s12 52s12 60s12
+36U14*Reset 16|38s12 50s12 87s12 104s12
+38U14*Write_GP0 16|46s12 52s12 60s12 90s12 93s12 97s12 107s12 110s12 113s12
+. 114s12 115s12
 40U14*Write_GP1 16|66s12 70s12
 42V13*Read_Status{7M12} 16|44s42
 44U14*Write_VRAM 16|74s12 78s12 82s12
-47V13*Read_VRAM{6M12} 16|76s47 80s51 84s48
+47V13*Read_VRAM{6M12} 16|76s47 80s51 84s48 99s47 101s47 117s53 119s53 121s53
+. 123s53 125s53 127s53
 X 15 psx-types.ads
 3K13*Types 12e14 16|3w10 15r37 15r64 25r37 25r64 54r41 56r32 58r32 62r35
 . 64r36
@@ -131,16 +135,20 @@ X 15 psx-types.ads
 6M12*Word16{11|84M9} 16|25r43 25r70
 7M12*Word32{11|92M9} 16|15r43 15r70 54r47 56r38 58r38 62r41 64r42
 X 16 psx_gpu_tests.adb
-6U11*PSX_GPU_Tests 6b11 88l5 88t18
+6U11*PSX_GPU_Tests 6b11 131l5 131t18
 12r4 GPU{14|17R9} 38m19 40r27 42r27 44r55 46m23 46r23 48r39 50m19 52m23 52r23
 . 54r55 56r46 58r46 60m23 60r23 62r49 64r50 66m23 66r23 68r39 70m23 70r23
-. 72r39 74m24 74r24 76r58 78m24 78r24 80r62 82m24 82r24 84r59
+. 72r39 74m24 74r24 76r58 78m24 78r24 80r62 82m24 82r24 84r59 87m19 90m23
+. 90r23 93m23 93r23 97m23 97r23 99r58 101r58 104m19 107m23 107r23 110m23
+. 110r23 113m23 113r23 114m23 114r23 115m23 115r23 117r64 119r64 121r64 123r64
+. 125r64 127r64
 14U14 Check 14b14 15>7 15>22 15>51 22l8 22t13 40s4 42s4 44s4 48s4 54s4 56s4
 . 58s4 62s4 64s4 68s4 72s4
 15a7 Name{string} 18r43 20r43
 15m22 Expected{15|7M12} 17r10
 15m51 Actual{15|7M12} 17r21
-24U14 Check 24b14 25>7 25>22 25>51 32l8 32t13 76s4 80s4 84s4
+24U14 Check 24b14 25>7 25>22 25>51 32l8 32t13 76s4 80s4 84s4 99s4 101s4 117s4
+. 119s4 121s4 123s4 125s4 127s4
 25a7 Name{string} 28r43 30r43
 25m22 Expected{15|6M12} 27r10
 25m51 Actual{15|6M12} 27r21

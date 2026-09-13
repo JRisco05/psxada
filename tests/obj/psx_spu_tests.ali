@@ -66,7 +66,7 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-spu.ads		20260913133634 3c6fb51c psx.spu%s
+D psx-spu.ads		20260913133902 3c6fb51c psx.spu%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D psx_spu_tests.adb	20260913133351 48a55026 psx_spu_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
@@ -85,7 +85,7 @@ D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_spu_tests standard 5 11 none]
-G r c none [psx_spu_tests standard 5 11 none] [reset psx__spu 76 14 none]
+G r c none [psx_spu_tests standard 5 11 none] [reset psx__spu 42 14 none]
 X 1 ada.ads
 18K9*Ada 22e8 16|2r6 7r8
 X 9 a-textio.ads
@@ -99,29 +99,29 @@ X 11 interfac.ads
 X 13 psx.ads
 1K9*PSX 3e8 16|3r6 11r10 28r4
 X 14 psx-spu.ads
-38K13*SPU 78e12 16|3w10 11r14 28r8
-48m7*Volume_Left{43M12} 16|68r28 80r29 91m21 92m22 94r28 96r29 98r28 100r29
-49m7*Volume_Right{43M12} 16|70r28 82r29
-50m7*Pitch{43M12} 16|72r28 84r29
-51m7*Start_Address{43M12} 16|74r28 87r25
-55b7*Key_On{boolean} 16|76r32
-56b7*Key_Off{boolean} 16|78r32
-60A9*Channel_Array(47R9)<integer>
-64A9*SPU_RAM_Array(42M12)<11|92M9>
-66R9*SPU_State 74e14 16|11r18
-67a7*Channels{60A9} 16|66r15 68r15 70r15 72r15 74r15 76r19 78r19 80r15 82r15
+4K13*SPU 44e12 16|3w10 11r14 28r8
+14m7*Volume_Left{9M12} 16|68r28 80r29 91m21 92m22 94r28 96r29 98r28 100r29
+15m7*Volume_Right{9M12} 16|70r28 82r29
+16m7*Pitch{9M12} 16|72r28 84r29
+17m7*Start_Address{9M12} 16|74r28 87r25
+21b7*Key_On{boolean} 16|76r32
+22b7*Key_Off{boolean} 16|78r32
+26A9*Channel_Array(13R9)<integer>
+30A9*SPU_RAM_Array(8M12)<11|92M9>
+32R9*SPU_State 40e14 16|11r18
+33a7*Channels{26A9} 16|66r15 68r15 70r15 72r15 74r15 76r19 78r19 80r15 82r15
 . 84r15 87r11 91m8 92m8 94r15 96r15 98r15 100r15
-68a7*RAM{64A9} 16|41r15 43r15 45r15 48m8 49m8 50m8 52r15 55r11 57r15 60r15
+34a7*RAM{30A9} 16|41r15 43r15 45r15 48m8 49m8 50m8 52r15 55r11 57r15 60r15
 . 62r15
-69m7*Control{43M12} 16|30r15
-70m7*Status{43M12} 16|32r15
-71m7*Transfer_Address{43M12} 16|34r15
-72m7*Transfer_Control{43M12} 16|36r15
-73m7*IRQ_Address{43M12} 16|38r15
-76U14*Reset 16|28s12
+35m7*Control{9M12} 16|30r15
+36m7*Status{9M12} 16|32r15
+37m7*Transfer_Address{9M12} 16|34r15
+38m7*Transfer_Control{9M12} 16|36r15
+39m7*IRQ_Address{9M12} 16|38r15
+42U14*Reset 16|28s12
 X 16 psx_spu_tests.adb
 5U11*PSX_SPU_Tests 5b11 105l5 105t18
-11r4 SPU{14|66R9} 28m19 30r11 32r11 34r11 36r11 38r11 41r11 43r11 45r11 48m4
+11r4 SPU{14|32R9} 28m19 30r11 32r11 34r11 36r11 38r11 41r11 43r11 45r11 48m4
 . 49m4 50m4 52r11 55r7 57r11 60r11 62r11 66r11 68r11 70r11 72r11 74r11 76r15
 . 78r15 80r11 82r11 84r11 87r7 91m4 92m4 94r11 96r11 98r11 100r11
 13U14 Check 13b14 13>21 13>42 20l8 20t13 30s4 32s4 34s4 36s4 38s4 41s4 43s4

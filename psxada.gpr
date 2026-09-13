@@ -14,7 +14,6 @@ project Psxada is
       "src/cpu/step",
       "src/gpu/",
       "src/spu/",
-      "src/spu/channel",
       "src/memory/",
       "src/state/",
       "src/dma/",
