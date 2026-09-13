@@ -15,6 +15,7 @@ package PSX.GPU is
    type GP0_Data_Array is array (Natural range 0 .. 15) of Word32;
 
    type GPU_State is record
+
       GP0    : Word32;
       GP1    : Word32;
       Status : Word32;
@@ -24,6 +25,12 @@ package PSX.GPU is
       GP0_Expected_Words : Natural;
       GP0_Received_Words : Natural;
       GP0_Data           : GP0_Data_Array;
+
+      GP0_X      : Natural;
+      GP0_Y      : Natural;
+      GP0_Width  : Natural;
+      GP0_Height : Natural;
+      
    end record;
 
    procedure Reset (GPU : out GPU_State);

@@ -7,6 +7,7 @@ procedure PSX_GPU_Tests is
 
    use type Interfaces.Unsigned_32;
    use type Interfaces.Unsigned_16;
+   --  use type Interfaces.Unsigned_8;
 
    GPU : PSX.GPU.GPU_State;
 
@@ -45,6 +46,26 @@ begin
    PSX.GPU.Write_GP0 (GPU, 16#1234_5678#);
 
    Check ("GP0 write", 16#1234_5678#, GPU.GP0);
+
+   PSX.GPU.Reset (GPU);
+
+   PSX.GPU.Write_GP0 (GPU, 16#A0C8_0064#);
+
+   Check ("GP0 command A0", 16#A0#, PSX.Types.Word32 (GPU.GP0_Command));
+
+   Check ("GP0 A0 X", 100, PSX.Types.Word32 (GPU.GP0_X));
+
+   Check ("GP0 A0 Y", 200, PSX.Types.Word32 (GPU.GP0_Y));
+   
+   PSX.GPU.Write_GP0 (GPU, 16#000A_0014#);
+
+   Check ("GP0 A0 Width", 20, PSX.Types.Word32 (GPU.GP0_Width));
+
+   Check ("GP0 A0 Height", 10, PSX.Types.Word32 (GPU.GP0_Height));
+
+   PSX.GPU.Write_GP1 (GPU, 16#89AB_CDEF#);
+
+   Check ("GP1 write", 16#89AB_CDEF#, GPU.GP1);
 
    PSX.GPU.Write_GP1 (GPU, 16#89AB_CDEF#);
 

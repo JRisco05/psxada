@@ -1,1 +1,1 @@
-psx-gpu.adb:2:06: warning: redundant with clause in body [-gnatwr]
+psx-gpu.ads:33:01: (style) trailing spaces not permitted [-gnatyb]

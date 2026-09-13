@@ -1,8 +1,8 @@
 with Interfaces;
-with PSX.Types;
 
 package body PSX.GPU is
 
+   use type Interfaces.Unsigned_8;
    use type Interfaces.Unsigned_32;
 
    procedure Reset (GPU : out GPU_State) is
@@ -16,12 +16,33 @@ package body PSX.GPU is
       GPU.GP0_Expected_Words := 0;
       GPU.GP0_Received_Words := 0;
       GPU.GP0_Data := (others => 0);
+
+      GPU.GP0_X := 0;
+      GPU.GP0_Y := 0;
+      GPU.GP0_Width := 0;
+      GPU.GP0_Height := 0;
+
    end Reset;
 
    procedure Write_GP0 (GPU : in out GPU_State; Value : Word32) is
       Command : constant Word8 := Word8 (Interfaces.Shift_Right (Value, 24));
    begin
       GPU.GP0 := Value;
+
+      --  Receive the second word of a CPU -> VRAM command.
+      if GPU.GP0_Command = 16#A0# and then GPU.GP0_Received_Words = 1 then
+
+         GPU.GP0_Data (1) := Value;
+
+         GPU.GP0_Width := Natural (Value and 16#0000_03FF#);
+
+         GPU.GP0_Height :=
+           Natural (Interfaces.Shift_Right (Value, 16) and 16#0000_01FF#);
+
+         GPU.GP0_Received_Words := 2;
+
+         return;
+      end if;
 
       --  A new GP0 command starts when no command
       --  is currently being received.
@@ -30,6 +51,15 @@ package body PSX.GPU is
          GPU.GP0_Command := Command;
          GPU.GP0_Received_Words := 1;
          GPU.GP0_Data (0) := Value;
+
+         if Command = 16#A0# then
+
+            GPU.GP0_X := Natural (Value and 16#0000_03FF#);
+
+            GPU.GP0_Y :=
+              Natural (Interfaces.Shift_Right (Value, 16) and 16#0000_01FF#);
+
+         end if;
 
          case Command is
 
