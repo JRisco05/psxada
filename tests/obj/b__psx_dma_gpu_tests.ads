@@ -23,7 +23,7 @@ package ada_main is
    GNAT_Version_Address : constant System.Address := GNAT_Version'Address;
    pragma Export (C, GNAT_Version_Address, "__gnat_version_address");
 
-   Ada_Main_Program_Name : constant String := "_ada_psx_dma_otc_tests" & ASCII.NUL;
+   Ada_Main_Program_Name : constant String := "_ada_psx_dma_gpu_tests" & ASCII.NUL;
    pragma Export (C, Ada_Main_Program_Name, "__gnat_ada_main_program_name");
 
    procedure adainit;
@@ -40,8 +40,8 @@ package ada_main is
    pragma Export (C, main, "main");
 
    type Version_32 is mod 2 ** 32;
-   u00001 : constant Version_32 := 16#f58e0627#;
-   pragma Export (C, u00001, "psx_dma_otc_testsB");
+   u00001 : constant Version_32 := 16#4fa15cea#;
+   pragma Export (C, u00001, "psx_dma_gpu_testsB");
    u00002 : constant Version_32 := 16#b2cfab41#;
    pragma Export (C, u00002, "system__standard_libraryB");
    u00003 : constant Version_32 := 16#986fbd5a#;
@@ -407,7 +407,7 @@ package ada_main is
    --  psx.memory%b
    --  psx.dma%s
    --  psx.dma%b
-   --  psx_dma_otc_tests%b
+   --  psx_dma_gpu_tests%b
    --  END ELABORATION ORDER
 
 end ada_main;

@@ -42,71 +42,102 @@ P ZX
 RN
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx.dma%b		psx-dma.adb		81f7ab39 NE OO PK IU
+U psx.dma%b		psx-dma.adb		ef13e090 NE OO PK IU
 W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
+W psx.gpu%s		psx-gpu.adb		psx-gpu.ali
 W psx.memory%s		psx-memory.adb		psx-memory.ali
 
-U psx.dma%s		psx-dma.ads		30818a82 EE NE OO PK IU
+U psx.dma%s		psx-dma.ads		009c3d64 EE NE OO PK IU
 W psx%s			psx.ads			psx.ali
+W psx.gpu%s		psx-gpu.adb		psx-gpu.ali
 W psx.memory%s		psx-memory.adb		psx-memory.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-dma.ads		20260910171829 246d433d psx.dma%s
-D psx-dma.adb		20260910171801 b752bf48 psx.dma%b
+D psx-dma.ads		20260914005322 a2982fd6 psx.dma%s
+D psx-dma.adb		20260914010032 e9ab4307 psx.dma%b
+D psx-gpu.ads		20260913045019 b6e8db0d psx.gpu%s
 D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
-G c Z s b [reset psx__dma 8 14 none]
-G c Z s b [process psx__dma 10 14 none]
-G r c none [process psx__dma 10 14 none] [write_32 psx__memory 48 14 none]
+G c Z s b [reset psx__dma 9 14 none]
+G c Z s b [process psx__dma 11 14 none]
+G c Z s b [process psx__dma 13 14 none]
+G r c none [process psx__dma 11 14 none] [write_32 psx__memory 48 14 none]
+G r c none [process psx__dma 13 14 none] [read_32 psx__memory 34 13 none]
+G r c none [process psx__dma 13 14 none] [write_gp0 psx__gpu 38 14 none]
+G r c none [process psx__dma 13 14 none] [write_32 psx__memory 48 14 none]
 X 1 interfac.ads
-47K9*Interfaces 247e15 4|1w6 6r13
-92M9*Unsigned_32 4|6r24
+47K9*Interfaces 247e15 4|1w6 7r13
+92M9*Unsigned_32 4|7r24
 X 2 psx.ads
-1K9*PSX 3e8 3|1r6 2r6 4r9 6r22 8r37 10r39 12r5 4|2r6 4r14 14r37 20r16 26r24
-. 33r43 69r10 77r7 86r39 96r5
+1K9*PSX 3e8 3|1r6 2r6 3r6 5r9 7r22 9r37 11r39 14r23 14r61 16r5 4|2r6 3r6
+. 5r14 21r37 27r16 33r24 42r23 42r61 82r19 85r10 98r43 129r10 134r7 143r39
+. 155r23 155r61 174r5
 X 3 psx-dma.ads
-4K13*DMA 2|1k9 3|12l9 12e12 4|4b18 96l9 96t12
-6M12*Word32{6|7M12} 4|8r24 10r25 11r25 12r25 20r51 20r66 27r17 28r17 34r14
-. 35r14 36r14 38r17 39r17 40r17 87r14
-8U14*Reset 8=21 4|14b14 17l8 17t13
-8r21 Memory{5|17R9} 4|14b21 16m7
-10U14*Process 10=23 4|86b14 94l8 94t15
-10r23 Memory{5|17R9} 4|86b23 89r34 92m23
+5K13*DMA 2|1k9 3|16l9 16e12 4|5b18 174l9 174t12
+7M12*Word32{7|7M12} 4|9r24 12r25 13r25 14r25 17r25 18r25 19r25 27r51 27r66
+. 34r17 35r17 44r14 45r14 46r14 48r17 49r17 50r17 99r14 100r14 101r14 103r17
+. 104r17 105r17 144r14 157r14
+9U14*Reset 9=21 4|21b14 24l8 24t13
+9r21 Memory{6|17R9} 4|21b21 23m7
+11U14*Process 11=23 4|143b14 151l8 151t15
+11r23 Memory{6|17R9} 4|143b23 146r34 149m23
+13U14*Process 14=7 14=48 4|154b14 172l8 172t15
+14r7 Memory{6|17R9} 4|155b7 160r34 163m23 167r34 170m23
+14r48 GPU{5|17R9} 4|155b48 163m31
 X 4 psx-dma.adb
-8m4 DMA_BASE{3|6M12} 10r35 11r35 12r35 22r47 30r40
-10m4 DMA6_MADR{3|6M12} 42r42
-11m4 DMA6_BCR{3|6M12} 43r41
-12m4 DMA6_CHCR{3|6M12} 44r42 82r35 89r42
-19V13 Read_DMA_Register{3|6M12} 19b13 20>7 20>41 23l8 23t25 42s15 43s14 44s15
-. 89s15
-20r7 Memory{5|17R9} 22r14
-20m41 Address{3|6M12} 22r37
-25U14 Write_DMA_Register 25b14 26=7 27>7 28>7 31l8 31t26 82s7
-26r7 Memory{5|17R9} 30m7
-27m7 Address{3|6M12} 30r30
-28m7 Value{3|6M12} 30r58
-33U14 Process_OTC 33b14 33=27 84l8 84t19 92s10
-33r27 Memory{5|17R9} 42r34 43r33 44r34 69m31 77m28 82m27
-34m7 MADR{3|6M12} 42m7 63r18
-35m7 BCR{3|6M12} 43m7 57r16
-36m7 CHCR{3|6M12} 44m7 47r11 52r12 80m7 80r15 82r46
-38m7 Address{3|6M12} 63m7 67r18 69r39 71m10 77r36
-39m7 Count{3|6M12} 57m7 59r10 65r13 72m10 72r19
-40m7 Next{3|6M12} 67m10 69r48 71r21
-87m7 CHCR{3|6M12} 89m7 91r11
-X 5 psx-memory.ads
-3K13*Memory 3|1w10 8r41 10r43 4|2w10 14r41 20r20 26r28 33r47 69r14 77r11
-. 86r43 5|55e15
-5A9*DMA_Register_Array(6|7M12)<1|92M9>
-17R9*Memory_State 3|8r48 10r50 4|14r48 20r27 26r35 33r54 86r50 5|22e14
-21a7*DMA_Registers{5A9} 4|16m14 22r21 30m14
-48U14*Write_32 4|69s21 77s18
-X 6 psx-types.ads
-3K13*Types 3|2w10 6r26 6|12e14
-7M12*Word32{1|92M9} 3|6r32
+9m4 DMA_BASE{3|7M12} 12r35 13r35 14r35 17r35 18r35 19r35 29r47 37r40
+12m4 DMA2_MADR{3|7M12} 52r42
+13m4 DMA2_BCR{3|7M12} 53r41
+14m4 DMA2_CHCR{3|7M12} 54r42 94r35 160r42
+17m4 DMA6_MADR{3|7M12} 107r42
+18m4 DMA6_BCR{3|7M12} 108r41
+19m4 DMA6_CHCR{3|7M12} 109r42 137r35 146r42 167r42
+26V13 Read_DMA_Register{3|7M12} 26b13 27>7 27>41 30l8 30t25 52s15 53s14 54s15
+. 107s15 108s14 109s15 146s15 160s15 167s15
+27r7 Memory{6|17R9} 29r14
+27m41 Address{3|7M12} 29r37
+32U14 Write_DMA_Register 32b14 33=7 34>7 35>7 38l8 38t26 94s7 137s7
+33r7 Memory{6|17R9} 37m7
+34m7 Address{3|7M12} 37r30
+35m7 Value{3|7M12} 37r58
+41U14 Process_GPU 41b14 42=7 42=48 95l8 95t19 163s10
+42r7 Memory{6|17R9} 52r34 53r33 54r34 82r39 94m27
+42r48 GPU{5|17R9} 85m29
+44m7 MADR{3|7M12} 52m7 78r18
+45m7 BCR{3|7M12} 53m7 72r16
+46m7 CHCR{3|7M12} 54m7 57r11 62r11 67r12 92m7 92r15 94r46
+48m7 Address{3|7M12} 78m7 82r47 87m10 87r21
+49m7 Count{3|7M12} 72m7 74r10 80r13 88m10 88r19
+50m7 Value{3|7M12} 82m10 85r34
+98U14 Process_OTC 98b14 98=27 138l8 138t19 149s10 170s10
+98r27 Memory{6|17R9} 107r34 108r33 109r34 129m31 134m28 137m27
+99m7 MADR{3|7M12} 107m7 125r18
+100m7 BCR{3|7M12} 108m7 119r16
+101m7 CHCR{3|7M12} 109m7 111r11 115r12 136m7 136r15 137r46
+103m7 Address{3|7M12} 125m7 128r18 129r39 130m10 134r36
+104m7 Count{3|7M12} 119m7 121r10 127r13 131m10 131r19
+105m7 Next{3|7M12} 128m10 129r48 130r21
+144m7 CHCR{3|7M12} 146m7 148r11
+157m7 CHCR{3|7M12} 160m7 162r11 167m7 169r11
+X 5 psx-gpu.ads
+3K13*GPU 3|1w10 14r65 4|3w10 42r65 85r14 155r65 5|50e12
+17R9*GPU_State 3|14r69 4|42r69 155r69 5|34e14
+38U14*Write_GP0 4|85s18
+X 6 psx-memory.ads
+3K13*Memory 3|2w10 9r41 11r43 14r27 4|2w10 21r41 27r20 33r28 42r27 82r23
+. 98r47 129r14 134r11 143r43 155r27 6|55e15
+5A9*DMA_Register_Array(7|7M12)<1|92M9>
+17R9*Memory_State 3|9r48 11r50 14r34 4|21r48 27r27 33r35 42r34 98r54 143r50
+. 155r34 6|22e14
+21a7*DMA_Registers{5A9} 4|23m14 29r21 37m14
+34V13*Read_32{7|7M12} 4|82s30
+48U14*Write_32 4|129s21 134s18
+X 7 psx-types.ads
+3K13*Types 3|3w10 7r26 7|12e14
+7M12*Word32{1|92M9} 3|7r32
 

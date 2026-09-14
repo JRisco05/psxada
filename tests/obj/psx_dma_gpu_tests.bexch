@@ -1,5 +1,5 @@
 [GENERATED OBJECT FILE]
-b__psx_cpu_execute_tests.o
+b__psx_dma_gpu_tests.o
 [PROJECT FILES]
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/psxada_tests.gpr
 20260914010204 c06efc3f973bbcb9dcab708f73a574f3
@@ -8,17 +8,14 @@ b__psx_cpu_execute_tests.o
 [BOUND OBJECT FILES]
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-types.o
+/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-gpu.o
 /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
-/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-register.o
-/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu.o
-/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-instruction.o
-/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-execute.o
-/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-fetch.o
-/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_cpu_execute_tests.o
+/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-dma.o
+/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_dma_gpu_tests.o
 [GENERATED SOURCE FILES]
-b__psx_cpu_execute_tests.ads
-b__psx_cpu_execute_tests.adb
-b__psx_cpu_execute_tests.ali
+b__psx_dma_gpu_tests.ads
+b__psx_dma_gpu_tests.adb
+b__psx_dma_gpu_tests.ali
 [RESULTING OPTIONS]
 -L/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/
 -L/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/

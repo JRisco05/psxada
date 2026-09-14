@@ -66,7 +66,7 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-spu.ads		20260913133902 3c6fb51c psx.spu%s
+D psx-spu.ads		20260913184301 3c6fb51c psx.spu%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D psx_spu_tests.adb	20260913133351 48a55026 psx_spu_tests%b
 D system.ads		20260610194523 8a611ac3 system%s

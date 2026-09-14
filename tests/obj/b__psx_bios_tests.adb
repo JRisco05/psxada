@@ -7,32 +7,33 @@ with Ada.Exceptions;
 
 package body ada_main is
 
-   E006 : Short_Integer; pragma Import (Ada, E006, "ada__exceptions_E");
-   E011 : Short_Integer; pragma Import (Ada, E011, "system__soft_links_E");
-   E022 : Short_Integer; pragma Import (Ada, E022, "system__exception_table_E");
-   E023 : Short_Integer; pragma Import (Ada, E023, "system__exceptions_E");
-   E018 : Short_Integer; pragma Import (Ada, E018, "system__soft_links__initialize_E");
+   E016 : Short_Integer; pragma Import (Ada, E016, "ada__exceptions_E");
+   E012 : Short_Integer; pragma Import (Ada, E012, "system__soft_links_E");
+   E010 : Short_Integer; pragma Import (Ada, E010, "system__exception_table_E");
+   E019 : Short_Integer; pragma Import (Ada, E019, "system__exceptions_E");
+   E050 : Short_Integer; pragma Import (Ada, E050, "system__soft_links__initialize_E");
    E077 : Short_Integer; pragma Import (Ada, E077, "ada__io_exceptions_E");
-   E052 : Short_Integer; pragma Import (Ada, E052, "ada__strings_E");
+   E007 : Short_Integer; pragma Import (Ada, E007, "ada__strings_E");
    E054 : Short_Integer; pragma Import (Ada, E054, "ada__strings__utf_encoding_E");
    E097 : Short_Integer; pragma Import (Ada, E097, "interfaces__c_E");
    E100 : Short_Integer; pragma Import (Ada, E100, "system__os_lib_E");
    E062 : Short_Integer; pragma Import (Ada, E062, "ada__tags_E");
-   E051 : Short_Integer; pragma Import (Ada, E051, "ada__strings__text_buffers_E");
+   E006 : Short_Integer; pragma Import (Ada, E006, "ada__strings__text_buffers_E");
    E076 : Short_Integer; pragma Import (Ada, E076, "ada__streams_E");
    E108 : Short_Integer; pragma Import (Ada, E108, "system__file_control_block_E");
    E090 : Short_Integer; pragma Import (Ada, E090, "system__finalization_root_E");
    E088 : Short_Integer; pragma Import (Ada, E088, "ada__finalization_E");
    E087 : Short_Integer; pragma Import (Ada, E087, "system__file_io_E");
-   E120 : Short_Integer; pragma Import (Ada, E120, "ada__streams__stream_io_E");
+   E124 : Short_Integer; pragma Import (Ada, E124, "ada__streams__stream_io_E");
    E074 : Short_Integer; pragma Import (Ada, E074, "ada__text_io_E");
-   E118 : Short_Integer; pragma Import (Ada, E118, "psx__memory_E");
+   E132 : Short_Integer; pragma Import (Ada, E132, "psx__gpu_E");
+   E122 : Short_Integer; pragma Import (Ada, E122, "psx__memory_E");
    E130 : Short_Integer; pragma Import (Ada, E130, "psx__dma_E");
    E113 : Short_Integer; pragma Import (Ada, E113, "psx__register_E");
-   E124 : Short_Integer; pragma Import (Ada, E124, "psx__cpu__instruction_E");
-   E128 : Short_Integer; pragma Import (Ada, E128, "psx__cpu__execute_E");
-   E116 : Short_Integer; pragma Import (Ada, E116, "psx__cpu__fetch_E");
-   E126 : Short_Integer; pragma Import (Ada, E126, "psx__cpu__step_E");
+   E116 : Short_Integer; pragma Import (Ada, E116, "psx__cpu__instruction_E");
+   E120 : Short_Integer; pragma Import (Ada, E120, "psx__cpu__execute_E");
+   E128 : Short_Integer; pragma Import (Ada, E128, "psx__cpu__fetch_E");
+   E118 : Short_Integer; pragma Import (Ada, E118, "psx__cpu__step_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
 
@@ -50,7 +51,7 @@ package body ada_main is
       begin
          F1;
       end;
-      E120 := E120 - 1;
+      E124 := E124 - 1;
       declare
          procedure F2;
          pragma Import (Ada, F2, "ada__streams__stream_io__finalize_spec");
@@ -176,17 +177,17 @@ package body ada_main is
       Ada.Exceptions'Elab_Spec;
       System.Soft_Links'Elab_Spec;
       System.Exception_Table'Elab_Body;
-      E022 := E022 + 1;
+      E010 := E010 + 1;
       System.Exceptions'Elab_Spec;
-      E023 := E023 + 1;
+      E019 := E019 + 1;
       System.Soft_Links.Initialize'Elab_Body;
-      E018 := E018 + 1;
-      E011 := E011 + 1;
-      E006 := E006 + 1;
+      E050 := E050 + 1;
+      E012 := E012 + 1;
+      E016 := E016 + 1;
       Ada.Io_Exceptions'Elab_Spec;
       E077 := E077 + 1;
       Ada.Strings'Elab_Spec;
-      E052 := E052 + 1;
+      E007 := E007 + 1;
       Ada.Strings.Utf_Encoding'Elab_Spec;
       E054 := E054 + 1;
       Interfaces.C'Elab_Spec;
@@ -197,7 +198,7 @@ package body ada_main is
       Ada.Tags'Elab_Body;
       E062 := E062 + 1;
       Ada.Strings.Text_Buffers'Elab_Spec;
-      E051 := E051 + 1;
+      E006 := E006 + 1;
       Ada.Streams'Elab_Spec;
       E076 := E076 + 1;
       System.File_Control_Block'Elab_Spec;
@@ -209,17 +210,18 @@ package body ada_main is
       System.File_Io'Elab_Body;
       E087 := E087 + 1;
       Ada.Streams.Stream_Io'Elab_Spec;
-      E120 := E120 + 1;
+      E124 := E124 + 1;
       Ada.Text_Io'Elab_Spec;
       Ada.Text_Io'Elab_Body;
       E074 := E074 + 1;
-      E118 := E118 + 1;
+      E132 := E132 + 1;
+      E122 := E122 + 1;
       E130 := E130 + 1;
       E113 := E113 + 1;
-      E124 := E124 + 1;
-      E128 := E128 + 1;
       E116 := E116 + 1;
-      E126 := E126 + 1;
+      E120 := E120 + 1;
+      E128 := E128 + 1;
+      E118 := E118 + 1;
    end adainit;
 
    procedure Ada_Main_Program;
@@ -259,6 +261,7 @@ package body ada_main is
 --  BEGIN Object file/option list
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-types.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-gpu.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-dma.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-register.o

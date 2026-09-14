@@ -1,7 +1,7 @@
 pragma Warnings (Off);
 pragma Ada_95;
-pragma Source_File_Name (ada_main, Spec_File_Name => "b__psx_dma_otc_tests.ads");
-pragma Source_File_Name (ada_main, Body_File_Name => "b__psx_dma_otc_tests.adb");
+pragma Source_File_Name (ada_main, Spec_File_Name => "b__psx_dma_gpu_tests.ads");
+pragma Source_File_Name (ada_main, Body_File_Name => "b__psx_dma_gpu_tests.adb");
 pragma Suppress (Overflow_Check);
 with Ada.Exceptions;
 
@@ -215,7 +215,7 @@ package body ada_main is
    end adainit;
 
    procedure Ada_Main_Program;
-   pragma Import (Ada, Ada_Main_Program, "_ada_psx_dma_otc_tests");
+   pragma Import (Ada, Ada_Main_Program, "_ada_psx_dma_gpu_tests");
 
    function main
      (argc : Integer;
@@ -254,7 +254,7 @@ package body ada_main is
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-gpu.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-dma.o
-   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_dma_otc_tests.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_dma_gpu_tests.o
    --   -L/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/
    --   -L/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/
    --   -L/Users/jonathanrisco/Projects/Ada/PSXADA/psxada/obj/development/
