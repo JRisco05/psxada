@@ -2,8 +2,9 @@ with Interfaces;
 with PSX.CPU.Execute;
 with PSX.CPU.Fetch;
 with PSX.CPU.Instruction;
-with PSX.Types;
 with PSX.DMA;
+with PSX.GPU;
+with PSX.Types;
 
 package body PSX.CPU.Step is
 
@@ -11,6 +12,18 @@ package body PSX.CPU.Step is
 
    procedure Step
      (CPU : in out PSX.CPU.CPU_State; Memory : in out PSX.Memory.Memory_State)
+   is
+      GPU : PSX.GPU.GPU_State;
+   begin
+      PSX.GPU.Reset (GPU);
+
+      Step (CPU, Memory, GPU);
+   end Step;
+
+   procedure Step
+     (CPU    : in out PSX.CPU.CPU_State;
+      Memory : in out PSX.Memory.Memory_State;
+      GPU    : in out PSX.GPU.GPU_State)
    is
       Inst                  : PSX.CPU.Instruction.Instruction;
       Current_PC            : constant PSX.Types.Word32 := CPU.PC;
@@ -29,9 +42,6 @@ package body PSX.CPU.Step is
 
       --  Determine whether the current instruction
       --  is a control-transfer instruction.
-      --
-      --  Every MIPS branch/jump instruction has a delay slot,
-      --  regardless of whether a conditional branch is taken.
       if Opcode_Value = 2
         or else Opcode_Value = 3
         or else Opcode_Value = 4
@@ -56,18 +66,13 @@ package body PSX.CPU.Step is
       end if;
 
       --  Prepare the sequential next instruction.
-      --
-      --  A branch or jump may replace this value during Execute.
       CPU.Next_PC := Current_Next_PC + PSX.Types.Word32 (4);
 
-      --  Execute while CPU.PC still identifies the
-      --  instruction currently being executed.
+      --  Execute instruction.
       PSX.CPU.Execute.Execute (CPU, Memory, Inst);
 
-      --  A conditional branch that is not taken leaves
-      --  Next_PC pointing to the sequential instruction.
-      --  STEP must advance that value one more instruction,
-      --  because the sequential instruction is the delay slot.
+      --  Conditional branch not taken:
+      --  Next_PC must advance beyond the delay slot.
       if Is_Control_Transfer and then CPU.Next_PC = Current_Next_PC then
          CPU.Next_PC := Current_Next_PC + PSX.Types.Word32 (4);
       end if;
@@ -75,8 +80,6 @@ package body PSX.CPU.Step is
       --  Exception occurred.
       if CPU.Exception_Pending then
 
-         --  If the exception happened in a delay slot,
-         --  EPC must point to the branch/jump instruction.
          if Current_In_Delay_Slot then
             CPU.EPC := Current_PC - PSX.Types.Word32 (4);
          else
@@ -87,17 +90,14 @@ package body PSX.CPU.Step is
 
       else
 
-         --  Advance to the instruction scheduled before
-         --  the current instruction executed.
          CPU.PC := Current_Next_PC;
 
-         --  The next instruction is a delay slot if the
-         --  current instruction was a control-transfer
-         --  instruction.
          CPU.In_Delay_Slot := Is_Control_Transfer;
 
       end if;
-      PSX.DMA.Process (Memory);
+
+      --  Process DMA after the CPU instruction.
+      PSX.DMA.Process (Memory, GPU);
 
    end Step;
 

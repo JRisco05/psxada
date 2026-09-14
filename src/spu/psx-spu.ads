@@ -41,4 +41,10 @@ package PSX.SPU is
 
    procedure Reset (SPU : out SPU_State);
 
+   procedure Read_Register
+     (SPU : in SPU_State; Address : in Word32; Value : out Word16);
+
+   procedure Write_Register
+     (SPU : in out SPU_State; Address : in Word32; Value : in Word16);
+
 end PSX.SPU;

@@ -15,4 +15,70 @@ package body PSX.SPU is
 
    end Reset;
 
+   procedure Write_Register
+     (SPU : in out SPU_State; Address : in Word32; Value : in Word16)
+   is
+      Voice_Index : Natural;
+      Offset      : Word32;
+   begin
+      if Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
+         Offset := Address - 16#1F801C00#;
+
+         Voice_Index := Natural (Offset / 16#10#);
+
+         case Offset mod 16#10# is
+
+            when 16#00# =>
+               SPU.Channels (Voice_Index).Volume_Left := Value;
+
+            when 16#02# =>
+               SPU.Channels (Voice_Index).Volume_Right := Value;
+
+            when 16#04# =>
+               SPU.Channels (Voice_Index).Pitch := Value;
+
+            when 16#06# =>
+               SPU.Channels (Voice_Index).Start_Address := Value;
+
+            when others =>
+               null;
+
+         end case;
+      end if;
+   end Write_Register;
+
+   procedure Read_Register
+     (SPU : in SPU_State; Address : in Word32; Value : out Word16)
+   is
+      Voice_Index : Natural;
+      Offset      : Word32;
+   begin
+      Value := 0;
+
+      if Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
+         Offset := Address - 16#1F801C00#;
+
+         Voice_Index := Natural (Offset / 16#10#);
+
+         case Offset mod 16#10# is
+
+            when 16#00# =>
+               Value := SPU.Channels (Voice_Index).Volume_Left;
+
+            when 16#02# =>
+               Value := SPU.Channels (Voice_Index).Volume_Right;
+
+            when 16#04# =>
+               Value := SPU.Channels (Voice_Index).Pitch;
+
+            when 16#06# =>
+               Value := SPU.Channels (Voice_Index).Start_Address;
+
+            when others =>
+               null;
+
+         end case;
+      end if;
+   end Read_Register;
+
 end PSX.SPU;
