@@ -42,13 +42,13 @@ P ZX
 RN
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx.dma%b		psx-dma.adb		17981338 NE OO PK IU
+U psx.dma%b		psx-dma.adb		03d54a70 NE OO PK IU
 W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
 W psx.gpu%s		psx-gpu.adb		psx-gpu.ali
 W psx.memory%s		psx-memory.adb		psx-memory.ali
 
-U psx.dma%s		psx-dma.ads		f817cecc EE NE OO PK IU
+U psx.dma%s		psx-dma.ads		ec5a9784 EE NE OO PK IU
 W psx%s			psx.ads			psx.ali
 W psx.gpu%s		psx-gpu.adb		psx-gpu.ali
 W psx.memory%s		psx-memory.adb		psx-memory.ali
@@ -58,7 +58,7 @@ D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
 D psx-dma.ads		20260914005322 a2982fd6 psx.dma%s
 D psx-dma.adb		20260914010032 e9ab4307 psx.dma%b
-D psx-gpu.ads		20260914232919 4e6328a5 psx.gpu%s
+D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
@@ -68,7 +68,7 @@ G c Z s b [process psx__dma 11 14 none]
 G c Z s b [process psx__dma 13 14 none]
 G r c none [process psx__dma 11 14 none] [write_32 psx__memory 48 14 none]
 G r c none [process psx__dma 13 14 none] [read_32 psx__memory 34 13 none]
-G r c none [process psx__dma 13 14 none] [write_gp0 psx__gpu 45 14 none]
+G r c none [process psx__dma 13 14 none] [write_gp0 psx__gpu 46 14 none]
 G r c none [process psx__dma 13 14 none] [write_32 psx__memory 48 14 none]
 X 1 interfac.ads
 47K9*Interfaces 247e15 4|1w6 7r13
@@ -125,9 +125,9 @@ X 4 psx-dma.adb
 144m7 CHCR{3|7M12} 146m7 148r11
 157m7 CHCR{3|7M12} 160m7 162r11 167m7 169r11
 X 5 psx-gpu.ads
-3K13*GPU 3|1w10 14r65 4|3w10 42r65 85r14 155r65 5|59e12
-17R9*GPU_State 3|14r69 4|42r69 155r69 5|41e14
-45U14*Write_GP0 4|85s18
+3K13*GPU 3|1w10 14r65 4|3w10 42r65 85r14 155r65 5|60e12
+17R9*GPU_State 3|14r69 4|42r69 155r69 5|42e14
+46U14*Write_GP0 4|85s18
 X 6 psx-memory.ads
 3K13*Memory 3|2w10 9r41 11r43 14r27 4|2w10 21r41 27r20 33r28 42r27 82r23
 . 98r47 129r14 134r11 143r43 155r27 6|55e15

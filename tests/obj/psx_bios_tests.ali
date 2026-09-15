@@ -51,7 +51,7 @@ RV NO_STANDARD_STORAGE_POOLS
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_bios_tests%b	psx_bios_tests.adb	0c0ae4c1 NE OO SU
+U psx_bios_tests%b	psx_bios_tests.adb	1847bd89 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -83,7 +83,7 @@ D psx.ads		20260824210455 6f0a212e psx%s
 D psx-cpu.ads		20260912021652 7c10720c psx.cpu%s
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
 D psx-cpu-step.ads	20260914130357 901c7255 psx.cpu.step%s
-D psx-gpu.ads		20260914232919 4e6328a5 psx.gpu%s
+D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
@@ -108,7 +108,7 @@ G a e
 G c Z b b [psx_bios_tests standard 11 11 none]
 G r c none [psx_bios_tests standard 11 11 none] [reset psx__cpu 39 14 none]
 G r c none [psx_bios_tests standard 11 11 none] [reset psx__memory 24 14 none]
-G r c none [psx_bios_tests standard 11 11 none] [reset psx__gpu 43 14 none]
+G r c none [psx_bios_tests standard 11 11 none] [reset psx__gpu 44 14 none]
 G r c none [psx_bios_tests standard 11 11 none] [load_bios psx__memory 53 14 none]
 G r c none [psx_bios_tests standard 11 11 none] [read_32 psx__memory 34 13 none]
 G r c none [psx_bios_tests standard 11 11 none] [read psx__register 11 13 none]
@@ -144,9 +144,9 @@ X 16 psx-cpu-step.ads
 5K17*Step 15e17 21|5w14 113r18
 10U14*Step 21|113s23
 X 17 psx-gpu.ads
-3K13*GPU 59e12 21|9w10 17r17 66r8
-17R9*GPU_State 41e14 21|17r21
-43U14*Reset 21|66s12
+3K13*GPU 60e12 21|9w10 17r17 66r8
+17R9*GPU_State 42e14 21|17r21
+44U14*Reset 21|66s12
 X 18 psx-memory.ads
 3K13*Memory 55e15 21|6w10 16r17 65r8 68r8 89r41 91r41
 17R9*Memory_State 22e14 21|16r24

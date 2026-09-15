@@ -26,17 +26,18 @@ package PSX.GPU is
       GP0_Received_Words : Natural;
       GP0_Data           : GP0_Data_Array;
 
-      GP0_X      : Natural;
-      GP0_Y      : Natural;
-      GP0_Width  : Natural;
-      GP0_Height : Natural;
-
       GP0_Read_Active : Boolean;
       GP0_Read_X      : Natural;
       GP0_Read_Y      : Natural;
       GP0_Read_Width  : Natural;
       GP0_Read_Height : Natural;
       GP0_Read_Index  : Natural;
+
+      GP0_X      : Natural;
+      GP0_Y      : Natural;
+      GP0_Width  : Natural;
+      GP0_Height : Natural;
+      GP0_Color  : Word32;
 
    end record;
 

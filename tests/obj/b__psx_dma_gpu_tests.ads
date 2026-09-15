@@ -40,7 +40,7 @@ package ada_main is
    pragma Export (C, main, "main");
 
    type Version_32 is mod 2 ** 32;
-   u00001 : constant Version_32 := 16#b72aaf42#;
+   u00001 : constant Version_32 := 16#a367f60a#;
    pragma Export (C, u00001, "psx_dma_gpu_testsB");
    u00002 : constant Version_32 := 16#b2cfab41#;
    pragma Export (C, u00002, "system__standard_libraryB");
@@ -258,13 +258,13 @@ package ada_main is
    pragma Export (C, u00108, "system__file_control_blockS");
    u00109 : constant Version_32 := 16#6f0a212e#;
    pragma Export (C, u00109, "psxS");
-   u00110 : constant Version_32 := 16#17981338#;
+   u00110 : constant Version_32 := 16#03d54a70#;
    pragma Export (C, u00110, "psx__dmaB");
-   u00111 : constant Version_32 := 16#f817cecc#;
+   u00111 : constant Version_32 := 16#ec5a9784#;
    pragma Export (C, u00111, "psx__dmaS");
-   u00112 : constant Version_32 := 16#63077296#;
+   u00112 : constant Version_32 := 16#957a60cd#;
    pragma Export (C, u00112, "psx__gpuB");
-   u00113 : constant Version_32 := 16#d9564f97#;
+   u00113 : constant Version_32 := 16#cd1b16df#;
    pragma Export (C, u00113, "psx__gpuS");
    u00114 : constant Version_32 := 16#06249ef3#;
    pragma Export (C, u00114, "psx__typesS");

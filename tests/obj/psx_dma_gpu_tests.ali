@@ -44,7 +44,7 @@ RN
 RV NO_IO
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_dma_gpu_tests%b	psx_dma_gpu_tests.adb	b72aaf42 NE OO SU IU
+U psx_dma_gpu_tests%b	psx_dma_gpu_tests.adb	a367f60a NE OO SU IU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -68,7 +68,7 @@ D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
 D psx-dma.ads		20260914005322 a2982fd6 psx.dma%s
-D psx-gpu.ads		20260914232919 4e6328a5 psx.gpu%s
+D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D psx_dma_gpu_tests.adb	20260914010142 14d8077e psx_dma_gpu_tests%b
@@ -89,10 +89,10 @@ D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_dma_gpu_tests standard 7 11 none]
 G r c none [psx_dma_gpu_tests standard 7 11 none] [reset psx__memory 24 14 none]
-G r c none [psx_dma_gpu_tests standard 7 11 none] [reset psx__gpu 43 14 none]
+G r c none [psx_dma_gpu_tests standard 7 11 none] [reset psx__gpu 44 14 none]
 G r c none [psx_dma_gpu_tests standard 7 11 none] [write_32 psx__memory 48 14 none]
 G r c none [psx_dma_gpu_tests standard 7 11 none] [process psx__dma 13 14 none]
-G r c none [psx_dma_gpu_tests standard 7 11 none] [read_vram psx__gpu 56 13 none]
+G r c none [psx_dma_gpu_tests standard 7 11 none] [read_vram psx__gpu 57 13 none]
 G r c none [psx_dma_gpu_tests standard 7 11 none] [read_32 psx__memory 34 13 none]
 X 1 ada.ads
 18K9*Ada 22e8 18|1r6 9r8
@@ -109,10 +109,10 @@ X 14 psx-dma.ads
 5K13*DMA 16e12 18|2w10 54r8
 13U14*Process 18|54s12
 X 15 psx-gpu.ads
-3K13*GPU 59e12 18|3w10 14r17 23r8 57r11 63r11
-17R9*GPU_State 41e14 18|14r21
-43U14*Reset 18|23s12
-56V13*Read_VRAM{6M12} 18|57s15 63s15
+3K13*GPU 60e12 18|3w10 14r17 23r8 57r11 63r11
+17R9*GPU_State 42e14 18|14r21
+44U14*Reset 18|23s12
+57V13*Read_VRAM{6M12} 18|57s15 63s15
 X 16 psx-memory.ads
 3K13*Memory 55e15 18|4w10 13r17 22r8 35r8 38r8 42r8 45r8 48r8 51r8 70r12
 17R9*Memory_State 22e14 18|13r24
