@@ -1,0 +1,1 @@
+psx_memory_cycles_tests.adb:3:06: warning: unit "Interfaces" is not referenced [-gnatwu]

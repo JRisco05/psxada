@@ -17,12 +17,17 @@ procedure PSX_BIOS_Tests is
    GPU    : PSX.GPU.GPU_State;
 
    -- Límite para que limpie la RAM real de la PS1
-   MAX_STEPS : constant Integer := 5_000_000;
+   MAX_STEPS : constant Integer := 20_000_000;
 
    -- Variable para recordar en qué instrucción se quedó o terminó
    Last_Step       : Integer := 0;
    Loop_Count      : Integer := 0;
    First_Loop_Step : Integer := -1;
+
+   Prev_PC   : PSX.Types.Word32 := 0;
+   Prev_Inst : PSX.Types.Word32 := 0;
+
+   Consecutive_Nops : Integer := 0;
 
    function Hex32 (Value : PSX.Types.Word32) return String is
       use Interfaces;
@@ -73,32 +78,65 @@ begin
      ("-------------------------------------------------------");
 
    --------------------------------------------------
-   -- EXECUTE BIOS AT REAL HARDWARE SPEED
+   --  EXECUTE BIOS AT REAL HARDWARE SPEED
    --------------------------------------------------
+
    for Step_Number in 0 .. MAX_STEPS loop
 
-      if CPU.PC = 16#0000_0E28# then
-         Loop_Count := Loop_Count + 1;
-
-         if First_Loop_Step = -1 then
-            First_Loop_Step := Step_Number;
-
-            Ada.Text_IO.Put_Line
-              ("FIRST 0xE28 AT STEP " & Integer'Image (Step_Number));
-
-            Print_Hex ("  INST = ", PSX.Memory.Read_32 (Memory, CPU.PC));
-
-            Print_Hex ("  NEXT = ", PSX.Memory.Read_32 (Memory, CPU.Next_PC));
-         end if;
-      end if;
-
-      -- AQUÍ SÍ: Guardamos el paso actual correctamente
       Last_Step := Step_Number;
 
+      -- 1. HISTORIAL: Leemos la instrucción de la memoria ANTES de ejecutar el paso
+      Prev_PC := CPU.PC;
+      begin
+         Prev_Inst := PSX.Memory.Read_32 (Memory, CPU.PC);
+      exception
+         when others =>
+            Prev_Inst := 16#DEAD_BEEF#;
+      end;
+
+      -- 2. CONTADOR: Lógica estricta de conteo de NOPs reales
+      if Prev_Inst = 0 then
+         Consecutive_Nops := Consecutive_Nops + 1;
+      else
+         Consecutive_Nops := 0; -- Reiniciar si la instrucción es válida
+      end if;
+
+      -- 3. ALARMA DE CONGELAMIENTO (ZONA VACÍA)
+      -- Si la CPU lee 100 NOPs seguidos, definitivamente se descarriló
+      if Consecutive_Nops >= 100 then
+         Ada.Text_IO.New_Line;
+         Ada.Text_IO.Put_Line
+           ("  !!! DETECTADA CAMINATA INFINITA DE NOPS (ZONA VACÍA) !!!");
+         Ada.Text_IO.Put_Line
+           ("  El problema empezó cerca del PASO: "
+            & Integer'Image (Step_Number - 100));
+         Print_Hex ("  PC antes de caer en el vacío = ", Prev_PC - (100 * 4));
+         Print_Hex ("  PC Actual en el colapso      = ", CPU.PC);
+
+         Ada.Text_IO.New_Line;
+         Ada.Text_IO.Put_Line ("=== DIAGNÓSTICO DE REGISTROS ===");
+         Print_Hex
+           ("  Registro RA (31) = ", PSX.Register.Read (CPU.Registers, 31));
+         Print_Hex
+           ("  Registro SP (29) = ", PSX.Register.Read (CPU.Registers, 29));
+         Print_Hex
+           ("  Registro T0 (8)  = ", PSX.Register.Read (CPU.Registers, 8));
+         Print_Hex
+           ("  Registro T1 (9)  = ", PSX.Register.Read (CPU.Registers, 9));
+
+         exit;
+      end if;
+
+      -- 4. DETECTAR EL BUCLE DE ESPERA FAMOSO (0xE28)
+      if (CPU.PC and 16#1FFF_FFFF#) = 16#0000_0E28# then
+         -- Lleva la cuenta de cuántas veces pasa por la espera del sistema
+         null;
+      end if;
+
+      -- 5. HOOK DE LA BIOS PARA TEXTO (TTY)
       if (CPU.PC and 16#1FFF_FFFF#) = 16#0000_00A0#
         or else (CPU.PC and 16#1FFF_FFFF#) = 16#0000_00B0#
       then
-         -- Verificamos si la función solicitada es imprimir caracteres
          if PSX.Register.Read (CPU.Registers, 9) = 16#3C#
            or else PSX.Register.Read (CPU.Registers, 2) = 16#3C#
          then
@@ -107,7 +145,7 @@ begin
       end if;
 
       --------------------------------------------------
-      -- EXECUTE STEP SILENTLY (Sin Prints lentos)
+      --  EXECUTE STEP SILENTLY (Sin Prints lentos)
       --------------------------------------------------
       begin
          PSX.CPU.Step.Step (CPU, Memory, GPU);

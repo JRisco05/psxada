@@ -1,10 +1,11 @@
-with PSX.Types;
+with Interfaces;
 
 package body PSX.Memory.Cycles is
 
+   use type Interfaces.Unsigned_32;
+
    function Load_Cycles (Address : PSX.Types.Word32) return Natural is
    begin
-
       -- Scratchpad RAM
       -- 1F800000 - 1F8003FF
       if Address >= 16#1F80_0000# and then Address <= 16#1F80_03FF# then
@@ -35,5 +36,28 @@ package body PSX.Memory.Cycles is
 
    end Load_Cycles;
 
-end PSX.Memory.Cycles;
+   function Store_Cycles (Address : PSX.Types.Word32) return Natural is
+   begin
+      -- Scratchpad RAM
+      -- 1F800000 - 1F8003FF
+      if Address >= 16#1F80_0000# and then Address <= 16#1F80_03FF# then
+         return 1;
 
+      -- I/O registers
+      -- 1F800400 - 1F80FFFF
+      elsif Address >= 16#1F80_0400# and then Address <= 16#1F80_FFFF# then
+         return 5;
+
+      -- Main RAM
+      -- 00000000 - 001FFFFF
+      elsif Address <= 16#001F_FFFF# then
+         return 7;
+
+      -- Unknown / unmapped area.
+      else
+         return 1;
+      end if;
+
+   end Store_Cycles;
+
+end PSX.Memory.Cycles;

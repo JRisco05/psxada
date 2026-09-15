@@ -16,9 +16,16 @@ project Psxada_Tests extends "../psxada.gpr" is
 
    for Main use
      ("psx_cpu_execute_tests.adb",
+     "psx_cpu_load_delay_tests.adb",
       "psx_cpu_muldiv_tests.adb",
       "psx_cpu_muldiv_stall_tests.adb",
       "psx_memory_tests.adb",
+      "psx_memory_cycles_tests.adb",
+      "psx_memory_store_cycle_tests.adb",
+      "psx_memory_load_timing_tests.adb",
+      "psx_memory_load_cycle_count_tests.adb",
+      "psx_memory_load_all_cycle_tests.adb",
+      "psx_memory_unaligned_tests.adb",
       "psx_cpu_step_tests.adb",
       "psx_spu_tests.adb",
       "psx_gpu_tests.adb",

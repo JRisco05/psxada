@@ -8,6 +8,7 @@ with PSX.Types;
 with PSX.Timers;
 with PSX.CPU.Cycles;
 with PSX.CPU.MulDiv;
+with PSX.Register;
 
 package body PSX.CPU.Step is
 
@@ -53,6 +54,15 @@ package body PSX.CPU.Step is
       end Advance_Cycles;
 
    begin
+
+      -- Aplicar el resultado de un load de la instrucción anterior.
+      if CPU.Load_Pending then
+
+         PSX.Register.Write (CPU.Registers, CPU.Load_Register, CPU.Load_Value);
+
+         CPU.Load_Pending := False;
+
+      end if;
 
       --  Fetch the instruction at the current PC.
       Inst := PSX.CPU.Fetch.Fetch (CPU, Memory);
@@ -101,6 +111,11 @@ package body PSX.CPU.Step is
 
       --  Execute instruction.
       PSX.CPU.Execute.Execute (CPU, Memory, Inst);
+
+      if CPU.Memory_Stall_Cycles > 0 then
+         Advance_Cycles (CPU.Memory_Stall_Cycles);
+         CPU.Memory_Stall_Cycles := 0;
+      end if;
 
       --  Conditional branch not taken:
       --  Next_PC must advance beyond the delay slot.

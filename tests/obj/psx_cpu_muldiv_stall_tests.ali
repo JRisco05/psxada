@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_cpu_muldiv_stall_tests%b  psx_cpu_muldiv_stall_tests.adb  cfa25519 NE OO SU
+U psx_cpu_muldiv_stall_tests%b  psx_cpu_muldiv_stall_tests.adb  ccbb9084 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -68,7 +68,7 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260915041503 0df55807 psx.cpu%s
+D psx-cpu.ads		20260915070107 0eec9d9a psx.cpu%s
 D psx-cpu-step.ads	20260914130357 901c7255 psx.cpu.step%s
 D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260915032554 99b2f715 psx.memory%s
@@ -92,7 +92,7 @@ D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_cpu_muldiv_stall_tests standard 7 11 none]
-G r c none [psx_cpu_muldiv_stall_tests standard 7 11 none] [reset psx__cpu 43 14 none]
+G r c none [psx_cpu_muldiv_stall_tests standard 7 11 none] [reset psx__cpu 49 14 none]
 G r c none [psx_cpu_muldiv_stall_tests standard 7 11 none] [reset psx__memory 26 14 none]
 G r c none [psx_cpu_muldiv_stall_tests standard 7 11 none] [write_32 psx__memory 50 14 none]
 G r c none [psx_cpu_muldiv_stall_tests standard 7 11 none] [step psx__cpu__step 7 14 none]
@@ -109,14 +109,14 @@ X 13 psx.ads
 1K9*PSX 3e8 21|3r6 4r6 5r6 12r13 13r13 33r4 34r4 48r4 51r4 54r4 56r4 62r4
 . 72r4 73r4 84r4 87r4 90r4 92r4 98r4
 X 14 psx-cpu.ads
-4K13*CPU 47e12 21|3w10 4r10 12r17 33r8 56r8 62r8 72r8 92r8 98r8
-12R9*CPU_State 41e14 21|12r21
+4K13*CPU 54e12 21|3w10 4r10 12r17 33r8 56r8 62r8 72r8 92r8 98r8
+12R9*CPU_State 47e14 21|12r21
 13a7*Registers{18|9A9} 21|39m8 40m8 64r34 78m8 79m8 100r35
 16m7*PC{8M12} 21|36m8 75m8
 22m7*Next_PC{8M12} 21|37m8 76m8
 32b7*MulDiv_Busy{boolean} 21|58r27 66r36 94r28 102r37
 33i7*MulDiv_Cycles{natural} 21|60r39 96r40
-43U14*Reset 21|33s12 72s12
+49U14*Reset 21|33s12 72s12
 X 15 psx-cpu-step.ads
 5K17*Step 15e17 21|4w14 56r12 62r12 92r12 98r12
 7U14*Step 21|56s17 62s17 92s17 98s17

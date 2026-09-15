@@ -46,14 +46,14 @@ U psx.cpu.instruction%b	psx-cpu-instruction.adb	e0adb4c5 NE OO PK IU
 W interfaces%s		interfac.ads		interfac.ali
 W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
 
-U psx.cpu.instruction%s	psx-cpu-instruction.ads	5082b8a0 EE NE OO PK IU
+U psx.cpu.instruction%s	psx-cpu-instruction.ads	539b7d3d EE NE OO PK IU
 W psx%s			psx.ads			psx.ali
 W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260915041503 0df55807 psx.cpu%s
+D psx-cpu.ads		20260915070107 0eec9d9a psx.cpu%s
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
 D psx-cpu-instruction.adb  20260911000750 d4f4ebbf psx.cpu.instruction%b
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
@@ -76,7 +76,7 @@ X 1 interfac.ads
 X 2 psx.ads
 1K9*PSX 3e8 4|1r6 3r9 5r22 27r5 5|3r14 47r5
 X 3 psx-cpu.ads
-4K13*CPU 2|1k9 3|47e12 4|3r13 27r9 5|3r18 47r9
+4K13*CPU 2|1k9 3|54e12 4|3r13 27r9 5|3r18 47r9
 X 4 psx-cpu-instruction.ads
 3K17*Instruction 3|4k13 4|27l13 27e24 5|3b22 47l13 47t24
 5M12*Word32{7|7M12} 8r13 11r48 13r44 15r44 17r44 19r47 21r47 23r51 25r48

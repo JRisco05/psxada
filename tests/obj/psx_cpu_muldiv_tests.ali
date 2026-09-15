@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_cpu_muldiv_tests%b  psx_cpu_muldiv_tests.adb  b569d0c5 NE OO SU
+U psx_cpu_muldiv_tests%b  psx_cpu_muldiv_tests.adb  b6701558 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -67,7 +67,7 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260915041503 0df55807 psx.cpu%s
+D psx-cpu.ads		20260915070107 0eec9d9a psx.cpu%s
 D psx-cpu-muldiv.ads	20260915041747 26acdc76 psx.cpu.muldiv%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
@@ -88,7 +88,7 @@ D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_cpu_muldiv_tests standard 6 11 none]
-G r c none [psx_cpu_muldiv_tests standard 6 11 none] [reset psx__cpu 43 14 none]
+G r c none [psx_cpu_muldiv_tests standard 6 11 none] [reset psx__cpu 49 14 none]
 G r c none [psx_cpu_muldiv_tests standard 6 11 none] [start_multiply psx__cpu__muldiv 6 14 none]
 G r c none [psx_cpu_muldiv_tests standard 6 11 none] [tick psx__cpu__muldiv 18 14 none]
 G r c none [psx_cpu_muldiv_tests standard 6 11 none] [start_divide psx__cpu__muldiv 12 14 none]
@@ -104,14 +104,14 @@ X 11 interfac.ads
 X 13 psx.ads
 1K9*PSX 3e8 18|3r6 4r6 11r10 27r4 30r4 41r4 50r4 58r4 65r4 73r4 80r4 88r4
 X 14 psx-cpu.ads
-4K13*CPU 47e12 18|3w10 4r10 11r14 27r8 30r8 41r8 50r8 58r8 65r8 73r8 80r8
+4K13*CPU 54e12 18|3w10 4r10 11r14 27r8 30r8 41r8 50r8 58r8 65r8 73r8 80r8
 . 88r8
-12R9*CPU_State 41e14 18|11r18
+12R9*CPU_State 47e14 18|11r18
 28m7*HI{8M12} 18|32r30 52r27 69r36 84r37
 29m7*LO{8M12} 18|34r30 54r27 67r35 82r36
 32b7*MulDiv_Busy{boolean} 18|36r28 43r37 60r38 75r36 90r37
 33i7*MulDiv_Cycles{natural} 18|38r34 45r34 56r36 71r34 86r35
-43U14*Reset 18|27s12
+49U14*Reset 18|27s12
 X 15 psx-cpu-muldiv.ads
 4K17*MulDiv 20e19 18|4w14 30r12 41r12 50r12 58r12 65r12 73r12 80r12 88r12
 6U14*Start_Multiply 18|30s19 50s19

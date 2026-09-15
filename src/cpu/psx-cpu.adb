@@ -15,6 +15,10 @@ package body PSX.CPU is
       CPU.LO := 0;
       CPU.MulDiv_Busy := False;
       CPU.MulDiv_Cycles := 0;
+      CPU.Memory_Stall_Cycles := 0;
+      CPU.Load_Pending := False;
+      CPU.Load_Register := 0;
+      CPU.Load_Value := 0;
       CPU.Status := 0;
       CPU.EPC := 0;
       CPU.Cause := None;

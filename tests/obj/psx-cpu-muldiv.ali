@@ -55,7 +55,7 @@ W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260915041503 0df55807 psx.cpu%s
+D psx-cpu.ads		20260915070107 0eec9d9a psx.cpu%s
 D psx-cpu-muldiv.ads	20260915041747 26acdc76 psx.cpu.muldiv%s
 D psx-cpu-muldiv.adb	20260915041857 5a013d31 psx.cpu.muldiv%b
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
@@ -80,9 +80,9 @@ X 2 psx.ads
 . 4r14 12r23 13r16 14r16 59r17 61r17 68r23 69r16 70r16 101r20 103r20 107r20
 . 109r20 117r33 131r5
 X 3 psx-cpu.ads
-4K13*CPU 2|1k9 3|47e12 4|1w10 4r13 7r27 13r27 18r37 20r9 5|4r18 12r27 68r27
+4K13*CPU 2|1k9 3|54e12 4|1w10 4r13 7r27 13r27 18r37 20r9 5|4r18 12r27 68r27
 . 117r37 131r9
-12R9*CPU_State 41e14 4|7r31 13r31 18r41 5|12r31 68r31 117r41
+12R9*CPU_State 47e14 4|7r31 13r31 18r41 5|12r31 68r31 117r41
 28m7*HI{8M12} 5|59m11 81m20 84m20 88m17 103m14 109m14
 29m7*LO{8M12} 5|61m11 80m20 83m20 87m17 101m14 107m14
 32b7*MulDiv_Busy{boolean} 5|63m11 113m11 119r14 123m17

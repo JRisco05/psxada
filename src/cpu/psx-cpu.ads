@@ -28,9 +28,15 @@ package PSX.CPU is
       HI : Word32;
       LO : Word32;
 
-      --  Multiply / divide unit state
+      -- Multiply / divide unit state
       MulDiv_Busy   : Boolean;
       MulDiv_Cycles : Natural;
+
+      -- Memory access stall
+      Memory_Stall_Cycles : Natural;
+      Load_Pending        : Boolean;
+      Load_Register       : PSX.Register.Register_Index;
+      Load_Value          : Word32;
 
       --  Coprocessor 0 / exception state
       Status : Word32;
@@ -41,6 +47,7 @@ package PSX.CPU is
    end record;
 
    procedure Reset (CPU : out CPU_State);
+
    procedure Enter_Exception (CPU : in out CPU_State);
    procedure Return_From_Exception (CPU : in out CPU_State);
 

@@ -40,7 +40,7 @@ package ada_main is
    pragma Export (C, main, "main");
 
    type Version_32 is mod 2 ** 32;
-   u00001 : constant Version_32 := 16#73c9ce1a#;
+   u00001 : constant Version_32 := 16#70abc418#;
    pragma Export (C, u00001, "psx_bios_testsB");
    u00002 : constant Version_32 := 16#b2cfab41#;
    pragma Export (C, u00002, "system__standard_libraryB");
@@ -258,9 +258,9 @@ package ada_main is
    pragma Export (C, u00108, "system__file_control_blockS");
    u00109 : constant Version_32 := 16#6f0a212e#;
    pragma Export (C, u00109, "psxS");
-   u00110 : constant Version_32 := 16#23ee5e24#;
+   u00110 : constant Version_32 := 16#2350623f#;
    pragma Export (C, u00110, "psx__cpuB");
-   u00111 : constant Version_32 := 16#d79fdb09#;
+   u00111 : constant Version_32 := 16#d4861e94#;
    pragma Export (C, u00111, "psx__cpuS");
    u00112 : constant Version_32 := 16#a7740a83#;
    pragma Export (C, u00112, "psx__registerB");
@@ -270,17 +270,17 @@ package ada_main is
    pragma Export (C, u00114, "psx__typesS");
    u00115 : constant Version_32 := 16#e0adb4c5#;
    pragma Export (C, u00115, "psx__cpu__instructionB");
-   u00116 : constant Version_32 := 16#5082b8a0#;
+   u00116 : constant Version_32 := 16#539b7d3d#;
    pragma Export (C, u00116, "psx__cpu__instructionS");
-   u00117 : constant Version_32 := 16#c724f6a2#;
+   u00117 : constant Version_32 := 16#9efb49d8#;
    pragma Export (C, u00117, "psx__cpu__stepB");
    u00118 : constant Version_32 := 16#5380f4ad#;
    pragma Export (C, u00118, "psx__cpu__stepS");
-   u00119 : constant Version_32 := 16#69dd6667#;
+   u00119 : constant Version_32 := 16#f8bbf887#;
    pragma Export (C, u00119, "psx__cpu__cyclesB");
-   u00120 : constant Version_32 := 16#c8733f4f#;
+   u00120 : constant Version_32 := 16#cb6afad2#;
    pragma Export (C, u00120, "psx__cpu__cyclesS");
-   u00121 : constant Version_32 := 16#74ef38aa#;
+   u00121 : constant Version_32 := 16#dafc3dea#;
    pragma Export (C, u00121, "psx__cpu__executeB");
    u00122 : constant Version_32 := 16#77967831#;
    pragma Export (C, u00122, "psx__cpu__executeS");
@@ -304,22 +304,26 @@ package ada_main is
    pragma Export (C, u00131, "psx__timersB");
    u00132 : constant Version_32 := 16#ab19291a#;
    pragma Export (C, u00132, "psx__timersS");
-   u00133 : constant Version_32 := 16#a5ba3250#;
-   pragma Export (C, u00133, "psx__cpu__fetchB");
-   u00134 : constant Version_32 := 16#27253c6e#;
-   pragma Export (C, u00134, "psx__cpu__fetchS");
-   u00135 : constant Version_32 := 16#19be13e8#;
-   pragma Export (C, u00135, "psx__dmaB");
-   u00136 : constant Version_32 := 16#f631ce1c#;
-   pragma Export (C, u00136, "psx__dmaS");
-   u00137 : constant Version_32 := 16#957a60cd#;
-   pragma Export (C, u00137, "psx__gpuB");
-   u00138 : constant Version_32 := 16#cd1b16df#;
-   pragma Export (C, u00138, "psx__gpuS");
-   u00139 : constant Version_32 := 16#a56a70fa#;
-   pragma Export (C, u00139, "system__memoryB");
-   u00140 : constant Version_32 := 16#92f586d9#;
-   pragma Export (C, u00140, "system__memoryS");
+   u00133 : constant Version_32 := 16#79ef05bb#;
+   pragma Export (C, u00133, "psx__memory__cyclesB");
+   u00134 : constant Version_32 := 16#1c223a08#;
+   pragma Export (C, u00134, "psx__memory__cyclesS");
+   u00135 : constant Version_32 := 16#a5ba3250#;
+   pragma Export (C, u00135, "psx__cpu__fetchB");
+   u00136 : constant Version_32 := 16#27253c6e#;
+   pragma Export (C, u00136, "psx__cpu__fetchS");
+   u00137 : constant Version_32 := 16#19be13e8#;
+   pragma Export (C, u00137, "psx__dmaB");
+   u00138 : constant Version_32 := 16#f631ce1c#;
+   pragma Export (C, u00138, "psx__dmaS");
+   u00139 : constant Version_32 := 16#957a60cd#;
+   pragma Export (C, u00139, "psx__gpuB");
+   u00140 : constant Version_32 := 16#cd1b16df#;
+   pragma Export (C, u00140, "psx__gpuS");
+   u00141 : constant Version_32 := 16#a56a70fa#;
+   pragma Export (C, u00141, "system__memoryB");
+   u00142 : constant Version_32 := 16#92f586d9#;
+   pragma Export (C, u00142, "system__memoryS");
 
    --  BEGIN ELABORATION ORDER
    --  ada%s
@@ -453,12 +457,14 @@ package ada_main is
    --  psx.timers%b
    --  psx.memory%s
    --  psx.memory%b
-   --  psx.cpu.execute%s
-   --  psx.cpu.execute%b
    --  psx.cpu.fetch%s
    --  psx.cpu.fetch%b
    --  psx.dma%s
    --  psx.dma%b
+   --  psx.memory.cycles%s
+   --  psx.memory.cycles%b
+   --  psx.cpu.execute%s
+   --  psx.cpu.execute%b
    --  psx.cpu.step%s
    --  psx.cpu.step%b
    --  psx_bios_tests%b

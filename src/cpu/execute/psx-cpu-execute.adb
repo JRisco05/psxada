@@ -3,6 +3,8 @@ with Ada.Unchecked_Conversion;
 with PSX.Types;
 with PSX.Register;
 with PSX.CPU.MulDiv;
+with PSX.Memory.Cycles;
+with Ada.Text_IO;
 
 package body PSX.CPU.Execute is
    use type Interfaces.Unsigned_8;
@@ -666,6 +668,9 @@ package body PSX.CPU.Execute is
       --  LB
       if Opcode_Value = 32 then
 
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Load_Cycles (Effective_Address);
+
          PSX.Register.Write
            (CPU.Registers,
             Rt_Index,
@@ -675,6 +680,9 @@ package body PSX.CPU.Execute is
 
       --  LBU
       if Opcode_Value = 36 then
+
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Load_Cycles (Effective_Address);
 
          PSX.Register.Write
            (CPU.Registers,
@@ -686,6 +694,9 @@ package body PSX.CPU.Execute is
       --  LH
       if Opcode_Value = 33 then
 
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Load_Cycles (Effective_Address);
+
          PSX.Register.Write
            (CPU.Registers,
             Rt_Index,
@@ -695,6 +706,9 @@ package body PSX.CPU.Execute is
 
       --  LHU
       if Opcode_Value = 37 then
+
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Load_Cycles (Effective_Address);
 
          PSX.Register.Write
            (CPU.Registers,
@@ -706,15 +720,191 @@ package body PSX.CPU.Execute is
       --  LW
       if Opcode_Value = 35 then
 
-         PSX.Register.Write
-           (CPU.Registers,
-            Rt_Index,
-            PSX.Memory.Read_32 (Memory, Effective_Address));
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Load_Cycles (Effective_Address);
+
+         CPU.Load_Register := Rt_Index;
+         CPU.Load_Value := PSX.Memory.Read_32 (Memory, Effective_Address);
+         CPU.Load_Pending := True;
+
+      end if;
+
+      --  LWL
+      if Opcode_Value = 34 then
+
+         declare
+            Aligned_Address : constant PSX.Types.Word32 :=
+              Effective_Address and 16#FFFF_FFFC#;
+
+            Memory_Value : constant PSX.Types.Word32 :=
+              PSX.Memory.Read_32 (Memory, Aligned_Address);
+
+            Old_Value : constant PSX.Types.Word32 := CPU.Registers (Rt_Index);
+
+            Mask  : PSX.Types.Word32;
+            Value : PSX.Types.Word32;
+         begin
+
+            case Effective_Address and 3 is
+
+               when 0      =>
+                  Mask := 16#00FF_FFFF#;
+                  Value :=
+                    Interfaces.Shift_Left (Memory_Value and 16#0000_00FF#, 24);
+
+               when 1      =>
+                  Mask := 16#0000_FFFF#;
+                  Value :=
+                    Interfaces.Shift_Left (Memory_Value and 16#0000_FFFF#, 16);
+
+               when 2      =>
+                  Mask := 16#0000_00FF#;
+                  Value :=
+                    Interfaces.Shift_Left (Memory_Value and 16#00FF_FFFF#, 8);
+
+               when others =>
+                  Mask := 16#0000_0000#;
+                  Value := Memory_Value;
+
+            end case;
+
+            PSX.Register.Write
+              (CPU.Registers, Rt_Index, (Old_Value and Mask) or Value);
+
+         end;
+
+      end if;
+
+      --  LWR
+      if Opcode_Value = 38 then
+
+         declare
+            Aligned_Address : constant PSX.Types.Word32 :=
+              Effective_Address and 16#FFFF_FFFC#;
+
+            Memory_Value : constant PSX.Types.Word32 :=
+              PSX.Memory.Read_32 (Memory, Aligned_Address);
+
+            Old_Value : constant PSX.Types.Word32 := CPU.Registers (Rt_Index);
+
+            Mask  : PSX.Types.Word32;
+            Value : PSX.Types.Word32;
+         begin
+
+            case Effective_Address and 3 is
+
+               when 0      =>
+                  Mask := 16#0000_0000#;
+                  Value := Memory_Value;
+
+               when 1      =>
+                  Mask := 16#FF00_0000#;
+                  Value := Interfaces.Shift_Right (Memory_Value, 8);
+
+               when 2      =>
+                  Mask := 16#FFFF_0000#;
+                  Value := Interfaces.Shift_Right (Memory_Value, 16);
+
+               when others =>
+                  Mask := 16#FFFF_FF00#;
+                  Value := Interfaces.Shift_Right (Memory_Value, 24);
+
+            end case;
+
+            PSX.Register.Write
+              (CPU.Registers, Rt_Index, (Old_Value and Mask) or Value);
+
+         end;
+
+      end if;
+
+      --  SWL
+      if Opcode_Value = 42 then
+
+         declare
+            Aligned_Address : constant PSX.Types.Word32 :=
+              Effective_Address and 16#FFFF_FFFC#;
+
+            Memory_Value : constant PSX.Types.Word32 :=
+              PSX.Memory.Read_32 (Memory, Aligned_Address);
+
+            New_Value : PSX.Types.Word32;
+         begin
+
+            case Effective_Address and 3 is
+
+               when 0      =>
+                  New_Value :=
+                    (Memory_Value and 16#FFFF_FF00#)
+                    or Interfaces.Shift_Right (Rt_Value, 24);
+
+               when 1      =>
+                  New_Value :=
+                    (Memory_Value and 16#FFFF_0000#)
+                    or Interfaces.Shift_Right (Rt_Value, 16);
+
+               when 2      =>
+                  New_Value :=
+                    (Memory_Value and 16#FF00_0000#)
+                    or Interfaces.Shift_Right (Rt_Value, 8);
+
+               when others =>
+                  New_Value := Rt_Value;
+
+            end case;
+
+            PSX.Memory.Write_32 (Memory, Aligned_Address, New_Value);
+
+         end;
+
+      end if;
+
+      -- SWR
+      if Opcode_Value = 46 then
+
+         declare
+            Aligned_Address : constant PSX.Types.Word32 :=
+              Effective_Address and 16#FFFF_FFFC#;
+
+            Memory_Value : constant PSX.Types.Word32 :=
+              PSX.Memory.Read_32 (Memory, Aligned_Address);
+
+            New_Value : PSX.Types.Word32;
+         begin
+
+            case Effective_Address and 3 is
+
+               when 0      =>
+                  New_Value := Rt_Value;
+
+               when 1      =>
+                  New_Value :=
+                    (Memory_Value and 16#0000_00FF#)
+                    or Interfaces.Shift_Left (Rt_Value, 8);
+
+               when 2      =>
+                  New_Value :=
+                    (Memory_Value and 16#0000_FFFF#)
+                    or Interfaces.Shift_Left (Rt_Value, 16);
+
+               when others =>
+                  New_Value :=
+                    (Memory_Value and 16#00FF_FFFF#)
+                    or Interfaces.Shift_Left (Rt_Value, 24);
+
+            end case;
+
+            PSX.Memory.Write_32 (Memory, Aligned_Address, New_Value);
+
+         end;
 
       end if;
 
       --  SB
       if Opcode_Value = 40 then
+
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Store_Cycles (Effective_Address);
 
          PSX.Memory.Write_8
            (Memory,
@@ -726,6 +916,9 @@ package body PSX.CPU.Execute is
       --  SH
       if Opcode_Value = 41 then
 
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Store_Cycles (Effective_Address);
+
          PSX.Memory.Write_16
            (Memory,
             Effective_Address,
@@ -733,10 +926,15 @@ package body PSX.CPU.Execute is
 
       end if;
 
-      --  SW
-      if Opcode_Value = 43 then
+      --  LW
+      if Opcode_Value = 35 then
 
-         PSX.Memory.Write_32 (Memory, Effective_Address, Rt_Value);
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Load_Cycles (Effective_Address);
+
+         CPU.Load_Register := Rt_Index;
+         CPU.Load_Value := PSX.Memory.Read_32 (Memory, Effective_Address);
+         CPU.Load_Pending := True;
 
       end if;
 

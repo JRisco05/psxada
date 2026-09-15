@@ -44,65 +44,70 @@ RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 RV NO_IMPLICIT_LOOPS
 
-U psx.cpu%b		psx-cpu.adb		23ee5e24 NE OO PK IU
+U psx.cpu%b		psx-cpu.adb		2350623f NE OO PK IU
 W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
 
-U psx.cpu%s		psx-cpu.ads		d79fdb09 EB NE OO PK IU
+U psx.cpu%s		psx-cpu.ads		d4861e94 EB NE OO PK IU
 W psx%s			psx.ads			psx.ali
 W psx.register%s	psx-register.adb	psx-register.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260915041503 0df55807 psx.cpu%s
-D psx-cpu.adb		20260915041518 bf0affe2 psx.cpu%b
+D psx-cpu.ads		20260915070107 0eec9d9a psx.cpu%s
+D psx-cpu.adb		20260915120409 bcad0664 psx.cpu%b
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
-G c Z s b [reset psx__cpu 43 14 none]
-G c Z s b [enter_exception psx__cpu 44 14 none]
-G c Z s b [return_from_exception psx__cpu 45 14 none]
+G c Z s b [reset psx__cpu 49 14 none]
+G c Z s b [enter_exception psx__cpu 51 14 none]
+G c Z s b [return_from_exception psx__cpu 52 14 none]
 G c Z s s [cpu_stateIP psx__cpu 12 9 none]
 X 1 interfac.ads
-47K9*Interfaces 247e15 4|1w6 5r13 6r13 27r9 44r9
+47K9*Interfaces 247e15 4|1w6 5r13 6r13 31r9 48r9
 81M9*Unsigned_8 4|5r24
 92M9*Unsigned_32 4|6r24
-154V13*Shift_Left{92M9} 4|27s20
-159V13*Shift_Right{92M9} 4|44s20
+154V13*Shift_Left{92M9} 4|31s20
+159V13*Shift_Right{92M9} 4|48s20
 X 2 psx.ads
-1K9*PSX 3e8 3|1r6 2r6 4r9 8r22 13r19 47r5 4|3r14 48r5
+1K9*PSX 3e8 3|1r6 2r6 4r9 8r22 13r19 38r29 54r5 4|3r14 52r5
 X 3 psx-cpu.ads
-4K13*CPU 2|1k9 3|47l9 47e12 4|3b18 48l9 48t12
-8M12*Word32{6|7M12} 16r12 22r17 28r12 29r12 36r16 37r16
-10E9*Exception_Code 10e59 38r16
-10n28*None{10E9} 4|20r20
+4K13*CPU 2|1k9 3|54l9 54e12 4|3b18 52l9 52t12
+8M12*Word32{6|7M12} 16r12 22r17 28r12 29r12 39r29 42r16 43r16
+10E9*Exception_Code 10e59 44r16
+10n28*None{10E9} 4|24r20
 10n34*Syscall{10E9}
 10n43*Break{10E9}
 10n50*Overflow{10E9}
-12R9*CPU_State 41e14 43r31 44r44 45r50 4|8r31 24r44 41r50
+12R9*CPU_State 47e14 49r31 51r44 52r50 4|8r31 28r44 45r50
 13a7*Registers{5|9A9} 4|10m11
-16m7*PC{8M12} 4|11m11 32m11
-22m7*Next_PC{8M12} 4|12m11 34m11
-26b7*In_Delay_Slot{boolean} 4|13m11 36m11
+16m7*PC{8M12} 4|11m11 36m11
+22m7*Next_PC{8M12} 4|12m11 38m11
+26b7*In_Delay_Slot{boolean} 4|13m11 40m11
 28m7*HI{8M12} 4|14m11
 29m7*LO{8M12} 4|15m11
 32b7*MulDiv_Busy{boolean} 4|16m11
 33i7*MulDiv_Cycles{natural} 4|17m11
-36m7*Status{8M12} 4|18m11 26m11 27r36 30m11 30r25 43m11 44r37 45r17
-37m7*EPC{8M12} 4|19m11
-38e7*Cause{10E9} 4|20m11
-40b7*Exception_Pending{boolean} 4|21m11 38m11
-43U14*Reset 43<21 4|8b14 22l8 22t13
-43r21 CPU{12R9} 4|8b21 10m7 11m7 12m7 13m7 14m7 15m7 16m7 17m7 18m7 19m7
-. 20m7 21m7
-44U14*Enter_Exception 44=31 4|24b14 39l8 39t23
-44r31 CPU{12R9} 4|24b31 26m7 27r32 30m7 30r21 32m7 34m7 36m7 38m7
-45U14*Return_From_Exception 45=37 4|41b14 46l8 46t29
-45r37 CPU{12R9} 4|41b37 43m7 44r33 45r13
+36i7*Memory_Stall_Cycles{natural} 4|18m11
+37b7*Load_Pending{boolean} 4|19m11
+38i7*Load_Register{5|7I9} 4|20m11
+39m7*Load_Value{8M12} 4|21m11
+42m7*Status{8M12} 4|22m11 30m11 31r36 34m11 34r25 47m11 48r37 49r17
+43m7*EPC{8M12} 4|23m11
+44e7*Cause{10E9} 4|24m11
+46b7*Exception_Pending{boolean} 4|25m11 42m11
+49U14*Reset 49<21 4|8b14 26l8 26t13
+49r21 CPU{12R9} 4|8b21 10m7 11m7 12m7 13m7 14m7 15m7 16m7 17m7 18m7 19m7
+. 20m7 21m7 22m7 23m7 24m7 25m7
+51U14*Enter_Exception 51=31 4|28b14 43l8 43t23
+51r31 CPU{12R9} 4|28b31 30m7 31r32 34m7 34r21 36m7 38m7 40m7 42m7
+52U14*Return_From_Exception 52=37 4|45b14 50l8 50t29
+52r37 CPU{12R9} 4|45b37 47m7 48r33 49r13
 X 5 psx-register.ads
-3K13*Register 3|1w10 13r23 5|20e17
+3K13*Register 3|1w10 13r23 38r33 5|20e17
+7I9*Register_Index<short_short_integer> 3|38r42
 9A9*Register_Array(5M12)<7I9> 3|13r32
 X 6 psx-types.ads
 3K13*Types 3|2w10 8r26 6|12e14
