@@ -1,0 +1,5 @@
+psx_cpu_swl_swr_tests.adb:10:04: warning: use clause for type "Interfaces.Unsigned_8" has no effect [-gnatwu]
+psx_cpu_swl_swr_tests.adb:33:07: (style) space required [-gnatyc]
+psx_cpu_swl_swr_tests.adb:44:10: (style) space required [-gnatyc]
+psx_cpu_swl_swr_tests.adb:60:07: (style) space required [-gnatyc]
+psx_cpu_swl_swr_tests.adb:71:10: (style) space required [-gnatyc]

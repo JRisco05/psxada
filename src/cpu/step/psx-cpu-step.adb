@@ -14,6 +14,10 @@ package body PSX.CPU.Step is
 
    use type Interfaces.Unsigned_32;
 
+   New_Load_Pending  : Boolean := False;
+   New_Load_Register : PSX.Register.Register_Index;
+   New_Load_Value    : PSX.Types.Word32;
+
    procedure Step
      (CPU : in out PSX.CPU.CPU_State; Memory : in out PSX.Memory.Memory_State)
    is
@@ -37,6 +41,9 @@ package body PSX.CPU.Step is
       Funct_Value           : PSX.Types.Word32;
       Is_Control_Transfer   : Boolean := False;
       Is_HI_LO_Read         : Boolean := False;
+      Load_To_Apply         : Boolean := False;
+      Load_Apply_Register   : PSX.Register.Register_Index;
+      Load_Apply_Value      : PSX.Types.Word32;
 
       procedure Advance_Cycles (Cycles : Natural) is
       begin
@@ -54,15 +61,6 @@ package body PSX.CPU.Step is
       end Advance_Cycles;
 
    begin
-
-      -- Aplicar el resultado de un load de la instrucción anterior.
-      if CPU.Load_Pending then
-
-         PSX.Register.Write (CPU.Registers, CPU.Load_Register, CPU.Load_Value);
-
-         CPU.Load_Pending := False;
-
-      end if;
 
       --  Fetch the instruction at the current PC.
       Inst := PSX.CPU.Fetch.Fetch (CPU, Memory);
@@ -109,8 +107,24 @@ package body PSX.CPU.Step is
 
       end if;
 
+      -- Guardar el load pendiente de la instrucción anterior.
+      Load_To_Apply := CPU.Load_Pending;
+
+      if Load_To_Apply then
+         Load_Apply_Register := CPU.Load_Register;
+         Load_Apply_Value := CPU.Load_Value;
+      end if;
+
       --  Execute instruction.
       PSX.CPU.Execute.Execute (CPU, Memory, Inst);
+
+      -- Guardar el load generado por la instrucción actual.
+      New_Load_Pending := CPU.Load_Pending;
+
+      if New_Load_Pending then
+         New_Load_Register := CPU.Load_Register;
+         New_Load_Value := CPU.Load_Value;
+      end if;
 
       if CPU.Memory_Stall_Cycles > 0 then
          Advance_Cycles (CPU.Memory_Stall_Cycles);
@@ -140,6 +154,22 @@ package body PSX.CPU.Step is
 
          CPU.In_Delay_Slot := Is_Control_Transfer;
 
+      end if;
+
+      -- Aplicar el resultado del load anterior
+      -- después de ejecutar la instrucción actual.
+      if Load_To_Apply then
+         PSX.Register.Write
+           (CPU.Registers, Load_Apply_Register, Load_Apply_Value);
+      end if;
+
+      -- Restaurar el load generado por la instrucción actual.
+      if New_Load_Pending then
+         CPU.Load_Pending := True;
+         CPU.Load_Register := New_Load_Register;
+         CPU.Load_Value := New_Load_Value;
+      else
+         CPU.Load_Pending := False;
       end if;
 
       --  Advance hardware by the cycles consumed

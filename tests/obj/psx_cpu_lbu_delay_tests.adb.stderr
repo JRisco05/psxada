@@ -1,0 +1,4 @@
+psx_cpu_lbu_delay_tests.adb:18:07: (style) space required [-gnatyc]
+psx_cpu_lbu_delay_tests.adb:21:07: (style) space required [-gnatyc]
+psx_cpu_lbu_delay_tests.adb:24:07: (style) space required [-gnatyc]
+psx_cpu_lbu_delay_tests.adb:27:07: (style) space required [-gnatyc]

@@ -1,0 +1,143 @@
+V "GNAT Lib v16"
+M P W=8
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IO
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx_cpu_shift_tests%b	psx_cpu_shift_tests.adb	c91447fb NE OO SU
+W ada%s			ada.ads			ada.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W psx%s			psx.ads			psx.ali
+W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
+W psx.cpu.step%s	psx-cpu-step.adb	psx-cpu-step.ali
+W psx.memory%s		psx-memory.adb		psx-memory.ali
+
+D ada.ads		20260610194523 76789da1 ada%s
+D a-except.ads		20260610194523 8699d7ff ada.exceptions%s
+D a-ioexce.ads		20260610194523 40018c65 ada.io_exceptions%s
+D a-stream.ads		20260610194523 cb01a8f8 ada.streams%s
+D a-string.ads		20260610194523 90ac6797 ada.strings%s
+D a-sttebu.ads		20260610194523 f1ad67a2 ada.strings.text_buffers%s
+D a-stuten.ads		20260610194523 c6ced0ae ada.strings.utf_encoding%s
+D a-tags.ads		20260610194523 2dbf449c ada.tags%s
+D a-textio.ads		20260610194523 34ef47de ada.text_io%s
+D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-cpu.ads		20260915070107 0eec9d9a psx.cpu%s
+D psx-cpu-step.ads	20260914130357 901c7255 psx.cpu.step%s
+D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
+D psx-memory.ads	20260915032554 99b2f715 psx.memory%s
+D psx-register.ads	20260824212926 4d5fe43c psx.register%s
+D psx-timers.ads	20260915025324 3c2c4e28 psx.timers%s
+D psx-types.ads		20260911215536 f83f461c psx.types%s
+D psx_cpu_shift_tests.adb  20260915152301 6ba8e13e psx_cpu_shift_tests%b
+D system.ads		20260610194523 8a611ac3 system%s
+D s-crtl.ads		20260610194523 823b6536 system.crtl%s
+D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
+D s-ficobl.ads		20260610194523 dc5161d4 system.file_control_block%s
+D s-parame.ads		20260610194523 a1aeab5c system.parameters%s
+D s-putima.ads		20260610194523 1b989439 system.put_images%s
+D s-secsta.ads		20260610194523 578279f5 system.secondary_stack%s
+D s-soflin.ads		20260610194523 5d88fdea system.soft_links%s
+D s-stache.ads		20260610194523 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20260610194523 1c9580f6 system.standard_library%s
+D s-stoele.ads		20260610194523 ccded4e8 system.storage_elements%s
+D s-traent.ads		20260610194523 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
+D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
+G a e
+G c Z b b [psx_cpu_shift_tests standard 7 11 none]
+G r c none [psx_cpu_shift_tests standard 7 11 none] [reset psx__cpu 49 14 none]
+G r c none [psx_cpu_shift_tests standard 7 11 none] [reset psx__memory 26 14 none]
+G r c none [psx_cpu_shift_tests standard 7 11 none] [write_32 psx__memory 50 14 none]
+G r c none [psx_cpu_shift_tests standard 7 11 none] [step psx__cpu__step 7 14 none]
+X 1 ada.ads
+18K9*Ada 22e8 21|1r6 15r4 16r4 36r7 38r7 59r7 61r7 82r7 84r7 106r7 108r7
+. 130r7 132r7 154r7 156r7 159r4 160r4
+X 9 a-textio.ads
+58K13*Text_IO 785e16 21|1w10 15r8 16r8 36r11 38r11 59r11 61r11 82r11 84r11
+. 106r11 108r11 130r11 132r11 154r11 156r11 159r8 160r8
+284U14*New_Line 21|16s16 159s16
+565U14*Put_Line 21|15s16 36s19 38s19 59s19 61s19 82s19 84s19 106s19 108s19
+. 130s19 132s19 154s19 156s19 160s16
+X 11 interfac.ads
+47K9*Interfaces 247e15 21|5w6 9r13
+92M9*Unsigned_32 21|9r24
+X 13 psx.ads
+1K9*PSX 3e8 21|2r6 3r6 4r6 10r13 11r13 22r4 23r4 28r4 33r4 45r4 46r4 51r4
+. 56r4 68r4 69r4 74r4 79r4 91r4 92r4 98r4 103r4 115r4 116r4 122r4 127r4 139r4
+. 140r4 146r4 151r4
+X 14 psx-cpu.ads
+4K13*CPU 54e12 21|2w10 3r10 10r17 22r8 33r8 45r8 56r8 68r8 79r8 91r8 103r8
+. 115r8 127r8 139r8 151r8
+12R9*CPU_State 47e14 21|10r21
+13a7*Registers{18|9A9} 21|25m8 35r11 48m8 58r11 71m8 81r11 94m8 95m8 105r11
+. 118m8 119m8 129r11 142m8 143m8 153r11
+16m7*PC{8M12} 21|30m8 53m8 76m8 100m8 124m8 148m8
+22m7*Next_PC{8M12} 21|31m8 54m8 77m8 101m8 125m8 149m8
+49U14*Reset 21|22s12 45s12 68s12 91s12 115s12 139s12
+X 15 psx-cpu-step.ads
+5K17*Step 15e17 21|3w14 33r12 56r12 79r12 103r12 127r12 151r12
+7U14*Step 21|33s17 56s17 79s17 103s17 127s17 151s17
+X 17 psx-memory.ads
+4K13*Memory 57e15 21|4w10 11r17 23r8 28r8 46r8 51r8 69r8 74r8 92r8 98r8 116r8
+. 122r8 140r8 146r8
+18R9*Memory_State 24e14 21|11r24
+26U14*Reset 21|23s15 46s15 69s15 92s15 116s15 140s15
+50U14*Write_32 21|28s15 51s15 74s15 98s15 122s15 146s15
+X 18 psx-register.ads
+9A9*Register_Array(5M12)<7I9>
+X 21 psx_cpu_shift_tests.adb
+7U11*PSX_CPU_Shift_Tests 7b11 162l5 162t24
+10r4 CPU{14|12R9} 22m19 25m4 30m4 31m4 33m23 33r23 35r7 45m19 48m4 53m4 54m4
+. 56m23 56r23 58r7 68m19 71m4 76m4 77m4 79m23 79r23 81r7 91m19 94m4 95m4
+. 100m4 101m4 103m23 103r23 105r7 115m19 118m4 119m4 124m4 125m4 127m23 127r23
+. 129r7 139m19 142m4 143m4 148m4 149m4 151m23 151r23 153r7
+11r4 Memory{17|18R9} 23m22 28m25 28r25 33m28 33r28 46m22 51m25 51r25 56m28
+. 56r28 69m22 74m25 74r25 79m28 79r28 92m22 98m25 98r25 103m28 103r28 116m22
+. 122m25 122r25 127m28 127r28 140m22 146m25 146r25 151m28 151r28
+

@@ -1,0 +1,5 @@
+psx_cpu_hilo_move_tests.adb:12:01: (style) trailing spaces not permitted [-gnatyb]
+psx_cpu_hilo_move_tests.adb:41:07: (style) space required [-gnatyc]
+psx_cpu_hilo_move_tests.adb:56:07: (style) space required [-gnatyc]
+psx_cpu_hilo_move_tests.adb:72:07: (style) space required [-gnatyc]
+psx_cpu_hilo_move_tests.adb:90:07: (style) space required [-gnatyc]

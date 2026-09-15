@@ -671,10 +671,10 @@ package body PSX.CPU.Execute is
          CPU.Memory_Stall_Cycles :=
            PSX.Memory.Cycles.Load_Cycles (Effective_Address);
 
-         PSX.Register.Write
-           (CPU.Registers,
-            Rt_Index,
-            Sign_Extend_8 (PSX.Memory.Read_8 (Memory, Effective_Address)));
+         CPU.Load_Register := Rt_Index;
+         CPU.Load_Value :=
+           Sign_Extend_8 (PSX.Memory.Read_8 (Memory, Effective_Address));
+         CPU.Load_Pending := True;
 
       end if;
 
@@ -684,10 +684,10 @@ package body PSX.CPU.Execute is
          CPU.Memory_Stall_Cycles :=
            PSX.Memory.Cycles.Load_Cycles (Effective_Address);
 
-         PSX.Register.Write
-           (CPU.Registers,
-            Rt_Index,
-            PSX.Types.Word32 (PSX.Memory.Read_8 (Memory, Effective_Address)));
+         CPU.Load_Register := Rt_Index;
+         CPU.Load_Value :=
+           PSX.Types.Word32 (PSX.Memory.Read_8 (Memory, Effective_Address));
+         CPU.Load_Pending := True;
 
       end if;
 
@@ -697,10 +697,10 @@ package body PSX.CPU.Execute is
          CPU.Memory_Stall_Cycles :=
            PSX.Memory.Cycles.Load_Cycles (Effective_Address);
 
-         PSX.Register.Write
-           (CPU.Registers,
-            Rt_Index,
-            Sign_Extend_16 (PSX.Memory.Read_16 (Memory, Effective_Address)));
+         CPU.Load_Register := Rt_Index;
+         CPU.Load_Value :=
+           Sign_Extend_16 (PSX.Memory.Read_16 (Memory, Effective_Address));
+         CPU.Load_Pending := True;
 
       end if;
 
@@ -710,10 +710,10 @@ package body PSX.CPU.Execute is
          CPU.Memory_Stall_Cycles :=
            PSX.Memory.Cycles.Load_Cycles (Effective_Address);
 
-         PSX.Register.Write
-           (CPU.Registers,
-            Rt_Index,
-            PSX.Types.Word32 (PSX.Memory.Read_16 (Memory, Effective_Address)));
+         CPU.Load_Register := Rt_Index;
+         CPU.Load_Value :=
+           PSX.Types.Word32 (PSX.Memory.Read_16 (Memory, Effective_Address));
+         CPU.Load_Pending := True;
 
       end if;
 
@@ -739,7 +739,10 @@ package body PSX.CPU.Execute is
             Memory_Value : constant PSX.Types.Word32 :=
               PSX.Memory.Read_32 (Memory, Aligned_Address);
 
-            Old_Value : constant PSX.Types.Word32 := CPU.Registers (Rt_Index);
+            Old_Value : constant PSX.Types.Word32 :=
+              (if CPU.Load_Pending and then CPU.Load_Register = Rt_Index
+               then CPU.Load_Value
+               else CPU.Registers (Rt_Index));
 
             Mask  : PSX.Types.Word32;
             Value : PSX.Types.Word32;
@@ -768,8 +771,9 @@ package body PSX.CPU.Execute is
 
             end case;
 
-            PSX.Register.Write
-              (CPU.Registers, Rt_Index, (Old_Value and Mask) or Value);
+            CPU.Load_Register := Rt_Index;
+            CPU.Load_Value := (Old_Value and Mask) or Value;
+            CPU.Load_Pending := True;
 
          end;
 
@@ -785,7 +789,10 @@ package body PSX.CPU.Execute is
             Memory_Value : constant PSX.Types.Word32 :=
               PSX.Memory.Read_32 (Memory, Aligned_Address);
 
-            Old_Value : constant PSX.Types.Word32 := CPU.Registers (Rt_Index);
+            Old_Value : constant PSX.Types.Word32 :=
+              (if CPU.Load_Pending and then CPU.Load_Register = Rt_Index
+               then CPU.Load_Value
+               else CPU.Registers (Rt_Index));
 
             Mask  : PSX.Types.Word32;
             Value : PSX.Types.Word32;
@@ -811,8 +818,9 @@ package body PSX.CPU.Execute is
 
             end case;
 
-            PSX.Register.Write
-              (CPU.Registers, Rt_Index, (Old_Value and Mask) or Value);
+            CPU.Load_Register := Rt_Index;
+            CPU.Load_Value := (Old_Value and Mask) or Value;
+            CPU.Load_Pending := True;
 
          end;
 
@@ -923,6 +931,16 @@ package body PSX.CPU.Execute is
            (Memory,
             Effective_Address,
             PSX.Types.Word16 (Rt_Value and 16#0000_FFFF#));
+
+      end if;
+
+      --  SW
+      if Opcode_Value = 43 then
+
+         CPU.Memory_Stall_Cycles :=
+           PSX.Memory.Cycles.Store_Cycles (Effective_Address);
+
+         PSX.Memory.Write_32 (Memory, Effective_Address, Rt_Value);
 
       end if;
 

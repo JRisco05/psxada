@@ -1,0 +1,6 @@
+psx_cpu_store_tests.adb:19:07: (style) space required [-gnatyc]
+psx_cpu_store_tests.adb:28:07: (style) space required [-gnatyc]
+psx_cpu_store_tests.adb:43:07: (style) space required [-gnatyc]
+psx_cpu_store_tests.adb:52:07: (style) space required [-gnatyc]
+psx_cpu_store_tests.adb:67:07: (style) space required [-gnatyc]
+psx_cpu_store_tests.adb:76:07: (style) space required [-gnatyc]
