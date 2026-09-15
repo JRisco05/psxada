@@ -88,6 +88,8 @@ package body PSX.CPU.Step is
 
          if PSX.CPU.Instruction.Rt (Inst) = 0
            or else PSX.CPU.Instruction.Rt (Inst) = 1
+           or else PSX.CPU.Instruction.Rt (Inst) = 16
+           or else PSX.CPU.Instruction.Rt (Inst) = 17
          then
             Is_Control_Transfer := True;
          end if;

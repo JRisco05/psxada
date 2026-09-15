@@ -38,6 +38,7 @@ project Psxada_Tests extends "../psxada.gpr" is
       "psx_cpu_add_immediate_tests.adb",
       "psx_cpu_lui_tests.adb",
       "psx_cpu_regimm_branch_tests.adb",
+      "psx_cpu_regimm_link_branch_tests.adb",
       "psx_memory_tests.adb",
       "psx_memory_cycles_tests.adb",
       "psx_memory_store_cycle_tests.adb",

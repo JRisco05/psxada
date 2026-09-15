@@ -647,6 +647,36 @@ package body PSX.CPU.Execute is
 
       end if;
 
+      -- BLTZAL
+      if Opcode_Value = 1 and PSX.CPU.Instruction.Rt (Inst) = 16 then
+         PSX.Register.Write (CPU.Registers, 31, CPU.PC + 8);
+
+         CPU.Next_PC := CPU.PC + 4;
+
+         if To_Signed_32 (Rs_Value) < 0 then
+            CPU.Next_PC :=
+              CPU.PC
+              + 4
+              + Interfaces.Shift_Left
+                  (Sign_Extend_16 (PSX.Types.Word16 (Immediate_Value)), 2);
+         end if;
+      end if;
+
+      -- BGEZAL
+      if Opcode_Value = 1 and PSX.CPU.Instruction.Rt (Inst) = 17 then
+         PSX.Register.Write (CPU.Registers, 31, CPU.PC + 8);
+
+         CPU.Next_PC := CPU.PC + 4;
+
+         if To_Signed_32 (Rs_Value) >= 0 then
+            CPU.Next_PC :=
+              CPU.PC
+              + 4
+              + Interfaces.Shift_Left
+                  (Sign_Extend_16 (PSX.Types.Word16 (Immediate_Value)), 2);
+         end if;
+      end if;
+
       --  J
       if Opcode_Value = 2 then
          CPU.Next_PC :=
