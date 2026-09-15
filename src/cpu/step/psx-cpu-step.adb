@@ -5,6 +5,7 @@ with PSX.CPU.Instruction;
 with PSX.DMA;
 with PSX.GPU;
 with PSX.Types;
+with PSX.Timers;
 
 package body PSX.CPU.Step is
 
@@ -98,6 +99,11 @@ package body PSX.CPU.Step is
 
       --  Process DMA after the CPU instruction.
       PSX.DMA.Process (Memory, GPU);
+
+      --  Advance timers by one CPU cycle.
+      for Timer_Index in 0 .. PSX.Timers.Timer_Count - 1 loop
+         PSX.Timers.Tick (Memory.Timers, Timer_Index, 1);
+      end loop;
 
    end Step;
 

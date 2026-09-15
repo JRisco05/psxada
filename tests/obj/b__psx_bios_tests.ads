@@ -272,7 +272,7 @@ package ada_main is
    pragma Export (C, u00115, "psx__cpu__instructionB");
    u00116 : constant Version_32 := 16#216792ab#;
    pragma Export (C, u00116, "psx__cpu__instructionS");
-   u00117 : constant Version_32 := 16#b0a95088#;
+   u00117 : constant Version_32 := 16#b2d578b0#;
    pragma Export (C, u00117, "psx__cpu__stepB");
    u00118 : constant Version_32 := 16#5380f4ad#;
    pragma Export (C, u00118, "psx__cpu__stepS");

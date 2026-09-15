@@ -6,6 +6,8 @@ with Interfaces;
 with PSX.CPU.Step;
 with PSX.CPU.Fetch;
 with PSX.CPU.Instruction;
+with PSX.CPU.Step;
+with PSX.Timers;
 
 procedure Psx_Cpu_Step_Tests is
 
@@ -284,8 +286,6 @@ begin
 
    Assert
      (CPU.PC = 16#0000_1008#, "STEP BEQ not taken reaches sequential address");
-
-   
 
    --------------------------------------------------
    --  CPU STEP: BNE TAKEN
@@ -854,6 +854,37 @@ begin
    Assert (CPU.PC = 16#8000_0080#, "STEP DELAY EXCEPTION: exception vector");
 
    Ada.Text_IO.Put_Line ("PASS: STEP DELAY SLOT EXCEPTION");
+
+   --------------------------------------------------
+   --  CPU STEP: TIMER TICK
+   --------------------------------------------------
+
+   PSX.CPU.Reset (CPU);
+   PSX.Memory.Reset (Memory);
+
+   CPU.PC := 16#0000_1000#;
+   CPU.Next_PC := 16#0000_1004#;
+
+   --  NOP
+   PSX.Memory.Write_32 (Memory, 16#0000_1000#, 16#0000_0000#);
+
+   Assert
+     (PSX.Timers.Read_Counter (Memory.Timers, 0) = 0,
+      "STEP TIMER initial counter");
+
+   PSX.CPU.Step.Step (CPU, Memory);
+
+   Assert
+     (PSX.Timers.Read_Counter (Memory.Timers, 0) = 1,
+      "STEP TIMER advances counter");
+
+   PSX.CPU.Step.Step (CPU, Memory);
+
+   Assert
+     (PSX.Timers.Read_Counter (Memory.Timers, 0) = 2,
+      "STEP TIMER advances counter twice");
+
+   Ada.Text_IO.Put_Line ("PASS: STEP TIMER TICK");
 
    --------------------------------------------------
    --  RESULT

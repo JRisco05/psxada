@@ -42,7 +42,7 @@ P ZX
 RN
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx.cpu.step%b	psx-cpu-step.adb	b0a95088 NE OO PK IU
+U psx.cpu.step%b	psx-cpu-step.adb	b2d578b0 NE OO PK IU
 W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
 W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
@@ -51,6 +51,7 @@ W psx.cpu.fetch%s	psx-cpu-fetch.adb	psx-cpu-fetch.ali
 W psx.cpu.instruction%s	psx-cpu-instruction.adb	psx-cpu-instruction.ali
 W psx.dma%s		psx-dma.adb		psx-dma.ali
 W psx.gpu%s		psx-gpu.adb		psx-gpu.ali
+W psx.timers%s		psx-timers.adb		psx-timers.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 U psx.cpu.step%s	psx-cpu-step.ads	5380f4ad EE NE OO PK IU
@@ -66,7 +67,7 @@ D psx-cpu-execute.ads	20260911215034 4b6c299f psx.cpu.execute%s
 D psx-cpu-fetch.ads	20260902161056 1bdf6dc0 psx.cpu.fetch%s
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
 D psx-cpu-step.ads	20260914130357 901c7255 psx.cpu.step%s
-D psx-cpu-step.adb	20260914130437 44d621df psx.cpu.step%b
+D psx-cpu-step.adb	20260915034409 7a8647cf psx.cpu.step%b
 D psx-dma.ads		20260914005322 a2982fd6 psx.dma%s
 D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260915032554 99b2f715 psx.memory%s
@@ -85,6 +86,7 @@ G r c none [step psx__cpu__step 7 14 none] [rt psx__cpu__instruction 15 13 none]
 G r c none [step psx__cpu__step 7 14 none] [execute psx__cpu__execute 7 14 none]
 G r c none [step psx__cpu__step 7 14 none] [enter_exception psx__cpu 40 14 none]
 G r c none [step psx__cpu__step 7 14 none] [process psx__dma 13 14 none]
+G r c none [step psx__cpu__step 7 14 none] [tick psx__timers 27 14 none]
 G r c none [step psx__cpu__step 10 14 none] [fetch psx__cpu__fetch 7 13 none]
 G r c none [step psx__cpu__step 10 14 none] [opcode psx__cpu__instruction 11 13 none]
 G r c none [step psx__cpu__step 10 14 none] [funct psx__cpu__instruction 21 13 none]
@@ -92,67 +94,74 @@ G r c none [step psx__cpu__step 10 14 none] [rt psx__cpu__instruction 15 13 none
 G r c none [step psx__cpu__step 10 14 none] [execute psx__cpu__execute 7 14 none]
 G r c none [step psx__cpu__step 10 14 none] [enter_exception psx__cpu 40 14 none]
 G r c none [step psx__cpu__step 10 14 none] [process psx__dma 13 14 none]
+G r c none [step psx__cpu__step 10 14 none] [tick psx__timers 27 14 none]
 X 1 interfac.ads
-47K9*Interfaces 247e15 8|1w6 11r13
-92M9*Unsigned_32 8|11r24
+47K9*Interfaces 247e15 8|1w6 12r13
+92M9*Unsigned_32 8|12r24
 X 2 psx.ads
 1K9*PSX 3e8 7|1r6 2r6 3r6 5r9 8r20 8r55 11r23 12r23 13r23 15r5 8|2r6 3r6
-. 4r6 5r6 6r6 7r6 9r14 14r20 14r55 16r13 18r7 24r23 25r23 26r23 28r31 29r40
-. 30r40 32r31 33r31 38r15 40r23 41r22 56r13 57r20 69r40 72r7 77r43 84r37
-. 89r10 100r7 104r5
+. 4r6 5r6 6r6 7r6 8r6 10r14 15r20 15r55 17r13 19r7 25r23 26r23 27r23 29r31
+. 30r40 31r40 33r31 34r31 39r15 41r23 42r22 57r13 58r20 70r40 73r7 78r43
+. 85r37 90r10 101r7 104r31 105r10 110r5
 X 3 psx-cpu.ads
-4K13*CPU 2|1k9 3|43e12 7|1w10 5r13 8r24 11r27 15r9 8|2r10 3r10 4r10 9r18
-. 14r24 24r27 28r35 38r19 40r27 41r26 56r17 57r24 72r11 89r14 104r9
-12R9*CPU_State 37e14 7|8r28 11r31 8|14r28 24r31
-16m7*PC{8M12} 8|29r64 93m14
-22m7*Next_PC{8M12} 8|30r64 69m11 76r43 77m14
-26b7*In_Delay_Slot{boolean} 8|31r55 95m14
-33m7*EPC{8M12} 8|84m17 86m17
-36b7*Exception_Pending{boolean} 8|81r14
-40U14*Enter_Exception 8|89s18
+4K13*CPU 2|1k9 3|43e12 7|1w10 5r13 8r24 11r27 15r9 8|2r10 3r10 4r10 10r18
+. 15r24 25r27 29r35 39r19 41r27 42r26 57r17 58r24 73r11 90r14 110r9
+12R9*CPU_State 37e14 7|8r28 11r31 8|15r28 25r31
+16m7*PC{8M12} 8|30r64 94m14
+22m7*Next_PC{8M12} 8|31r64 70m11 77r43 78m14
+26b7*In_Delay_Slot{boolean} 8|32r55 96m14
+33m7*EPC{8M12} 8|85m17 87m17
+36b7*Exception_Pending{boolean} 8|82r14
+40U14*Enter_Exception 8|90s18
 X 4 psx-cpu-execute.ads
-5K17*Execute 12e20 8|2w14 72r15
-7U14*Execute 8|72s23
+5K17*Execute 12e20 8|2w14 73r15
+7U14*Execute 8|73s23
 X 5 psx-cpu-fetch.ads
-5K17*Fetch 11e18 8|3w14 38r23
-7V13*Fetch{6|7R9} 8|38s29
+5K17*Fetch 11e18 8|3w14 39r23
+7V13*Fetch{6|7R9} 8|39s29
 X 6 psx-cpu-instruction.ads
-3K17*Instruction 27e24 8|4w14 28r39 40r31 41r30 56r21 57r28
-7R9*Instruction 9e14 8|28r51
-11V13*Opcode{5M12} 8|40s43
-15V13*Rt{5M12} 8|56s33 57s40
-21V13*Funct{5M12} 8|41s42
+3K17*Instruction 27e24 8|4w14 29r39 41r31 42r30 57r21 58r28
+7R9*Instruction 9e14 8|29r51
+11V13*Opcode{5M12} 8|41s43
+15V13*Rt{5M12} 8|57s33 58s40
+21V13*Funct{5M12} 8|42s42
 X 7 psx-cpu-step.ads
-5K17*Step 3|4k13 7|15l13 15e17 8|9b22 104l13 104t17
-7U14*Step 8=7 8=39 8|13b14 21l8 21t12
-8r7 CPU{3|12R9} 8|14b7 20m13
-8r39 Memory{11|18R9} 8|14b39 20m18
-10U14*Step 11=7 12=7 13=7 8|20s7 23b14 102l8 102t12
-11r7 CPU{3|12R9} 8|24b7 29r60 30r60 31r51 38r36 69m7 72m32 76r39 77m10 81r10
-. 84m13 86m13 89m35 93m10 95m10
-12r7 Memory{11|18R9} 8|25b7 38r41 72m37 100m24
-13r7 GPU{10|17R9} 8|26b7 100m32
+5K17*Step 3|4k13 7|15l13 15e17 8|10b22 110l13 110t17
+7U14*Step 8=7 8=39 8|14b14 22l8 22t12
+8r7 CPU{3|12R9} 8|15b7 21m13
+8r39 Memory{11|18R9} 8|15b39 21m18
+10U14*Step 11=7 12=7 13=7 8|21s7 24b14 108l8 108t12
+11r7 CPU{3|12R9} 8|25b7 30r60 31r60 32r51 39r36 70m7 73m32 77r39 78m10 82r10
+. 85m13 87m13 90m35 94m10 96m10
+12r7 Memory{11|18R9} 8|26b7 39r41 73m37 101m24 105m27 105r27
+13r7 GPU{10|17R9} 8|27b7 101m32
 X 8 psx-cpu-step.adb
-16r7 GPU{10|17R9} 18m22 20m26 20r26
-28r7 Inst{6|7R9} 38m7 40r51 41r49 56r37 57r44 72r45
-29m7 Current_PC{14|7M12} 84r24 86r24
-30m7 Current_Next_PC{14|7M12} 69r22 76r53 77r25 93r20
-31b7 Current_In_Delay_Slot{boolean} 83r13
-32m7 Opcode_Value{14|7M12} 40m7 45r10 46r17 47r17 48r17 49r17 50r17 54r13
-. 62r13
-33m7 Funct_Value{14|7M12} 41m7 62r40 62r64
-34b7 Is_Control_Transfer{boolean} 52m10 59m13 65m10 76r10 95r31
+17r7 GPU{10|17R9} 19m22 21m26 21r26
+29r7 Inst{6|7R9} 39m7 41r51 42r49 57r37 58r44 73r45
+30m7 Current_PC{14|7M12} 85r24 87r24
+31m7 Current_Next_PC{14|7M12} 70r22 77r53 78r25 94r20
+32b7 Current_In_Delay_Slot{boolean} 84r13
+33m7 Opcode_Value{14|7M12} 41m7 46r10 47r17 48r17 49r17 50r17 51r17 55r13
+. 63r13
+34m7 Funct_Value{14|7M12} 42m7 63r40 63r64
+35b7 Is_Control_Transfer{boolean} 53m10 60m13 66m10 77r10 96r31
+104i11 Timer_Index{integer} 105r42
 X 9 psx-dma.ads
-5K13*DMA 8|5w10 100r11 9|16e12
-13U14*Process 8|100s15
+5K13*DMA 8|5w10 101r11 9|16e12
+13U14*Process 8|101s15
 X 10 psx-gpu.ads
-3K13*GPU 7|2w10 13r27 8|6w10 16r17 18r11 26r27 10|60e12
-17R9*GPU_State 7|13r31 8|16r21 26r31 10|42e14
-44U14*Reset 8|18s15
+3K13*GPU 7|2w10 13r27 8|6w10 17r17 19r11 27r27 10|60e12
+17R9*GPU_State 7|13r31 8|17r21 27r31 10|42e14
+44U14*Reset 8|19s15
 X 11 psx-memory.ads
-4K13*Memory 7|3w10 8r59 12r27 8|14r59 25r27 11|57e15
-18R9*Memory_State 7|8r66 12r34 8|14r66 25r34 11|24e14
+4K13*Memory 7|3w10 8r59 12r27 8|15r59 26r27 11|57e15
+18R9*Memory_State 7|8r66 12r34 8|15r66 26r34 11|24e14
+23r7*Timers{13|18R9} 8|105m34
+X 13 psx-timers.ads
+3K13*Timers 8|8w10 104r35 105r14 13|43e15
+7N4*Timer_Count 8|104r42
+27U14*Tick 8|105s21
 X 14 psx-types.ads
-3K13*Types 8|7w10 29r44 30r44 32r35 33r35 69r44 77r47 84r41 14|12e14
-7M12*Word32{1|92M9} 8|29r50 30r50 32r41 33r41 69r50 77r53 84r47
+3K13*Types 8|7w10 30r44 31r44 33r35 34r35 70r44 78r47 85r41 14|12e14
+7M12*Word32{1|92M9} 8|30r50 31r50 33r41 34r41 70r50 78r53 85r47
 

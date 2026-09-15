@@ -1,2 +1,1 @@
-psx_cpu_step_tests.adb:287:01: (style) multiple blank lines [-gnatyu]
-psx_cpu_step_tests.adb:288:01: (style) trailing spaces not permitted [-gnatyb]
+psx_cpu_step_tests.adb:9:06: warning: redundant with clause [-gnatwr]
