@@ -1,4 +1,5 @@
 with PSX.Types;
+with PSX.Timers;
 
 package PSX.Memory is
 
@@ -19,6 +20,7 @@ package PSX.Memory is
       Scratchpad    : Scratchpad_Array;
       BIOS          : BIOS_Array;
       DMA_Registers : DMA_Register_Array;
+      Timers        : PSX.Timers.Timers_State;
    end record;
 
    procedure Reset (Memory : out Memory_State);

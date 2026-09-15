@@ -17,6 +17,7 @@ project Psxada is
       "src/memory/",
       "src/state/",
       "src/dma/",
+      "src/timers/",
       "bios/",
       "tests/cpu/execute",
       "tests/cpu/register",
@@ -24,6 +25,7 @@ project Psxada is
       "tests/memory/",
       "tests/bios/",
       "tests/spu/",
+      "tests/timers/",
       "tests/gpu/",
       "tests/dma/",
       "config/");

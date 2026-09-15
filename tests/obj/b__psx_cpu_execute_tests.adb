@@ -26,11 +26,12 @@ package body ada_main is
    E087 : Short_Integer; pragma Import (Ada, E087, "system__file_io_E");
    E122 : Short_Integer; pragma Import (Ada, E122, "ada__streams__stream_io_E");
    E074 : Short_Integer; pragma Import (Ada, E074, "ada__text_io_E");
-   E120 : Short_Integer; pragma Import (Ada, E120, "psx__memory_E");
    E113 : Short_Integer; pragma Import (Ada, E113, "psx__register_E");
    E118 : Short_Integer; pragma Import (Ada, E118, "psx__cpu__instruction_E");
+   E126 : Short_Integer; pragma Import (Ada, E126, "psx__timers_E");
+   E120 : Short_Integer; pragma Import (Ada, E120, "psx__memory_E");
    E116 : Short_Integer; pragma Import (Ada, E116, "psx__cpu__execute_E");
-   E126 : Short_Integer; pragma Import (Ada, E126, "psx__cpu__fetch_E");
+   E128 : Short_Integer; pragma Import (Ada, E128, "psx__cpu__fetch_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
 
@@ -211,11 +212,12 @@ package body ada_main is
       Ada.Text_Io'Elab_Spec;
       Ada.Text_Io'Elab_Body;
       E074 := E074 + 1;
-      E120 := E120 + 1;
       E113 := E113 + 1;
       E118 := E118 + 1;
-      E116 := E116 + 1;
       E126 := E126 + 1;
+      E120 := E120 + 1;
+      E116 := E116 + 1;
+      E128 := E128 + 1;
    end adainit;
 
    procedure Ada_Main_Program;
@@ -255,10 +257,11 @@ package body ada_main is
 --  BEGIN Object file/option list
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-types.o
-   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-register.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-instruction.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-timers.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-execute.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-fetch.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_cpu_execute_tests.o

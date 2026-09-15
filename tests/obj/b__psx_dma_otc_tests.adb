@@ -27,6 +27,7 @@ package body ada_main is
    E118 : Short_Integer; pragma Import (Ada, E118, "ada__streams__stream_io_E");
    E074 : Short_Integer; pragma Import (Ada, E074, "ada__text_io_E");
    E113 : Short_Integer; pragma Import (Ada, E113, "psx__gpu_E");
+   E122 : Short_Integer; pragma Import (Ada, E122, "psx__timers_E");
    E116 : Short_Integer; pragma Import (Ada, E116, "psx__memory_E");
    E111 : Short_Integer; pragma Import (Ada, E111, "psx__dma_E");
 
@@ -210,6 +211,7 @@ package body ada_main is
       Ada.Text_Io'Elab_Body;
       E074 := E074 + 1;
       E113 := E113 + 1;
+      E122 := E122 + 1;
       E116 := E116 + 1;
       E111 := E111 + 1;
    end adainit;
@@ -252,6 +254,7 @@ package body ada_main is
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-types.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-gpu.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-timers.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-dma.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_dma_otc_tests.o

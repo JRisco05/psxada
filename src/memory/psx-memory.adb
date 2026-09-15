@@ -1,8 +1,8 @@
 with Interfaces;
 with Ada.Streams;
 with Ada.Streams.Stream_IO;
-with Interfaces;
 with Ada.Text_IO;
+with PSX.Timers;
 
 package body PSX.Memory is
 
@@ -53,6 +53,8 @@ package body PSX.Memory is
       Memory.Scratchpad := (others => 0);
       Memory.BIOS := (others => 0);
       Memory.DMA_Registers := (others => 0);
+
+      PSX.Timers.Reset (Memory.Timers);
    end Reset;
 
    function Read_8
@@ -98,15 +100,45 @@ package body PSX.Memory is
      (Memory : Memory_State; Address : PSX.Types.Word32)
       return PSX.Types.Word32
    is
+      Timer_Base : constant PSX.Types.Word32 := 16#1F80_1100#;
+      Timer_End  : constant PSX.Types.Word32 := 16#1F80_1128#;
+
       DMA_Base : constant PSX.Types.Word32 := 16#1F80_1080#;
       DMA_End  : constant PSX.Types.Word32 := 16#1F80_10FF#;
-      Index    : PSX.Types.Word32;
+
+      Index : PSX.Types.Word32;
    begin
-      if Address >= DMA_Base and then Address <= DMA_End then
+
+      --  Timers
+      if Address >= Timer_Base and then Address <= Timer_End then
+
+         Index := (Address - Timer_Base) / 16;
+
+         case (Address - Timer_Base) mod 16 is
+
+            when 0      =>
+               return PSX.Timers.Read_Counter (Memory.Timers, Natural (Index));
+
+            when 4      =>
+               return PSX.Timers.Read_Mode (Memory.Timers, Natural (Index));
+
+            when 8      =>
+               return PSX.Timers.Read_Target (Memory.Timers, Natural (Index));
+
+            when others =>
+               return 0;
+
+         end case;
+
+      --  DMA
+      elsif Address >= DMA_Base and then Address <= DMA_End then
+
          Index := (Address - DMA_Base) / 4;
          return Memory.DMA_Registers (Index);
 
+      --  RAM / BIOS / Scratchpad / Unmapped
       else
+
          declare
             B0 : constant PSX.Types.Word32 :=
               PSX.Types.Word32 (Read_8 (Memory, Address));
@@ -126,7 +158,9 @@ package body PSX.Memory is
               or Interfaces.Shift_Left (B2, 16)
               or Interfaces.Shift_Left (B3, 24);
          end;
+
       end if;
+
    end Read_32;
 
    procedure Write_8
@@ -176,15 +210,44 @@ package body PSX.Memory is
       Address : PSX.Types.Word32;
       Value   : PSX.Types.Word32)
    is
+      Timer_Base : constant PSX.Types.Word32 := 16#1F80_1100#;
+      Timer_End  : constant PSX.Types.Word32 := 16#1F80_1128#;
+
       DMA_Base : constant PSX.Types.Word32 := 16#1F80_1080#;
       DMA_End  : constant PSX.Types.Word32 := 16#1F80_10FF#;
-      Index    : PSX.Types.Word32;
+
+      Index : PSX.Types.Word32;
    begin
-      if Address >= DMA_Base and then Address <= DMA_End then
+
+      --  Timers
+      if Address >= Timer_Base and then Address <= Timer_End then
+
+         Index := (Address - Timer_Base) / 16;
+
+         case (Address - Timer_Base) mod 16 is
+
+            when 0      =>
+               PSX.Timers.Write_Counter
+                 (Memory.Timers, Natural (Index), Value);
+
+            when 4      =>
+               PSX.Timers.Write_Mode (Memory.Timers, Natural (Index), Value);
+
+            when 8      =>
+               PSX.Timers.Write_Target (Memory.Timers, Natural (Index), Value);
+
+            when others =>
+               null;
+
+         end case;
+
+      --  DMA
+      elsif Address >= DMA_Base and then Address <= DMA_End then
 
          Index := (Address - DMA_Base) / 4;
          Memory.DMA_Registers (Index) := Value;
 
+      --  RAM / BIOS / Scratchpad / Unmapped
       else
 
          declare
@@ -207,9 +270,11 @@ package body PSX.Memory is
          end;
 
       end if;
+
    end Write_32;
 
    procedure Load_BIOS (Memory : in out Memory_State; Path : String) is
+
       use Ada.Streams;
       use Ada.Streams.Stream_IO;
 
@@ -218,6 +283,7 @@ package body PSX.Memory is
       Last      : Stream_Element_Offset;
       Position  : Stream_Element_Offset := 0;
       BIOS_Size : constant Stream_Element_Offset := 16#0008_0000#;
+
    begin
       Open (File => File, Mode => In_File, Name => Path);
 

@@ -53,7 +53,7 @@ W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
 W psx.register%s	psx-register.adb	psx-register.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
-U psx.cpu.execute%s	psx-cpu-execute.ads	6dfd21a9 EE NE OO PK IU
+U psx.cpu.execute%s	psx-cpu-execute.ads	77967831 EE NE OO PK IU
 W psx%s			psx.ads			psx.ali
 W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
 W psx.cpu.instruction%s	psx-cpu-instruction.adb	psx-cpu-instruction.ali
@@ -67,8 +67,9 @@ D psx-cpu.ads		20260912021652 7c10720c psx.cpu%s
 D psx-cpu-execute.ads	20260911215034 4b6c299f psx.cpu.execute%s
 D psx-cpu-execute.adb	20260911215034 44b2f1a6 psx.cpu.execute%b
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
-D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
+D psx-memory.ads	20260915032554 99b2f715 psx.memory%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
+D psx-timers.ads	20260915025324 3c2c4e28 psx.timers%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
@@ -90,12 +91,12 @@ G r c none [execute psx__cpu__execute 7 14 none] [immediate psx__cpu__instructio
 G r c none [execute psx__cpu__execute 7 14 none] [write psx__register 15 14 none]
 G r c none [execute psx__cpu__execute 7 14 none] [return_from_exception psx__cpu 41 14 none]
 G r c none [execute psx__cpu__execute 7 14 none] [target psx__cpu__instruction 25 13 none]
-G r c none [execute psx__cpu__execute 7 14 none] [read_8 psx__memory 26 13 none]
-G r c none [execute psx__cpu__execute 7 14 none] [read_16 psx__memory 30 13 none]
-G r c none [execute psx__cpu__execute 7 14 none] [read_32 psx__memory 34 13 none]
-G r c none [execute psx__cpu__execute 7 14 none] [write_8 psx__memory 38 14 none]
-G r c none [execute psx__cpu__execute 7 14 none] [write_16 psx__memory 43 14 none]
-G r c none [execute psx__cpu__execute 7 14 none] [write_32 psx__memory 48 14 none]
+G r c none [execute psx__cpu__execute 7 14 none] [read_8 psx__memory 28 13 none]
+G r c none [execute psx__cpu__execute 7 14 none] [read_16 psx__memory 32 13 none]
+G r c none [execute psx__cpu__execute 7 14 none] [read_32 psx__memory 36 13 none]
+G r c none [execute psx__cpu__execute 7 14 none] [write_8 psx__memory 40 14 none]
+G r c none [execute psx__cpu__execute 7 14 none] [write_16 psx__memory 45 14 none]
+G r c none [execute psx__cpu__execute 7 14 none] [write_32 psx__memory 50 14 none]
 X 1 ada.ads
 18K9*Ada 22e8 7|2r6 53r6
 X 2 a-unccon.ads
@@ -177,35 +178,35 @@ X 6 psx-cpu-execute.ads
 . 625m10 625r25 630m13 631r15 645m10 645r25 650m13 651r15 662m10 663r13 670m30
 . 670r30 670r49 673m10 674r13 682m13 682r13 692m13 692r13 702m13 702r13 712m13
 . 712r13 722m13 722r13
-9r7 Memory{9|17R9} 7|95b7 684r47 694r50 704r49 714r51 724r33 732m13 742m13
+9r7 Memory{9|18R9} 7|95b7 684r47 694r50 704r49 714r51 724r33 732m13 742m13
 . 751m31
 10r7 Inst{8|7R9} 7|96b7 100r37 103r36 106r62 109r62 112r62 115r45 124r40
 . 416r13 421r40 622r55 642r55 664r66 675r66
 X 7 psx-cpu-execute.adb
-15V13 Sign_Extend_16{11|7M12} 15b13 15>29 23l8 23t22 127s20 441s21 466s24
+15V13 Sign_Extend_16{12|7M12} 15b13 15>29 23l8 23t22 127s20 441s21 466s24
 . 474s28 490s24 554s20 574s20 594s20 614s20 634s20 654s20 704s13
-15m29 Value{11|6M12} 18r34 19r52 21r35
-25V13 Sign_Extend_8{11|7M12} 25b13 25>28 32l8 32t21 684s13
-25m28 Value{11|5M12} 27r33 28r52 30r35
-34V13 Zero_Extend_16{11|7M12} 34b13 34>29 38l8 38t22 508s26 517s25 527s26
-34m29 Value{11|6M12} 37r32
+15m29 Value{12|6M12} 18r34 19r52 21r35
+25V13 Sign_Extend_8{12|7M12} 25b13 25>28 32l8 32t21 684s13
+25m28 Value{12|5M12} 27r33 28r52 30r35
+34V13 Zero_Extend_16{12|7M12} 34b13 34>29 38l8 38t22 508s26 517s25 527s26
+34m29 Value{12|6M12} 37r32
 40V13 To_Signed_32{3|65I9} 40b13 41>7 50l8 50t20 202s41 205s41 233s41 236s41
 . 287s16 287s42 344s18 347s18 436s38 440s18 473s13 474s14 588s13 608s13 628s13
 . 648s13
-41m7 Value{11|7M12} 43r10 45r35 48r40
+41m7 Value{12|7M12} 43r10 45r35 48r40
 52V13 To_Word32[2|23]{3|92M9} 220s22 252s22 358s29 359s29 456s19
-55V13 Multiply_Signed{11|8M12} 55b13 56>7 56>32 91l8 91t23 314s18
-56m7 Left{11|7M12} 59r44 71r32 73r28
-56m32 Right{11|7M12} 61r45 77r33 79r29
+55V13 Multiply_Signed{12|8M12} 55b13 56>7 56>32 91l8 91t23 314s18
+56m7 Left{12|7M12} 59r44 71r32 73r28
+56m32 Right{12|7M12} 61r45 77r33 79r29
 59b7 Left_Negative{boolean} 70r10 85r10
 61b7 Right_Negative{boolean} 76r10 85r28
-63m7 Left_Magnitude{11|7M12} 71m10 73m10 83r27
-64m7 Right_Magnitude{11|7M12} 77m10 79m10 83r63
-66m7 Product{11|8M12} 82m7 86r21 88r17
-99m7 Opcode_Value{11|7M12} 132r10 413r10 431r10 460r13 471r10 488r10 503r10
+63m7 Left_Magnitude{12|7M12} 71m10 73m10 83r27
+64m7 Right_Magnitude{12|7M12} 77m10 79m10 83r63
+66m7 Product{12|8M12} 82m7 86r21 88r17
+99m7 Opcode_Value{12|7M12} 132r10 413r10 431r10 460r13 471r10 488r10 503r10
 . 512r10 522r10 532r10 542r10 562r10 582r10 602r10 622r10 642r10 661r10 668r10
 . 679r10 689r10 699r10 709r10 719r10 729r10 739r10 749r10
-102m7 Funct_Value{11|7M12} 135r13 144r16 148r16 156r16 165r16 173r16 182r16
+102m7 Funct_Value{12|7M12} 135r13 144r16 148r16 156r16 165r16 173r16 182r16
 . 190r16 199r16 225r16 230r16 257r16 262r16 268r16 273r16 279r16 285r16 298r16
 . 310r16 325r16 340r16 366r16 376r16 381r16 386r16 391r16 396r16 403r16
 105i7 Rs_Index{10|7I9} 118r43 145r62
@@ -215,16 +216,16 @@ X 7 psx-cpu-execute.adb
 . 227r48 251r22 259r48 265r31 270r48 276r31 282r31 289r51 293r51 302r51 306r51
 . 378r48 383r48 424r16
 114i7 Shamt_Value{natural} 153r49 170r50 187r61
-117m7 Rs_Value{11|7M12} 127r9 141r28 162r38 179r38 196r38 202r55 227r58 233r55
+117m7 Rs_Value{12|7M12} 127r9 141r28 162r38 179r38 196r38 202r55 227r58 233r55
 . 259r58 265r41 270r58 276r41 282r46 287r30 300r16 314r35 329r36 344r32 370r26
 . 371r26 388r23 393r23 436r52 466r13 473r27 490r13 508r13 517r13 527r13 548r13
 . 568r13 588r27 608r27 628r27 648r27
-120m7 Rt_Value{11|7M12} 153r39 162r19 170r40 179r19 187r51 196r19 205r55
+120m7 Rt_Value{12|7M12} 153r39 162r19 170r40 179r19 187r51 196r19 205r55
 . 227r69 236r55 259r69 265r54 270r70 276r54 282r58 287r56 300r27 314r45 329r66
 . 347r32 368r16 370r37 371r39 425r30 548r24 568r25 734r30 744r31 751r58
-123m7 Immediate_Value{11|7M12} 127r54 441r55 466r58 474r62 490r58 508r60
+123m7 Immediate_Value{12|7M12} 127r54 441r55 466r58 474r62 490r58 508r60
 . 517r59 527r60 537r36 554r54 574r54 594r54 614r54 634r54 654r54
-126m7 Effective_Address{11|7M12} 684r55 694r58 704r57 714r59 724r41 733r13
+126m7 Effective_Address{12|7M12} 684r55 694r58 704r57 714r59 724r41 733r13
 . 743r13 751r39
 201i16 A{3|68I9} 207r59
 204i16 B{3|68I9} 207r63
@@ -232,8 +233,8 @@ X 7 psx-cpu-execute.adb
 232i16 A{3|68I9} 238r59
 235i16 B{3|68I9} 238r63
 238i16 Result{3|68I9} 241r19 243r20 252r56
-313m16 Product{11|8M12} 317r44 320r60
-328m16 Product{11|8M12} 332r44 335r60
+313m16 Product{12|8M12} 317r44 320r60
+328m16 Product{12|8M12} 332r44 335r60
 343i16 Rs_Signed{3|65I9} 355r31 356r32
 346i16 Rt_Signed{3|65I9} 353r19 355r43 356r46
 349i16 Quotient{3|65I9} 355m19 358r40
@@ -255,15 +256,15 @@ X 8 psx-cpu-instruction.ads
 23V13*Immediate{5M12} 7|124s29
 25V13*Target{5M12} 7|664s58 675s58
 X 9 psx-memory.ads
-3K13*Memory 6|3w10 9r27 7|95r27 684r32 694r35 704r33 714r35 724r17 731r14
-. 741r14 751r14 9|55e15
-17R9*Memory_State 6|9r34 7|95r34 9|22e14
-26V13*Read_8{11|5M12} 7|684s39 694s42
-30V13*Read_16{11|6M12} 7|704s40 714s42
-34V13*Read_32{11|7M12} 7|724s24
-38U14*Write_8 7|731s21
-43U14*Write_16 7|741s21
-48U14*Write_32 7|751s21
+4K13*Memory 6|3w10 9r27 7|95r27 684r32 694r35 704r33 714r35 724r17 731r14
+. 741r14 751r14 9|57e15
+18R9*Memory_State 6|9r34 7|95r34 9|24e14
+28V13*Read_8{12|5M12} 7|684s39 694s42
+32V13*Read_16{12|6M12} 7|704s40 714s42
+36V13*Read_32{12|7M12} 7|724s24
+40U14*Write_8 7|731s21
+45U14*Write_16 7|741s21
+50U14*Write_32 7|751s21
 X 10 psx-register.ads
 3K13*Register 7|4w10 13r17 105r31 106r13 108r31 109r13 111r31 112r13 118r13
 . 121r13 138r17 145r32 150r17 158r17 167r17 175r17 184r17 192r17 217r23 227r17
@@ -278,12 +279,12 @@ X 10 psx-register.ads
 . 249s32 259s26 264s26 270s26 275s26 281s26 289s29 293s29 302s29 306s29 378s26
 . 383s26 453s29 463s23 477s26 481s26 492s26 496s26 505s23 514s23 524s23 534s23
 . 670s23 681s23 691s23 701s23 711s23 721s23
-X 11 psx-types.ads
+X 12 psx-types.ads
 3K13*Types 7|3w10 15r41 15r66 19r38 21r21 25r40 25r64 28r38 30r21 34r41 34r66
 . 37r18 41r19 53r59 56r18 56r44 57r18 63r29 64r29 66r21 83r13 83r49 99r35
 . 102r34 117r31 120r31 123r38 126r40 127r40 313r39 317r30 320r22 328r39 329r22
 . 329r52 332r30 335r22 441r41 466r44 474r48 490r44 508r46 517r45 527r46 554r40
-. 574r40 594r40 614r40 634r40 654r40 694r17 714r17 734r17 744r17 11|12e14
+. 574r40 594r40 614r40 634r40 654r40 694r17 714r17 734r17 744r17 12|12e14
 5M12*Word8{3|81M9} 7|25r46 734r23
 6M12*Word16{3|84M9} 7|15r47 34r47 127r46 441r47 466r50 474r54 490r50 508r52
 . 517r51 527r52 554r46 574r46 594r46 614r46 634r46 654r46 744r23

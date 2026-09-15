@@ -53,7 +53,7 @@ W psx.dma%s		psx-dma.adb		psx-dma.ali
 W psx.gpu%s		psx-gpu.adb		psx-gpu.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
-U psx.cpu.step%s	psx-cpu-step.ads	49ebad35 EE NE OO PK IU
+U psx.cpu.step%s	psx-cpu-step.ads	5380f4ad EE NE OO PK IU
 W psx%s			psx.ads			psx.ali
 W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
 W psx.gpu%s		psx-gpu.adb		psx-gpu.ali
@@ -69,8 +69,9 @@ D psx-cpu-step.ads	20260914130357 901c7255 psx.cpu.step%s
 D psx-cpu-step.adb	20260914130437 44d621df psx.cpu.step%b
 D psx-dma.ads		20260914005322 a2982fd6 psx.dma%s
 D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
-D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
+D psx-memory.ads	20260915032554 99b2f715 psx.memory%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
+D psx-timers.ads	20260915025324 3c2c4e28 psx.timers%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
@@ -125,21 +126,21 @@ X 7 psx-cpu-step.ads
 5K17*Step 3|4k13 7|15l13 15e17 8|9b22 104l13 104t17
 7U14*Step 8=7 8=39 8|13b14 21l8 21t12
 8r7 CPU{3|12R9} 8|14b7 20m13
-8r39 Memory{11|17R9} 8|14b39 20m18
+8r39 Memory{11|18R9} 8|14b39 20m18
 10U14*Step 11=7 12=7 13=7 8|20s7 23b14 102l8 102t12
 11r7 CPU{3|12R9} 8|24b7 29r60 30r60 31r51 38r36 69m7 72m32 76r39 77m10 81r10
 . 84m13 86m13 89m35 93m10 95m10
-12r7 Memory{11|17R9} 8|25b7 38r41 72m37 100m24
+12r7 Memory{11|18R9} 8|25b7 38r41 72m37 100m24
 13r7 GPU{10|17R9} 8|26b7 100m32
 X 8 psx-cpu-step.adb
 16r7 GPU{10|17R9} 18m22 20m26 20r26
 28r7 Inst{6|7R9} 38m7 40r51 41r49 56r37 57r44 72r45
-29m7 Current_PC{13|7M12} 84r24 86r24
-30m7 Current_Next_PC{13|7M12} 69r22 76r53 77r25 93r20
+29m7 Current_PC{14|7M12} 84r24 86r24
+30m7 Current_Next_PC{14|7M12} 69r22 76r53 77r25 93r20
 31b7 Current_In_Delay_Slot{boolean} 83r13
-32m7 Opcode_Value{13|7M12} 40m7 45r10 46r17 47r17 48r17 49r17 50r17 54r13
+32m7 Opcode_Value{14|7M12} 40m7 45r10 46r17 47r17 48r17 49r17 50r17 54r13
 . 62r13
-33m7 Funct_Value{13|7M12} 41m7 62r40 62r64
+33m7 Funct_Value{14|7M12} 41m7 62r40 62r64
 34b7 Is_Control_Transfer{boolean} 52m10 59m13 65m10 76r10 95r31
 X 9 psx-dma.ads
 5K13*DMA 8|5w10 100r11 9|16e12
@@ -149,9 +150,9 @@ X 10 psx-gpu.ads
 17R9*GPU_State 7|13r31 8|16r21 26r31 10|42e14
 44U14*Reset 8|18s15
 X 11 psx-memory.ads
-3K13*Memory 7|3w10 8r59 12r27 8|14r59 25r27 11|55e15
-17R9*Memory_State 7|8r66 12r34 8|14r66 25r34 11|22e14
-X 13 psx-types.ads
-3K13*Types 8|7w10 29r44 30r44 32r35 33r35 69r44 77r47 84r41 13|12e14
+4K13*Memory 7|3w10 8r59 12r27 8|14r59 25r27 11|57e15
+18R9*Memory_State 7|8r66 12r34 8|14r66 25r34 11|24e14
+X 14 psx-types.ads
+3K13*Types 8|7w10 29r44 30r44 32r35 33r35 69r44 77r47 84r41 14|12e14
 7M12*Word32{1|92M9} 8|29r50 30r50 32r41 33r41 69r50 77r53 84r47
 
