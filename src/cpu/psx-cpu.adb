@@ -13,6 +13,8 @@ package body PSX.CPU is
       CPU.In_Delay_Slot := False;
       CPU.HI := 0;
       CPU.LO := 0;
+      CPU.MulDiv_Busy := False;
+      CPU.MulDiv_Cycles := 0;
       CPU.Status := 0;
       CPU.EPC := 0;
       CPU.Cause := None;

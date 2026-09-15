@@ -55,7 +55,7 @@ W psx.memory%s		psx-memory.adb		psx-memory.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260912021652 7c10720c psx.cpu%s
+D psx-cpu.ads		20260915041503 0df55807 psx.cpu%s
 D psx-cpu-fetch.ads	20260902161056 1bdf6dc0 psx.cpu.fetch%s
 D psx-cpu-fetch.adb	20260902161229 27d7a885 psx.cpu.fetch%b
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
@@ -73,10 +73,10 @@ X 2 psx.ads
 1K9*PSX 3e8 4|1r6 2r6 3r6 5r9 8r13 8r41 9r14 11r5 5|1r6 3r14 6r13 6r41 7r14
 . 9r14 12r19 18r5
 X 3 psx-cpu.ads
-4K13*CPU 2|1k9 3|43e12 4|1w10 2r10 5r13 8r17 9r18 11r9 5|3r18 6r17 7r18 9r18
+4K13*CPU 2|1k9 3|47e12 4|1w10 2r10 5r13 8r17 9r18 11r9 5|3r18 6r17 7r18 9r18
 . 18r9
 8M12*Word32{10|7M12}
-12R9*CPU_State 37e14 4|8r21 5|6r21
+12R9*CPU_State 41e14 4|8r21 5|6r21
 16m7*PC{8M12} 5|12r51
 X 4 psx-cpu-fetch.ads
 5K17*Fetch 3|4k13 4|11l13 11e18 5|3b22 18l13 18t18

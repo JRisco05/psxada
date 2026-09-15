@@ -2,6 +2,7 @@ project Psxada_Tests extends "../psxada.gpr" is
 
    for Source_Dirs use
      ("cpu/execute/",
+      "cpu/muldiv/",
       "memory/",
       "spu/",
       "gpu/",
@@ -15,6 +16,8 @@ project Psxada_Tests extends "../psxada.gpr" is
 
    for Main use
      ("psx_cpu_execute_tests.adb",
+      "psx_cpu_muldiv_tests.adb",
+      "psx_cpu_muldiv_stall_tests.adb",
       "psx_memory_tests.adb",
       "psx_cpu_step_tests.adb",
       "psx_spu_tests.adb",

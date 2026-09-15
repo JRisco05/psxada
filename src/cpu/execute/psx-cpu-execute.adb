@@ -2,6 +2,7 @@ with Interfaces;
 with Ada.Unchecked_Conversion;
 with PSX.Types;
 with PSX.Register;
+with PSX.CPU.MulDiv;
 
 package body PSX.CPU.Execute is
    use type Interfaces.Unsigned_8;
@@ -131,282 +132,269 @@ package body PSX.CPU.Execute is
       --  R-Type instructions
       if Opcode_Value = 0 then
 
-         --  JALR
-         if Funct_Value = 9 then
+         case Funct_Value is
 
-            --  Return address is the instruction after the delay slot.
-            PSX.Register.Write (CPU.Registers, Rd_Index, CPU.PC + 8);
+            --  SLL
 
-            --  Schedule the register-indirect jump.
-            CPU.Next_PC := Rs_Value;
+            when 0      =>
 
-         --  JR
-         elsif Funct_Value = 8 then
-            CPU.Next_PC := PSX.Register.Read (CPU.Registers, Rs_index);
+               PSX.Register.Write
+                 (CPU.Registers,
+                  Rd_Index,
+                  Interfaces.Shift_Left (Rt_Value, Shamt_Value));
 
-         --  SLL
-         elsif Funct_Value = 0 then
+            --  SRL
 
-            PSX.Register.Write
-              (CPU.Registers,
-               Rd_Index,
-               Interfaces.Shift_Left (Rt_Value, Shamt_Value));
+            when 2      =>
 
-         --  SLLV
-         elsif Funct_Value = 4 then
+               PSX.Register.Write
+                 (CPU.Registers,
+                  Rd_Index,
+                  Interfaces.Shift_Right (Rt_Value, Shamt_Value));
 
-            PSX.Register.Write
-              (CPU.Registers,
-               Rd_Index,
-               Interfaces.Shift_Left
-                 (Rt_Value, Natural (Rs_Value and 16#0000_001F#)));
+            --  SRA
 
-         --  SRL
-         elsif Funct_Value = 2 then
+            when 3      =>
 
-            PSX.Register.Write
-              (CPU.Registers,
-               Rd_Index,
-               Interfaces.Shift_Right (Rt_Value, Shamt_Value));
+               PSX.Register.Write
+                 (CPU.Registers,
+                  Rd_Index,
+                  Interfaces.Shift_Right_Arithmetic (Rt_Value, Shamt_Value));
 
-         --  SRLV
-         elsif Funct_Value = 6 then
+            --  SLLV
 
-            PSX.Register.Write
-              (CPU.Registers,
-               Rd_Index,
-               Interfaces.Shift_Right
-                 (Rt_Value, Natural (Rs_Value and 16#0000_001F#)));
+            when 4      =>
 
-         --  SRA
-         elsif Funct_Value = 3 then
+               PSX.Register.Write
+                 (CPU.Registers,
+                  Rd_Index,
+                  Interfaces.Shift_Left
+                    (Rt_Value, Natural (Rs_Value and 16#0000_001F#)));
 
-            PSX.Register.Write
-              (CPU.Registers,
-               Rd_Index,
-               Interfaces.Shift_Right_Arithmetic (Rt_Value, Shamt_Value));
+            --  SRLV
 
-         --  SRAV
-         elsif Funct_Value = 7 then
+            when 6      =>
 
-            PSX.Register.Write
-              (CPU.Registers,
-               Rd_Index,
-               Interfaces.Shift_Right_Arithmetic
-                 (Rt_Value, Natural (Rs_Value and 16#0000_001F#)));
+               PSX.Register.Write
+                 (CPU.Registers,
+                  Rd_Index,
+                  Interfaces.Shift_Right
+                    (Rt_Value, Natural (Rs_Value and 16#0000_001F#)));
 
-         --  ADD
-         elsif Funct_Value = 32 then
-            declare
-               A : constant Interfaces.Integer_64 :=
-                 Interfaces.Integer_64 (To_Signed_32 (Rs_Value));
+            --  SRAV
 
-               B : constant Interfaces.Integer_64 :=
-                 Interfaces.Integer_64 (To_Signed_32 (Rt_Value));
+            when 7      =>
 
-               Result : constant Interfaces.Integer_64 := A + B;
-            begin
-               if Result > Interfaces.Integer_64 (Interfaces.Integer_32'Last)
-                 or else
-                   Result < Interfaces.Integer_64 (Interfaces.Integer_32'First)
-               then
-                  CPU.Cause := PSX.CPU.Overflow;
-                  CPU.EPC := CPU.PC;
-                  CPU.Exception_Pending := True;
+               PSX.Register.Write
+                 (CPU.Registers,
+                  Rd_Index,
+                  Interfaces.Shift_Right_Arithmetic
+                    (Rt_Value, Natural (Rs_Value and 16#0000_001F#)));
+
+            --  JR
+
+            when 8      =>
+
+               CPU.Next_PC := PSX.Register.Read (CPU.Registers, Rs_Index);
+
+            --  JALR
+
+            when 9      =>
+
+               PSX.Register.Write (CPU.Registers, Rd_Index, CPU.PC + 8);
+
+               CPU.Next_PC := Rs_Value;
+
+            --  SYSCALL
+
+            when 12     =>
+
+               CPU.Cause := Syscall;
+               CPU.EPC := CPU.PC;
+               CPU.Exception_Pending := True;
+
+            --  BREAK
+
+            when 13     =>
+
+               CPU.Cause := PSX.CPU.Break;
+               CPU.EPC := CPU.PC;
+               CPU.Exception_Pending := True;
+
+            --  MFHI
+
+            when 16     =>
+
+               PSX.Register.Write (CPU.Registers, Rd_Index, CPU.HI);
+
+            --  MTHI
+
+            when 17     =>
+
+               CPU.HI := Rs_Value;
+
+            --  MFLO
+
+            when 18     =>
+
+               PSX.Register.Write (CPU.Registers, Rd_Index, CPU.LO);
+
+            --  MTLO
+
+            when 19     =>
+
+               CPU.LO := Rs_Value;
+
+            --  MULT
+
+            when 24     =>
+
+               PSX.CPU.MulDiv.Start_Multiply (CPU, Rs_Value, Rt_Value, True);
+
+            --  MULTU
+
+            when 25     =>
+
+               PSX.CPU.MulDiv.Start_Multiply (CPU, Rs_Value, Rt_Value, False);
+
+            --  DIV
+
+            when 26     =>
+
+               PSX.CPU.MulDiv.Start_Divide (CPU, Rs_Value, Rt_Value, True);
+
+            --  DIVU
+
+            when 27     =>
+
+               PSX.CPU.MulDiv.Start_Divide (CPU, Rs_Value, Rt_Value, False);
+
+            --  ADD
+
+            when 32     =>
+
+               declare
+                  A : constant Interfaces.Integer_64 :=
+                    Interfaces.Integer_64 (To_Signed_32 (Rs_Value));
+
+                  B : constant Interfaces.Integer_64 :=
+                    Interfaces.Integer_64 (To_Signed_32 (Rt_Value));
+
+                  Result : constant Interfaces.Integer_64 := A + B;
+               begin
+                  if Result
+                    > Interfaces.Integer_64 (Interfaces.Integer_32'Last)
+                    or else
+                      Result
+                      < Interfaces.Integer_64 (Interfaces.Integer_32'First)
+                  then
+                     CPU.Cause := PSX.CPU.Overflow;
+                     CPU.EPC := CPU.PC;
+                     CPU.Exception_Pending := True;
+                  else
+                     PSX.Register.Write
+                       (CPU.Registers,
+                        Rd_Index,
+                        To_Word32 (Interfaces.Integer_32 (Result)));
+                  end if;
+               end;
+
+            --  ADDU
+
+            when 33     =>
+
+               PSX.Register.Write
+                 (CPU.Registers, Rd_Index, Rs_Value + Rt_Value);
+
+            --  SUB
+
+            when 34     =>
+
+               declare
+                  A : constant Interfaces.Integer_64 :=
+                    Interfaces.Integer_64 (To_Signed_32 (Rs_Value));
+
+                  B : constant Interfaces.Integer_64 :=
+                    Interfaces.Integer_64 (To_Signed_32 (Rt_Value));
+
+                  Result : constant Interfaces.Integer_64 := A - B;
+               begin
+                  if Result
+                    > Interfaces.Integer_64 (Interfaces.Integer_32'Last)
+                    or else
+                      Result
+                      < Interfaces.Integer_64 (Interfaces.Integer_32'First)
+                  then
+                     CPU.Cause := PSX.CPU.Overflow;
+                     CPU.EPC := CPU.PC;
+                     CPU.Exception_Pending := True;
+                  else
+                     PSX.Register.Write
+                       (CPU.Registers,
+                        Rd_Index,
+                        To_Word32 (Interfaces.Integer_32 (Result)));
+                  end if;
+               end;
+
+            --  SUBU
+
+            when 35     =>
+
+               PSX.Register.Write
+                 (CPU.Registers, Rd_Index, Rs_Value - Rt_Value);
+
+            --  AND
+
+            when 36     =>
+
+               PSX.Register.Write
+                 (CPU.Registers, Rd_Index, Rs_Value and Rt_Value);
+
+            --  OR
+
+            when 37     =>
+
+               PSX.Register.Write
+                 (CPU.Registers, Rd_Index, Rs_Value or Rt_Value);
+
+            --  XOR
+
+            when 38     =>
+
+               PSX.Register.Write
+                 (CPU.Registers, Rd_Index, Rs_Value xor Rt_Value);
+
+            --  NOR
+
+            when 39     =>
+
+               PSX.Register.Write
+                 (CPU.Registers, Rd_Index, not (Rs_Value or Rt_Value));
+
+            --  SLT
+
+            when 42     =>
+
+               if To_Signed_32 (Rs_Value) < To_Signed_32 (Rt_Value) then
+                  PSX.Register.Write (CPU.Registers, Rd_Index, 1);
                else
-                  PSX.Register.Write
-                    (CPU.Registers,
-                     Rd_Index,
-                     To_Word32 (Interfaces.Integer_32 (Result)));
+                  PSX.Register.Write (CPU.Registers, Rd_Index, 0);
                end if;
-            end;
 
-         --  ADDU
-         elsif Funct_Value = 33 then
+            --  SLTU
 
-            PSX.Register.Write (CPU.Registers, Rd_Index, Rs_Value + Rt_Value);
+            when 43     =>
 
-         --  SUB
-         elsif Funct_Value = 34 then
-            declare
-               A : constant Interfaces.Integer_64 :=
-                 Interfaces.Integer_64 (To_Signed_32 (Rs_Value));
-
-               B : constant Interfaces.Integer_64 :=
-                 Interfaces.Integer_64 (To_Signed_32 (Rt_Value));
-
-               Result : constant Interfaces.Integer_64 := A - B;
-
-            begin
-               if Result > Interfaces.Integer_64 (Interfaces.Integer_32'Last)
-                 or else
-                   Result < Interfaces.Integer_64 (Interfaces.Integer_32'First)
-               then
-                  CPU.Cause := PSX.CPU.Overflow;
-                  CPU.EPC := CPU.PC;
-                  CPU.Exception_Pending := True;
+               if Rs_Value < Rt_Value then
+                  PSX.Register.Write (CPU.Registers, Rd_Index, 1);
                else
-                  PSX.Register.Write
-                    (CPU.Registers,
-                     Rd_Index,
-                     To_Word32 (Interfaces.Integer_32 (Result)));
-               end if;
-            end;
-
-         --  SUBU
-         elsif Funct_Value = 35 then
-
-            PSX.Register.Write (CPU.Registers, Rd_Index, Rs_Value - Rt_Value);
-
-         --  AND
-         elsif Funct_Value = 36 then
-
-            PSX.Register.Write
-              (CPU.Registers, Rd_Index, Rs_Value and Rt_Value);
-
-         --  OR
-         elsif Funct_Value = 37 then
-
-            PSX.Register.Write (CPU.Registers, Rd_Index, Rs_Value or Rt_Value);
-
-         --  XOR
-         elsif Funct_Value = 38 then
-
-            PSX.Register.Write
-              (CPU.Registers, Rd_Index, Rs_Value xor Rt_Value);
-
-         --  NOR
-         elsif Funct_Value = 39 then
-
-            PSX.Register.Write
-              (CPU.Registers, Rd_Index, not (Rs_Value or Rt_Value));
-
-         --  SLT
-         elsif Funct_Value = 42 then
-
-            if To_Signed_32 (Rs_Value) < To_Signed_32 (Rt_Value) then
-
-               PSX.Register.Write (CPU.Registers, Rd_Index, 1);
-
-            else
-
-               PSX.Register.Write (CPU.Registers, Rd_Index, 0);
-
-            end if;
-
-         --  SLTU
-         elsif Funct_Value = 43 then
-
-            if Rs_Value < Rt_Value then
-
-               PSX.Register.Write (CPU.Registers, Rd_Index, 1);
-
-            else
-
-               PSX.Register.Write (CPU.Registers, Rd_Index, 0);
-            end if;
-
-         --  MULT
-         elsif Funct_Value = 24 then
-
-            declare
-               Product : constant PSX.Types.Word64 :=
-                 Multiply_Signed (Rs_Value, Rt_Value);
-            begin
-
-               CPU.LO := PSX.Types.Word32 (Product and 16#FFFF_FFFF#);
-
-               CPU.HI :=
-                 PSX.Types.Word32 (Interfaces.Shift_Right (Product, 32));
-
-            end;
-
-         --  MULTU
-         elsif Funct_Value = 25 then
-
-            declare
-               Product : constant PSX.Types.Word64 :=
-                 PSX.Types.Word64 (Rs_Value) * PSX.Types.Word64 (Rt_Value);
-            begin
-
-               CPU.LO := PSX.Types.Word32 (Product and 16#FFFF_FFFF#);
-
-               CPU.HI :=
-                 PSX.Types.Word32 (Interfaces.Shift_Right (Product, 32));
-
-            end;
-
-         --  DIV
-         elsif Funct_Value = 26 then
-
-            declare
-               Rs_Signed : constant Interfaces.Integer_32 :=
-                 To_Signed_32 (Rs_Value);
-
-               Rt_Signed : constant Interfaces.Integer_32 :=
-                 To_Signed_32 (Rt_Value);
-
-               Quotient  : Interfaces.Integer_32;
-               Remainder : Interfaces.Integer_32;
-            begin
-
-               if Rt_Signed /= 0 then
-
-                  Quotient := Rs_Signed / Rt_Signed;
-                  Remainder := Rs_Signed rem Rt_Signed;
-
-                  CPU.LO := To_Word32 (Quotient);
-                  CPU.HI := To_Word32 (Remainder);
-
+                  PSX.Register.Write (CPU.Registers, Rd_Index, 0);
                end if;
 
-            end;
+            when others =>
+               null;
 
-         --  DIVU
-         elsif Funct_Value = 27 then
-
-            if Rt_Value /= 0 then
-
-               CPU.LO := Rs_Value / Rt_Value;
-               CPU.HI := Rs_Value rem Rt_Value;
-
-            end if;
-
-         --  MFHI
-         elsif Funct_Value = 16 then
-
-            PSX.Register.Write (CPU.Registers, Rd_Index, CPU.HI);
-
-         --  MFLO
-         elsif Funct_Value = 18 then
-
-            PSX.Register.Write (CPU.Registers, Rd_Index, CPU.LO);
-
-         --  MTHI
-         elsif Funct_Value = 17 then
-
-            CPU.HI := Rs_Value;
-
-         --  MTLO
-         elsif Funct_Value = 19 then
-
-            CPU.LO := Rs_Value;
-
-         --  SYSCALL
-         elsif Funct_Value = 12 then
-
-            CPU.Cause := Syscall;
-            CPU.EPC := CPU.PC;
-            CPU.Exception_Pending := True;
-
-         --  BREAK
-         elsif Funct_Value = 13 then
-
-            CPU.Cause := PSX.CPU.Break;
-            CPU.EPC := CPU.PC;
-            CPU.Exception_Pending := True;
-
-         end if;
+         end case;
       end if;
 
       --  COP0

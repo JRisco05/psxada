@@ -1,5 +1,4 @@
 with PSX.CPU.Instruction;
-with PSX.Types;
 
 package PSX.CPU.Cycles is
 

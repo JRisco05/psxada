@@ -1,4 +1,4 @@
-psx-cpu-execute.adb:145:65: (style) bad casing of "Rs_Index" declared at line 105 [-gnatyr]
-psx-cpu-execute.adb:622:27: (style) "and then" required [-gnatyB]
-psx-cpu-execute.adb:642:27: (style) "and then" required [-gnatyB]
+psx-cpu-execute.adb:56:13: warning: function "Multiply_Signed" is not referenced [-gnatwu]
+psx-cpu-execute.adb:610:27: (style) "and then" required [-gnatyB]
+psx-cpu-execute.adb:630:27: (style) "and then" required [-gnatyB]
 psx-cpu-execute.ads:1:06: warning: unnecessary with of ancestor [-gnatwr]

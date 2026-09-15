@@ -1,0 +1,6 @@
+psx-cpu-muldiv.adb:2:06: warning: redundant with clause in body [-gnatwr]
+psx-cpu-muldiv.adb:79:45: warning: condition can only be True if invalid values present [-gnatwc]
+psx-cpu-muldiv.adb:79:45: warning: condition is always False [-gnatwc]
+psx-cpu-muldiv.adb:107:48: warning: redundant conversion, expression is of type "Unsigned_32" [-gnatwr]
+psx-cpu-muldiv.adb:109:48: warning: redundant conversion, expression is of type "Unsigned_32" [-gnatwr]
+psx-cpu-muldiv.ads:1:06: warning: unnecessary with of ancestor [-gnatwr]

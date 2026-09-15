@@ -6,6 +6,8 @@ with PSX.DMA;
 with PSX.GPU;
 with PSX.Types;
 with PSX.Timers;
+with PSX.CPU.Cycles;
+with PSX.CPU.MulDiv;
 
 package body PSX.CPU.Step is
 
@@ -33,6 +35,23 @@ package body PSX.CPU.Step is
       Opcode_Value          : PSX.Types.Word32;
       Funct_Value           : PSX.Types.Word32;
       Is_Control_Transfer   : Boolean := False;
+      Is_HI_LO_Read         : Boolean := False;
+
+      procedure Advance_Cycles (Cycles : Natural) is
+      begin
+
+         for Cycle in 1 .. Cycles loop
+            PSX.CPU.MulDiv.Tick (CPU, 1);
+
+            PSX.DMA.Process (Memory, GPU);
+
+            for Timer_Index in 0 .. PSX.Timers.Timer_Count - 1 loop
+               PSX.Timers.Tick (Memory.Timers, Timer_Index, 1);
+            end loop;
+
+         end loop;
+      end Advance_Cycles;
+
    begin
 
       --  Fetch the instruction at the current PC.
@@ -40,6 +59,11 @@ package body PSX.CPU.Step is
 
       Opcode_Value := PSX.CPU.Instruction.Opcode (Inst);
       Funct_Value := PSX.CPU.Instruction.Funct (Inst);
+
+      if Opcode_Value = 0 and then (Funct_Value = 16 or else Funct_Value = 18)
+      then
+         Is_HI_LO_Read := True;
+      end if;
 
       --  Determine whether the current instruction
       --  is a control-transfer instruction.
@@ -69,6 +93,12 @@ package body PSX.CPU.Step is
       --  Prepare the sequential next instruction.
       CPU.Next_PC := Current_Next_PC + PSX.Types.Word32 (4);
 
+      if Is_HI_LO_Read and then CPU.MulDiv_Busy then
+
+         Advance_Cycles (CPU.MulDiv_Cycles);
+
+      end if;
+
       --  Execute instruction.
       PSX.CPU.Execute.Execute (CPU, Memory, Inst);
 
@@ -97,13 +127,9 @@ package body PSX.CPU.Step is
 
       end if;
 
-      --  Process DMA after the CPU instruction.
-      PSX.DMA.Process (Memory, GPU);
-
-      --  Advance timers by one CPU cycle.
-      for Timer_Index in 0 .. PSX.Timers.Timer_Count - 1 loop
-         PSX.Timers.Tick (Memory.Timers, Timer_Index, 1);
-      end loop;
+      --  Advance hardware by the cycles consumed
+      --  by the current instruction.
+      Advance_Cycles (PSX.CPU.Cycles.Get (Inst));
 
    end Step;
 

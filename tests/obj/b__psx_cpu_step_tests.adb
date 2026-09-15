@@ -26,14 +26,16 @@ package body ada_main is
    E087 : Short_Integer; pragma Import (Ada, E087, "system__file_io_E");
    E120 : Short_Integer; pragma Import (Ada, E120, "ada__streams__stream_io_E");
    E074 : Short_Integer; pragma Import (Ada, E074, "ada__text_io_E");
-   E134 : Short_Integer; pragma Import (Ada, E134, "psx__gpu_E");
+   E138 : Short_Integer; pragma Import (Ada, E138, "psx__gpu_E");
    E113 : Short_Integer; pragma Import (Ada, E113, "psx__register_E");
    E126 : Short_Integer; pragma Import (Ada, E126, "psx__cpu__instruction_E");
+   E130 : Short_Integer; pragma Import (Ada, E130, "psx__cpu__cycles_E");
+   E134 : Short_Integer; pragma Import (Ada, E134, "psx__cpu__muldiv_E");
    E124 : Short_Integer; pragma Import (Ada, E124, "psx__timers_E");
    E118 : Short_Integer; pragma Import (Ada, E118, "psx__memory_E");
-   E130 : Short_Integer; pragma Import (Ada, E130, "psx__cpu__execute_E");
+   E132 : Short_Integer; pragma Import (Ada, E132, "psx__cpu__execute_E");
    E116 : Short_Integer; pragma Import (Ada, E116, "psx__cpu__fetch_E");
-   E132 : Short_Integer; pragma Import (Ada, E132, "psx__dma_E");
+   E136 : Short_Integer; pragma Import (Ada, E136, "psx__dma_E");
    E128 : Short_Integer; pragma Import (Ada, E128, "psx__cpu__step_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
@@ -215,14 +217,16 @@ package body ada_main is
       Ada.Text_Io'Elab_Spec;
       Ada.Text_Io'Elab_Body;
       E074 := E074 + 1;
-      E134 := E134 + 1;
+      E138 := E138 + 1;
       E113 := E113 + 1;
       E126 := E126 + 1;
+      E130 := E130 + 1;
+      E134 := E134 + 1;
       E124 := E124 + 1;
       E118 := E118 + 1;
-      E130 := E130 + 1;
-      E116 := E116 + 1;
       E132 := E132 + 1;
+      E116 := E116 + 1;
+      E136 := E136 + 1;
       E128 := E128 + 1;
    end adainit;
 
@@ -267,6 +271,8 @@ package body ada_main is
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-register.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-instruction.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-cycles.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-muldiv.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-timers.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cpu-execute.o

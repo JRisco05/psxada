@@ -28,6 +28,10 @@ package PSX.CPU is
       HI : Word32;
       LO : Word32;
 
+      --  Multiply / divide unit state
+      MulDiv_Busy   : Boolean;
+      MulDiv_Cycles : Natural;
+
       --  Coprocessor 0 / exception state
       Status : Word32;
       EPC    : Word32;

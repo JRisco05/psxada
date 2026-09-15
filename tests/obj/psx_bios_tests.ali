@@ -51,7 +51,7 @@ RV NO_STANDARD_STORAGE_POOLS
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_bios_tests%b	psx_bios_tests.adb	022ce411 NE OO SU
+U psx_bios_tests%b	psx_bios_tests.adb	73c9ce1a NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -80,7 +80,7 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-cpu.ads		20260912021652 7c10720c psx.cpu%s
+D psx-cpu.ads		20260915041503 0df55807 psx.cpu%s
 D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
 D psx-cpu-step.ads	20260914130357 901c7255 psx.cpu.step%s
 D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
@@ -107,7 +107,7 @@ D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_bios_tests standard 11 11 none]
-G r c none [psx_bios_tests standard 11 11 none] [reset psx__cpu 39 14 none]
+G r c none [psx_bios_tests standard 11 11 none] [reset psx__cpu 43 14 none]
 G r c none [psx_bios_tests standard 11 11 none] [reset psx__memory 26 14 none]
 G r c none [psx_bios_tests standard 11 11 none] [reset psx__gpu 44 14 none]
 G r c none [psx_bios_tests standard 11 11 none] [load_bios psx__memory 55 14 none]
@@ -133,12 +133,12 @@ X 13 psx.ads
 . 43r27 44r9 54r49 64r4 65r4 66r4 68r4 89r37 91r37 102r13 103r20 113r10 139r35
 . 140r35
 X 14 psx-cpu.ads
-4K13*CPU 43e12 22|3w10 4r10 5r10 15r17 41r39 64r8 113r14
-12R9*CPU_State 37e14 22|15r21 41r43
+4K13*CPU 47e12 22|3w10 4r10 5r10 15r17 41r39 64r8 113r14
+12R9*CPU_State 41e14 22|15r21 41r43
 13a7*Registers{19|9A9} 22|44r32 102r36 103r43 139r58 140r58
 16m7*PC{8M12} 22|80r14 89r69 98r15 99r22 121r64 137r39
 22m7*Next_PC{8M12} 22|91r69 138r39
-39U14*Reset 22|64s12
+43U14*Reset 22|64s12
 X 15 psx-cpu-instruction.ads
 3K17*Instruction 27e24 22|4w14
 X 16 psx-cpu-step.ads
