@@ -25,12 +25,12 @@ RV NO_IMPLICIT_LOOPS
 RV NO_ELABORATION_CODE
 RV NO_OBSOLESCENT_FEATURES
 
-U ada_main%b		b__psx_cpu_load_delay_tests.adb  7c1cb5dd OO PK IL
+U ada_main%b		b__psx_cpu_load_delay_tests.adb  e80c3d3e OO PK IL
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 Z system%s		system.ads		system.ali
 
-U ada_main%s		b__psx_cpu_load_delay_tests.ads  b5fb5b41 EE NE OO PK IL
+U ada_main%s		b__psx_cpu_load_delay_tests.ads  21ebd3a2 EE NE OO PK IL
 W system%s		system.ads		system.ali
 W system.parameters%s	s-parame.adb		s-parame.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
@@ -38,8 +38,8 @@ W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 D ada.ads		20260610194523 76789da1 ada%s
 D a-except.ads		20260610194523 8699d7ff ada.exceptions%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
-D b__psx_cpu_load_delay_tests.ads  20260915162636 c9b6932b ada_main%s
-D b__psx_cpu_load_delay_tests.adb  20260915162636 3333f109 ada_main%b
+D b__psx_cpu_load_delay_tests.ads  20260915164132 5da61bc8 ada_main%s
+D b__psx_cpu_load_delay_tests.adb  20260915164132 3333f109 ada_main%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-parame.ads		20260610194523 a1aeab5c system.parameters%s
 D s-secsta.ads		20260610194523 578279f5 system.secondary_stack%s

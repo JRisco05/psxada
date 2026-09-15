@@ -16,6 +16,7 @@ project Psxada is
       "src/cpu/muldiv",
       "src/cpu/step",
       "src/gpu/",
+      "src/gte/",
       "src/spu/",
       "src/memory/",
       "src/state/",

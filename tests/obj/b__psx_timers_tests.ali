@@ -38,8 +38,8 @@ W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 D ada.ads		20260610194523 76789da1 ada%s
 D a-except.ads		20260610194523 8699d7ff ada.exceptions%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
-D b__psx_timers_tests.ads  20260915162447 6d7523da ada_main%s
-D b__psx_timers_tests.adb  20260915162447 42d3db1b ada_main%b
+D b__psx_timers_tests.ads  20260915163352 6d7523da ada_main%s
+D b__psx_timers_tests.adb  20260915163352 42d3db1b ada_main%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-parame.ads		20260610194523 a1aeab5c system.parameters%s
 D s-secsta.ads		20260610194523 578279f5 system.secondary_stack%s

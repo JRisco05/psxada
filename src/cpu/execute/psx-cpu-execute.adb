@@ -407,6 +407,20 @@ package body PSX.CPU.Execute is
 
             PSX.CPU.Return_From_Exception (CPU);
 
+         --  MFC0
+         elsif PSX.CPU.Instruction.Rs (Inst) = 0 then
+
+            --  COP0 Status register ($12)
+            if Rd_Index = 12 then
+
+               PSX.Register.Write (CPU.Registers, Rt_Index, CPU.Status);
+
+            elsif Rd_Index = 14 then
+
+               PSX.Register.Write (CPU.Registers, Rt_Index, CPU.EPC);
+
+            end if;
+
          --  MTC0
          elsif PSX.CPU.Instruction.Rs (Inst) = 4 then
 
@@ -414,6 +428,7 @@ package body PSX.CPU.Execute is
             if Rd_Index = 12 then
                CPU.Status := Rt_Value;
             end if;
+
          end if;
       end if;
 
