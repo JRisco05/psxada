@@ -42,22 +42,24 @@ P ZX
 RN
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx.spu%b		psx-spu.adb		aee31f41 NE OO PK IU
+U psx.spu%b		psx-spu.adb		a51aa67b NE OO PK IU
 W psx%s			psx.ads			psx.ali
 
-U psx.spu%s		psx-spu.ads		3a4b2bef EE NE OO PK IU
+U psx.spu%s		psx-spu.ads		ba3c5e36 EE NE OO PK IU
 W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-spu.ads		20260913184301 3c6fb51c psx.spu%s
-D psx-spu.adb		20260911215034 928caa5d psx.spu%b
+D psx-spu.ads		20260914134636 bc18c0c5 psx.spu%s
+D psx-spu.adb		20260914134730 190266be psx.spu%b
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
 G c Z s b [reset psx__spu 42 14 none]
+G c Z s b [read_register psx__spu 44 14 none]
+G c Z s b [write_register psx__spu 47 14 none]
 G c Z s s [spu_channelIP psx__spu 13 9 none]
 G c Z s s [Tchannel_arrayBIP psx__spu 26 4 none]
 G c Z s s [Tspu_ram_arrayBIP psx__spu 30 4 none]
@@ -68,18 +70,18 @@ X 1 interfac.ads
 84M9*Unsigned_16
 92M9*Unsigned_32 3|6r24
 X 2 psx.ads
-1K9*PSX 3e8 3|2r6 4r9 8r21 9r22 10r22 44r5 4|1r14 18r5
+1K9*PSX 3e8 3|2r6 4r9 8r21 9r22 10r22 50r5 4|1r14 84r5
 X 3 psx-spu.ads
-4K13*SPU 2|1k9 3|44l9 44e12 4|1b18 18l9 18t12
+4K13*SPU 2|1k9 3|50l9 50e12 4|1b18 84l9 84t12
 8M12*Word8{5|5M12} 30r72
 9M12*Word16{5|6M12} 14r25 15r25 16r25 17r25 20r25 35r26 36r26 37r26 38r26
-. 39r26
-10M12*Word32{5|7M12} 18r25 19r25 30r33
+. 39r26 45r60 48r63 4|19r63 51r60
+10M12*Word32{5|7M12} 18r25 19r25 30r33 45r40 48r44 4|19r44 22r21 51r40 54r21
 13R9*SPU_Channel 23e14 26r45
-14m7*Volume_Left{9M12}
-15m7*Volume_Right{9M12}
-16m7*Pitch{9M12}
-17m7*Start_Address{9M12}
+14m7*Volume_Left{9M12} 4|32m43 66r52
+15m7*Volume_Right{9M12} 4|35m43 69r52
+16m7*Pitch{9M12} 4|38m43 72r52
+17m7*Start_Address{9M12} 4|41m43 75r52
 18m7*ADSR_Level{10M12}
 19m7*ADSR{10M12}
 20m7*Current_Address{9M12}
@@ -88,8 +90,8 @@ X 3 psx-spu.ads
 26A9*Channel_Array(13R9)<integer> 33r26
 28N4*SPU_RAM_SIZE 30r51
 30A9*SPU_RAM_Array(8M12)<1|92M9> 34r26
-32R9*SPU_State 40e14 42r31 4|3r31
-33a7*Channels{26A9}
+32R9*SPU_State 40e14 42r31 45r16 48r20 4|3r31 19r20 51r16
+33a7*Channels{26A9} 4|32m20 35m20 38m20 41m20 66r29 69r29 72r29 75r29
 34a7*RAM{30A9} 4|6m11
 35m7*Control{9M12} 4|8m11
 36m7*Status{9M12} 4|9m11
@@ -98,6 +100,19 @@ X 3 psx-spu.ads
 39m7*IRQ_Address{9M12} 4|14m11
 42U14*Reset 42<21 4|3b14 16l8 16t13
 42r21 SPU{32R9} 4|3b21 6m7 8m7 9m7 11m7 12m7 14m7
+44U14*Read_Register 45>7 45>27 45<48 4|50b14 82l8 82t21
+45r7 SPU{32R9} 4|51b7 66r25 69r25 72r25 75r25
+45m27 Address{10M12} 4|51b27 58r10 58r43 59r20
+45m48 Value{9M12} 4|51b48 56m7 66m16 69m16 72m16 75m16
+47U14*Write_Register 48=7 48>31 48>52 4|18b14 48l8 48t22
+48r7 SPU{32R9} 4|19b7 32m16 35m16 38m16 41m16
+48m31 Address{10M12} 4|19b31 24r10 24r43 25r20
+48m52 Value{9M12} 4|19b52 32r58 35r59 38r52 41r60
+X 4 psx-spu.adb
+21i7 Voice_Index{natural} 27m10 32r30 35r30 38r30 41r30
+22m7 Offset{3|10M12} 25m10 27r34 29r15
+53i7 Voice_Index{natural} 61m10 66r39 69r39 72r39 75r39
+54m7 Offset{3|10M12} 59m10 61r34 63r15
 X 5 psx-types.ads
 3K13*Types 3|2w10 8r25 9r26 10r26 5|12e14
 5M12*Word8{1|81M9} 3|8r31

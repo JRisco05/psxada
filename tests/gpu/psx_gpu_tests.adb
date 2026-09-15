@@ -83,7 +83,9 @@ begin
 
    Check ("VRAM last pixel", 16#001F#, PSX.GPU.Read_VRAM (GPU, 1023, 511));
 
+   --------------------------------------------------
    -- Test GP0 A0: CPU -> VRAM
+   --------------------------------------------------
    PSX.GPU.Reset (GPU);
 
    -- A0: X=100, Y=200
@@ -125,6 +127,50 @@ begin
    Check ("GP0 A0 multi pixel 4", 16#5555#, PSX.GPU.Read_VRAM (GPU, 101, 201));
 
    Check ("GP0 A0 multi pixel 5", 16#6666#, PSX.GPU.Read_VRAM (GPU, 102, 201));
+
+   --------------------------------------------------
+   -- Test GP0 C0: VRAM -> CPU
+   --------------------------------------------------
+   PSX.GPU.Reset (GPU);
+
+   PSX.GPU.Write_VRAM (GPU, 100, 200, 16#7C00#);
+
+   PSX.GPU.Write_VRAM (GPU, 101, 200, 16#03E0#);
+
+   -- C0: X=100, Y=200
+   PSX.GPU.Write_GP0 (GPU, 16#C0C8_0064#);
+   -- Width=2, Height=1
+   PSX.GPU.Write_GP0 (GPU, 16#0001_0002#);
+
+   Ada.Text_IO.Put_Line ("C0 ACTIVE = " & Boolean'Image (GPU.GP0_Read_Active));
+
+   Ada.Text_IO.Put_Line ("C0 X = " & Natural'Image (GPU.GP0_Read_X));
+
+   Ada.Text_IO.Put_Line ("C0 Y = " & Natural'Image (GPU.GP0_Read_Y));
+
+   Ada.Text_IO.Put_Line ("C0 WIDTH = " & Natural'Image (GPU.GP0_Read_Width));
+
+   Ada.Text_IO.Put_Line ("C0 HEIGHT = " & Natural'Image (GPU.GP0_Read_Height));
+
+   PSX.GPU.Write_GP0 (GPU, 16#C0C8_0064#);
+
+   -- X=100, Y=200
+   PSX.GPU.Write_GP0 (GPU, 16#00C8_0064#);
+
+   -- Width=2, Height=1
+   PSX.GPU.Write_GP0 (GPU, 16#0001_0002#);
+
+   declare
+      Read_Value : PSX.Types.Word32;
+   begin
+      Read_Value := PSX.GPU.Read_GP0 (GPU);
+
+      -- Check ("GP0 C0 pixel 0", 16#03E0_7C00#, Read_Value);
+      Ada.Text_IO.Put_Line
+        ("GP0 C0 READ = " & Interfaces.Unsigned_32'Image (Read_Value));
+
+      Check ("GP0 C0 pixel 0", 16#03E0_7C00#, Read_Value);
+   end;
 
    Ada.Text_IO.Put_Line ("GPU tests finished.");
 

@@ -1,0 +1,4 @@
+psx-spu.adb:19:41: (style) "in" should be omitted [-gnatyI]
+psx-spu.adb:51:13: (style) "in" should be omitted [-gnatyI]
+psx-spu.ads:45:13: (style) "in" should be omitted [-gnatyI]
+psx-spu.ads:48:41: (style) "in" should be omitted [-gnatyI]

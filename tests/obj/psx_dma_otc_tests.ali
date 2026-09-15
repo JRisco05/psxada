@@ -67,7 +67,7 @@ D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
 D psx-dma.ads		20260914005322 a2982fd6 psx.dma%s
-D psx-gpu.ads		20260913045019 b6e8db0d psx.gpu%s
+D psx-gpu.ads		20260914232919 4e6328a5 psx.gpu%s
 D psx-memory.ads	20260911000750 83d9ae8d psx.memory%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D psx_dma_otc_tests.adb	20260910172100 181f86be psx_dma_otc_tests%b

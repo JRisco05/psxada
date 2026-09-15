@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_spu_tests%b	psx_spu_tests.adb	d1345b25 NE OO SU
+U psx_spu_tests%b	psx_spu_tests.adb	51432efc NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -66,7 +66,7 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
-D psx-spu.ads		20260913184301 3c6fb51c psx.spu%s
+D psx-spu.ads		20260914134636 bc18c0c5 psx.spu%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
 D psx_spu_tests.adb	20260913133351 48a55026 psx_spu_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
@@ -99,7 +99,7 @@ X 11 interfac.ads
 X 13 psx.ads
 1K9*PSX 3e8 16|3r6 11r10 28r4
 X 14 psx-spu.ads
-4K13*SPU 44e12 16|3w10 11r14 28r8
+4K13*SPU 50e12 16|3w10 11r14 28r8
 14m7*Volume_Left{9M12} 16|68r28 80r29 91m21 92m22 94r28 96r29 98r28 100r29
 15m7*Volume_Right{9M12} 16|70r28 82r29
 16m7*Pitch{9M12} 16|72r28 84r29

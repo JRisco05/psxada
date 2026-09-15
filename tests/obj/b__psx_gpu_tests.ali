@@ -25,12 +25,12 @@ RV NO_IMPLICIT_LOOPS
 RV NO_ELABORATION_CODE
 RV NO_OBSOLESCENT_FEATURES
 
-U ada_main%b		b__psx_gpu_tests.adb	cca5f81f OO PK IL
+U ada_main%b		b__psx_gpu_tests.adb	465197e5 OO PK IL
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 Z system%s		system.ads		system.ali
 
-U ada_main%s		b__psx_gpu_tests.ads	4a61b6cd EE NE OO PK IL
+U ada_main%s		b__psx_gpu_tests.ads	c095d937 EE NE OO PK IL
 W system%s		system.ads		system.ali
 W system.parameters%s	s-parame.adb		s-parame.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
@@ -38,8 +38,8 @@ W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 D ada.ads		20260610194523 76789da1 ada%s
 D a-except.ads		20260610194523 8699d7ff ada.exceptions%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
-D b__psx_gpu_tests.ads	20260914010249 362c7ea7 ada_main%s
-D b__psx_gpu_tests.adb	20260914010249 7c105147 ada_main%b
+D b__psx_gpu_tests.ads	20260915015441 bcd8115d ada_main%s
+D b__psx_gpu_tests.adb	20260915015441 7c105147 ada_main%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-parame.ads		20260610194523 a1aeab5c system.parameters%s
 D s-secsta.ads		20260610194523 578279f5 system.secondary_stack%s
@@ -58,7 +58,7 @@ X 1 ada.ads
 X 2 a-except.ads
 44K13*Exceptions 309e19 5|6w10
 X 4 b__psx_gpu_tests.ads
-6K9*ada_main 389l5 389e13 5|8b14 250l5 250t13
+6K9*ada_main 392l5 392e13 5|8b14 250l5 250t13
 8i4*gnat_argc{integer} 12m22 12r22 5|223r10 224m10
 9m4*gnat_argv{6|67M9} 13m22 13r22 5|225m10
 10m4*gnat_envp{6|67M9} 14m22 14r22 5|227m7
@@ -82,7 +82,7 @@ X 4 b__psx_gpu_tests.ads
 . 199r22 201r22 203r22 205r22 207r22 209r22 211r22 213r22 215r22 217r22 219r22
 . 221r22 223r22 225r22 227r22 229r22 231r22 233r22 235r22 237r22 239r22 241r22
 . 243r22 245r22 247r22 249r22 251r22 253r22 255r22 257r22 259r22 261r22 263r22
-. 265r22 267r22 269r22
+. 265r22 267r22 269r22 271r22
 43m4*u00001{42M9} 44r22
 45m4*u00002{42M9} 46r22
 47m4*u00003{42M9} 48r22
@@ -197,6 +197,7 @@ X 4 b__psx_gpu_tests.ads
 265m4*u00112{42M9} 266r22
 267m4*u00113{42M9} 268r22
 269m4*u00114{42M9} 270r22
+271m4*u00115{42M9} 272r22
 X 5 b__psx_gpu_tests.adb
 10i4 E016{short_integer} 10m46 10r46 171m7 171r15
 11i4 E012{short_integer} 11m46 11r46 170m7 170r15

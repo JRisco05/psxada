@@ -22,6 +22,13 @@ package body PSX.GPU is
       GPU.GP0_Width := 0;
       GPU.GP0_Height := 0;
 
+      GPU.GP0_Read_Active := False;
+      GPU.GP0_Read_X := 0;
+      GPU.GP0_Read_Y := 0;
+      GPU.GP0_Read_Width := 0;
+      GPU.GP0_Read_Height := 0;
+      GPU.GP0_Read_Index := 0;
+
    end Reset;
 
    procedure Write_GP0 (GPU : in out GPU_State; Value : Word32) is
@@ -34,9 +41,91 @@ package body PSX.GPU is
    begin
       GPU.GP0 := Value;
 
-      -- Segundo word del comando A0:
-      -- bits 0..9   = width
-      -- bits 16..24 = height
+      -- C0: VRAM -> CPU
+      -- Segunda palabra: X / Y
+      if GPU.GP0_Command = 16#C0# and then GPU.GP0_Received_Words = 1 then
+
+         GPU.GP0_Data (1) := Value;
+
+         GPU.GP0_Read_X := Natural (Value and 16#0000_03FF#);
+
+         GPU.GP0_Read_Y :=
+           Natural (Interfaces.Shift_Right (Value, 16) and 16#0000_01FF#);
+
+         GPU.GP0_Received_Words := 2;
+
+         return;
+      end if;
+
+      -- C0: VRAM -> CPU
+      -- Tercera palabra: width / height
+      if GPU.GP0_Command = 16#C0# and then GPU.GP0_Received_Words = 2 then
+
+         GPU.GP0_Data (2) := Value;
+
+         GPU.GP0_Read_Width := Natural (Value and 16#0000_03FF#);
+
+         GPU.GP0_Read_Height :=
+           Natural (Interfaces.Shift_Right (Value, 16) and 16#0000_01FF#);
+
+         GPU.GP0_Read_Index := 0;
+         GPU.GP0_Read_Active := True;
+
+         GPU.GP0_Command := 0;
+         GPU.GP0_Expected_Words := 0;
+         GPU.GP0_Received_Words := 0;
+
+         return;
+      end if;
+
+      -- ============================================================
+      -- C0: VRAM -> CPU
+      -- Segunda palabra: X / Y
+      -- ============================================================
+
+      if GPU.GP0_Command = 16#C0# and then GPU.GP0_Received_Words = 1 then
+
+         GPU.GP0_Data (1) := Value;
+
+         GPU.GP0_Read_X := Natural (Value and 16#0000_03FF#);
+
+         GPU.GP0_Read_Y :=
+           Natural (Interfaces.Shift_Right (Value, 16) and 16#0000_01FF#);
+
+         GPU.GP0_Received_Words := 2;
+
+         return;
+      end if;
+
+      -- ============================================================
+      -- C0: VRAM -> CPU
+      -- Tercera palabra: ancho / alto
+      -- ============================================================
+
+      if GPU.GP0_Command = 16#C0# and then GPU.GP0_Received_Words = 2 then
+
+         GPU.GP0_Data (2) := Value;
+
+         GPU.GP0_Read_Width := Natural (Value and 16#0000_03FF#);
+
+         GPU.GP0_Read_Height :=
+           Natural (Interfaces.Shift_Right (Value, 16) and 16#0000_01FF#);
+
+         GPU.GP0_Read_Index := 0;
+         GPU.GP0_Read_Active := True;
+
+         GPU.GP0_Command := 0;
+         GPU.GP0_Expected_Words := 0;
+         GPU.GP0_Received_Words := 0;
+
+         return;
+      end if;
+
+      -- ============================================================
+      -- A0: CPU -> VRAM
+      -- Segunda palabra: ancho / alto
+      -- ============================================================
+
       if GPU.GP0_Command = 16#A0# and then GPU.GP0_Received_Words = 1 then
 
          GPU.GP0_Data (1) := Value;
@@ -46,8 +135,6 @@ package body PSX.GPU is
          GPU.GP0_Height :=
            Natural (Interfaces.Shift_Right (Value, 16) and 16#0000_01FF#);
 
-         -- Total de words del comando:
-         -- 1 command + 1 XY + pixel data.
          GPU.GP0_Expected_Words :=
            2 + ((GPU.GP0_Width * GPU.GP0_Height + 1) / 2);
 
@@ -56,7 +143,10 @@ package body PSX.GPU is
          return;
       end if;
 
-      -- Recepción de datos de píxeles del comando A0.
+      -- ============================================================
+      -- A0: recepción de datos de píxeles
+      -- ============================================================
+
       if GPU.GP0_Command = 16#A0#
         and then GPU.GP0_Received_Words >= 2
         and then GPU.GP0_Received_Words < GPU.GP0_Expected_Words
@@ -96,7 +186,6 @@ package body PSX.GPU is
 
          GPU.GP0_Received_Words := GPU.GP0_Received_Words + 1;
 
-         -- Transferencia terminada.
          if GPU.GP0_Received_Words = GPU.GP0_Expected_Words then
             GPU.GP0_Command := 0;
             GPU.GP0_Expected_Words := 0;
@@ -106,7 +195,10 @@ package body PSX.GPU is
          return;
       end if;
 
-      -- Inicio de un nuevo comando GP0.
+      -- ============================================================
+      -- Inicio de un nuevo comando GP0
+      -- ============================================================
+
       if GPU.GP0_Expected_Words = 0 then
 
          GPU.GP0_Command := Command;
@@ -122,13 +214,68 @@ package body PSX.GPU is
 
             GPU.GP0_Expected_Words := 3;
 
+         elsif Command = 16#C0# then
+
+            GPU.GP0_Expected_Words := 3;
+
          else
+
             GPU.GP0_Expected_Words := 1;
+
          end if;
 
       end if;
 
    end Write_GP0;
+
+   function Read_GP0 (GPU : in out GPU_State) return Word32 is
+      Pixel_Index : Natural;
+      Pixel_X     : Natural;
+      Pixel_Y     : Natural;
+      Pixel_0     : Word16;
+      Pixel_1     : Word16;
+      Result      : Word32;
+   begin
+
+      if not GPU.GP0_Read_Active then
+         return 0;
+      end if;
+
+      Pixel_Index := GPU.GP0_Read_Index * 2;
+
+      Pixel_X := GPU.GP0_Read_X + (Pixel_Index mod GPU.GP0_Read_Width);
+
+      Pixel_Y := GPU.GP0_Read_Y + (Pixel_Index / GPU.GP0_Read_Width);
+
+      Pixel_0 :=
+        Read_VRAM (GPU, Pixel_X mod VRAM_WIDTH, Pixel_Y mod VRAM_HEIGHT);
+
+      if Pixel_Index + 1 < GPU.GP0_Read_Width * GPU.GP0_Read_Height then
+         Pixel_X :=
+           GPU.GP0_Read_X + ((Pixel_Index + 1) mod GPU.GP0_Read_Width);
+
+         Pixel_Y := GPU.GP0_Read_Y + ((Pixel_Index + 1) / GPU.GP0_Read_Width);
+
+         Pixel_1 :=
+           Read_VRAM (GPU, Pixel_X mod VRAM_WIDTH, Pixel_Y mod VRAM_HEIGHT);
+      else
+         Pixel_1 := 0;
+      end if;
+
+      Result :=
+        Word32 (Pixel_0) or Interfaces.Shift_Left (Word32 (Pixel_1), 16);
+
+      GPU.GP0_Read_Index := GPU.GP0_Read_Index + 1;
+
+      if GPU.GP0_Read_Index
+        >= ((GPU.GP0_Read_Width * GPU.GP0_Read_Height + 1) / 2)
+      then
+         GPU.GP0_Read_Active := False;
+         GPU.GP0_Read_Index := 0;
+      end if;
+
+      return Result;
+   end Read_GP0;
 
    procedure Write_GP1 (GPU : in out GPU_State; Value : Word32) is
    begin

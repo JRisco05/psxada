@@ -30,12 +30,21 @@ package PSX.GPU is
       GP0_Y      : Natural;
       GP0_Width  : Natural;
       GP0_Height : Natural;
-      
+
+      GP0_Read_Active : Boolean;
+      GP0_Read_X      : Natural;
+      GP0_Read_Y      : Natural;
+      GP0_Read_Width  : Natural;
+      GP0_Read_Height : Natural;
+      GP0_Read_Index  : Natural;
+
    end record;
 
    procedure Reset (GPU : out GPU_State);
 
    procedure Write_GP0 (GPU : in out GPU_State; Value : Word32);
+
+   function Read_GP0 (GPU : in out GPU_State) return Word32;
 
    procedure Write_GP1 (GPU : in out GPU_State; Value : Word32);
 

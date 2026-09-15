@@ -20,7 +20,9 @@ procedure PSX_BIOS_Tests is
    MAX_STEPS : constant Integer := 5_000_000;
 
    -- Variable para recordar en qué instrucción se quedó o terminó
-   Last_Step : Integer := 0;
+   Last_Step       : Integer := 0;
+   Loop_Count      : Integer := 0;
+   First_Loop_Step : Integer := -1;
 
    function Hex32 (Value : PSX.Types.Word32) return String is
       use Interfaces;
@@ -76,11 +78,18 @@ begin
    for Step_Number in 0 .. MAX_STEPS loop
 
       if CPU.PC = 16#0000_0E28# then
-         Print_Hex ("  LOOP PC = ", CPU.PC);
+         Loop_Count := Loop_Count + 1;
 
-         Print_Hex ("  INST    = ", PSX.Memory.Read_32 (Memory, CPU.PC));
+         if First_Loop_Step = -1 then
+            First_Loop_Step := Step_Number;
 
-         Print_Hex ("  NEXT    = ", PSX.Memory.Read_32 (Memory, CPU.Next_PC));
+            Ada.Text_IO.Put_Line
+              ("FIRST 0xE28 AT STEP " & Integer'Image (Step_Number));
+
+            Print_Hex ("  INST = ", PSX.Memory.Read_32 (Memory, CPU.PC));
+
+            Print_Hex ("  NEXT = ", PSX.Memory.Read_32 (Memory, CPU.Next_PC));
+         end if;
       end if;
 
       -- AQUÍ SÍ: Guardamos el paso actual correctamente
@@ -120,6 +129,7 @@ begin
    Ada.Text_IO.Put_Line
      ("-------------------------------------------------------");
    Ada.Text_IO.Put_Line ("Total steps executed: " & Integer'Image (Last_Step));
+   Ada.Text_IO.Put_Line ("Times at 0x00000E28: " & Integer'Image (Loop_Count));
    Ada.Text_IO.Put_Line ("BIOS execution completed or hit step limit.");
 
    Ada.Text_IO.New_Line;
