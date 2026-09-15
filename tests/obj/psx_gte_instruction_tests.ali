@@ -1,0 +1,123 @@
+V "GNAT Lib v16"
+M P W=8
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IO
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx_gte_instruction_tests%b  psx_gte_instruction_tests.adb  cc1ae99a NE OO SU
+W ada%s			ada.ads			ada.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W psx%s			psx.ads			psx.ali
+W psx.gte%s		psx-gte.adb		psx-gte.ali
+W psx.gte.instruction%s	psx-gte-instruction.adb	psx-gte-instruction.ali
+
+D ada.ads		20260610194523 76789da1 ada%s
+D a-except.ads		20260610194523 8699d7ff ada.exceptions%s
+D a-ioexce.ads		20260610194523 40018c65 ada.io_exceptions%s
+D a-stream.ads		20260610194523 cb01a8f8 ada.streams%s
+D a-string.ads		20260610194523 90ac6797 ada.strings%s
+D a-sttebu.ads		20260610194523 f1ad67a2 ada.strings.text_buffers%s
+D a-stuten.ads		20260610194523 c6ced0ae ada.strings.utf_encoding%s
+D a-tags.ads		20260610194523 2dbf449c ada.tags%s
+D a-textio.ads		20260610194523 34ef47de ada.text_io%s
+D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-gte.ads		20260915174620 570875b6 psx.gte%s
+D psx-gte-instruction.ads  20260915171635 33cfbd89 psx.gte.instruction%s
+D psx-types.ads		20260911215536 f83f461c psx.types%s
+D psx_gte_instruction_tests.adb  20260915171800 5a2bea0c psx_gte_instruction_tests%b
+D system.ads		20260610194523 8a611ac3 system%s
+D s-crtl.ads		20260610194523 823b6536 system.crtl%s
+D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
+D s-ficobl.ads		20260610194523 dc5161d4 system.file_control_block%s
+D s-parame.ads		20260610194523 a1aeab5c system.parameters%s
+D s-putima.ads		20260610194523 1b989439 system.put_images%s
+D s-secsta.ads		20260610194523 578279f5 system.secondary_stack%s
+D s-soflin.ads		20260610194523 5d88fdea system.soft_links%s
+D s-stache.ads		20260610194523 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20260610194523 1c9580f6 system.standard_library%s
+D s-stoele.ads		20260610194523 ccded4e8 system.storage_elements%s
+D s-traent.ads		20260610194523 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
+D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
+G a e
+G c Z b b [psx_gte_instruction_tests standard 6 11 none]
+G r c none [psx_gte_instruction_tests standard 6 11 none] [command psx__gte__instruction 11 13 none]
+G r c none [psx_gte_instruction_tests standard 6 11 none] [sf psx__gte__instruction 13 13 none]
+G r c none [psx_gte_instruction_tests standard 6 11 none] [mx psx__gte__instruction 15 13 none]
+G r c none [psx_gte_instruction_tests standard 6 11 none] [v psx__gte__instruction 17 13 none]
+G r c none [psx_gte_instruction_tests standard 6 11 none] [cv psx__gte__instruction 19 13 none]
+G r c none [psx_gte_instruction_tests standard 6 11 none] [lm psx__gte__instruction 21 13 none]
+X 1 ada.ads
+18K9*Ada 22e8 17|1r6 1r23
+X 9 a-textio.ads
+58K13*Text_IO 785e16 17|1w10 1r27
+284U14*New_Line 17|14s4 66s4
+565U14*Put_Line 17|13s4 31s7 33s7 37s7 39s7 43s7 45s7 49s7 51s7 55s7 57s7
+. 61s7 63s7 67s4
+X 11 interfac.ads
+47K9*Interfaces 247e15 17|2w6 8r13 24r9 25r9 26r9 27r9 28r9
+92M9*Unsigned_32 17|8r24
+154V13*Shift_Left{92M9} 17|24s20 25s20 26s20 27s20 28s20
+X 13 psx.ads
+1K9*PSX 3e8 17|4r6 10r11 30r7 36r7 42r7 48r7 54r7 60r7
+X 14 psx-gte.ads
+4K13*GTE 139e12 17|4r10 10r15 30r11 36r11 42r11 48r11 54r11 60r11
+X 15 psx-gte-instruction.ads
+3K17*Instruction 23e24 17|4w14 10r19 30r15 36r15 42r15 48r15 54r15 60r15
+7R9*Instruction 9e14 17|10r31
+8m7*Raw{5M12} 17|22m9
+11V13*Command{5M12} 17|30s27
+13V13*Sf{5M12} 17|36s27
+15V13*Mx{5M12} 17|42s27
+17V13*V{5M12} 17|48s27
+19V13*Cv{5M12} 17|54s27
+21V13*Lm{5M12} 17|60s27
+X 17 psx_gte_instruction_tests.adb
+6U11*PSX_GTE_Instruction_Tests 6b11 69l5 69t30
+10r4 Inst{15|7R9} 22m4 30r36 36r31 42r31 48r30 54r31 60r31
+

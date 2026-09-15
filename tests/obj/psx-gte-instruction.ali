@@ -1,0 +1,99 @@
+V "GNAT Lib v16"
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx.gte.instruction%b	psx-gte-instruction.adb	66612db4 NE OO PK IU
+W interfaces%s		interfac.ads		interfac.ali
+W psx.gte%s		psx-gte.adb		psx-gte.ali
+
+U psx.gte.instruction%s	psx-gte-instruction.ads	9cf88e23 EE NE OO PK IU
+W psx%s			psx.ads			psx.ali
+W psx.gte%s		psx-gte.adb		psx-gte.ali
+W psx.types%s		psx-types.ads		psx-types.ali
+
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-gte.ads		20260915174620 570875b6 psx.gte%s
+D psx-gte-instruction.ads  20260915171635 33cfbd89 psx.gte.instruction%s
+D psx-gte-instruction.adb  20260915171657 c4bf69fc psx.gte.instruction%b
+D psx-types.ads		20260911215536 f83f461c psx.types%s
+D system.ads		20260610194523 8a611ac3 system%s
+G a e
+G c Z s b [command psx__gte__instruction 11 13 none]
+G c Z s b [sf psx__gte__instruction 13 13 none]
+G c Z s b [mx psx__gte__instruction 15 13 none]
+G c Z s b [v psx__gte__instruction 17 13 none]
+G c Z s b [cv psx__gte__instruction 19 13 none]
+G c Z s b [lm psx__gte__instruction 21 13 none]
+G c Z s s [instructionIP psx__gte__instruction 7 9 none]
+X 1 interfac.ads
+47K9*Interfaces 247e15 5|1w6 5r13 14r14 19r14 24r14 29r14 34r14
+92M9*Unsigned_32 5|5r24
+159V13*Shift_Right{92M9} 5|14s25 19s25 24s25 29s25 34s25
+X 2 psx.ads
+1K9*PSX 3e8 4|1r6 3r9 5r22 23r5 5|3r14 37r5
+X 3 psx-gte.ads
+4K13*GTE 2|1k9 3|139e12 4|3r13 23r9 5|3r18 37r9
+X 4 psx-gte-instruction.ads
+3K17*Instruction 3|4k13 4|23l13 23e24 5|3b22 37l13 37t24
+5M12*Word32{6|7M12} 8r13 11r49 13r44 15r44 17r43 19r44 21r44 5|7r49 12r44
+. 17r44 22r43 27r44 32r44
+7R9*Instruction 9e14 11r29 13r24 15r24 17r23 19r24 21r24 5|7r29 12r24 17r24
+. 22r23 27r24 32r24
+8m7*Raw{5M12} 5|9r19 14r43 19r43 24r43 29r43 34r43
+11V13*Command{5M12} 11>22 5|7b13 10l8 10t15
+11r22 Inst{7R9} 5|7b22 9r14
+13V13*Sf{5M12} 13>17 5|12b13 15l8 15t10
+13r17 Inst{7R9} 5|12b17 14r38
+15V13*Mx{5M12} 15>17 5|17b13 20l8 20t10
+15r17 Inst{7R9} 5|17b17 19r38
+17V13*V{5M12} 17>16 5|22b13 25l8 25t9
+17r16 Inst{7R9} 5|22b16 24r38
+19V13*Cv{5M12} 19>17 5|27b13 30l8 30t10
+19r17 Inst{7R9} 5|27b17 29r38
+21V13*Lm{5M12} 21>17 5|32b13 35l8 35t10
+21r17 Inst{7R9} 5|32b17 34r38
+X 6 psx-types.ads
+3K13*Types 4|1w10 5r26 6|12e14
+7M12*Word32{1|92M9} 4|5r32
+

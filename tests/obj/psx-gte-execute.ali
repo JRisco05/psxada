@@ -1,0 +1,227 @@
+V "GNAT Lib v16"
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_LONG_LONG_INTEGERS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx.gte.execute%b	psx-gte-execute.adb	e9384c1f NE OO PK IU
+W interfaces%s		interfac.ads		interfac.ali
+W psx%s			psx.ads			psx.ali
+W psx.gte%s		psx-gte.adb		psx-gte.ali
+W psx.gte.instruction%s	psx-gte-instruction.adb	psx-gte-instruction.ali
+W psx.types%s		psx-types.ads		psx-types.ali
+
+U psx.gte.execute%s	psx-gte-execute.ads	73c7d4dd EE NE OO PK IU
+W psx%s			psx.ads			psx.ali
+W psx.gte%s		psx-gte.adb		psx-gte.ali
+W psx.gte.instruction%s	psx-gte-instruction.adb	psx-gte-instruction.ali
+
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D psx.ads		20260824210455 6f0a212e psx%s
+D psx-gte.ads		20260915174620 570875b6 psx.gte%s
+D psx-gte-execute.ads	20260915172608 40086954 psx.gte.execute%s
+D psx-gte-execute.adb	20260915221259 f3d1271f psx.gte.execute%b
+D psx-gte-instruction.ads  20260915171635 33cfbd89 psx.gte.instruction%s
+D psx-types.ads		20260911215536 f83f461c psx.types%s
+D system.ads		20260610194523 8a611ac3 system%s
+G a e
+G c Z s b [execute psx__gte__execute 6 14 none]
+G r c none [execute psx__gte__execute 6 14 none] [command psx__gte__instruction 11 13 none]
+G r c none [execute psx__gte__execute 6 14 none] [lm psx__gte__instruction 21 13 none]
+G r c none [execute psx__gte__execute 6 14 none] [sf psx__gte__instruction 13 13 none]
+X 1 interfac.ads
+47K9*Interfaces 247e15 5|1w6 7r13 38r10 64r9
+92M9*Unsigned_32 5|7r24 38r21
+154V13*Shift_Left{92M9} 5|64s20
+X 2 psx.ads
+1K9*PSX 3e8 4|1r6 2r6 4r9 7r21 8r14 10r5 5|2r6 3r6 5r14 9r22 59r20 70r22
+. 97r22 117r22 138r20 167r20 168r14 171r9 174r18 369r21 370r14 373r9 389r5
+X 3 psx-gte.ads
+4K13*GTE 2|1k9 3|139e12 4|1w10 2r10 4r13 7r25 8r18 10r9 5|3r10 5r18 59r24
+. 70r26 97r26 117r26 138r24 167r24 168r18 171r13 174r22 369r25 370r18 373r13
+. 389r9
+9R9*GTE_State 117e14 4|7r29 5|59r28 70r30 97r30 117r30 138r28 167r28 369r29
+13m7*V0_X{7M12} 5|177r24
+14m7*V0_Y{7M12} 5|180r24
+15m7*V0_Z{7M12} 5|183r24
+28m7*IR0{7M12} 5|351m11
+29m7*IR1{7M12} 5|273m11 313r38
+30m7*IR2{7M12} 5|276m11 332r38
+31m7*IR3{7M12} 5|279m11
+33m7*SX0{7M12} 5|318m11
+34m7*SY0{7M12} 5|319m11
+35m7*SX1{7M12} 5|318r22 320m11
+36m7*SY1{7M12} 5|319r22 321m11
+37m7*SX2{7M12} 5|320r22 323m11
+38m7*SY2{7M12} 5|321r22 337m11
+40m7*SZ0{7M12} 5|289m11
+41m7*SZ1{7M12} 5|289r22 290m11
+42m7*SZ2{7M12} 5|290r22 291m11
+43m7*SZ3{7M12} 5|291r22 293m11 298r16
+49m7*MAC0{7M12} 5|316m11 335m11 349m11
+50m7*MAC1{7M12} 5|265m11
+51m7*MAC2{7M12} 5|266m11
+52m7*MAC3{7M12} 5|267m11
+62m7*RT11{7M12} 5|185r59
+63m7*RT12{7M12} 5|186r59
+64m7*RT13{7M12} 5|187r59
+65m7*RT21{7M12} 5|189r59
+66m7*RT22{7M12} 5|190r59
+67m7*RT23{7M12} 5|191r59
+68m7*RT31{7M12} 5|193r59
+69m7*RT32{7M12} 5|194r59
+70m7*RT33{7M12} 5|195r59
+72m7*TRX{7M12} 5|197r58
+73m7*TRY{7M12} 5|198r58
+74m7*TRZ{7M12} 5|199r58
+104m7*OFX{7M12} 5|215r24
+105m7*OFY{7M12} 5|218r24
+107m7*H{7M12} 5|212r32
+109m7*DQA{7M12} 5|221r24
+110m7*DQB{7M12} 5|224r24
+115m7*FLAG{7M12} 5|62m11 63r13 233m11
+X 4 psx-gte-execute.ads
+4K17*Execute 3|4k13 4|10l13 10e20 5|5b22 389l13 389t20
+6U14*Execute 7=7 8>7 5|368b14 387l8 387t15
+7r7 GTE{3|9R9} 5|369b7 380m27
+8r7 Inst{6|7R9} 5|370b7 373r38 380r32
+X 5 psx-gte-execute.adb
+9M12 Word32{7|7M12} 11r32 24r32 35r41 37r14 65r12 73r31 98r41 119r31 372r26
+11V13 Signed_16{long_long_integer} 11b13 11>24 21l5 21t14 177s9 180s9 183s9
+. 185s44 186s44 187s44 189s44 190s44 191s44 193s44 194s44 195s44 221s9 313s23
+. 332s23
+11m24 Value{9M12} 14r9 16r8
+12i4 V{long_long_integer} 17r14 19r14
+24V13 Signed_32{long_long_integer} 24b13 24>24 32l5 32t14 197s43 198s43 199s43
+. 215s9 218s9 224s9
+24m24 Value{9M12} 26r8 27r33 30r33
+34V13 To_Word32{9M12} 34b13 35>7 40l8 40t17 92s14 112s14 133s14 265s19 266s19
+. 267s19 316s19 335s19 349s19 352s9
+35i7 Value{long_long_integer} 39r13
+43V13 SAR{long_long_integer} 43b13 44>7 45>7 55l8 55t11 261s15 262s15 263s15
+. 287s3 325s17 339s17 357s18 359s10 360s17
+44i7 Value{long_long_integer} 50r10 51r17 53r21
+45i7 Amount{natural} 48r14
+47i7 Divisor{long_long_integer} 51r25 53r30
+58U14 Set_Flag 58b14 59=7 60>7 66l8 66t16 85s10 89s10 105s10 109s10 126s10
+. 130s10 147s10 148s10 157s10 158s10 362s10
+59r7 GTE{3|9R9} 62m7 63r9
+60i7 Bit{natural} 65r24
+69V13 Saturate_IR{9M12} 69b13 70=7 71>7 72>7 73>7 93l8 93t19 274s9 277s9
+. 280s9
+70r7 GTE{3|9R9} 85m20 89m20
+71i7 Value{long_long_integer} 80r37
+72i7 Bit{natural} 85r25 89r25
+73b7 LM{boolean} 76r13
+75i7 Min_Value{long_long_integer} 87r22 88r20
+78i7 Max_Value{long_long_integer} 83r19 84r20
+80i7 Result{long_long_integer} 83r10 84m10 87r13 88m10 92r25
+96V13 Saturate_SZ3{9M12} 96b13 97=7 98>7 113l8 113t20 294s9
+97r7 GTE{3|9R9} 105m20 109m20
+98i7 Value{long_long_integer} 100r37
+100i7 Result{long_long_integer} 103r10 104m10 107r13 108m10 112r25
+116V13 Saturate_Screen{9M12} 116b13 117=7 118>7 119>7 134l8 134t23 324s9
+. 338s9
+117r7 GTE{3|9R9} 126m20 130m20
+118i7 Value{long_long_integer} 121r37
+119i7 Bit{natural} 126r25 130r25
+121i7 Result{long_long_integer} 124r10 125m10 128r13 129m10 133r25
+137V13 Divide_Perspective{long_long_integer} 137b13 138=7 139>7 140>7 163l8
+. 163t26 305s9
+138r7 GTE{3|9R9} 147m20 148m20 157m20 158m20
+139i7 H{long_long_integer} 152r20
+140i7 SZ3{long_long_integer} 146r10 154r30
+142i7 Numerator{long_long_integer} 152m7 154r18
+143i7 Result{long_long_integer} 154m7 156r10 159m10 162r14
+166U14 Execute_RTPS 166b14 167=7 168>7 365l8 365t20 380s13
+167r7 GTE{3|9R9} 177r20 180r20 183r20 185r55 186r55 187r55 189r55 190r55
+. 191r55 193r55 194r55 195r55 197r54 198r54 199r54 212r28 215r20 218r20 221r20
+. 224r20 233m7 265m7 266m7 267m7 273m7 274m22 274r22 276m7 277m22 277r22
+. 279m7 280m22 280r22 289m7 289r18 290m7 290r18 291m7 291r18 293m7 294m23
+. 294r23 298r12 306m12 306r12 313r34 316m7 318m7 318r18 319m7 319r18 320m7
+. 320r18 321m7 321r18 323m7 325m12 325r12 332r34 335m7 337m7 339m12 339r12
+. 349m7 351m7 362m20
+168r7 Inst{6|7R9} 171r33 174r42
+170b7 LM{boolean} 274r37 277r37 280r37
+173i7 SF{natural} 261r30 262r30 263r30
+176i7 VX{long_long_integer} 241r18 247r18 253r18
+179i7 VY{long_long_integer} 242r18 248r18 254r18
+182i7 VZ{long_long_integer} 243r18 249r18 255r18
+185i7 RT11{long_long_integer} 241r11
+186i7 RT12{long_long_integer} 242r11
+187i7 RT13{long_long_integer} 243r11
+189i7 RT21{long_long_integer} 247r11
+190i7 RT22{long_long_integer} 248r11
+191i7 RT23{long_long_integer} 249r11
+193i7 RT31{long_long_integer} 253r11
+194i7 RT32{long_long_integer} 254r11
+195i7 RT33{long_long_integer} 255r11
+197i7 TRX{long_long_integer} 240r9
+198i7 TRY{long_long_integer} 246r9
+199i7 TRZ{long_long_integer} 252r9
+201i7 MAC1_Raw{long_long_integer} 239m7 261r20
+202i7 MAC2_Raw{long_long_integer} 245m7 262r20
+203i7 MAC3_Raw{long_long_integer} 251m7 263r20 287r8
+205i7 MAC1{long_long_integer} 261m7 265r30 274r27
+206i7 MAC2{long_long_integer} 262m7 266r30 277r27
+207i7 MAC3{long_long_integer} 263m7 267r30 280r27
+209i7 SZ3_Value{long_long_integer} 286m7 294r28 296m7 306r26
+211i7 H_Value{long_long_integer} 306r17
+214i7 OFX_Value{long_long_integer} 314r11
+217i7 OFY_Value{long_long_integer} 333r11
+220i7 DQA_Value{long_long_integer} 346r23
+223i7 DQB_Value{long_long_integer} 347r11
+226i7 Perspective{long_long_integer} 304m7 313r9 332r9 346r9
+228i7 MAC0{long_long_integer} 312m7 316r30 325r22 331m7 335r30 339r22 345m7
+. 349r30 357r23 359r15 360r22
+372m7 Command{9M12} 377r12
+X 6 psx-gte-instruction.ads
+3K17*Instruction 4|2w14 8r22 5|3w14 168r22 171r17 174r26 370r22 373r17 6|23e24
+7R9*Instruction 4|8r34 5|168r34 370r34 6|9e14
+11V13*Command{5M12} 5|373s29
+13V13*Sf{5M12} 5|174s38
+21V13*Lm{5M12} 5|171s29
+X 7 psx-types.ads
+3K13*Types 5|2w10 9r26 7|12e14
+7M12*Word32{1|92M9} 5|9r32
+
