@@ -16,7 +16,7 @@ begin
    Ada.Text_IO.New_Line;
 
    ------------------------------------------------------------------
-   -- AND
+   --  AND
    ------------------------------------------------------------------
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
@@ -24,7 +24,7 @@ begin
    CPU.Registers (1) := 16#F0F0_F0F0#;
    CPU.Registers (2) := 16#0FF0_0FF0#;
 
-   -- AND R3, R1, R2 (Opcode real: 16#0022_1824#)
+   --  AND R3, R1, R2 (Opcode real: 16#0022_1824#)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0022_1824#);
 
    CPU.PC := 16#0001_0000#;
@@ -39,7 +39,7 @@ begin
    end if;
 
    ------------------------------------------------------------------
-   -- OR
+   --  OR
    ------------------------------------------------------------------
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
@@ -47,7 +47,7 @@ begin
    CPU.Registers (1) := 16#F0F0_F0F0#;
    CPU.Registers (2) := 16#0FF0_0FF0#;
 
-   -- OR R3, R1, R2 (Opcode real: 16#0022_1825#)
+   --  OR R3, R1, R2 (Opcode real: 16#0022_1825#)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0022_1825#);
 
    CPU.PC := 16#0001_0000#;
@@ -62,7 +62,7 @@ begin
    end if;
 
    ------------------------------------------------------------------
-   -- XOR
+   --  XOR
    ------------------------------------------------------------------
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
@@ -70,7 +70,7 @@ begin
    CPU.Registers (1) := 16#F0F0_F0F0#;
    CPU.Registers (2) := 16#0FF0_0FF0#;
 
-   -- XOR R3, R1, R2 (Opcode real: 16#0022_1826#)
+   --  XOR R3, R1, R2 (Opcode real: 16#0022_1826#)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0022_1826#);
 
    CPU.PC := 16#0001_0000#;
@@ -85,7 +85,7 @@ begin
    end if;
 
    ------------------------------------------------------------------
-   -- NOR
+   --  NOR
    ------------------------------------------------------------------
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
@@ -93,7 +93,7 @@ begin
    CPU.Registers (1) := 16#F0F0_F0F0#;
    CPU.Registers (2) := 16#0FF0_0FF0#;
 
-   -- NOR R3, R1, R2 (Opcode real: 16#0022_1827#)
+   --  NOR R3, R1, R2 (Opcode real: 16#0022_1827#)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0022_1827#);
 
    CPU.PC := 16#0001_0000#;

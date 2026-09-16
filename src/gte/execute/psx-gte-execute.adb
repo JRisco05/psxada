@@ -548,12 +548,10 @@ end Execute_RTPT;
 
    end Execute_RTPS;
 
-      procedure Execute_MVMVA
+         procedure Execute_MVMVA
      (GTE  : in out PSX.GTE.GTE_State;
       Inst : PSX.GTE.Instruction.Instruction)
    is
-      use type Interfaces.Unsigned_32;
-
       SF : constant Boolean :=
         PSX.GTE.Instruction.Sf (Inst) /= 0;
 
@@ -568,16 +566,18 @@ end Execute_RTPT;
       MAC2_Raw : Long_Long_Integer;
       MAC3_Raw : Long_Long_Integer;
 
-      MAC1_Scaled : Long_Long_Integer;
-      MAC2_Scaled : Long_Long_Integer;
-      MAC3_Scaled : Long_Long_Integer;
+      MAC1 : Long_Long_Integer;
+      MAC2 : Long_Long_Integer;
+      MAC3 : Long_Long_Integer;
 
       Matrix_11 : Long_Long_Integer;
       Matrix_12 : Long_Long_Integer;
       Matrix_13 : Long_Long_Integer;
+
       Matrix_21 : Long_Long_Integer;
       Matrix_22 : Long_Long_Integer;
       Matrix_23 : Long_Long_Integer;
+
       Matrix_31 : Long_Long_Integer;
       Matrix_32 : Long_Long_Integer;
       Matrix_33 : Long_Long_Integer;
@@ -587,7 +587,12 @@ end Execute_RTPT;
       TZ : Long_Long_Integer;
 
    begin
-      -- MVMVA currently starts with the RT matrix.
+      GTE.FLAG := 0;
+
+      -- ----------------------------------------------------
+      -- Matriz RT
+      -- ----------------------------------------------------
+
       Matrix_11 := Signed_16 (GTE.RT11);
       Matrix_12 := Signed_16 (GTE.RT12);
       Matrix_13 := Signed_16 (GTE.RT13);
@@ -600,57 +605,107 @@ end Execute_RTPT;
       Matrix_32 := Signed_16 (GTE.RT32);
       Matrix_33 := Signed_16 (GTE.RT33);
 
-      -- V = 0 -> V0
-      VX := Signed_16 (GTE.V0_X);
-      VY := Signed_16 (GTE.V0_Y);
-      VZ := Signed_16 (GTE.V0_Z);
+      -- ----------------------------------------------------
+      -- Selección del vector
+      -- V=0 -> V0
+      -- V=1 -> V1
+      -- V=2 -> V2
+      -- ----------------------------------------------------
 
-      -- CV = 0 -> translation vector TR.
+      case PSX.GTE.Instruction.V (Inst) is
+
+         when 0 =>
+            VX := Signed_16 (GTE.V0_X);
+            VY := Signed_16 (GTE.V0_Y);
+            VZ := Signed_16 (GTE.V0_Z);
+
+         when 1 =>
+            VX := Signed_16 (GTE.V1_X);
+            VY := Signed_16 (GTE.V1_Y);
+            VZ := Signed_16 (GTE.V1_Z);
+
+         when 2 =>
+            VX := Signed_16 (GTE.V2_X);
+            VY := Signed_16 (GTE.V2_Y);
+            VZ := Signed_16 (GTE.V2_Z);
+
+         when others =>
+            VX := 0;
+            VY := 0;
+            VZ := 0;
+
+      end case;
+
+      -- ----------------------------------------------------
+      -- CV=0 -> vector de traslación
+      -- ----------------------------------------------------
+
       TX := Signed_32 (GTE.TRX);
       TY := Signed_32 (GTE.TRY);
       TZ := Signed_32 (GTE.TRZ);
 
-      -- Matrix * vector + translation << 12.
+      -- ----------------------------------------------------
+      -- Multiplicación matriz * vector
+      -- ----------------------------------------------------
+
       MAC1_Raw :=
-        TX * 16#1000# +
-        Matrix_11 * VX +
-        Matrix_12 * VY +
-        Matrix_13 * VZ;
+        TX * 16#1000#
+        + Matrix_11 * VX
+        + Matrix_12 * VY
+        + Matrix_13 * VZ;
 
       MAC2_Raw :=
-        TY * 16#1000# +
-        Matrix_21 * VX +
-        Matrix_22 * VY +
-        Matrix_23 * VZ;
+        TY * 16#1000#
+        + Matrix_21 * VX
+        + Matrix_22 * VY
+        + Matrix_23 * VZ;
 
       MAC3_Raw :=
-        TZ * 16#1000# +
-        Matrix_31 * VX +
-        Matrix_32 * VY +
-        Matrix_33 * VZ;
+        TZ * 16#1000#
+        + Matrix_31 * VX
+        + Matrix_32 * VY
+        + Matrix_33 * VZ;
+
+      -- ----------------------------------------------------
+      -- SF
+      -- SF=0 -> sin desplazamiento
+      -- SF=1 -> desplazamiento de 12 bits
+      -- ----------------------------------------------------
 
       if SF then
-         MAC1_Scaled := SAR (MAC1_Raw, 12);
-         MAC2_Scaled := SAR (MAC2_Raw, 12);
-         MAC3_Scaled := SAR (MAC3_Raw, 12);
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
       else
-         MAC1_Scaled := MAC1_Raw;
-         MAC2_Scaled := MAC2_Raw;
-         MAC3_Scaled := MAC3_Raw;
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
       end if;
 
-      GTE.MAC1 := To_Word32 (MAC1_Scaled);
-      GTE.MAC2 := To_Word32 (MAC2_Scaled);
-      GTE.MAC3 := To_Word32 (MAC3_Scaled);
+      -- ----------------------------------------------------
+      -- MAC
+      -- ----------------------------------------------------
 
-            GTE.IR1 :=
-        Saturate_IR (GTE, MAC1_Scaled, 24, LM);
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+
+      -- ----------------------------------------------------
+      -- IR
+      -- ----------------------------------------------------
+
+      GTE.IR1 :=
+        Saturate_IR
+          (GTE, MAC1, 24, LM);
 
       GTE.IR2 :=
-        Saturate_IR (GTE, MAC2_Scaled, 23, LM);
+        Saturate_IR
+          (GTE, MAC2, 23, LM);
 
       GTE.IR3 :=
-        Saturate_IR (GTE, MAC3_Scaled, 22, LM);
+        Saturate_IR
+          (GTE, MAC3, 22, LM);
+
    end Execute_MVMVA;
 
 

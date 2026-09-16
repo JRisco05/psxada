@@ -1,8 +1,0 @@
-psx_cpu_logic_tests.adb:19:07: (style) space required [-gnatyc]
-psx_cpu_logic_tests.adb:27:07: (style) space required [-gnatyc]
-psx_cpu_logic_tests.adb:42:07: (style) space required [-gnatyc]
-psx_cpu_logic_tests.adb:50:07: (style) space required [-gnatyc]
-psx_cpu_logic_tests.adb:65:07: (style) space required [-gnatyc]
-psx_cpu_logic_tests.adb:73:07: (style) space required [-gnatyc]
-psx_cpu_logic_tests.adb:88:07: (style) space required [-gnatyc]
-psx_cpu_logic_tests.adb:96:07: (style) space required [-gnatyc]
