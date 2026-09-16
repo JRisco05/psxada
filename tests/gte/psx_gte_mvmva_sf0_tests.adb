@@ -60,20 +60,20 @@ PSX.GTE.Write_Control (GTE, 37, 0);
 
    PSX.GTE.Execute.Execute (GTE, Inst);
 
-   Check
+      Check
      ("MAC1 SF=0",
       409600,
-      PSX.GTE.Read_Data (GTE, 24));
+      PSX.GTE.Read_Data (GTE, 25));
 
    Check
      ("MAC2 SF=0",
       819200,
-      PSX.GTE.Read_Data (GTE, 25));
+      PSX.GTE.Read_Data (GTE, 26));
 
    Check
      ("MAC3 SF=0",
       1228800,
-      PSX.GTE.Read_Data (GTE, 26));
+      PSX.GTE.Read_Data (GTE, 27));
 
    Check
      ("IR1 SF=0",

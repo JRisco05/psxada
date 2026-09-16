@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_gte_mvmva_sf0_tests%b  psx_gte_mvmva_sf0_tests.adb  cc4a987b NE OO SU
+U psx_gte_mvmva_sf0_tests%b  psx_gte_mvmva_sf0_tests.adb  d51d1221 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -74,7 +74,7 @@ D psx-gte.ads		20260915174620 570875b6 psx.gte%s
 D psx-gte-execute.ads	20260915172608 40086954 psx.gte.execute%s
 D psx-gte-instruction.ads  20260915171635 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
-D psx_gte_mvmva_sf0_tests.adb  20260916040033 4d7b870f psx_gte_mvmva_sf0_tests%b
+D psx_gte_mvmva_sf0_tests.adb  20260916141012 542c0d55 psx_gte_mvmva_sf0_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -108,15 +108,15 @@ X 11 interfac.ads
 92M9*Unsigned_32 18|9r24 16r29 17r29 25r41 26r39
 X 13 psx.ads
 1K9*PSX 3e8 18|2r6 3r6 4r6 11r10 12r11 33r4 36r4 37r4 42r4 43r4 44r4 45r4
-. 46r4 49r4 50r4 51r4 61r4 66r7 71r7 76r7 81r7 86r7 91r7
+. 46r4 49r1 50r4 51r4 61r4 66r7 71r7 76r7 81r7 86r7 91r7
 X 14 psx-gte.ads
 4K13*GTE 139e12 18|2w10 3r10 4r10 11r14 12r15 33r8 36r8 37r8 42r8 43r8 44r8
-. 45r8 46r8 49r8 50r8 51r8 61r8 66r11 71r11 76r11 81r11 86r11 91r11
+. 45r8 46r8 49r5 50r8 51r8 61r8 66r11 71r11 76r11 81r11 86r11 91r11
 9R9*GTE_State 117e14 18|11r18
 119U14*Reset 18|33s12
 121U17*Write_Data 18|36s12 37s12
 126V13*Read_Data{7M12} 18|66s15 71s15 76s15 81s15 86s15 91s15
-130U14*Write_Control 18|42s12 43s12 44s12 45s12 46s12 49s12 50s12 51s12
+130U14*Write_Control 18|42s12 43s12 44s12 45s12 46s12 49s9 50s12 51s12
 X 15 psx-gte-execute.ads
 4K17*Execute 10e20 18|3w14 61r12
 6U14*Execute 18|61s20
@@ -127,10 +127,10 @@ X 16 psx-gte-instruction.ads
 X 18 psx_gte_mvmva_sf0_tests.adb
 7U11*PSX_GTE_MVMVA_SF0_Tests 7b11 94l5 94t28
 11r4 GTE{14|9R9} 33m19 36m24 36r24 37m24 37r24 42m27 42r27 43m27 43r27 44m27
-. 44r27 45m27 45r27 46m27 46r27 49m27 49r27 50m27 50r27 51m27 51r27 61m29
+. 44r27 45m27 45r27 46m27 46r27 49m24 49r24 50m27 50r27 51m27 51r27 61m29
 . 61r29 66r26 71r26 76r26 81r26 86r26 91r26
 12r4 Inst{16|7R9} 59m4 61r34
-14U14 Check 14b14 15>7 16>7 17>7 28l8 28t13 63s4 68s4 73s4 78s4 83s4 88s4
+14U14 Check 14b14 15>7 16>7 17>7 28l8 28t13 63s7 68s4 73s4 78s4 83s4 88s4
 15a7 Name{string} 21r31 24r24
 16m7 Expected{11|92M9} 20r19 25r60
 17m7 Actual{11|92M9} 20r10 26r58

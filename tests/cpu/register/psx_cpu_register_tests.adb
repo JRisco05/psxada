@@ -1,13 +1,12 @@
 with Ada.Text_IO;
 with Interfaces;
-
 with PSX.CPU;
 with PSX.CPU.Execute;
 with PSX.CPU.Instruction;
 with PSX.Memory;
 with PSX.Register;
 
-procedure Psx_Cpu_Execute_Tests is
+procedure Psx_Cpu_Register_Tests is
 
    use type Interfaces.Unsigned_32;
 
@@ -85,4 +84,4 @@ begin
    Ada.Text_IO.New_Line;
    Ada.Text_IO.Put_Line ("All execution tests passed.");
 
-end Psx_Cpu_Execute_Tests;
+end Psx_Cpu_Register_Tests;

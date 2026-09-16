@@ -99,6 +99,52 @@ begin
 
    Check (SPU.Channels (22).Volume_Left = 0, "Channel 22 unaffected");
 
+      -- Voice 1
+
+   PSX.SPU.Write_Register
+     (SPU,
+      16#1F801C10#,
+      16#1111#);
+
+   Check
+     (SPU.Channels (1).Volume_Left = 16#1111#,
+      "Voice 1 Volume Left register");
+
+   -- Voice 23
+
+   PSX.SPU.Write_Register
+     (SPU,
+      16#1F801D70#,
+      16#AAAA#);
+
+   Check
+     (SPU.Channels (23).Volume_Left = 16#AAAA#,
+      "Voice 23 Volume Left register");
+
+         declare
+      Value : Interfaces.Unsigned_16;
+   begin
+
+      PSX.SPU.Read_Register
+        (SPU,
+         16#1F801C00#,
+         Value);
+
+      Check
+        (Value = 16#1234#,
+         "Read Voice 0 Volume Left");
+
+      PSX.SPU.Read_Register
+        (SPU,
+         16#1F801D70#,
+         Value);
+
+      Check
+        (Value = 16#AAAA#,
+         "Read Voice 23 Volume Left");
+
+   end;
+
    New_Line;
    Put_Line ("SPU basic tests completed.");
 

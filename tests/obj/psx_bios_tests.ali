@@ -51,18 +51,20 @@ RV NO_STANDARD_STORAGE_POOLS
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_bios_tests%b	psx_bios_tests.adb	70abc418 NE OO SU
+U psx_bios_tests%b	psx_bios_tests.adb	01449cf0 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
 W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
-W psx.cpu.instruction%s	psx-cpu-instruction.adb	psx-cpu-instruction.ali
 W psx.cpu.step%s	psx-cpu-step.adb	psx-cpu-step.ali
+W psx.dma%s		psx-dma.adb		psx-dma.ali
 W psx.gpu%s		psx-gpu.adb		psx-gpu.ali
+W psx.gte%s		psx-gte.adb		psx-gte.ali
 W psx.memory%s		psx-memory.adb		psx-memory.ali
 W psx.register%s	psx-register.adb	psx-register.ali
+W psx.spu%s		psx-spu.adb		psx-spu.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 Z system.img_int%s	s-imgint.ads		s-imgint.ali
 Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
@@ -81,14 +83,16 @@ D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260824210455 6f0a212e psx%s
 D psx-cpu.ads		20260915070107 0eec9d9a psx.cpu%s
-D psx-cpu-instruction.ads  20260911000750 a548a6bb psx.cpu.instruction%s
 D psx-cpu-step.ads	20260914130357 901c7255 psx.cpu.step%s
+D psx-dma.ads		20260914005322 a2982fd6 psx.dma%s
 D psx-gpu.ads		20260915021831 5a2e71ed psx.gpu%s
+D psx-gte.ads		20260915174620 570875b6 psx.gte%s
 D psx-memory.ads	20260915032554 99b2f715 psx.memory%s
 D psx-register.ads	20260824212926 4d5fe43c psx.register%s
+D psx-spu.ads		20260914134636 bc18c0c5 psx.spu%s
 D psx-timers.ads	20260915025324 3c2c4e28 psx.timers%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
-D psx_bios_tests.adb	20260915130200 981117ab psx_bios_tests%b
+D psx_bios_tests.adb	20260916144020 053e735d psx_bios_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -106,93 +110,108 @@ D s-traent.ads		20260610194523 c81cbf8c system.traceback_entries%s
 D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
-G c Z b b [psx_bios_tests standard 11 11 none]
-G r c none [psx_bios_tests standard 11 11 none] [reset psx__cpu 49 14 none]
-G r c none [psx_bios_tests standard 11 11 none] [reset psx__memory 26 14 none]
-G r c none [psx_bios_tests standard 11 11 none] [reset psx__gpu 44 14 none]
-G r c none [psx_bios_tests standard 11 11 none] [load_bios psx__memory 55 14 none]
-G r c none [psx_bios_tests standard 11 11 none] [read_32 psx__memory 36 13 none]
-G r c none [psx_bios_tests standard 11 11 none] [read psx__register 11 13 none]
-G r c none [psx_bios_tests standard 11 11 none] [step psx__cpu__step 10 14 none]
+G c Z b b [psx_bios_tests standard 13 11 none]
+G r c none [psx_bios_tests standard 13 11 none] [reset psx__cpu 49 14 none]
+G r c none [psx_bios_tests standard 13 11 none] [reset psx__memory 26 14 none]
+G r c none [psx_bios_tests standard 13 11 none] [reset psx__gpu 44 14 none]
+G r c none [psx_bios_tests standard 13 11 none] [reset psx__spu 42 14 none]
+G r c none [psx_bios_tests standard 13 11 none] [reset psx__gte 119 14 none]
+G r c none [psx_bios_tests standard 13 11 none] [reset psx__dma 9 14 none]
+G r c none [psx_bios_tests standard 13 11 none] [load_bios psx__memory 55 14 none]
+G r c none [psx_bios_tests standard 13 11 none] [read_32 psx__memory 36 13 none]
+G r c none [psx_bios_tests standard 13 11 none] [read psx__register 11 13 none]
+G r c none [psx_bios_tests standard 13 11 none] [step psx__cpu__step 10 14 none]
 X 1 ada.ads
-18K9*Ada 22e8 22|2r6 54r10 61r7 66r4 67r4 75r4 77r4 107r10 108r10 110r10
-. 116r10 117r10 154r13 155r13 159r13 166r4 167r4 169r4 170r4 171r4 173r4
-. 174r4
+18K9*Ada 22e8 24|2r6 58r10 64r7 69r4 70r4 83r4 85r4 114r10 115r10 117r10
+. 125r10 126r10 165r13 166r13 170r13 177r4 178r4 180r4 182r4 184r4 187r4
+. 188r4
 X 9 a-textio.ads
-58K13*Text_IO 785e16 22|2w10 54r14 61r11 66r8 67r8 75r8 77r8 107r14 108r14
-. 110r14 116r14 117r14 154r17 155r17 159r17 166r8 167r8 169r8 170r8 171r8
-. 173r8 174r8
-284U14*New_Line 22|107s22 116s22 154s25 166s16 173s16
-433U14*Put 22|54s22
-565U14*Put_Line 22|61s19 66s16 67s16 75s16 77s16 108s22 110s22 117s22 155s25
-. 159s25 167s16 169s16 170s16 171s16 174s16
+58K13*Text_IO 785e16 24|2w10 58r14 64r11 69r8 70r8 83r8 85r8 114r14 115r14
+. 117r14 125r14 126r14 165r17 166r17 170r17 177r8 178r8 180r8 182r8 184r8
+. 187r8 188r8
+284U14*New_Line 24|114s22 125s22 165s25 177s16 187s16
+433U14*Put 24|58s22
+565U14*Put_Line 24|64s19 69s16 70s16 83s16 85s16 115s22 117s22 126s22 166s25
+. 170s25 178s16 180s16 182s16 184s16 188s16
 X 11 interfac.ads
-47K9*Interfaces 247e15 22|1w6 13r13 33r11 40r15 47r11
-92M9*Unsigned_32 22|13r24 36r16
-159V13*Shift_Right{92M9} 22|40s26
+47K9*Interfaces 247e15 24|1w6 15r13 37r11 44r15 51r11
+92M9*Unsigned_32 24|15r24 40r16
+159V13*Shift_Right{92M9} 24|44s26
 X 13 psx.ads
-1K9*PSX 3e8 22|3r6 4r6 5r6 6r6 7r6 8r6 9r6 15r13 16r13 17r13 27r16 28r16
-. 32r28 46r35 48r27 49r9 59r49 69r4 70r4 71r4 73r4 91r23 119r38 121r38 123r38
-. 125r38 140r13 141r20 151r10 177r35 178r35
+1K9*PSX 3e8 24|3r6 4r6 5r6 6r6 7r6 8r6 9r6 10r6 11r6 17r13 18r13 19r13 20r13
+. 21r13 31r16 32r16 36r28 50r35 52r27 53r9 62r49 72r4 73r4 74r4 75r4 76r4
+. 79r4 81r4 99r23 128r21 130r21 132r21 134r21 151r13 152r20 162r10 191r35
+. 192r35
 X 14 psx-cpu.ads
-4K13*CPU 54e12 22|3w10 4r10 5r10 15r17 46r39 69r8 151r14
-12R9*CPU_State 47e14 22|15r21 46r43
-13a7*Registers{19|9A9} 22|49r32 119r61 121r61 123r61 125r61 140r36 141r43
-. 177r58 178r58
-16m7*PC{8M12} 22|89r22 91r55 114r62 131r15 137r15 138r22 159r64 175r39
-22m7*Next_PC{8M12} 22|176r39
-49U14*Reset 22|69s12
-X 15 psx-cpu-instruction.ads
-3K17*Instruction 27e24 22|4w14
-X 16 psx-cpu-step.ads
-5K17*Step 15e17 22|5w14 151r18
-10U14*Step 22|151s23
+4K13*CPU 54e12 24|3w10 4r10 17r17 50r39 72r8 162r14
+12R9*CPU_State 47e14 24|17r21 50r43
+13a7*Registers{20|9A9} 24|53r32 128r44 130r44 132r44 134r44 151r36 152r43
+. 191r58 192r58
+16m7*PC{8M12} 24|97r22 99r55 123r25 140r15 148r15 149r22 170r64 189r39
+22m7*Next_PC{8M12} 24|190r39
+49U14*Reset 24|72s12
+X 15 psx-cpu-step.ads
+5K17*Step 15e17 24|4w14 162r18
+10U14*Step 24|162s23
+X 16 psx-dma.ads
+5K13*DMA 16e12 24|11w10 79r8
+9U14*Reset 24|79s12
 X 17 psx-gpu.ads
-3K13*GPU 60e12 22|9w10 17r17 71r8
-17R9*GPU_State 42e14 22|17r21
-44U14*Reset 22|71s12
-X 18 psx-memory.ads
-4K13*Memory 57e15 22|6w10 16r17 70r8 73r8 91r27
-18R9*Memory_State 24e14 22|16r24
-26U14*Reset 22|70s15
-36V13*Read_32{21|7M12} 22|91s34
-55U14*Load_BIOS 22|73s15
-X 19 psx-register.ads
-3K13*Register 20e17 22|8w10 49r13 119r42 121r42 123r42 125r42 140r17 141r24
-. 177r39 178r39
+3K13*GPU 60e12 24|8w10 19r17 74r8
+17R9*GPU_State 42e14 24|19r21
+44U14*Reset 24|74s12
+X 18 psx-gte.ads
+4K13*GTE 139e12 24|10w10 21r17 76r8
+9R9*GTE_State 117e14 24|21r21
+119U14*Reset 24|76s12
+X 19 psx-memory.ads
+4K13*Memory 57e15 24|5w10 18r17 73r8 81r8 99r27
+18R9*Memory_State 24e14 24|18r24
+26U14*Reset 24|73s15
+36V13*Read_32{23|7M12} 24|99s34
+55U14*Load_BIOS 24|81s15
+X 20 psx-register.ads
+3K13*Register 20e17 24|7w10 53r13 128r25 130r25 132r25 134r25 151r17 152r24
+. 191r39 192r39
 9A9*Register_Array(5M12)<7I9>
-11V13*Read{5M12} 22|49s22 119s51 121s51 123s51 125s51 140s26 141s33 177s48
-. 178s48
-X 21 psx-types.ads
-3K13*Types 12e14 22|7w10 27r20 28r20 32r32 48r31 59r53
-7M12*Word32{11|92M9} 22|27r26 28r26 32r38 48r37 59r59
-X 22 psx_bios_tests.adb
-11U11*PSX_BIOS_Tests 11b11 180l5 180t19
-15r4 CPU{14|12R9} 69m19 89r18 91r51 114r58 119r57 121r57 123r57 125r57 131r11
-. 137r11 138r18 140r32 141r39 143r28 151m29 151r29 159r60 175r35 176r35 177r54
-. 178r54
-16r4 Memory{18|18R9} 70m22 73m26 73r26 91r43 151m34 151r34
-17r4 GPU{17|17R9} 71m19 151m42 151r42
-20i4 MAX_STEPS{integer} 84r28
-23i4 Last_Step{integer} 86m7 169r68
-24i4 Loop_Count{integer} 170r67
-25i4 First_Loop_Step{integer}
-27m4 Prev_PC{21|7M12} 89m7 113r58
-28m4 Prev_Inst{21|7M12} 91m10 94m13 98r10
-30i4 Consecutive_Nops{integer} 99m10 99r30 101m10 106r10
-32V13 Hex32{string} 32b13 32>20 44l8 44t13 61s37 159s53
-32m20 Value{21|7M12} 36r31
-34a7 Hex{string} 39r24
-35a7 Result{string} 38r24 39m10 43r21
-36m7 V{11|92M9} 39r38 40m10 40r39
-38i11 I{integer} 39r18
-46U14 Hook_BIOS_TTY 46b14 46>29 57l8 57t21 143s13
-46r29 CPU{14|12R9} 49r28
-48m7 Reg_A0{21|7M12} 52r10 53r37
-50e7 Char_Val{character} 53m10 54r27
-59U14 Print_Hex 59b14 59>25 59>41 62l8 62t17 113s10 114s10 118s10 120s10
-. 122s10 124s10 175s4 176s4 177s4 178s4
-59a25 Label{string} 61r29
-59m41 Value{21|7M12} 61r44
-84i8 Step_Number{integer} 86r20 112r30 157r33
+11V13*Read{5M12} 24|53s22 128s34 130s34 132s34 134s34 151s26 152s33 191s48
+. 192s48
+X 21 psx-spu.ads
+4K13*SPU 50e12 24|9w10 20r17 75r8
+32R9*SPU_State 40e14 24|20r21
+42U14*Reset 24|75s12
+X 23 psx-types.ads
+3K13*Types 12e14 24|6w10 31r20 32r20 36r32 52r31 62r53
+7M12*Word32{11|92M9} 24|31r26 32r26 36r38 52r37 62r59
+X 24 psx_bios_tests.adb
+13U11*PSX_BIOS_Tests 13b11 194l5 194t19
+17r4 CPU{14|12R9} 72m19 97r18 99r51 123r21 128r40 130r40 132r40 134r40 140r11
+. 148r11 149r18 151r32 152r39 154r28 162m29 162r29 170r60 189r35 190r35 191r54
+. 192r54
+18r4 Memory{19|18R9} 73m22 79m19 79r19 81m26 81r26 99r43 162m34 162r34
+19r4 GPU{17|17R9} 74m19 162m42 162r42
+20r4 SPU{21|32R9} 75m19
+21r4 GTE{18|9R9} 76m19
+24i4 MAX_STEPS{integer} 92r28
+27i4 Last_Step{integer} 94m7 181r49
+28i4 Loop_Count{integer} 144m10 144r24 183r48
+29i4 First_Loop_Step{integer} 141r13 142m13
+31m4 Prev_PC{23|7M12} 97m7 121r21
+32m4 Prev_Inst{23|7M12} 99m10 102m13 106r10
+34i4 Consecutive_Nops{integer} 107m10 107r30 109m10 113r10
+36V13 Hex32{string} 36b13 36>20 48l8 48t13 64s37 170s53
+36m20 Value{23|7M12} 40r31
+38a7 Hex{string} 43r24
+39a7 Result{string} 42r24 43m10 47r21
+40m7 V{11|92M9} 43r38 44m10 44r39
+42i11 I{integer} 43r18
+50U14 Hook_BIOS_TTY 50b14 50>29 60l8 60t21 154s13
+50r29 CPU{14|12R9} 53r28
+52m7 Reg_A0{23|7M12} 56r10 57r37
+54e7 Char_Val{character} 57m10 58r27
+62U14 Print_Hex 62b14 62>25 62>41 65l8 65t17 120s10 122s10 127s10 129s10
+. 131s10 133s10 189s4 190s4 191s4 192s4
+62a25 Label{string} 64r29
+62m41 Value{23|7M12} 64r44
+92i8 Step_Number{integer} 94r20 119r30 142r32 168r33
 
