@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_gte_rtpt_tests%b	psx_gte_rtpt_tests.adb	22c119c2 NE OO SU
+U psx_gte_rtpt_tests%b	psx_gte_rtpt_tests.adb	d54e16a4 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -74,7 +74,7 @@ D psx-gte.ads		20260915174620 570875b6 psx.gte%s
 D psx-gte-execute.ads	20260915172608 40086954 psx.gte.execute%s
 D psx-gte-instruction.ads  20260915171635 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260911215536 f83f461c psx.types%s
-D psx_gte_rtpt_tests.adb  20260915223313 a3f006b6 psx_gte_rtpt_tests%b
+D psx_gte_rtpt_tests.adb  20260915230608 547f09d0 psx_gte_rtpt_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -128,7 +128,7 @@ X 14 psx-gte.ads
 36m7*SY1{7M12} 18|118r32
 37m7*SX2{7M12} 18|120r32
 38m7*SY2{7M12} 18|121r32
-40m7*SZ0{7M12} 18|105r33
+40m7*SZ0{7M12} 18|105r30
 41m7*SZ1{7M12} 18|106r33
 42m7*SZ2{7M12} 18|107r33
 43m7*SZ3{7M12} 18|108r33
@@ -159,7 +159,7 @@ X 18 psx_gte_rtpt_tests.adb
 7U11*PSX_GTE_RTPT_Tests 7b11 138l5 138t23
 12r4 GTE{14|9R9} 31m22 33m7 34m7 35m7 37m7 38m7 39m7 41m7 42m7 44m7 45m7
 . 46m7 61m4 62m4 63m4 65m4 66m4 67m4 69m4 70m4 71m4 78m29 78r29 84r29 85r29
-. 86r30 92r30 93r30 94r31 105r29 106r29 107r29 108r29 114r28 115r28 117r28
+. 86r30 92r30 93r30 94r31 105r26 106r29 107r29 108r29 114r28 115r28 117r28
 . 118r28 120r28 121r28 127r21 133r22
 14U14 Check 14b14 15>7 16>7 17>7 27l8 27t13 84s4 85s4 86s4 92s4 93s4 94s4
 . 105s4 106s4 107s4 108s4 114s4 115s4 117s4 118s4 120s4 121s4 127s4 133s4

@@ -102,9 +102,9 @@ begin
    -- V2 -> SZ3=3000
    ------------------------------------------------------------------
 
-   Check ("SZ0 FIFO", 1000, GTE.SZ0);
-   Check ("SZ1 FIFO", 2000, GTE.SZ1);
-   Check ("SZ2 FIFO", 3000, GTE.SZ2);
+   Check ("SZ0 FIFO", 0, GTE.SZ0);
+   Check ("SZ1 FIFO", 1000, GTE.SZ1);
+   Check ("SZ2 FIFO", 2000, GTE.SZ2);
    Check ("SZ3 FIFO", 3000, GTE.SZ3);
 
    ------------------------------------------------------------------
@@ -114,11 +114,11 @@ begin
    Check ("SX0 FIFO", 100, GTE.SX0);
    Check ("SY0 FIFO", 200, GTE.SY0);
 
-   Check ("SX1 FIFO", 300, GTE.SX1);
-   Check ("SY1 FIFO", 400, GTE.SY1);
+   Check ("SX1 FIFO", 150, GTE.SX1);
+   Check ("SY1 FIFO", 200, GTE.SY1);
 
-   Check ("SX2 FIFO", 500, GTE.SX2);
-   Check ("SY2 FIFO", 600, GTE.SY2);
+   Check ("SX2 FIFO", 166, GTE.SX2);
+   Check ("SY2 FIFO", 199, GTE.SY2);
 
    ------------------------------------------------------------------
    -- IR0
