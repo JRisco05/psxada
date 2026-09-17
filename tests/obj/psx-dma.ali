@@ -57,7 +57,7 @@ W psx.types%s		psx-types.ads		psx-types.ali
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260916234907 6f0a212e psx%s
 D psx-dma.ads		20260916234906 a2982fd6 psx.dma%s
-D psx-dma.adb		20260916234906 e9ab4307 psx.dma%b
+D psx-dma.adb		20260917002337 e9ab4307 psx.dma%b
 D psx-gpu.ads		20260916234907 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s

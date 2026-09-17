@@ -1,1 +1,0 @@
-psx_gte_execute_tests.adb:10:04: warning: use clause for type "Interfaces.Unsigned_32" has no effect [-gnatwu]

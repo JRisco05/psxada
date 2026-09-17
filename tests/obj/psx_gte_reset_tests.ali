@@ -67,7 +67,7 @@ D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260916234907 6f0a212e psx%s
 D psx-gte.ads		20260916234907 570875b6 psx.gte%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_gte_reset_tests.adb  20260916234911 80f3994c psx_gte_reset_tests%b
+D psx_gte_reset_tests.adb  20260917002337 80f3994c psx_gte_reset_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s

@@ -7,7 +7,6 @@ with Interfaces;
 
 procedure PSX_CPU_SWL_SWR_Tests is
 
-   use type Interfaces.Unsigned_8;
    use type Interfaces.Unsigned_32;
 
    CPU    : PSX.CPU.CPU_State;

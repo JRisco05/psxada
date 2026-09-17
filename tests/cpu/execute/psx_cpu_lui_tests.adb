@@ -8,8 +8,8 @@ with Interfaces;
 
 procedure PSX_CPU_LUI_Tests is
 
-   use type interfaces.Unsigned_32;
-   
+   use type Interfaces.Unsigned_32;
+
    CPU    : PSX.CPU.CPU_State;
    Memory : PSX.Memory.Memory_State;
 

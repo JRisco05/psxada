@@ -1,5 +1,6 @@
 with Ada.Text_IO;
 with PSX.GTE;
+With PSX.Types; 
 with Interfaces;
 
 procedure PSX_GTE_Data_Tests is
@@ -225,7 +226,6 @@ begin
       PSX.GTE.Read_Data (GTE, 19),
       16#0000_4444#);
 
-
    --  IR registers
 
    PSX.GTE.Write_Data
@@ -244,7 +244,6 @@ begin
    Check ("IR1", GTE.IR1, 16#0000_2222#);
    Check ("IR2", GTE.IR2, 16#0000_3333#);
    Check ("IR3", GTE.IR3, 16#0000_4444#);
-
 
    --  MAC registers
 

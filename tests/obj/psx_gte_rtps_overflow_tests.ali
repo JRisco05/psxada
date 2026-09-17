@@ -74,7 +74,7 @@ D psx-gte.ads		20260916234907 570875b6 psx.gte%s
 D psx-gte-execute.ads	20260916234913 40086954 psx.gte.execute%s
 D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_gte_rtps_overflow_tests.adb  20260916234911 2c98cebd psx_gte_rtps_overflow_tests%b
+D psx_gte_rtps_overflow_tests.adb  20260917002337 2c98cebd psx_gte_rtps_overflow_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -122,7 +122,7 @@ X 14 psx-gte.ads
 70m7*RT33{7M12} 18|35m11
 72m7*TRX{7M12} 18|37m11
 73m7*TRY{7M12} 18|38m11
-74m7*TRZ{7M12} 18|39m11 162m5
+74m7*TRZ{7M12} 18|39m11 162m8
 104m7*OFX{7M12} 18|41m11
 105m7*OFY{7M12} 18|42m11
 107m7*H{7M12} 18|44m11
@@ -143,7 +143,7 @@ X 18 psx_gte_rtps_overflow_tests.adb
 . 46m7 61m4 62m4 63m4 67m29 67r29 69r53 70r49 78m4 79m4 80m4 82m29 82r29
 . 84r53 85r49 93m4 94m4 95m4 97m29 97r29 99r53 100r58 108m4 109m4 110m4 112m29
 . 112r29 114r53 115r58 123m4 124m4 125m4 127m29 127r29 129r26 133r7 141m4
-. 142m4 143m4 145m29 145r29 147r40 151r4 159m4 160m4 161m4 162m1 164m29 164r29
+. 142m4 143m4 145m29 145r29 147r40 151r4 159m4 160m4 161m4 162m4 164m29 164r29
 . 166r47
 14U14 Check 14b14 15>7 16>7 17>7 27l8 27t13 69s4 70s4 84s4 85s4 99s4 100s4
 . 114s4 115s4 129s4 130s4 147s4 148s3 166s4

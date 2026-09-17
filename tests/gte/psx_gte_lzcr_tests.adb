@@ -5,6 +5,7 @@ with PSX.Types;
 
 procedure PSX_GTE_LZCR_Tests is
 
+   use type Interfaces.Unsigned_32;
    use Ada.Text_IO;
 
    GTE : PSX.GTE.GTE_State;

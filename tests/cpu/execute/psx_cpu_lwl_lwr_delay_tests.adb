@@ -41,7 +41,7 @@ begin
       Ada.Text_IO.Put_Line ("FAIL: LWL committed immediately");
    end if;
 
-   -- LWR
+   --  LWR
    PSX.CPU.Step.Step (CPU, Memory);
 
    if CPU.Load_Pending then

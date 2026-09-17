@@ -2,9 +2,12 @@ with Ada.Text_IO;
 with PSX.GTE;
 with PSX.GTE.Instruction;
 with PSX.GTE.Execute;
+with PSX.Types;
+with Interfaces;
 
 procedure PSX_GTE_MVMVA_V2_Tests is
 
+   use type Interfaces.Unsigned_32;
    use Ada.Text_IO;
 
    GTE  : PSX.GTE.GTE_State;
@@ -66,7 +69,7 @@ begin
    GTE.TRZ := 0;
 
    -- SF=1, V=2, LM=0, MX=0, CV=0, CMD=12
-   Inst.Raw := 16#0018_000C#;
+   Inst.Raw := 16#0009_000C#;
 
    PSX.GTE.Execute.Execute (GTE, Inst);
 

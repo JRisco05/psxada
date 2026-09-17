@@ -44,11 +44,10 @@ RN
 RV NO_IO
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_gte_execute_tests%b  psx_gte_execute_tests.adb  81b0fd7c NE OO SU
+U psx_gte_execute_tests%b  psx_gte_execute_tests.adb  c935d47a NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
-W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
 W psx.gte%s		psx-gte.adb		psx-gte.ali
 W psx.gte.execute%s	psx-gte-execute.adb	psx-gte-execute.ali
@@ -71,7 +70,7 @@ D psx-gte.ads		20260916234907 570875b6 psx.gte%s
 D psx-gte-execute.ads	20260916234913 40086954 psx.gte.execute%s
 D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_gte_execute_tests.adb  20260916234910 0081e208 psx_gte_execute_tests%b
+D psx_gte_execute_tests.adb  20260917002337 d91532cf psx_gte_execute_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -87,33 +86,35 @@ D s-traent.ads		20260610194523 c81cbf8c system.traceback_entries%s
 D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
-G c Z b b [psx_gte_execute_tests standard 8 11 none]
-G r c none [psx_gte_execute_tests standard 8 11 none] [reset psx__gte 119 14 none]
-G r c none [psx_gte_execute_tests standard 8 11 none] [execute psx__gte__execute 6 14 none]
+G c Z b b [psx_gte_execute_tests standard 6 11 none]
+G r c none [psx_gte_execute_tests standard 6 11 none] [reset psx__gte 119 14 none]
+G r c none [psx_gte_execute_tests standard 6 11 none] [execute psx__gte__execute 6 14 none]
 X 1 ada.ads
 18K9*Ada 22e8 18|1r6 1r23
 X 9 a-textio.ads
 58K13*Text_IO 785e16 18|1w10 1r27
-284U14*New_Line 18|17s4 27s4
-565U14*Put_Line 18|16s4 25s4 28s4
+284U14*New_Line 18|13s4 23s4
+565U14*Put_Line 18|12s4 21s4 24s4
 X 11 interfac.ads
-47K9*Interfaces 247e15 18|2w6 10r13
-92M9*Unsigned_32 18|10r24
+92M9*Unsigned_32
 X 13 psx.ads
-1K9*PSX 3e8 18|4r6 5r6 6r6 12r11 13r11 19r4 23r4
+1K9*PSX 3e8 18|2r6 3r6 4r6 8r11 9r11 15r4 19r4
 X 14 psx-gte.ads
-4K13*GTE 139e12 18|4w10 5r10 6r10 12r15 13r15 19r8 23r8
-9R9*GTE_State 117e14 18|12r19
-119U14*Reset 18|19s12
+4K13*GTE 139e12 18|2w10 3r10 4r10 8r15 9r15 15r8 19r8
+9R9*GTE_State 117e14 18|8r19
+119U14*Reset 18|15s12
 X 15 psx-gte-execute.ads
-4K17*Execute 10e20 18|5w14 23r12
-6U14*Execute 18|23s20
+4K17*Execute 10e20 18|3w14 19r12
+6U14*Execute 18|19s20
 X 16 psx-gte-instruction.ads
-3K17*Instruction 23e24 18|6w14 13r19
-7R9*Instruction 9e14 18|13r31
-8m7*Raw{5M12} 18|21m9
+3K17*Instruction 23e24 18|4w14 9r19
+5M12*Word32{17|7M12}
+7R9*Instruction 9e14 18|9r31
+8m7*Raw{5M12} 18|17m9
+X 17 psx-types.ads
+7M12*Word32{11|92M9}
 X 18 psx_gte_execute_tests.adb
-8U11*PSX_GTE_Execute_Tests 8b11 30l5 30t26
-12r4 GTE{14|9R9} 19m19 23m29 23r29
-13r4 Inst{16|7R9} 21m4 23r34
+6U11*PSX_GTE_Execute_Tests 6b11 26l5 26t26
+8r4 GTE{14|9R9} 15m19 19m29 19r29
+9r4 Inst{16|7R9} 17m4 19r34
 

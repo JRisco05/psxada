@@ -78,7 +78,7 @@ D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
 D psx-register.ads	20260916234913 4d5fe43c psx.register%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_cpu_add_immediate_tests.adb  20260916234949 8f16587e psx_cpu_add_immediate_tests%b
+D psx_cpu_add_immediate_tests.adb  20260917002337 8f16587e psx_cpu_add_immediate_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s

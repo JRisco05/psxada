@@ -9,7 +9,7 @@ with Interfaces;
 procedure PSX_CPU_HILO_Move_Tests is
 
    use type Interfaces.Unsigned_32;
-   
+
    CPU    : PSX.CPU.CPU_State;
    Memory : PSX.Memory.Memory_State;
 
