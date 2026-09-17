@@ -19,7 +19,7 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- MFC0 R2, $12
+   --  MFC0 R2, $12
    CPU.Status := 16#1234_5678#;
 
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#4002_6000#);
@@ -35,7 +35,7 @@ begin
       Put_Line ("FAIL: MFC0 Status");
    end if;
 
-   -- MFC0 R3, $14
+   --  MFC0 R3, $14
    CPU.EPC := 16#8000_1234#;
 
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#4003_7000#);

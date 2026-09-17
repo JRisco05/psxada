@@ -36,7 +36,7 @@ begin
    CPU.PC := 16#0001_0000#;
    CPU.Next_PC := 16#0001_0004#;
 
-   -- ADDU R3, R1, R2
+   --  ADDU R3, R1, R2
    CPU.Registers (1) := 16#FFFF_FFFF#;
    CPU.Registers (2) := 1;
 
@@ -46,7 +46,7 @@ begin
 
    Check ("ADDU", 0, CPU.Registers (3));
 
-   -- SUBU R3, R1, R2
+   --  SUBU R3, R1, R2
    CPU.Registers (1) := 0;
    CPU.Registers (2) := 1;
 

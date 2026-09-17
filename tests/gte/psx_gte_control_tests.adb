@@ -34,7 +34,7 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   -- RT11 / RT12
+   --  RT11 / RT12
    PSX.GTE.Write_Control
      (GTE, 32, 16#2222_1111#);
 
@@ -46,7 +46,7 @@ begin
       PSX.GTE.Read_Control (GTE, 32),
       16#2222_1111#);
 
-   -- RT13 / RT21
+   --  RT13 / RT21
    PSX.GTE.Write_Control
      (GTE, 33, 16#4444_3333#);
 
@@ -58,7 +58,7 @@ begin
       PSX.GTE.Read_Control (GTE, 33),
       16#4444_3333#);
 
-   -- Translation vector
+   --  Translation vector
    PSX.GTE.Write_Control
      (GTE, 37, 16#1111_1111#);
 
@@ -72,14 +72,14 @@ begin
    Check ("TRY", GTE.TRY, 16#2222_2222#);
    Check ("TRZ", GTE.TRZ, 16#3333_3333#);
 
-   -- Light matrix
+   --  Light matrix
    PSX.GTE.Write_Control
      (GTE, 40, 16#BBBB_AAAA#);
 
    Check ("L11", GTE.L11, 16#0000_AAAA#);
    Check ("L12", GTE.L12, 16#0000_BBBB#);
 
-   -- Background color
+   --  Background color
    PSX.GTE.Write_Control
      (GTE, 45, 16#1111_1111#);
 
@@ -93,14 +93,14 @@ begin
    Check ("GBK", GTE.GBK, 16#2222_2222#);
    Check ("BBK", GTE.BBK, 16#3333_3333#);
 
-   -- Light color matrix
+   --  Light color matrix
    PSX.GTE.Write_Control
      (GTE, 48, 16#BBBB_AAAA#);
 
    Check ("LR1", GTE.LR1, 16#0000_AAAA#);
    Check ("LR2", GTE.LR2, 16#0000_BBBB#);
 
-   -- Far color
+   --  Far color
    PSX.GTE.Write_Control
      (GTE, 53, 16#1111_1111#);
    PSX.GTE.Write_Control
@@ -112,7 +112,7 @@ begin
    Check ("GFC", GTE.GFC, 16#2222_2222#);
    Check ("BFC", GTE.BFC, 16#3333_3333#);
 
-   -- Screen offset / projection
+   --  Screen offset / projection
    PSX.GTE.Write_Control
      (GTE, 56, 16#1111_1111#);
 
@@ -126,7 +126,7 @@ begin
    Check ("OFY", GTE.OFY, 16#2222_2222#);
    Check ("H", GTE.H, 16#0000_3333#);
 
-   -- Depth cue
+   --  Depth cue
    PSX.GTE.Write_Control
      (GTE, 59, 16#0000_4444#);
 
@@ -136,7 +136,7 @@ begin
    Check ("DQA", GTE.DQA, 16#0000_4444#);
    Check ("DQB", GTE.DQB, 16#5555_5555#);
 
-   -- Depth averaging
+   --  Depth averaging
    PSX.GTE.Write_Control
      (GTE, 61, 16#0000_6666#);
 
@@ -146,7 +146,7 @@ begin
    Check ("ZSF3", GTE.ZSF3, 16#0000_6666#);
    Check ("ZSF4", GTE.ZSF4, 16#0000_7777#);
 
-   -- FLAG is read-only.
+   --  FLAG is read-only.
    Check
      ("FLAG reset",
       PSX.GTE.Read_Control (GTE, 63),

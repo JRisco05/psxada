@@ -53,7 +53,7 @@ begin
    New_Line;
 
    ------------------------------------------------------------------
-   -- 1. Valores negativos
+   --  1. Valores negativos
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -71,7 +71,7 @@ begin
    Check ("Negative IR3", 1000, GTE.IR3);
 
    ------------------------------------------------------------------
-   -- 2. Translation
+   --  2. Translation
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -91,7 +91,7 @@ begin
    Check ("Translation IR3", 1100, GTE.IR3);
 
    ------------------------------------------------------------------
-   -- 3. Saturación IR positiva
+   --  3. Saturación IR positiva
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -107,7 +107,7 @@ begin
    Check ("IR3 positive saturation", 16#0000_7FFF#, GTE.IR3);
 
    ------------------------------------------------------------------
-   -- 4. Saturación IR negativa con LM=0
+   --  4. Saturación IR negativa con LM=0
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -123,7 +123,7 @@ begin
    Check ("IR3 negative saturation", 16#FFFF_8000#, GTE.IR3);
 
    ------------------------------------------------------------------
-   -- 5. LM = 1
+   --  5. LM = 1
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -132,7 +132,7 @@ begin
    GTE.V0_Y := 16#FFFF_8000#;
    GTE.V0_Z := 16#FFFF_8000#;
 
-   -- Command 01 + SF=1 + LM=1
+   --  Command 01 + SF=1 + LM=1
    Inst.Raw := 16#0008_0401#;
 
    PSX.GTE.Execute.Execute (GTE, Inst);
@@ -142,7 +142,7 @@ begin
    Check ("LM IR3 clamps to zero", 0, GTE.IR3);
 
    ------------------------------------------------------------------
-   -- 6. SF = 0
+   --  6. SF = 0
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -151,7 +151,7 @@ begin
    GTE.V0_Y := 200;
    GTE.V0_Z := 1000;
 
-   -- Command 01, SF=0
+   --  Command 01, SF=0
    Inst.Raw := 16#0000_0001#;
 
    PSX.GTE.Execute.Execute (GTE, Inst);

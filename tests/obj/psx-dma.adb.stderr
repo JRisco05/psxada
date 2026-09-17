@@ -1,5 +1,6 @@
 psx-dma.adb:2:06: warning: redundant with clause in body [-gnatwr]
 psx-dma.adb:3:06: warning: redundant with clause in body [-gnatwr]
+psx-dma.adb:9:05: (style) bad indentation [-gnaty0]
 psx-dma.adb:61:79: (style) this line is too long: 80 [-gnatyM]
 psx-dma.adb:67:10: (style) redundant parentheses [-gnatyx]
 psx-dma.adb:115:10: (style) redundant parentheses [-gnatyx]

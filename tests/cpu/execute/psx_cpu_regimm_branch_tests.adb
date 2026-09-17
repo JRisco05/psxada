@@ -28,15 +28,15 @@ begin
    New_Line;
 
    ------------------------------------------------------------------
-   -- BLTZ tomado (Branch Less Than Zero)
+   --  BLTZ tomado (Branch Less Than Zero)
    ------------------------------------------------------------------
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- R1 = -1 (Es menor que cero, por lo tanto SÍ salta)
+   --  R1 = -1 (Es menor que cero, por lo tanto SÍ salta)
    CPU.Registers (1) := 16#FFFF_FFFF#;
 
-   -- Escribimos BLTZ R1, +2
+   --  Escribimos BLTZ R1, +2
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0420_0002#);
 
    CPU.PC := 16#0001_0000#;
@@ -48,15 +48,15 @@ begin
    Check ("BLTZ taken", 16#0001_000C#, CPU.Next_PC);
 
    ------------------------------------------------------------------
-   -- BLTZ no tomado
+   --  BLTZ no tomado
    ------------------------------------------------------------------
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- R1 = 1 (Es mayor que cero, por lo tanto NO salta)
+   --  R1 = 1 (Es mayor que cero, por lo tanto NO salta)
    CPU.Registers (1) := 1;
 
-   -- Escribimos BLTZ R1, +2
+   --  Escribimos BLTZ R1, +2
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0420_0002#);
 
    CPU.PC := 16#0001_0000#;
@@ -64,19 +64,19 @@ begin
 
    PSX.CPU.Step.Step (CPU, Memory);
 
-   -- Como NO saltó, sigue en línea recta y el Next_PC final debe ser 0x0001_0008
+   --  Como NO saltó, sigue en línea recta y el Next_PC final debe ser 0x0001_0008
    Check ("BLTZ not taken", 16#0001_0008#, CPU.Next_PC);
 
    ------------------------------------------------------------------
-   -- BGEZ tomado (Branch Greater Than or Equal to Zero)
+   --  BGEZ tomado (Branch Greater Than or Equal to Zero)
    ------------------------------------------------------------------
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- R1 = 1 (Es mayor o igual a cero, por lo tanto SÍ salta)
+   --  R1 = 1 (Es mayor o igual a cero, por lo tanto SÍ salta)
    CPU.Registers (1) := 1;
 
-   -- Escribimos BGEZ R1, +2
+   --  Escribimos BGEZ R1, +2
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0421_0002#);
 
    CPU.PC := 16#0001_0000#;
@@ -84,19 +84,19 @@ begin
 
    PSX.CPU.Step.Step (CPU, Memory);
 
-   -- Como SÍ saltó, el Next_PC final debe ser 0x0001_000C
+   --  Como SÍ saltó, el Next_PC final debe ser 0x0001_000C
    Check ("BGEZ taken", 16#0001_000C#, CPU.Next_PC);
 
    ------------------------------------------------------------------
-   -- BGEZ no tomado
+   --  BGEZ no tomado
    ------------------------------------------------------------------
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- R1 = -1 (Es menor que cero, por lo tanto NO salta)
+   --  R1 = -1 (Es menor que cero, por lo tanto NO salta)
    CPU.Registers (1) := 16#FFFF_FFFF#;
 
-   -- Escribimos BGEZ R1, +2
+   --  Escribimos BGEZ R1, +2
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0421_0002#);
 
    CPU.PC := 16#0001_0000#;
@@ -104,7 +104,7 @@ begin
 
    PSX.CPU.Step.Step (CPU, Memory);
 
-   -- Como NO saltó, sigue en línea recta y el Next_PC final debe ser 0x0001_0008
+   --  Como NO saltó, sigue en línea recta y el Next_PC final debe ser 0x0001_0008
    Check ("BGEZ not taken", 16#0001_0008#, CPU.Next_PC);
 
    Put_Line ("");

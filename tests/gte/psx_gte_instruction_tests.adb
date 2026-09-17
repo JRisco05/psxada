@@ -13,12 +13,12 @@ begin
    Put_Line ("Testing PSX GTE instruction decoder...");
    New_Line;
 
-   -- Command = 16
-   -- Sf = 1
-   -- Mx = 2
-   -- V = 1
-   -- Cv = 3
-   -- Lm = 1
+   --  Command = 16
+   --  Sf = 1
+   --  Mx = 2
+   --  V = 1
+   --  Cv = 3
+   --  Lm = 1
    Inst.Raw :=
      16#0000_0010#
      or Interfaces.Shift_Left (1, 19)

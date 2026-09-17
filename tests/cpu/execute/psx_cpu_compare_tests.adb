@@ -34,10 +34,10 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- SLT R3, R1, R2
-   -- R1 = -1
-   -- R2 = 1
-   -- Resultado: 1
+   --  SLT R3, R1, R2
+   --  R1 = -1
+   --  R2 = 1
+   --  Resultado: 1
    CPU.Registers (1) := 16#FFFF_FFFF#;
    CPU.Registers (2) := 1;
 
@@ -56,11 +56,11 @@ begin
       1,
       CPU.Registers (3));
 
-   -- SLTU R3, R1, R2
-   -- R1 = 0xFFFFFFFF
-   -- R2 = 1
-   -- Como unsigned: 0xFFFFFFFF > 1
-   -- Resultado: 0
+   --  SLTU R3, R1, R2
+   --  R1 = 0xFFFFFFFF
+   --  R2 = 1
+   --  Como unsigned: 0xFFFFFFFF > 1
+   --  Resultado: 0
    CPU.Registers (1) := 16#FFFF_FFFF#;
    CPU.Registers (2) := 1;
 

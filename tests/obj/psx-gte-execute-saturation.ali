@@ -52,13 +52,13 @@ W psx.gte.execute%s	psx-gte-execute.adb	psx-gte-execute.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
-D psx.ads		20260824210455 6f0a212e psx%s
-D psx-gte.ads		20260915174620 570875b6 psx.gte%s
-D psx-gte-execute.ads	20260915172608 40086954 psx.gte.execute%s
-D psx-gte-execute-saturation.ads  20260915172954 d5141f15 psx.gte.execute.saturation%s
-D psx-gte-execute-saturation.adb  20260915173717 4561a572 psx.gte.execute.saturation%b
-D psx-gte-instruction.ads  20260915171635 33cfbd89 psx.gte.instruction%s
-D psx-types.ads		20260911215536 f83f461c psx.types%s
+D psx.ads		20260916234907 6f0a212e psx%s
+D psx-gte.ads		20260916234907 570875b6 psx.gte%s
+D psx-gte-execute.ads	20260916234913 40086954 psx.gte.execute%s
+D psx-gte-execute-saturation.ads  20260916234913 d5141f15 psx.gte.execute.saturation%s
+D psx-gte-execute-saturation.adb  20260916234913 4561a572 psx.gte.execute.saturation%b
+D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
+D psx-types.ads		20260916234908 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
 G c Z s b [saturate_ir psx__gte__execute__saturation 7 13 none]

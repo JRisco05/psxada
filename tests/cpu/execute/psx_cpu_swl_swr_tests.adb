@@ -30,7 +30,7 @@ procedure PSX_CPU_SWL_SWR_Tests is
 begin
 
    ------------------------------------------------------------------
-   -- SWL
+   --  SWL
    ------------------------------------------------------------------
 
    for Offset in 0 .. 3 loop
@@ -41,7 +41,7 @@ begin
       CPU.Registers (1) := 16#0000_0100#;
       CPU.Registers (2) := 16#1122_3344#;
 
-      -- SWL R2, offset(R1)
+      --  SWL R2, offset(R1)
       PSX.Memory.Write_32
         (Memory,
          16#0001_0000#,
@@ -57,7 +57,7 @@ begin
    end loop;
 
    ------------------------------------------------------------------
-   -- SWR
+   --  SWR
    ------------------------------------------------------------------
 
    for Offset in 0 .. 3 loop
@@ -68,7 +68,7 @@ begin
       CPU.Registers (1) := 16#0000_0100#;
       CPU.Registers (2) := 16#1122_3344#;
 
-      -- SWR R2, offset(R1)
+      --  SWR R2, offset(R1)
       PSX.Memory.Write_32
         (Memory,
          16#0001_0000#,

@@ -53,7 +53,7 @@ begin
    New_Line;
 
    ------------------------------------------------------------------
-   -- 1. Saturación SX2 positiva
+   --  1. Saturación SX2 positiva
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -70,7 +70,7 @@ begin
    Check ("FLAG SX2 saturation", 16#0000_4000#, GTE.FLAG);
 
    ------------------------------------------------------------------
-   -- 2. Saturación SY2 positiva
+   --  2. Saturación SY2 positiva
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -85,7 +85,7 @@ begin
    Check ("FLAG SY2 saturation", 16#0000_2000#, GTE.FLAG);
 
    ------------------------------------------------------------------
-   -- 3. Saturación SX2 negativa
+   --  3. Saturación SX2 negativa
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -100,7 +100,7 @@ begin
    Check ("FLAG SX2 negative saturation", 16#0000_4000#, GTE.FLAG);
 
    ------------------------------------------------------------------
-   -- 4. Saturación SY2 negativa
+   --  4. Saturación SY2 negativa
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -115,7 +115,7 @@ begin
    Check ("FLAG SY2 negative saturation", 16#0000_2000#, GTE.FLAG);
 
    ------------------------------------------------------------------
-   -- 5. SZ3 = 0 -> saturación + división por cero
+   --  5. SZ3 = 0 -> saturación + división por cero
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -133,7 +133,7 @@ begin
       GTE.FLAG);
 
    ------------------------------------------------------------------
-   -- 6. Z negativo -> SZ3 saturado a cero
+   --  6. Z negativo -> SZ3 saturado a cero
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -151,7 +151,7 @@ begin
    GTE.FLAG);
 
    ------------------------------------------------------------------
-   -- 7. SZ3 dentro del rango
+   --  7. SZ3 dentro del rango
    ------------------------------------------------------------------
 
    Setup_Identity;
@@ -159,7 +159,7 @@ begin
    GTE.V0_X := 100;
    GTE.V0_Y := 200;
    GTE.V0_Z := 0;
-GTE.TRZ := 16#0000_FFFF#;
+   GTE.TRZ := 16#0000_FFFF#;
 
    PSX.GTE.Execute.Execute (GTE, Inst);
 

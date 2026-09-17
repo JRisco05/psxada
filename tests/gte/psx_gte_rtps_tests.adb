@@ -8,7 +8,7 @@ with Interfaces;
 procedure PSX_GTE_RTPS_Tests is
 
    use type Interfaces.Unsigned_32;
-   
+
    use Ada.Text_IO;
 
    GTE : PSX.GTE.GTE_State;
@@ -39,10 +39,10 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   -- =========================================================
-   -- Identity rotation matrix.
-   -- 1.0 in GTE fixed point = 0x1000.
-   -- =========================================================
+   --  =========================================================
+   --  Identity rotation matrix.
+   --  1.0 in GTE fixed point = 0x1000.
+   --  =========================================================
 
    PSX.GTE.Write_Control
      (GTE, 32, 16#0000_1000#);
@@ -59,7 +59,7 @@ begin
    PSX.GTE.Write_Control
      (GTE, 36, 16#0000_1000#);
 
-   -- Translation = 0.
+   --  Translation = 0.
    PSX.GTE.Write_Control
      (GTE, 37, 0);
 
@@ -69,32 +69,32 @@ begin
    PSX.GTE.Write_Control
      (GTE, 39, 0);
 
-   -- Screen offset = 0.
+   --  Screen offset = 0.
    PSX.GTE.Write_Control
      (GTE, 56, 0);
 
    PSX.GTE.Write_Control
      (GTE, 57, 0);
 
-   -- H = 1000.
+   --  H = 1000.
    PSX.GTE.Write_Control
      (GTE, 58, 1000);
 
-   -- DQA/DQB = 0.
+   --  DQA/DQB = 0.
    PSX.GTE.Write_Control
      (GTE, 59, 0);
 
    PSX.GTE.Write_Control
      (GTE, 60, 0);
 
-   -- Vertex V0 = (100, 200, 1000).
+   --  Vertex V0 = (100, 200, 1000).
    PSX.GTE.Write_Data
      (GTE, 0, 16#00C8_0064#);
 
    PSX.GTE.Write_Data
      (GTE, 1, 1000);
 
-   -- Preload FIFOs so we can verify the shift.
+   --  Preload FIFOs so we can verify the shift.
    PSX.GTE.Write_Data
      (GTE, 16, 1);
 
@@ -107,18 +107,18 @@ begin
    PSX.GTE.Write_Data
      (GTE, 19, 4);
 
-   -- RTPS command:
-   -- command = 01h
-   -- sf = 1
-   -- lm = 0
+   --  RTPS command:
+   --  command = 01h
+   --  sf = 1
+   --  lm = 0
    Inst.Raw := 16#0008_0001#;
 
    PSX.GTE.Execute.Execute
      (GTE, Inst);
 
-   -- =========================================================
-   -- Rotation / translation
-   -- =========================================================
+   --  =========================================================
+   --  Rotation / translation
+   --  =========================================================
 
    Check
      ("IR1",
@@ -150,9 +150,9 @@ begin
       GTE.MAC3,
       1000);
 
-   -- =========================================================
-   -- SZ FIFO
-   -- =========================================================
+   --  =========================================================
+   --  SZ FIFO
+   --  =========================================================
 
    Check
      ("SZ0 FIFO",
@@ -174,16 +174,16 @@ begin
       GTE.SZ3,
       1000);
 
-   -- =========================================================
-   -- Perspective projection
+   --  =========================================================
+   --  Perspective projection
    --
-   -- H = 1000
-   -- SZ3 = 1000
-   -- factor = 65536
+   --  H = 1000
+   --  SZ3 = 1000
+   --  factor = 65536
    --
-   -- SX = 100
-   -- SY = 200
-   -- =========================================================
+   --  SX = 100
+   --  SY = 200
+   --  =========================================================
 
    Check
      ("SX2",
@@ -195,16 +195,16 @@ begin
       GTE.SY2,
       200);
 
-   -- =========================================================
-   -- Depth cue
-   -- =========================================================
+   --  =========================================================
+   --  Depth cue
+   --  =========================================================
 
    Check
      ("IR0",
       GTE.IR0,
       0);
 
-   -- No saturation expected.
+   --  No saturation expected.
    Check
      ("FLAG",
       GTE.FLAG,

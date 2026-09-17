@@ -17,19 +17,19 @@ begin
    CPU.Registers (1) := 16#0000_0100#;
    CPU.Registers (2) := 16#AABB_CCDD#;
 
-   -- Memoria = 11 22 33 44
+   --  Memoria = 11 22 33 44
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#1122_3344#);
 
-   -- LWR R2, 3(R1)
+   --  LWR R2, 3(R1)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#9822_0003#);
 
-   -- NOP
+   --  NOP
    PSX.Memory.Write_32 (Memory, 16#0001_0004#, 16#0000_0000#);
 
    CPU.PC := 16#0001_0000#;
    CPU.Next_PC := 16#0001_0004#;
 
-   -- Ejecutar LWR.
+   --  Ejecutar LWR.
    PSX.CPU.Step.Step (CPU, Memory);
 
    if CPU.Registers (2) = 16#AABB_CCDD# then
@@ -44,7 +44,7 @@ begin
       Ada.Text_IO.Put_Line ("FAIL: LWR pending");
    end if;
 
-   -- Ejecutar NOP.
+   --  Ejecutar NOP.
    PSX.CPU.Step.Step (CPU, Memory);
 
    if CPU.Registers (2) = 16#AABB_CC11# then

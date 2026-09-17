@@ -31,9 +31,9 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- SLTI R3, R1, -1
-   -- R1 = -2
-   -- -2 < -1 => 1
+   --  SLTI R3, R1, -1
+   --  R1 = -2
+   --  -2 < -1 => 1
    CPU.Registers (1) := 16#FFFF_FFFE#;
 
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#2823_FFFF#);
@@ -45,10 +45,10 @@ begin
 
    Check ("SLTI signed", 1, CPU.Registers (3));
 
-   -- SLTIU R3, R1, -1
-   -- R1 = 1
-   -- Immediate sign-extended = 0xFFFFFFFF
-   -- 1 < 0xFFFFFFFF unsigned => 1
+   --  SLTIU R3, R1, -1
+   --  R1 = 1
+   --  Immediate sign-extended = 0xFFFFFFFF
+   --  1 < 0xFFFFFFFF unsigned => 1
    CPU.Registers (1) := 1;
 
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#2C23_FFFF#);

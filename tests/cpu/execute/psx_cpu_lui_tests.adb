@@ -35,8 +35,8 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- LUI R3, 0x1234
-   -- R3 = 0x12340000
+   --  LUI R3, 0x1234
+   --  R3 = 0x12340000
    PSX.Memory.Write_32
      (Memory,
       16#0001_0000#,
@@ -52,8 +52,8 @@ begin
       16#1234_0000#,
       CPU.Registers (3));
 
-   -- LUI R3, 0xFFFF
-   -- R3 = 0xFFFF0000
+   --  LUI R3, 0xFFFF
+   --  R3 = 0xFFFF0000
    PSX.Memory.Write_32
      (Memory,
       16#0001_0000#,

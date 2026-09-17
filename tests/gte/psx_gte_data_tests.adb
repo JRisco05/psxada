@@ -1,12 +1,11 @@
 with Ada.Text_IO;
 with PSX.GTE;
-with PSX.Types;
 with Interfaces;
 
 procedure PSX_GTE_Data_Tests is
 
-   use Type Interfaces.Unsigned_32;
-   
+   use type Interfaces.Unsigned_32;
+
    use Ada.Text_IO;
 
    GTE : PSX.GTE.GTE_State;
@@ -34,7 +33,7 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   -- V0X / V0Y
+   --  V0X / V0Y
    PSX.GTE.Write_Data
      (GTE, 0, 16#2222_1111#);
 
@@ -53,7 +52,7 @@ begin
       PSX.GTE.Read_Data (GTE, 0),
       16#2222_1111#);
 
-   -- V0Z
+   --  V0Z
    PSX.GTE.Write_Data
      (GTE, 1, 16#3333_3333#);
 
@@ -62,7 +61,7 @@ begin
       GTE.V0_Z,
       16#3333_3333#);
 
-   -- V1X / V1Y
+   --  V1X / V1Y
    PSX.GTE.Write_Data
      (GTE, 2, 16#5555_4444#);
 
@@ -76,7 +75,7 @@ begin
       GTE.V1_Y,
       16#0000_5555#);
 
-   -- V1Z
+   --  V1Z
    PSX.GTE.Write_Data
      (GTE, 3, 16#6666_6666#);
 
@@ -85,7 +84,7 @@ begin
       GTE.V1_Z,
       16#6666_6666#);
 
-   -- V2X / V2Y
+   --  V2X / V2Y
    PSX.GTE.Write_Data
      (GTE, 4, 16#8888_7777#);
 
@@ -99,7 +98,7 @@ begin
       GTE.V2_Y,
       16#0000_8888#);
 
-   -- V2Z
+   --  V2Z
    PSX.GTE.Write_Data
      (GTE, 5, 16#9999_9999#);
 
@@ -108,7 +107,7 @@ begin
       GTE.V2_Z,
       16#9999_9999#);
 
-   -- SXY FIFO
+   --  SXY FIFO
    PSX.GTE.Write_Data
      (GTE, 12, 16#BBBB_AAAA#);
 
@@ -148,7 +147,7 @@ begin
       GTE.SY2,
       16#0000_FFFF#);
 
-   -- SXYP writes must push the FIFO.
+   --  SXYP writes must push the FIFO.
    PSX.GTE.Write_Data
      (GTE, 15, 16#2222_1111#);
 
@@ -182,7 +181,7 @@ begin
       GTE.SY2,
       16#0000_2222#);
 
-         -- SZ FIFO / depth registers
+   --  SZ FIFO / depth registers
 
    PSX.GTE.Write_Data
      (GTE, 16, 16#0000_1111#);
@@ -227,7 +226,7 @@ begin
       16#0000_4444#);
 
 
-   -- IR registers
+   --  IR registers
 
    PSX.GTE.Write_Data
      (GTE, 8, 16#0000_1111#);
@@ -247,7 +246,7 @@ begin
    Check ("IR3", GTE.IR3, 16#0000_4444#);
 
 
-   -- MAC registers
+   --  MAC registers
 
    PSX.GTE.Write_Data
      (GTE, 24, 16#1111_1111#);

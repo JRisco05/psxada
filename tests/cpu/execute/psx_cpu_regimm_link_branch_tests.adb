@@ -37,9 +37,9 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- BLTZAL R1, +2
-   -- R1 = -1 -> branch taken
-   -- $ra = PC + 8
+   --  BLTZAL R1, +2
+   --  R1 = -1 -> branch taken
+   --  $ra = PC + 8
    CPU.Registers (1) := 16#FFFF_FFFF#;
 
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0430_0002#);
@@ -53,8 +53,8 @@ begin
 
    Check ("BLTZAL link", 16#0001_0008#, CPU.Registers (31));
 
-   -- BLTZAL R1, +2
-   -- R1 = 1 -> branch not taken
+   --  BLTZAL R1, +2
+   --  R1 = 1 -> branch not taken
    CPU.Registers (1) := 1;
 
    CPU.PC := 16#0001_0000#;
@@ -66,8 +66,8 @@ begin
 
    Check ("BLTZAL link not taken", 16#0001_0008#, CPU.Registers (31));
 
-   -- BGEZAL R1, +2
-   -- R1 = 1 -> branch taken
+   --  BGEZAL R1, +2
+   --  R1 = 1 -> branch taken
    CPU.Registers (1) := 1;
 
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#0431_0002#);
@@ -81,8 +81,8 @@ begin
 
    Check ("BGEZAL link", 16#0001_0008#, CPU.Registers (31));
 
-   -- BGEZAL R1, +2
-   -- R1 = -1 -> branch not taken
+   --  BGEZAL R1, +2
+   --  R1 = -1 -> branch not taken
    CPU.Registers (1) := 16#FFFF_FFFF#;
 
    CPU.PC := 16#0001_0000#;

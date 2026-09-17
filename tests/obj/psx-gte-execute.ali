@@ -57,12 +57,12 @@ W psx.gte%s		psx-gte.adb		psx-gte.ali
 W psx.gte.instruction%s	psx-gte-instruction.adb	psx-gte-instruction.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
-D psx.ads		20260824210455 6f0a212e psx%s
-D psx-gte.ads		20260915174620 570875b6 psx.gte%s
-D psx-gte-execute.ads	20260915172608 40086954 psx.gte.execute%s
-D psx-gte-execute.adb	20260916192210 c0ac2290 psx.gte.execute%b
-D psx-gte-instruction.ads  20260915171635 33cfbd89 psx.gte.instruction%s
-D psx-types.ads		20260911215536 f83f461c psx.types%s
+D psx.ads		20260916234907 6f0a212e psx%s
+D psx-gte.ads		20260916234907 570875b6 psx.gte%s
+D psx-gte-execute.ads	20260916234913 40086954 psx.gte.execute%s
+D psx-gte-execute.adb	20260916234913 c0ac2290 psx.gte.execute%b
+D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
+D psx-types.ads		20260916234908 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
 G c Z s b [execute psx__gte__execute 6 14 none]

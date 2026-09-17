@@ -2,14 +2,10 @@ with Ada.Text_IO;
 with Interfaces;
 with PSX.GTE;
 with PSX.Types;
-with Interfaces;
 
 procedure PSX_GTE_LZCR_Tests is
 
-   use type Interfaces.Unsigned_32;
-   
    use Ada.Text_IO;
-   use type Interfaces.Unsigned_32;
 
    GTE : PSX.GTE.GTE_State;
 
@@ -36,7 +32,7 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   -- 32 leading zeroes.
+   --  32 leading zeroes.
    PSX.GTE.Write_Data
      (GTE, 30, 16#0000_0000#);
 
@@ -50,7 +46,7 @@ begin
       PSX.GTE.Read_Data (GTE, 31),
       32);
 
-   -- One leading one.
+   --  One leading one.
    PSX.GTE.Write_Data
      (GTE, 30, 16#8000_0000#);
 
@@ -64,7 +60,7 @@ begin
       PSX.GTE.Read_Data (GTE, 31),
       1);
 
-   -- Four leading zeroes.
+   --  Four leading zeroes.
    PSX.GTE.Write_Data
      (GTE, 30, 16#0FFF_FFFF#);
 
@@ -73,7 +69,7 @@ begin
       PSX.GTE.Read_Data (GTE, 31),
       4);
 
-   -- Four leading ones.
+   --  Four leading ones.
    PSX.GTE.Write_Data
      (GTE, 30, 16#F000_0000#);
 
@@ -82,7 +78,7 @@ begin
       PSX.GTE.Read_Data (GTE, 31),
       4);
 
-   -- Eight leading zeroes.
+   --  Eight leading zeroes.
    PSX.GTE.Write_Data
      (GTE, 30, 16#00FF_FFFF#);
 
@@ -91,7 +87,7 @@ begin
       PSX.GTE.Read_Data (GTE, 31),
       8);
 
-   -- Eight leading ones.
+   --  Eight leading ones.
    PSX.GTE.Write_Data
      (GTE, 30, 16#FF00_0000#);
 
@@ -100,7 +96,7 @@ begin
       PSX.GTE.Read_Data (GTE, 31),
       8);
 
-   -- One leading one followed by zero.
+   --  One leading one followed by zero.
    PSX.GTE.Write_Data
      (GTE, 30, 16#8000_0001#);
 
@@ -109,7 +105,7 @@ begin
       PSX.GTE.Read_Data (GTE, 31),
       1);
 
-   -- All ones.
+   --  All ones.
    PSX.GTE.Write_Data
      (GTE, 30, 16#FFFF_FFFF#);
 
@@ -118,7 +114,7 @@ begin
       PSX.GTE.Read_Data (GTE, 31),
       32);
 
-   -- LZCR is read-only.
+   --  LZCR is read-only.
    PSX.GTE.Write_Data
      (GTE, 31, 16#1234_5678#);
 

@@ -15,16 +15,16 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- R1 = 0x00000100
+   --  R1 = 0x00000100
    CPU.Registers (1) := 16#0000_0100#;
 
-   -- Memoria: 0x80
+   --  Memoria: 0x80
    PSX.Memory.Write_8 (Memory, 16#0000_0100#, 16#80#);
 
-   -- LBU R2, 0(R1)
+   --  LBU R2, 0(R1)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#9022_0000#);
 
-   -- NOP
+   --  NOP
    PSX.Memory.Write_32 (Memory, 16#0001_0004#, 16#0000_0000#);
 
    CPU.PC := 16#0001_0000#;

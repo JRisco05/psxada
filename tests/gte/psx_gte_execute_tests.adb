@@ -1,13 +1,9 @@
 with Ada.Text_IO; use Ada.Text_IO;
-with Interfaces;
-
 with PSX.GTE;
 with PSX.GTE.Execute;
 with PSX.GTE.Instruction;
 
 procedure PSX_GTE_Execute_Tests is
-
-   use type Interfaces.Unsigned_32;
 
    GTE  : PSX.GTE.GTE_State;
    Inst : PSX.GTE.Instruction.Instruction;

@@ -5,7 +5,7 @@ with Interfaces;
 procedure PSX_GTE_Reset_Tests is
 
    use type Interfaces.Unsigned_32;
-   
+
    GTE : PSX.GTE.GTE_State;
 
 begin

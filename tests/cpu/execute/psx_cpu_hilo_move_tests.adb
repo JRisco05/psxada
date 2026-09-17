@@ -38,7 +38,7 @@ begin
    CPU.PC := 16#0001_0000#;
    CPU.Next_PC := 16#0001_0004#;
 
-   -- MTHI R1
+   --  MTHI R1
    CPU.Registers (1) := 16#1234_5678#;
 
    PSX.Memory.Write_32
@@ -53,7 +53,7 @@ begin
       16#1234_5678#,
       CPU.HI);
 
-   -- MFHI R2
+   --  MFHI R2
    PSX.Memory.Write_32
      (Memory,
       16#0001_0000#,
@@ -69,7 +69,7 @@ begin
       16#1234_5678#,
       CPU.Registers (2));
 
-   -- MTLO R1
+   --  MTLO R1
    CPU.Registers (1) := 16#89AB_CDEF#;
 
    PSX.Memory.Write_32
@@ -87,7 +87,7 @@ begin
       16#89AB_CDEF#,
       CPU.LO);
 
-   -- MFLO R2
+   --  MFLO R2
    PSX.Memory.Write_32
      (Memory,
       16#0001_0000#,

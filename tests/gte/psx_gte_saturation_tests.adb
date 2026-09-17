@@ -1,14 +1,10 @@
 with Ada.Text_IO; use Ada.Text_IO;
-
 with PSX.GTE.Execute.Saturation;
-with PSX.Types;
 with Interfaces;
 
 procedure PSX_GTE_Saturation_Tests is
 
    use type Interfaces.Unsigned_32;
-   
-   subtype Word32 is PSX.Types.Word32;
 
 begin
    Put_Line ("Testing PSX GTE IR saturation...");

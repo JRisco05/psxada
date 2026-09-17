@@ -34,8 +34,8 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- ADDI R3, R1, -1
-   -- 5 + (-1) = 4
+   --  ADDI R3, R1, -1
+   --  5 + (-1) = 4
    CPU.Registers (1) := 5;
 
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#2023_FFFF#);
@@ -47,8 +47,8 @@ begin
 
    Check ("ADDI sign extension", 4, CPU.Registers (3));
 
-   -- ADDIU R3, R1, -1
-   -- 0 + (-1) = 0xFFFFFFFF
+   --  ADDIU R3, R1, -1
+   --  0 + (-1) = 0xFFFFFFFF
    CPU.Registers (1) := 0;
 
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#2423_FFFF#);
@@ -60,8 +60,8 @@ begin
 
    Check ("ADDIU sign extension", 16#FFFF_FFFF#, CPU.Registers (3));
 
-   -- ADDI overflow
-   -- 0x7FFFFFFF + 1 => signed overflow
+   --  ADDI overflow
+   --  0x7FFFFFFF + 1 => signed overflow
    CPU.Registers (1) := 16#7FFF_FFFF#;
    CPU.Registers (3) := 16#1234_5678#;
 
