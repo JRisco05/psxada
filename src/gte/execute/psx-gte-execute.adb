@@ -488,17 +488,57 @@ package body PSX.GTE.Execute is
       --  Matriz RT
       --  ----------------------------------------------------
 
-      Matrix_11 := Signed_16 (GTE.RT11);
-      Matrix_12 := Signed_16 (GTE.RT12);
-      Matrix_13 := Signed_16 (GTE.RT13);
+      case PSX.GTE.Instruction.Mx (Inst) is
 
-      Matrix_21 := Signed_16 (GTE.RT21);
-      Matrix_22 := Signed_16 (GTE.RT22);
-      Matrix_23 := Signed_16 (GTE.RT23);
+         when 0      =>
+            -- Rotation matrix
+            Matrix_11 := Signed_16 (GTE.RT11);
+            Matrix_12 := Signed_16 (GTE.RT12);
+            Matrix_13 := Signed_16 (GTE.RT13);
+            Matrix_21 := Signed_16 (GTE.RT21);
+            Matrix_22 := Signed_16 (GTE.RT22);
+            Matrix_23 := Signed_16 (GTE.RT23);
+            Matrix_31 := Signed_16 (GTE.RT31);
+            Matrix_32 := Signed_16 (GTE.RT32);
+            Matrix_33 := Signed_16 (GTE.RT33);
 
-      Matrix_31 := Signed_16 (GTE.RT31);
-      Matrix_32 := Signed_16 (GTE.RT32);
-      Matrix_33 := Signed_16 (GTE.RT33);
+         when 1      =>
+            -- Light matrix
+            Matrix_11 := Signed_16 (GTE.L11);
+            Matrix_12 := Signed_16 (GTE.L12);
+            Matrix_13 := Signed_16 (GTE.L13);
+            Matrix_21 := Signed_16 (GTE.L21);
+            Matrix_22 := Signed_16 (GTE.L22);
+            Matrix_23 := Signed_16 (GTE.L23);
+            Matrix_31 := Signed_16 (GTE.L31);
+            Matrix_32 := Signed_16 (GTE.L32);
+            Matrix_33 := Signed_16 (GTE.L33);
+
+         when 2      =>
+            -- Color matrix
+            Matrix_11 := Signed_16 (GTE.LR1);
+            Matrix_12 := Signed_16 (GTE.LR2);
+            Matrix_13 := Signed_16 (GTE.LR3);
+            Matrix_21 := Signed_16 (GTE.LG1);
+            Matrix_22 := Signed_16 (GTE.LG2);
+            Matrix_23 := Signed_16 (GTE.LG3);
+            Matrix_31 := Signed_16 (GTE.LB1);
+            Matrix_32 := Signed_16 (GTE.LB2);
+            Matrix_33 := Signed_16 (GTE.LB3);
+
+         when others =>
+            -- Color matrix
+            Matrix_11 := Signed_16 (GTE.LR1);
+            Matrix_12 := Signed_16 (GTE.LR2);
+            Matrix_13 := Signed_16 (GTE.LR3);
+            Matrix_21 := Signed_16 (GTE.LG1);
+            Matrix_22 := Signed_16 (GTE.LG2);
+            Matrix_23 := Signed_16 (GTE.LG3);
+            Matrix_31 := Signed_16 (GTE.LB1);
+            Matrix_32 := Signed_16 (GTE.LB2);
+            Matrix_33 := Signed_16 (GTE.LB3);
+
+      end case;
 
       --  ----------------------------------------------------
       --  Selección del vector
@@ -510,21 +550,25 @@ package body PSX.GTE.Execute is
       case PSX.GTE.Instruction.V (Inst) is
 
          when 0      =>
+            -- V=0 -> V0
             VX := Signed_16 (GTE.V0_X);
             VY := Signed_16 (GTE.V0_Y);
             VZ := Signed_16 (GTE.V0_Z);
 
          when 1      =>
+            -- V=1 -> V1
             VX := Signed_16 (GTE.V1_X);
             VY := Signed_16 (GTE.V1_Y);
             VZ := Signed_16 (GTE.V1_Z);
 
          when 2      =>
+            -- V=2 -> V2
             VX := Signed_16 (GTE.V2_X);
             VY := Signed_16 (GTE.V2_Y);
             VZ := Signed_16 (GTE.V2_Z);
 
          when 3      =>
+            -- V=3 -> IR vector
             VX := Signed_16 (GTE.IR1);
             VY := Signed_16 (GTE.IR2);
             VZ := Signed_16 (GTE.IR3);
