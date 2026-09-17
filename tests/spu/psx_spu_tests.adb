@@ -1,6 +1,7 @@
 with Interfaces;
-with Ada.Text_IO;
 with PSX.SPU;
+with Ada.Text_IO;
+
 
 procedure PSX_SPU_Tests is
 
@@ -125,6 +126,36 @@ begin
       PSX.SPU.Read_Register (SPU, 16#1F801D70#, Value);
 
       Check (Value = 16#AAAA#, "Read Voice 23 Volume Left");
+
+   end;
+
+   -- Código de verificación de lectura corregido:
+   declare
+      Value :
+        PSX.SPU.Word16; -- O simplemente Word16 si usas "use PSX.SPU;" arriba
+   begin
+
+      -- 🌟 ¡PASO CRÍTICO!: Primero escribimos los valores en el SPU
+      PSX.SPU.Write_Register (SPU, 16#1F801D80#, 16#1111#);
+      PSX.SPU.Write_Register (SPU, 16#1F801D82#, 16#2222#);
+      PSX.SPU.Write_Register (SPU, 16#1F801D84#, 16#3333#);
+      PSX.SPU.Write_Register (SPU, 16#1F801D86#, 16#4444#);
+
+      PSX.SPU.Read_Register (SPU, 16#1F801D80#, Value);
+
+      Check (Value = 16#1111#, "Read Main Volume Left");
+
+      PSX.SPU.Read_Register (SPU, 16#1F801D82#, Value);
+
+      Check (Value = 16#2222#, "Read Main Volume Right");
+
+      PSX.SPU.Read_Register (SPU, 16#1F801D84#, Value);
+
+      Check (Value = 16#3333#, "Read Reverb Volume Left");
+
+      PSX.SPU.Read_Register (SPU, 16#1F801D86#, Value);
+
+      Check (Value = 16#4444#, "Read Reverb Volume Right");
 
    end;
 

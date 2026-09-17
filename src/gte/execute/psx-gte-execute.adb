@@ -524,6 +524,11 @@ package body PSX.GTE.Execute is
             VY := Signed_16 (GTE.V2_Y);
             VZ := Signed_16 (GTE.V2_Z);
 
+         when 3      =>
+            VX := Signed_16 (GTE.IR1);
+            VY := Signed_16 (GTE.IR2);
+            VZ := Signed_16 (GTE.IR3);
+
          when others =>
             VX := 0;
             VY := 0;

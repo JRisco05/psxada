@@ -4,9 +4,8 @@ package body PSX.SPU is
    begin
 
       SPU.RAM := (others => 0);
-
       SPU.Control := 0;
-
+      SPU.Status := 0;
       SPU.Transfer_Address := 0;
       SPU.Transfer_Control := 0;
 
@@ -20,13 +19,25 @@ package body PSX.SPU is
       Voice_Index : Natural;
       Offset      : Word32;
    begin
-      if Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
-         Offset := Address - 16#1F801C00#;
+      -- 1. Primero comprobamos las direcciones de volumen GLOBAL
+      if Address = 16#1F801D80# then
+         SPU.Main_Volume_Left := Value;
 
+      elsif Address = 16#1F801D82# then
+         SPU.Main_Volume_Right := Value;
+
+      elsif Address = 16#1F801D84# then
+         SPU.Reverb_Volume_Left := Value;
+
+      elsif Address = 16#1F801D86# then
+         SPU.Reverb_Volume_Right := Value;
+
+      -- 2. Si no es volumen global, comprobamos si pertenece al rango de las 24 VOCES
+      elsif Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
+         Offset := Address - 16#1F801C00#;
          Voice_Index := Natural (Offset / 16#10#);
 
          case Offset mod 16#10# is
-
             when 16#00# =>
                SPU.Channels (Voice_Index).Volume_Left := Value;
 
@@ -38,31 +49,12 @@ package body PSX.SPU is
 
             when 16#06# =>
                SPU.Channels (Voice_Index).Start_Address := Value;
-            
-            when 16#1F801D80# =>
-               SPU.Main_Volume_Left := Value;
-            
-            when 16#1F801D82# =>
-               SPU.Main_Volume_Right := Value;
 
-            when 16#1F801D84# =>
-               SPU.Reverb_Volume_Left := Value;
-            
-            when 16#1F801D86# =>
-               SPU.Reverb_Volume_Right := Value;
-            
-             --  when  =>
-   
-
-            when others => 
+            when others =>
                null;
-
          end case;
-      end if;
-      
-   
 
-   
+      end if;
    end Write_Register;
 
    procedure Read_Register
@@ -71,15 +63,27 @@ package body PSX.SPU is
       Voice_Index : Natural;
       Offset      : Word32;
    begin
-      Value := 0;
+      Value := 0; -- Valor de seguridad por defecto
 
-      if Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
+      -- 1. Primero comprobamos las lecturas de volumen GLOBAL
+      if Address = 16#1F801D80# then
+         Value := SPU.Main_Volume_Left;
+
+      elsif Address = 16#1F801D82# then
+         Value := SPU.Main_Volume_Right;
+
+      elsif Address = 16#1F801D84# then
+         Value := SPU.Reverb_Volume_Left;
+
+      elsif Address = 16#1F801D86# then
+         Value := SPU.Reverb_Volume_Right;
+
+      -- 2. Si no, comprobamos si la CPU quiere leer los datos de las 24 VOCES
+      elsif Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
          Offset := Address - 16#1F801C00#;
-
          Voice_Index := Natural (Offset / 16#10#);
 
          case Offset mod 16#10# is
-
             when 16#00# =>
                Value := SPU.Channels (Voice_Index).Volume_Left;
 
@@ -93,9 +97,9 @@ package body PSX.SPU is
                Value := SPU.Channels (Voice_Index).Start_Address;
 
             when others =>
-               null;
-
+               Value := 0;
          end case;
+
       end if;
    end Read_Register;
 
