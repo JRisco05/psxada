@@ -37,6 +37,11 @@ package PSX.SPU is
       Transfer_Address : Word16;
       Transfer_Control : Word16;
       IRQ_Address      : Word16;
+      Main_Volume_Left   : Word16;
+      Main_Volume_Right  : Word16;
+
+      Reverb_Volume_Left  : Word16;
+      Reverb_Volume_Right : Word16;
    end record;
 
    procedure Reset (SPU : out SPU_State);
