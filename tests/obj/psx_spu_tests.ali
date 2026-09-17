@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_spu_tests%b	psx_spu_tests.adb	07c0b302 NE OO SU
+U psx_spu_tests%b	psx_spu_tests.adb	0c4c4103 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -66,9 +66,9 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260917034516 6f0a212e psx%s
-D psx-spu.ads		20260917034252 338125ce psx.spu%s
+D psx-spu.ads		20260917161442 380dd7cf psx.spu%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_spu_tests.adb	20260917142737 91bf28d3 psx_spu_tests%b
+D psx_spu_tests.adb	20260917161312 91bf28d3 psx_spu_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -84,62 +84,62 @@ D s-traent.ads		20260610194523 c81cbf8c system.traceback_entries%s
 D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
-G c Z b b [psx_spu_tests standard 6 11 none]
-G r c none [psx_spu_tests standard 6 11 none] [reset psx__spu 47 14 none]
-G r c none [psx_spu_tests standard 6 11 none] [write_register psx__spu 52 14 none]
-G r c none [psx_spu_tests standard 6 11 none] [read_register psx__spu 49 14 none]
+G c Z b b [psx_spu_tests standard 5 11 none]
+G r c none [psx_spu_tests standard 5 11 none] [reset psx__spu 47 14 none]
+G r c none [psx_spu_tests standard 5 11 none] [write_register psx__spu 52 14 none]
+G r c none [psx_spu_tests standard 5 11 none] [read_register psx__spu 49 14 none]
 X 1 ada.ads
-18K9*Ada 22e8 16|3r6 8r8
+18K9*Ada 22e8 16|3r6 7r8
 X 9 a-textio.ads
-58K13*Text_IO 785e16 16|3w10 8r12
-284U14*New_Line 16|26s4 162s4
-565U14*Put_Line 16|17s10 19s10 25s4 163s4
+58K13*Text_IO 785e16 16|3w10 7r12
+284U14*New_Line 16|25s4 161s4
+565U14*Put_Line 16|16s10 18s10 24s4 162s4
 X 11 interfac.ads
-47K9*Interfaces 247e15 16|1w6 9r13 10r13 119r15
-81M9*Unsigned_8 16|9r24
-84M9*Unsigned_16 16|10r24 119r26
+47K9*Interfaces 247e15 16|1w6 8r13 9r13 118r15
+81M9*Unsigned_8 16|8r24
+84M9*Unsigned_16 16|9r24 118r26
 X 13 psx.ads
-1K9*PSX 3e8 16|2r6 12r10 29r4 105r4 112r4 122r7 126r7 135r9 139r7 140r7 141r7
-. 142r7 144r7 148r7 152r7 156r7
+1K9*PSX 3e8 16|2r6 11r10 28r4 104r4 111r4 121r7 125r7 134r9 138r7 139r7 140r7
+. 141r7 143r7 147r7 151r7 155r7
 X 14 psx-spu.ads
-4K13*SPU 55e12 16|2w10 12r14 29r8 105r8 112r8 122r11 126r11 135r13 139r11
-. 140r11 141r11 142r11 144r11 148r11 152r11 156r11
-9M12*Word16{15|6M12} 16|135r17
-14m7*Volume_Left{9M12} 16|69r28 81r29 92m21 93m22 95r28 97r29 99r28 101r29
-. 108r24 115r25
-15m7*Volume_Right{9M12} 16|71r28 83r29
-16m7*Pitch{9M12} 16|73r28 85r29
-17m7*Start_Address{9M12} 16|75r28 88r25
-21b7*Key_On{boolean} 16|77r32
-22b7*Key_Off{boolean} 16|79r32
+4K13*SPU 55e12 16|2w10 11r14 28r8 104r8 111r8 121r11 125r11 134r13 138r11
+. 139r11 140r11 141r11 143r11 147r11 151r11 155r11
+9M12*Word16{15|6M12} 16|134r17
+14m7*Volume_Left{9M12} 16|68r28 80r29 91m21 92m22 94r28 96r29 98r28 100r29
+. 107r24 114r25
+15m7*Volume_Right{9M12} 16|70r28 82r29
+16m7*Pitch{9M12} 16|72r28 84r29
+17m7*Start_Address{9M12} 16|74r28 87r25
+21b7*Key_On{boolean} 16|76r32
+22b7*Key_Off{boolean} 16|78r32
 26A9*Channel_Array(13R9)<integer>
 30A9*SPU_RAM_Array(8M12)<11|92M9>
-32R9*SPU_State 45e14 16|12r18
-33a7*Channels{26A9} 16|67r15 69r15 71r15 73r15 75r15 77r19 79r19 81r15 83r15
-. 85r15 88r11 92m8 93m8 95r15 97r15 99r15 101r15 108r11 115r11
-34a7*RAM{30A9} 16|42r15 44r15 46r15 49m8 50m8 51m8 53r15 56r11 58r15 61r15
-. 63r15
-35m7*Control{9M12} 16|31r15
-36m7*Status{9M12} 16|33r15
-37m7*Transfer_Address{9M12} 16|35r15
-38m7*Transfer_Control{9M12} 16|37r15
-39m7*IRQ_Address{9M12} 16|39r15
-47U14*Reset 16|29s12
-49U14*Read_Register 16|122s15 126s15 144s15 148s15 152s15 156s15
-52U14*Write_Register 16|105s12 112s12 139s15 140s15 141s15 142s15
+32R9*SPU_State 45e14 16|11r18
+33a7*Channels{26A9} 16|66r15 68r15 70r15 72r15 74r15 76r19 78r19 80r15 82r15
+. 84r15 87r11 91m8 92m8 94r15 96r15 98r15 100r15 107r11 114r11
+34a7*RAM{30A9} 16|41r15 43r15 45r15 48m8 49m8 50m8 52r15 55r11 57r15 60r15
+. 62r15
+35m7*Control{9M12} 16|30r15
+36m7*Status{9M12} 16|32r15
+37m7*Transfer_Address{9M12} 16|34r15
+38m7*Transfer_Control{9M12} 16|36r15
+39m7*IRQ_Address{9M12} 16|38r15
+47U14*Reset 16|28s12
+49U14*Read_Register 16|121s15 125s15 143s15 147s15 151s15 155s15
+52U14*Write_Register 16|104s12 111s12 138s15 139s15 140s15 141s15
 X 16 psx_spu_tests.adb
-6U11*PSX_SPU_Tests 6b11 165l5 165t18
-12r4 SPU{14|32R9} 29m19 31r11 33r11 35r11 37r11 39r11 42r11 44r11 46r11 49m4
-. 50m4 51m4 53r11 56r7 58r11 61r11 63r11 67r11 69r11 71r11 73r11 75r11 77r15
-. 79r15 81r11 83r11 85r11 88r7 92m4 93m4 95r11 97r11 99r11 101r11 105m28
-. 105r28 108r7 112m28 112r28 115r7 122r30 126r30 139m31 139r31 140m31 140r31
-. 141m31 141r31 142m31 142r31 144r30 148r30 152r30 156r30
-14U14 Check 14b14 14>21 14>42 21l8 21t13 31s4 33s4 35s4 37s4 39s4 42s4 44s4
-. 46s4 53s4 55s4 58s4 61s4 63s4 67s4 69s4 71s4 73s4 75s4 77s4 79s4 81s4 83s4
-. 85s4 87s4 95s4 97s4 99s4 101s4 107s4 114s4 124s7 128s7 146s7 150s7 154s7
-. 158s7
-14b21 Condition{boolean} 16r10
-14a42 Message{string} 17r31 19r31
-119m7 Value{11|84M9} 122m49 124r14 126m49 128r14
-134m7 Value{14|9M12} 144m49 146r14 148m49 150r14 152m49 154r14 156m49 158r14
+5U11*PSX_SPU_Tests 5b11 164l5 164t18
+11r4 SPU{14|32R9} 28m19 30r11 32r11 34r11 36r11 38r11 41r11 43r11 45r11 48m4
+. 49m4 50m4 52r11 55r7 57r11 60r11 62r11 66r11 68r11 70r11 72r11 74r11 76r15
+. 78r15 80r11 82r11 84r11 87r7 91m4 92m4 94r11 96r11 98r11 100r11 104m28
+. 107r7 111m28 114r7 121r30 125r30 138m31 139m31 140m31 141m31 143r30 147r30
+. 151r30 155r30
+13U14 Check 13b14 13>21 13>42 20l8 20t13 30s4 32s4 34s4 36s4 38s4 41s4 43s4
+. 45s4 52s4 54s4 57s4 60s4 62s4 66s4 68s4 70s4 72s4 74s4 76s4 78s4 80s4 82s4
+. 84s4 86s4 94s4 96s4 98s4 100s4 106s4 113s4 123s7 127s7 145s7 149s7 153s7
+. 157s7
+13b21 Condition{boolean} 15r10
+13a42 Message{string} 16r31 18r31
+118m7 Value{11|84M9} 121m49 123r14 125m49 127r14
+133m7 Value{14|9M12} 143m49 145r14 147m49 149r14 151m49 153r14 155m49 157r14
 

@@ -1,3 +1,0 @@
-psx_spu_tests.adb:4:01: (style) multiple blank lines [-gnatyu]
-psx_spu_tests.adb:132:07: (style) space required [-gnatyc]
-psx_spu_tests.adb:138:10: (style) space required [-gnatyc]

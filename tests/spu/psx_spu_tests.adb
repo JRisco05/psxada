@@ -2,7 +2,6 @@ with Interfaces;
 with PSX.SPU;
 with Ada.Text_IO;
 
-
 procedure PSX_SPU_Tests is
 
    use Ada.Text_IO;
@@ -129,13 +128,13 @@ begin
 
    end;
 
-   -- Código de verificación de lectura corregido:
+   --  Código de verificación de lectura corregido:
    declare
       Value :
-        PSX.SPU.Word16; -- O simplemente Word16 si usas "use PSX.SPU;" arriba
+        PSX.SPU.Word16; --  O simplemente Word16 si usas "use PSX.SPU;" arriba
    begin
 
-      -- 🌟 ¡PASO CRÍTICO!: Primero escribimos los valores en el SPU
+      --  🌟 ¡PASO CRÍTICO!: Primero escribimos los valores en el SPU
       PSX.SPU.Write_Register (SPU, 16#1F801D80#, 16#1111#);
       PSX.SPU.Write_Register (SPU, 16#1F801D82#, 16#2222#);
       PSX.SPU.Write_Register (SPU, 16#1F801D84#, 16#3333#);

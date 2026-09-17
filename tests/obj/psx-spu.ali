@@ -42,18 +42,18 @@ P ZX
 RN
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx.spu%b		psx-spu.adb		6bbdfd70 NE OO PK IU
+U psx.spu%b		psx-spu.adb		54428f5f NE OO PK IU
 W psx%s			psx.ads			psx.ali
 
-U psx.spu%s		psx-spu.ads		35a5bb3d EE NE OO PK IU
+U psx.spu%s		psx-spu.ads		3e29493c EE NE OO PK IU
 W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D psx.ads		20260917034516 6f0a212e psx%s
-D psx-spu.ads		20260917034252 338125ce psx.spu%s
-D psx-spu.adb		20260917143208 583cd8be psx.spu%b
+D psx-spu.ads		20260917161442 380dd7cf psx.spu%s
+D psx-spu.adb		20260917161517 6c4f5890 psx.spu%b
 D psx-types.ads		20260916234908 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e
@@ -75,8 +75,8 @@ X 3 psx-spu.ads
 4K13*SPU 2|1k9 3|55l9 55e12 4|1b18 107l9 107t12
 8M12*Word8{5|5M12} 30r72
 9M12*Word16{5|6M12} 14r25 15r25 16r25 17r25 20r25 35r27 36r27 37r27 38r27
-. 39r27 40r27 41r27 43r29 44r29 50r60 53r63 4|18r63 62r60
-10M12*Word32{5|7M12} 18r25 19r25 30r33 50r40 53r44 4|18r44 21r21 62r40 65r21
+. 39r27 40r27 41r27 43r29 44r29 50r54 53r54 4|17r54 62r54
+10M12*Word32{5|7M12} 18r25 19r25 30r33 50r34 53r38 4|17r38 20r21 62r34 65r21
 13R9*SPU_Channel 23e14 26r45
 14m7*Volume_Left{9M12} 4|43m43 89r52
 15m7*Volume_Right{9M12} 4|46m43 92r52
@@ -90,32 +90,32 @@ X 3 psx-spu.ads
 26A9*Channel_Array(13R9)<integer> 33r27
 28N4*SPU_RAM_SIZE 30r51
 30A9*SPU_RAM_Array(8M12)<1|92M9> 34r27
-32R9*SPU_State 45e14 47r31 50r16 53r20 4|3r31 18r20 62r16
+32R9*SPU_State 45e14 47r31 50r13 53r17 4|3r31 17r17 62r13
 33a7*Channels{26A9} 4|43m20 46m20 49m20 52m20 89r29 92r29 95r29 98r29
 34a7*RAM{30A9} 4|6m11
-35m7*Control{9M12} 4|8m11
-36m7*Status{9M12} 4|9m11
-37m7*Transfer_Address{9M12} 4|10m11
-38m7*Transfer_Control{9M12} 4|11m11
-39m7*IRQ_Address{9M12} 4|13m11
-40m7*Main_Volume_Left{9M12} 4|25m14 71r23
-41m7*Main_Volume_Right{9M12} 4|28m14 74r23
-43m7*Reverb_Volume_Left{9M12} 4|31m14 77r23
-44m7*Reverb_Volume_Right{9M12} 4|34m14 80r23
-47U14*Reset 47<21 4|3b14 15l8 15t13
-47r21 SPU{32R9} 4|3b21 6m7 8m7 9m7 10m7 11m7 13m7
-49U14*Read_Register 50>7 50>27 50<48 4|61b14 105l8 105t21
+35m7*Control{9M12} 4|7m11
+36m7*Status{9M12} 4|8m11
+37m7*Transfer_Address{9M12} 4|9m11
+38m7*Transfer_Control{9M12} 4|10m11
+39m7*IRQ_Address{9M12} 4|12m11
+40m7*Main_Volume_Left{9M12} 4|24m14 71r23
+41m7*Main_Volume_Right{9M12} 4|27m14 74r23
+43m7*Reverb_Volume_Left{9M12} 4|30m14 77r23
+44m7*Reverb_Volume_Right{9M12} 4|33m14 80r23
+47U14*Reset 47<21 4|3b14 14l8 14t13
+47r21 SPU{32R9} 4|3b21 6m7 7m7 8m7 9m7 10m7 12m7
+49U14*Read_Register 50>7 50>24 50<42 4|61b14 105l8 105t21
 50r7 SPU{32R9} 4|62b7 71r19 74r19 77r19 80r19 89r25 92r25 95r25 98r25
-50m27 Address{10M12} 4|62b27 70r10 73r13 76r13 79r13 83r13 83r46 84r20
-50m48 Value{9M12} 4|62b48 67m7 71m10 74m10 77m10 80m10 89m16 92m16 95m16
+50m24 Address{10M12} 4|62b24 70r10 73r13 76r13 79r13 83r13 83r46 84r20
+50m42 Value{9M12} 4|62b42 67m7 71m10 74m10 77m10 80m10 89m16 92m16 95m16
 . 98m16 101m16
-52U14*Write_Register 53=7 53>31 53>52 4|17b14 59l8 59t22
-53r7 SPU{32R9} 4|18b7 25m10 28m10 31m10 34m10 43m16 46m16 49m16 52m16
-53m31 Address{10M12} 4|18b31 24r10 27r13 30r13 33r13 37r13 37r46 38r20
-53m52 Value{9M12} 4|18b52 25r34 28r35 31r36 34r37 43r58 46r59 49r52 52r60
+52U14*Write_Register 53<7 53>28 53>46 4|16b14 59l8 59t22
+53r7 SPU{32R9} 4|17b7 24m10 27m10 30m10 33m10 43m16 46m16 49m16 52m16
+53m28 Address{10M12} 4|17b28 23r10 26r13 29r13 32r13 37r13 37r46 38r20
+53m46 Value{9M12} 4|17b46 24r34 27r35 30r36 33r37 43r58 46r59 49r52 52r60
 X 4 psx-spu.adb
-20i7 Voice_Index{natural} 39m10 43r30 46r30 49r30 52r30
-21m7 Offset{3|10M12} 38m10 39r34 41r15
+19i7 Voice_Index{natural} 39m10 43r30 46r30 49r30 52r30
+20m7 Offset{3|10M12} 38m10 39r34 41r15
 64i7 Voice_Index{natural} 85m10 89r39 92r39 95r39 98r39
 65m7 Offset{3|10M12} 84m10 85r34 87r15
 X 5 psx-types.ads
