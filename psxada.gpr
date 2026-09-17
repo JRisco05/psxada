@@ -34,6 +34,7 @@ project Psxada is
       "tests/spu/",
       "tests/timers/",
       "tests/gpu/",
+      "tests/gte/",
       "tests/dma/",
       "config/");
 

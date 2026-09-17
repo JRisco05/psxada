@@ -6,31 +6,6 @@ package body PSX.SPU is
       SPU.RAM := (others => 0);
 
       SPU.Control := 0;
-      SPU.Status := 0;
-      
-      if Address = 16#1F801D80# then
-
-         SPU.Main_Volume_Left := Value;
-
-      elsif Address = 16#1F801D82# then
-
-   SPU.Main_Volume_Right := Value;
-
-elsif Address = 16#1F801D84# then
-
-   SPU.Reverb_Volume_Left := Value;
-
-elsif Address = 16#1F801D86# then
-
-   SPU.Reverb_Volume_Right := Value;
-
-elsif Address >= 16#1F801C00#
-  and then Address <= 16#1F801D7F#
-then
-
-   -- aquí permanece tu código actual de voices
-
-end if;
 
       SPU.Transfer_Address := 0;
       SPU.Transfer_Control := 0;
@@ -75,13 +50,17 @@ end if;
             
             when 16#1F801D86# =>
                SPU.Reverb_Volume_Right := Value;
+            
+             --  when  =>
+   
 
             when others => 
                null;
 
          end case;
-      elsif;
-   elsif;
+      end if;
+      
+   
 
    
    end Write_Register;

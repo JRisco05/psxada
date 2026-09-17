@@ -40,7 +40,7 @@ package ada_main is
    pragma Export (C, main, "main");
 
    type Version_32 is mod 2 ** 32;
-   u00001 : constant Version_32 := 16#7e098107#;
+   u00001 : constant Version_32 := 16#bcec3f64#;
    pragma Export (C, u00001, "psx_memory_store_cycle_testsB");
    u00002 : constant Version_32 := 16#b2cfab41#;
    pragma Export (C, u00002, "system__standard_libraryB");
@@ -258,7 +258,7 @@ package ada_main is
    pragma Export (C, u00108, "system__file_control_blockS");
    u00109 : constant Version_32 := 16#6f0a212e#;
    pragma Export (C, u00109, "psxS");
-   u00110 : constant Version_32 := 16#2350623f#;
+   u00110 : constant Version_32 := 16#49d2ec47#;
    pragma Export (C, u00110, "psx__cpuB");
    u00111 : constant Version_32 := 16#d4861e94#;
    pragma Export (C, u00111, "psx__cpuS");
@@ -268,7 +268,7 @@ package ada_main is
    pragma Export (C, u00113, "psx__registerS");
    u00114 : constant Version_32 := 16#06249ef3#;
    pragma Export (C, u00114, "psx__typesS");
-   u00115 : constant Version_32 := 16#413a85e2#;
+   u00115 : constant Version_32 := 16#19da7f2d#;
    pragma Export (C, u00115, "psx__cpu__stepB");
    u00116 : constant Version_32 := 16#5380f4ad#;
    pragma Export (C, u00116, "psx__cpu__stepS");
@@ -280,15 +280,15 @@ package ada_main is
    pragma Export (C, u00119, "psx__cpu__instructionB");
    u00120 : constant Version_32 := 16#539b7d3d#;
    pragma Export (C, u00120, "psx__cpu__instructionS");
-   u00121 : constant Version_32 := 16#8329383b#;
+   u00121 : constant Version_32 := 16#99aa6487#;
    pragma Export (C, u00121, "psx__cpu__executeB");
    u00122 : constant Version_32 := 16#77967831#;
    pragma Export (C, u00122, "psx__cpu__executeS");
-   u00123 : constant Version_32 := 16#15835e9a#;
+   u00123 : constant Version_32 := 16#d8d6aee0#;
    pragma Export (C, u00123, "psx__cpu__muldivB");
    u00124 : constant Version_32 := 16#de939a6a#;
    pragma Export (C, u00124, "psx__cpu__muldivS");
-   u00125 : constant Version_32 := 16#e73f30c3#;
+   u00125 : constant Version_32 := 16#b068690c#;
    pragma Export (C, u00125, "psx__memoryB");
    u00126 : constant Version_32 := 16#32abde0f#;
    pragma Export (C, u00126, "psx__memoryS");
@@ -308,7 +308,7 @@ package ada_main is
    pragma Export (C, u00133, "psx__memory__cyclesB");
    u00134 : constant Version_32 := 16#1c223a08#;
    pragma Export (C, u00134, "psx__memory__cyclesS");
-   u00135 : constant Version_32 := 16#a5ba3250#;
+   u00135 : constant Version_32 := 16#b71a1818#;
    pragma Export (C, u00135, "psx__cpu__fetchB");
    u00136 : constant Version_32 := 16#27253c6e#;
    pragma Export (C, u00136, "psx__cpu__fetchS");

@@ -55,9 +55,9 @@ W psx.memory%s		psx-memory.adb		psx-memory.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
-D psx.ads		20260916234907 6f0a212e psx%s
+D psx.ads		20260917034516 6f0a212e psx%s
 D psx-dma.ads		20260916234906 a2982fd6 psx.dma%s
-D psx-dma.adb		20260917002337 e9ab4307 psx.dma%b
+D psx-dma.adb		20260917034417 e9ab4307 psx.dma%b
 D psx-gpu.ads		20260916234907 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s
@@ -80,7 +80,7 @@ X 2 psx.ads
 . 155r23 155r61 174r5
 X 3 psx-dma.ads
 5K13*DMA 2|1k9 3|16l9 16e12 4|5b18 174l9 174t12
-7M12*Word32{8|7M12} 4|9r25 12r25 13r25 14r25 17r25 18r25 19r25 27r51 27r66
+7M12*Word32{8|7M12} 4|9r24 12r25 13r25 14r25 17r25 18r25 19r25 27r51 27r66
 . 34r17 35r17 44r14 45r14 46r14 48r17 49r17 50r17 99r14 100r14 101r14 103r17
 . 104r17 105r17 144r14 157r14
 9U14*Reset 9=21 4|21b14 24l8 24t13
@@ -91,7 +91,7 @@ X 3 psx-dma.ads
 14r7 Memory{6|18R9} 4|155b7 160r34 163m23 167r34 170m23
 14r48 GPU{5|17R9} 4|155b48 163m31
 X 4 psx-dma.adb
-9m5 DMA_BASE{3|7M12} 12r35 13r35 14r35 17r35 18r35 19r35 29r47 37r40
+9m4 DMA_BASE{3|7M12} 12r35 13r35 14r35 17r35 18r35 19r35 29r47 37r40
 12m4 DMA2_MADR{3|7M12} 52r42
 13m4 DMA2_BCR{3|7M12} 53r41
 14m4 DMA2_CHCR{3|7M12} 54r42 94r35 160r42

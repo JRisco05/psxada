@@ -268,7 +268,7 @@ package ada_main is
    pragma Export (C, u00113, "psx__gpuS");
    u00114 : constant Version_32 := 16#06249ef3#;
    pragma Export (C, u00114, "psx__typesS");
-   u00115 : constant Version_32 := 16#e73f30c3#;
+   u00115 : constant Version_32 := 16#b068690c#;
    pragma Export (C, u00115, "psx__memoryB");
    u00116 : constant Version_32 := 16#32abde0f#;
    pragma Export (C, u00116, "psx__memoryS");

@@ -24,15 +24,15 @@ package body ada_main is
    E090 : Short_Integer; pragma Import (Ada, E090, "system__finalization_root_E");
    E088 : Short_Integer; pragma Import (Ada, E088, "ada__finalization_E");
    E087 : Short_Integer; pragma Import (Ada, E087, "system__file_io_E");
-   E120 : Short_Integer; pragma Import (Ada, E120, "ada__streams__stream_io_E");
+   E122 : Short_Integer; pragma Import (Ada, E122, "ada__streams__stream_io_E");
    E074 : Short_Integer; pragma Import (Ada, E074, "ada__text_io_E");
    E140 : Short_Integer; pragma Import (Ada, E140, "psx__gpu_E");
    E113 : Short_Integer; pragma Import (Ada, E113, "psx__register_E");
-   E126 : Short_Integer; pragma Import (Ada, E126, "psx__cpu__instruction_E");
+   E118 : Short_Integer; pragma Import (Ada, E118, "psx__cpu__instruction_E");
    E130 : Short_Integer; pragma Import (Ada, E130, "psx__cpu__cycles_E");
    E134 : Short_Integer; pragma Import (Ada, E134, "psx__cpu__muldiv_E");
-   E124 : Short_Integer; pragma Import (Ada, E124, "psx__timers_E");
-   E118 : Short_Integer; pragma Import (Ada, E118, "psx__memory_E");
+   E126 : Short_Integer; pragma Import (Ada, E126, "psx__timers_E");
+   E120 : Short_Integer; pragma Import (Ada, E120, "psx__memory_E");
    E116 : Short_Integer; pragma Import (Ada, E116, "psx__cpu__fetch_E");
    E138 : Short_Integer; pragma Import (Ada, E138, "psx__dma_E");
    E136 : Short_Integer; pragma Import (Ada, E136, "psx__memory__cycles_E");
@@ -55,7 +55,7 @@ package body ada_main is
       begin
          F1;
       end;
-      E120 := E120 - 1;
+      E122 := E122 - 1;
       declare
          procedure F2;
          pragma Import (Ada, F2, "ada__streams__stream_io__finalize_spec");
@@ -214,17 +214,17 @@ package body ada_main is
       System.File_Io'Elab_Body;
       E087 := E087 + 1;
       Ada.Streams.Stream_Io'Elab_Spec;
-      E120 := E120 + 1;
+      E122 := E122 + 1;
       Ada.Text_Io'Elab_Spec;
       Ada.Text_Io'Elab_Body;
       E074 := E074 + 1;
       E140 := E140 + 1;
       E113 := E113 + 1;
-      E126 := E126 + 1;
+      E118 := E118 + 1;
       E130 := E130 + 1;
       E134 := E134 + 1;
-      E124 := E124 + 1;
-      E118 := E118 + 1;
+      E126 := E126 + 1;
+      E120 := E120 + 1;
       E116 := E116 + 1;
       E138 := E138 + 1;
       E136 := E136 + 1;
