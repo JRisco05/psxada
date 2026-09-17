@@ -36,8 +36,8 @@ package body PSX.Timers is
    begin
       if Index in Timers.Timers'Range then
 
-         -- Bits 10 y 11 son flags de estado.
-         -- Al escribir Mode se limpian.
+         --  Bits 10 y 11 son flags de estado.
+         --  Al escribir Mode se limpian.
          Timers.Timers (Index).Mode := Value and 16#F3FF#;
 
       end if;
@@ -89,7 +89,7 @@ package body PSX.Timers is
 
             Counter := 0;
 
-            -- Bit 11: reached 0xFFFF
+            --  Bit 11: reached 0xFFFF
             Timers.Timers (Index).Mode :=
               Timers.Timers (Index).Mode or 16#0800#;
 
@@ -99,14 +99,14 @@ package body PSX.Timers is
 
          end if;
 
-         -- Target reached
+         --  Target reached
          if Counter = Target then
 
-            -- Bit 10: reached target
+            --  Bit 10: reached target
             Timers.Timers (Index).Mode :=
               Timers.Timers (Index).Mode or 16#0400#;
 
-            -- Bit 3: reset counter when target reached
+            --  Bit 3: reset counter when target reached
             if (Timers.Timers (Index).Mode and 16#0008#) /= 0 then
                Counter := 0;
             end if;

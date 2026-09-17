@@ -34,12 +34,12 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   -- V0 = (100, 200, 300)
+   --  V0 = (100, 200, 300)
    PSX.GTE.Write_Data (GTE, 0, 16#00C8_0064#);
    PSX.GTE.Write_Data (GTE, 1, 300);
 
-   -- RT = identidad en formato Q12.
-   -- Los registros de la matriz están empaquetados.
+   --  RT = identidad en formato Q12.
+   --  Los registros de la matriz están empaquetados.
 
    PSX.GTE.Write_Control (GTE, 32, 16#0000_1000#); -- RT11=4096, RT12=0
    PSX.GTE.Write_Control (GTE, 33, 0);              -- RT13=0, RT21=0
@@ -47,17 +47,17 @@ begin
    PSX.GTE.Write_Control (GTE, 35, 0);              -- RT31=0, RT32=0
    PSX.GTE.Write_Control (GTE, 36, 4096);           -- RT33=4096
 
-   -- TR = 0
+   --  TR = 0
    PSX.GTE.Write_Control (GTE, 37, 0);
    PSX.GTE.Write_Control (GTE, 38, 0);
    PSX.GTE.Write_Control (GTE, 39, 0);
 
-   -- MVMVA:
-   -- command = 12
-   -- SF = 0
-   -- MX = 0 (RT)
-   -- V = 0 (V0)
-   -- CV = 0 (TR)
+   --  MVMVA:
+   --  command = 12
+   --  SF = 0
+   --  MX = 0 (RT)
+   --  V = 0 (V0)
+   --  CV = 0 (TR)
    Inst.Raw := 16#0000_000C#;
 
    PSX.GTE.Execute.Execute (GTE, Inst);

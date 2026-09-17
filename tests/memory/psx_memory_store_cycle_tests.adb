@@ -4,7 +4,6 @@ with PSX.CPU;
 with PSX.CPU.Step;
 with PSX.Memory;
 with PSX.Timers;
-with PSX.Types;
 
 procedure Psx_Memory_Store_Cycle_Tests is
 
@@ -54,10 +53,10 @@ begin
    New_Line;
 
    ----------------------------------------------------------------
-   -- SB
+   --  SB
    ----------------------------------------------------------------
 
-   -- SB R2, 0(R1)
+   --  SB R2, 0(R1)
    Prepare_Store (16#0000_0100#, 16#A022_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -65,10 +64,10 @@ begin
    Check ("SB RAM timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 7);
 
    ----------------------------------------------------------------
-   -- SH
+   --  SH
    ----------------------------------------------------------------
 
-   -- SH R2, 0(R1)
+   --  SH R2, 0(R1)
    Prepare_Store (16#0000_0100#, 16#A422_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -76,10 +75,10 @@ begin
    Check ("SH RAM timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 7);
 
    ----------------------------------------------------------------
-   -- SW
+   --  SW
    ----------------------------------------------------------------
 
-   -- SW R2, 0(R1)
+   --  SW R2, 0(R1)
    Prepare_Store (16#0000_0100#, 16#AC22_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -87,10 +86,10 @@ begin
    Check ("SW RAM timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 7);
 
    ----------------------------------------------------------------
-   -- Store value semantics
+   --  Store value semantics
    ----------------------------------------------------------------
 
-   -- SB: debe escribir solamente los 8 bits inferiores
+   --  SB: debe escribir solamente los 8 bits inferiores
    Prepare_Store (16#0000_0100#, 16#A022_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -100,7 +99,7 @@ begin
       Interfaces.Unsigned_32 (PSX.Memory.Read_8 (Memory, 16#0000_0100#)),
       16#0000_0078#);
 
-   -- SH: debe escribir solamente los 16 bits inferiores
+   --  SH: debe escribir solamente los 16 bits inferiores
    Prepare_Store (16#0000_0100#, 16#A422_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -110,7 +109,7 @@ begin
       Interfaces.Unsigned_32 (PSX.Memory.Read_16 (Memory, 16#0000_0100#)),
       16#0000_5678#);
 
-   -- SW: debe escribir los 32 bits completos
+   --  SW: debe escribir los 32 bits completos
    Prepare_Store (16#0000_0100#, 16#AC22_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -120,7 +119,7 @@ begin
       PSX.Memory.Read_32 (Memory, 16#0000_0100#),
       16#1234_5678#);
 
-   -- Scratchpad
+   --  Scratchpad
    Prepare_Store (16#1F80_0000#, 16#A022_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -128,14 +127,14 @@ begin
    Check
      ("SB Scratchpad timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 1);
 
-   -- I/O
+   --  I/O
    Prepare_Store (16#1F80_1108#, 16#A022_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
 
    Check ("SB I/O timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 5);
 
-   -- Scratchpad
+   --  Scratchpad
    Prepare_Store (16#1F80_0000#, 16#A422_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -143,14 +142,14 @@ begin
    Check
      ("SH Scratchpad timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 1);
 
-   -- I/O
+   --  I/O
    Prepare_Store (16#1F80_1108#, 16#A422_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
 
    Check ("SH I/O timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 5);
 
-   -- Scratchpad
+   --  Scratchpad
    Prepare_Store (16#1F80_0000#, 16#AC22_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -158,7 +157,7 @@ begin
    Check
      ("SW Scratchpad timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 1);
 
-   -- I/O
+   --  I/O
    Prepare_Store (16#1F80_1108#, 16#AC22_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -166,10 +165,10 @@ begin
    Check ("SW I/O timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 5);
 
    ----------------------------------------------------------------
-   -- Store value semantics: Scratchpad
+   --  Store value semantics: Scratchpad
    ----------------------------------------------------------------
 
-   -- SB
+   --  SB
    Prepare_Store (16#1F80_0000#, 16#A022_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -179,7 +178,7 @@ begin
       Interfaces.Unsigned_32 (PSX.Memory.Read_8 (Memory, 16#1F80_0000#)),
       16#0000_0078#);
 
-   -- SH
+   --  SH
    Prepare_Store (16#1F80_0000#, 16#A422_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -189,7 +188,7 @@ begin
       Interfaces.Unsigned_32 (PSX.Memory.Read_16 (Memory, 16#1F80_0000#)),
       16#0000_5678#);
 
-   -- SW
+   --  SW
    Prepare_Store (16#1F80_0000#, 16#AC22_0000#);
 
    PSX.CPU.Step.Step (CPU, Memory);

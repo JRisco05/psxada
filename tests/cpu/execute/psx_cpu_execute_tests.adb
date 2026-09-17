@@ -1,5 +1,5 @@
 with Ada.Text_IO;
-with interfaces;
+with Interfaces;
 with PSX.CPU;
 with PSX.CPU.Execute;
 with PSX.CPU.Instruction;

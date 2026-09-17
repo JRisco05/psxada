@@ -41,7 +41,7 @@ procedure Psx_Memory_Load_Cycle_Count_Tests is
 
       CPU.Registers (1) := Address;
 
-      -- LW R2, 0(R1)
+      --  LW R2, 0(R1)
       PSX.Memory.Write_32 (Memory, 16#0000_0000#, 16#8C22_0000#);
    end Prepare_LW;
 
@@ -51,7 +51,7 @@ begin
    New_Line;
 
    ----------------------------------------------------------------
-   -- RAM
+   --  RAM
    ----------------------------------------------------------------
 
    Prepare_LW (16#0000_0100#);
@@ -63,7 +63,7 @@ begin
    Check ("LW RAM timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 7);
 
    ----------------------------------------------------------------
-   -- Scratchpad
+   --  Scratchpad
    ----------------------------------------------------------------
 
    Prepare_LW (16#1F80_0000#);
@@ -76,10 +76,10 @@ begin
      ("LW Scratchpad timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 1);
 
    ----------------------------------------------------------------
-   -- I/O
+   --  I/O
    ----------------------------------------------------------------
 
-   -- Use the Timer 0 target register itself as the I/O address.
+   --  Use the Timer 0 target register itself as the I/O address.
    Prepare_LW (16#1F80_1108#);
 
    PSX.CPU.Step.Step (CPU, Memory);

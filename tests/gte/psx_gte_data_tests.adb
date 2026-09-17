@@ -1,6 +1,6 @@
 with Ada.Text_IO;
 with PSX.GTE;
-With PSX.Types;
+with PSX.Types;
 with Interfaces;
 
 procedure PSX_GTE_Data_Tests is

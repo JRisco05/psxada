@@ -66,13 +66,13 @@ D a-textio.ads		20260610194523 34ef47de ada.text_io%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
-D psx.ads		20260916234907 6f0a212e psx%s
-D psx-gte.ads		20260916234907 570875b6 psx.gte%s
-D psx-gte-execute.ads	20260916234913 40086954 psx.gte.execute%s
-D psx-gte-execute-saturation.ads  20260916234913 d5141f15 psx.gte.execute.saturation%s
-D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
+D psx.ads		20260917034516 6f0a212e psx%s
+D psx-gte.ads		20260917034501 570875b6 psx.gte%s
+D psx-gte-execute.ads	20260917034447 40086954 psx.gte.execute%s
+D psx-gte-execute-saturation.ads  20260917034436 d5141f15 psx.gte.execute.saturation%s
+D psx-gte-instruction.ads  20260917034455 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_gte_saturation_tests.adb  20260917002337 91eb5321 psx_gte_saturation_tests%b
+D psx_gte_saturation_tests.adb  20260917034853 91eb5321 psx_gte_saturation_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -94,21 +94,21 @@ X 1 ada.ads
 18K9*Ada 22e8 19|1r6 1r23
 X 9 a-textio.ads
 58K13*Text_IO 785e16 19|1w10 1r27
-284U14*New_Line 19|11s4 45s4
-565U14*Put_Line 19|10s4 14s7 16s7 20s7 22s7 26s7 28s7 33s7 35s7 40s7 42s7
-. 46s4
+284U14*New_Line 19|11s4 43s4
+565U14*Put_Line 19|10s4 14s7 16s7 20s7 22s7 26s7 28s7 32s7 34s7 38s7 40s7
+. 44s4
 X 11 interfac.ads
 47K9*Interfaces 247e15 19|3w6 7r13
 92M9*Unsigned_32 19|7r24
 X 13 psx.ads
-1K9*PSX 3e8 19|2r6 13r7 19r7 25r7 31r7 38r7
+1K9*PSX 3e8 19|2r6 13r7 19r7 25r7 31r7 37r7
 X 14 psx-gte.ads
-4K13*GTE 139e12 19|2r10 13r11 19r11 25r11 31r11 38r11
+4K13*GTE 131e12 19|2r10 13r11 19r11 25r11 31r11 37r11
 X 15 psx-gte-execute.ads
-4K17*Execute 10e20 19|2r14 13r15 19r15 25r15 31r15 38r15
+4K17*Execute 9e20 19|2r14 13r15 19r15 25r15 31r15 37r15
 X 16 psx-gte-execute-saturation.ads
-3K25*Saturation 9e31 19|2w22 13r23 19r23 25r23 31r23 38r23
-7V13*Saturate_IR{5M12} 19|13s34 19s34 25s34 31s34 38s34
+3K25*Saturation 9e31 19|2w22 13r23 19r23 25r23 31r23 37r23
+7V13*Saturate_IR{5M12} 19|13s34 19s34 25s34 31s34 37s34
 X 19 psx_gte_saturation_tests.adb
-5U11*PSX_GTE_Saturation_Tests 5b11 48l5 48t29
+5U11*PSX_GTE_Saturation_Tests 5b11 46l5 46t29
 

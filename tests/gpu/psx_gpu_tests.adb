@@ -70,34 +70,34 @@ begin
    Check ("VRAM last pixel", 16#001F#, PSX.GPU.Read_VRAM (GPU, 1023, 511));
 
    --------------------------------------------------
-   -- Test GP0 A0: CPU -> VRAM
+   --  Test GP0 A0: CPU -> VRAM
    --------------------------------------------------
    PSX.GPU.Reset (GPU);
 
-   -- A0: X=100, Y=200
+   --  A0: X=100, Y=200
    PSX.GPU.Write_GP0 (GPU, 16#A0C8_0064#);
 
-   -- Width=2, Height=1
+   --  Width=2, Height=1
    PSX.GPU.Write_GP0 (GPU, 16#0001_0002#);
 
-   -- Pixel 0 = 7C00, Pixel 1 = 03E0
+   --  Pixel 0 = 7C00, Pixel 1 = 03E0
    PSX.GPU.Write_GP0 (GPU, 16#03E0_7C00#);
 
    Check ("GP0 A0 pixel 0", 16#7C00#, PSX.GPU.Read_VRAM (GPU, 100, 200));
    Check ("GP0 A0 pixel 1", 16#03E0#, PSX.GPU.Read_VRAM (GPU, 101, 200));
 
    --------------------------------------------------
-   -- Test GP0 A0: transferencia de varias filas
+   --  Test GP0 A0: transferencia de varias filas
    --------------------------------------------------
    PSX.GPU.Reset (GPU);
 
-   -- A0: X=100, Y=200
+   --  A0: X=100, Y=200
    PSX.GPU.Write_GP0 (GPU, 16#A0C8_0064#);
 
-   -- Width=3, Height=2
+   --  Width=3, Height=2
    PSX.GPU.Write_GP0 (GPU, 16#0002_0003#);
 
-   -- 6 píxeles = 3 words
+   --  6 píxeles = 3 words
    PSX.GPU.Write_GP0 (GPU, 16#2222_1111#);
    PSX.GPU.Write_GP0 (GPU, 16#4444_3333#);
    PSX.GPU.Write_GP0 (GPU, 16#6666_5555#);
@@ -110,21 +110,21 @@ begin
    Check ("GP0 A0 multi pixel 5", 16#6666#, PSX.GPU.Read_VRAM (GPU, 102, 201));
 
    --------------------------------------------------
-   -- Test GP0 C0: VRAM -> CPU
+   --  Test GP0 C0: VRAM -> CPU
    --------------------------------------------------
    PSX.GPU.Reset (GPU);
 
-   -- Escribimos los píxeles iniciales en VRAM
+   --  Escribimos los píxeles iniciales en VRAM
    PSX.GPU.Write_VRAM (GPU, 100, 200, 16#7C00#);
    PSX.GPU.Write_VRAM (GPU, 101, 200, 16#03E0#);
 
-   -- C0: X=100, Y=200
+   --  C0: X=100, Y=200
    PSX.GPU.Write_GP0 (GPU, 16#C0C8_0064#);
 
-   -- Width=2, Height=1
+   --  Width=2, Height=1
    PSX.GPU.Write_GP0 (GPU, 16#0001_0002#);
 
-   -- Ahora los prints saldrán con datos reales porque la GPU ya fue configurada arriba
+   --  Ahora los prints saldrán con datos reales porque la GPU ya fue configurada arriba
    Ada.Text_IO.Put_Line ("C0 ACTIVE = " & Boolean'Image (GPU.GP0_Read_Active));
    Ada.Text_IO.Put_Line ("C0 X = " & Natural'Image (GPU.GP0_Read_X));
    Ada.Text_IO.Put_Line ("C0 Y = " & Natural'Image (GPU.GP0_Read_Y));
@@ -142,17 +142,17 @@ begin
       Check ("GP0 C0 pixel 0", 16#03E0_7C00#, Read_Value);
    end;
 
-   -- Test GP0 02: Fill Rectangle in VRAM
+   --  Test GP0 02: Fill Rectangle in VRAM
 
    PSX.GPU.Reset (GPU);
 
-   -- 02: color = 7C00 (red)
+   --  02: color = 7C00 (red)
    PSX.GPU.Write_GP0 (GPU, 16#02_00_7C_00#);
 
-   -- X = 100, Y = 200
+   --  X = 100, Y = 200
    PSX.GPU.Write_GP0 (GPU, 16#00C8_0064#);
 
-   -- Width = 2, Height = 2
+   --  Width = 2, Height = 2
    PSX.GPU.Write_GP0 (GPU, 16#0002_0002#);
 
    Check ("GP0 02 pixel 0,0", 16#7C00#, PSX.GPU.Read_VRAM (GPU, 100, 200));

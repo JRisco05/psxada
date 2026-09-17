@@ -1,5 +1,4 @@
 with Interfaces;
-with PSX.Types;
 
 package body PSX.CPU.MulDiv is
 

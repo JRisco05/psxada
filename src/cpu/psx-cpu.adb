@@ -2,7 +2,6 @@ with Interfaces;
 
 package body PSX.CPU is
 
-   use type Interfaces.Unsigned_8;
    use type Interfaces.Unsigned_32;
 
    procedure Reset (CPU : out CPU_State) is

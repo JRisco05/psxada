@@ -69,12 +69,12 @@ D a-textio.ads		20260610194523 34ef47de ada.text_io%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
-D psx.ads		20260916234907 6f0a212e psx%s
-D psx-gte.ads		20260916234907 570875b6 psx.gte%s
-D psx-gte-execute.ads	20260916234913 40086954 psx.gte.execute%s
-D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
+D psx.ads		20260917034516 6f0a212e psx%s
+D psx-gte.ads		20260917034501 570875b6 psx.gte%s
+D psx-gte-execute.ads	20260917034447 40086954 psx.gte.execute%s
+D psx-gte-instruction.ads  20260917034455 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_gte_mvmva_lm_tests.adb  20260916234911 02c29c91 psx_gte_mvmva_lm_tests%b
+D psx_gte_mvmva_lm_tests.adb  20260917040207 02c29c91 psx_gte_mvmva_lm_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -94,46 +94,46 @@ D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_gte_mvmva_lm_tests standard 7 11 none]
 G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [reset psx__gte 119 14 none]
-G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [write_data psx__gte 121 17 none]
-G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [write_control psx__gte 130 14 none]
+G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [write_data psx__gte 121 14 none]
+G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [write_control psx__gte 126 14 none]
 G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [execute psx__gte__execute 6 14 none]
-G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [read_data psx__gte 126 13 none]
-G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [read_control psx__gte 135 13 none]
+G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [read_data psx__gte 124 13 none]
+G r c none [psx_gte_mvmva_lm_tests standard 7 11 none] [read_control psx__gte 129 13 none]
 X 1 ada.ads
 18K9*Ada 22e8 18|1r6 1r23
 X 9 a-textio.ads
 58K13*Text_IO 785e16 18|1w10 1r27
-565U14*Put_Line 18|21s10 23s10 31s4 94s4
+565U14*Put_Line 18|20s10 22s10 33s4 87s4
 X 11 interfac.ads
-47K9*Interfaces 247e15 18|2w6 9r13 16r18 17r18 25r30 26r28
-92M9*Unsigned_32 18|9r24 16r29 17r29 25r41 26r39
+47K9*Interfaces 247e15 18|2w6 9r13 16r18 17r18 26r15 28r15
+92M9*Unsigned_32 18|9r24 16r29 17r29 26r26 28r26
 X 13 psx.ads
-1K9*PSX 3e8 18|3r6 4r6 5r6 11r11 12r11 33r4 36r4 37r4 41r4 42r4 43r4 44r4
-. 45r4 48r4 49r4 50r4 61r4 66r7 71r7 76r7 82r7 87r7 92r7
+1K9*PSX 3e8 18|3r6 4r6 5r6 11r11 12r11 35r4 38r4 39r4 43r4 44r4 45r4 46r4
+. 47r4 50r4 51r4 52r4 63r4 65r30 67r30 69r30 75r7 80r7 85r7
 X 14 psx-gte.ads
-4K13*GTE 139e12 18|3w10 4r10 5r10 11r15 12r15 33r8 36r8 37r8 41r8 42r8 43r8
-. 44r8 45r8 48r8 49r8 50r8 61r8 66r11 71r11 76r11 82r11 87r11 92r11
+4K13*GTE 131e12 18|3w10 4r10 5r10 11r15 12r15 35r8 38r8 39r8 43r8 44r8 45r8
+. 46r8 47r8 50r8 51r8 52r8 63r8 65r34 67r34 69r34 75r11 80r11 85r11
 9R9*GTE_State 117e14 18|11r19
-119U14*Reset 18|33s12
-121U17*Write_Data 18|36s12 37s12
-126V13*Read_Data{7M12} 18|66s15 71s15 76s15
-130U14*Write_Control 18|41s12 42s12 43s12 44s12 45s12 48s12 49s12 50s12
-135V13*Read_Control{7M12} 18|82s15 87s15 92s15
+119U14*Reset 18|35s12
+121U14*Write_Data 18|38s12 39s12
+124V13*Read_Data{7M12} 18|65s38 67s38 69s38
+126U14*Write_Control 18|43s12 44s12 45s12 46s12 47s12 50s12 51s12 52s12
+129V13*Read_Control{7M12} 18|75s15 80s15 85s15
 X 15 psx-gte-execute.ads
-4K17*Execute 10e20 18|4w14 61r12
-6U14*Execute 18|61s20
+4K17*Execute 9e20 18|4w14 63r12
+6U14*Execute 18|63s20
 X 16 psx-gte-instruction.ads
 3K17*Instruction 23e24 18|5w14 12r19
 7R9*Instruction 9e14 18|12r31
-8m7*Raw{5M12} 18|59m9
+8m7*Raw{5M12} 18|61m9
 X 18 psx_gte_mvmva_lm_tests.adb
-7U11*PSX_GTE_MVMVA_LM_Tests 7b11 95l5 95t27
-11r4 GTE{14|9R9} 33m19 36m24 36r24 37m24 37r24 41m27 41r27 42m27 42r27 43m27
-. 43r27 44m27 44r27 45m27 45r27 48m27 48r27 49m27 49r27 50m27 50r27 61m29
-. 61r29 66r26 71r26 76r26 82r29 87r29 92r29
-12r4 Inst{16|7R9} 59m4 61r34
-14U14 Check 14b14 15>7 16>7 17>7 28l8 28t13 63s4 68s4 73s4 79s4 84s4 89s4
-15a7 Name{string} 21r31 24r24
-16m7 Expected{11|92M9} 20r19 25r60
-17m7 Actual{11|92M9} 20r10 26r58
+7U11*PSX_GTE_MVMVA_LM_Tests 7b11 88l5 88t27
+11r4 GTE{14|9R9} 35m19 38m24 38r24 39m24 39r24 43m27 43r27 44m27 44r27 45m27
+. 45r27 46m27 46r27 47m27 47r27 50m27 50r27 51m27 51r27 52m27 52r27 63m29
+. 63r29 65r49 67r49 69r49 75r29 80r29 85r29
+12r4 Inst{16|7R9} 61m4 63r34
+14U14 Check 14b14 15>7 16>7 17>7 30l8 30t13 65s4 67s4 69s4 72s4 77s4 82s4
+15a7 Name{string} 20r31 24r15
+16m7 Expected{11|92M9} 19r19 26r45
+17m7 Actual{11|92M9} 19r10 28r45
 

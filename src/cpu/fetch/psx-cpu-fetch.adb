@@ -1,5 +1,3 @@
-with PSX.Memory;
-
 package body PSX.CPU.Fetch is
 
    function Fetch

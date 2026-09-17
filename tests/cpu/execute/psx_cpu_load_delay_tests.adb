@@ -35,16 +35,16 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- R1 = 0x00000100
+   --  R1 = 0x00000100
    PSX.Register.Write (CPU.Registers, 1, 16#0000_0100#);
 
-   -- Memoria[0x100] = 0x12345678
+   --  Memoria[0x100] = 0x12345678
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#1234_5678#);
 
-   -- LW R2, 0(R1)
+   --  LW R2, 0(R1)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#8C22_0000#);
 
-   -- NOP
+   --  NOP
    PSX.Memory.Write_32 (Memory, 16#0001_0004#, 16#0000_0000#);
 
    CPU.PC := 16#0001_0000#;
@@ -52,7 +52,7 @@ begin
 
    Check ("LW delay before", PSX.Register.Read (CPU.Registers, 2), 0);
 
-   -- Ejecutar LW
+   --  Ejecutar LW
    PSX.CPU.Step.Step (CPU, Memory);
 
    Check ("LW delay after LW", PSX.Register.Read (CPU.Registers, 2), 0);
@@ -66,10 +66,10 @@ begin
    Ada.Text_IO.Put_Line
      ("Load_Value = " & Interfaces.Unsigned_32'Image (CPU.Load_Value));
 
-   -- Ejecutar NOP
+   --  Ejecutar NOP
    PSX.CPU.Step.Step (CPU, Memory);
 
-   -- Ahora el resultado del LW debe estar en R2.
+   --  Ahora el resultado del LW debe estar en R2.
    Check
      ("LW delay after next instruction",
       PSX.Register.Read (CPU.Registers, 2),

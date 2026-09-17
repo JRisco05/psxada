@@ -1,29 +1,22 @@
-psx-spu.adb:9:23: (style) space required [-gnatyt]
-psx-spu.adb:11:03: (style) incorrect layout [-gnatyl]
-psx-spu.adb:13:01: (style) this token should be in column 7 [-gnatyl]
-psx-spu.adb:15:03: (style) incorrect layout [-gnatyl]
-psx-spu.adb:17:01: (style) this token should be in column 7 [-gnatyl]
-psx-spu.adb:19:03: (style) incorrect layout [-gnatyl]
-psx-spu.adb:21:01: (style) this token should be in column 7 [-gnatyl]
-psx-spu.adb:23:03: (style) incorrect layout [-gnatyl]
-psx-spu.adb:25:01: (style) this token should be in column 7 [-gnatyl]
+psx-spu.adb:10:01: (style) trailing spaces not permitted [-gnatyb]
+psx-spu.adb:17:03: (style) incorrect layout [-gnatyl]
+psx-spu.adb:19:01: (style) this token should be in column 7 [-gnatyl]
+psx-spu.adb:21:03: (style) incorrect layout [-gnatyl]
+psx-spu.adb:23:01: (style) this token should be in column 7 [-gnatyl]
+psx-spu.adb:25:03: (style) incorrect layout [-gnatyl]
 psx-spu.adb:27:01: (style) this token should be in column 7 [-gnatyl]
-psx-spu.adb:29:07: (style) space required [-gnatyc]
-psx-spu.adb:31:01: error: statement expected
-psx-spu.adb:41:41: (style) "in" should be omitted [-gnatyI]
-psx-spu.adb:64:01: (style) trailing spaces not permitted [-gnatyb]
-psx-spu.adb:67:01: (style) trailing spaces not permitted [-gnatyb]
-psx-spu.adb:73:01: (style) trailing spaces not permitted [-gnatyb]
-psx-spu.adb:76:01: (style) trailing spaces not permitted [-gnatyb]
-psx-spu.adb:77:14: (style) bad indentation [-gnaty0]
-psx-spu.adb:77:18: error: missing operand
-psx-spu.adb:78:20: error: missing "=>"
-psx-spu.adb:80:12: error: statement expected
-psx-spu.adb:85:01: (style) trailing spaces not permitted [-gnatyb]
-psx-spu.adb:88:01: error: missing "end Write_Register;"
-psx-spu.adb:91:01: (style) multiple blank lines [-gnatyu]
-psx-spu.adb:92:01: (style) trailing spaces not permitted [-gnatyb]
-psx-spu.adb:93:04: error: no "begin" for this "end"
-psx-spu.adb:95:04: error: declarations mixed with statements is a GNAT-specific extension
-psx-spu.adb:95:04: error: unit must be compiled with -gnatX [or -gnatX0] or use pragma Extensions_Allowed (On) [or All_Extensions]
-psx-spu.adb:96:13: (style) "in" should be omitted [-gnatyI]
+psx-spu.adb:29:01: (style) this token should be in column 7 [-gnatyl]
+psx-spu.adb:31:07: (style) space required [-gnatyc]
+psx-spu.adb:33:01: error: statement expected
+psx-spu.adb:43:41: (style) "in" should be omitted [-gnatyI]
+psx-spu.adb:66:01: (style) trailing spaces not permitted [-gnatyb]
+psx-spu.adb:69:01: (style) trailing spaces not permitted [-gnatyb]
+psx-spu.adb:75:01: (style) trailing spaces not permitted [-gnatyb]
+psx-spu.adb:79:27: (style) trailing spaces not permitted [-gnatyb]
+psx-spu.adb:83:12: error: missing operand
+psx-spu.adb:84:03: error: statement expected
+psx-spu.adb:85:01: (style) multiple blank lines [-gnatyu]
+psx-spu.adb:86:01: (style) trailing spaces not permitted [-gnatyb]
+psx-spu.adb:87:03: error: statement expected
+psx-spu.adb:87:03: error: missing "end if;" for "if" at line 48
+psx-spu.adb:90:13: (style) "in" should be omitted [-gnatyI]

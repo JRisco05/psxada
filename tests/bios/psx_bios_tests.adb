@@ -20,10 +20,10 @@ procedure PSX_BIOS_Tests is
    SPU    : PSX.SPU.SPU_State;
    GTE    : PSX.GTE.GTE_State;
 
-   -- Límite para que limpie la RAM real de la PS1
+   --  Límite para que limpie la RAM real de la PS1
    MAX_STEPS : constant Integer := 20_000_000;
 
-   -- Variables de control de bucles e historial
+   --  Variables de control de bucles e historial
    Last_Step       : Integer := 0;
    Loop_Count      : Integer := 0;
    First_Loop_Step : Integer := -1;
@@ -75,7 +75,7 @@ begin
    PSX.SPU.Reset (SPU);
    PSX.GTE.Reset (GTE);
 
-   -- 2. AGREGADO: Inicializamos los registros de tu DMA pasandole la memoria
+   --  2. AGREGADO: Inicializamos los registros de tu DMA pasandole la memoria
    PSX.DMA.Reset (Memory);
 
    PSX.Memory.Load_BIOS (Memory, "bios/SCPH1001.BIN");
@@ -93,7 +93,7 @@ begin
 
       Last_Step := Step_Number;
 
-      -- 1. HISTORIAL: Leemos la instrucción antes del paso
+      --  1. HISTORIAL: Leemos la instrucción antes del paso
       Prev_PC := CPU.PC;
       begin
          Prev_Inst := PSX.Memory.Read_32 (Memory, CPU.PC);
@@ -102,14 +102,14 @@ begin
             Prev_Inst := 16#DEAD_BEEF#;
       end;
 
-      -- 2. CONTADOR: Conteo de NOPs reales
+      --  2. CONTADOR: Conteo de NOPs reales
       if Prev_Inst = 0 then
          Consecutive_Nops := Consecutive_Nops + 1;
       else
          Consecutive_Nops := 0;
       end if;
 
-      -- 3. ALARMA DE CONGELAMIENTO (ZONA VACÍA)
+      --  3. ALARMA DE CONGELAMIENTO (ZONA VACÍA)
       if Consecutive_Nops >= 100 then
          Ada.Text_IO.New_Line;
          Ada.Text_IO.Put_Line
@@ -130,7 +130,7 @@ begin
          exit;
       end if;
 
-      -- 4. DETECTAR EL BUCLE DE ESPERA FAMOSO (0xE28)
+      --  4. DETECTAR EL BUCLE DE ESPERA FAMOSO (0xE28)
       if (CPU.PC and 16#1FFF_FFFF#) = 16#0000_0E28# then
          if First_Loop_Step = -1 then
             First_Loop_Step := Step_Number;
@@ -138,7 +138,7 @@ begin
          Loop_Count := Loop_Count + 1;
       end if;
 
-      -- 5. HOOK DE LA BIOS PARA TEXTO (TTY)
+      --  5. HOOK DE LA BIOS PARA TEXTO (TTY)
       if (CPU.PC and 16#1FFF_FFFF#) = 16#0000_00A0#
         or else (CPU.PC and 16#1FFF_FFFF#) = 16#0000_00B0#
       then
@@ -167,7 +167,7 @@ begin
 
    end loop;
 
-   -- Mostramos el total real de pasos ejecutados al terminar
+   --  Mostramos el total real de pasos ejecutados al terminar
    Ada.Text_IO.New_Line;
    Ada.Text_IO.Put_Line
      ("-------------------------------------------------------");

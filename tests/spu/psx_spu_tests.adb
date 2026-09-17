@@ -24,7 +24,7 @@ begin
    Put_Line ("Testing PSX.SPU...");
    New_Line;
 
-   -- Reset del SPU
+   --  Reset del SPU
    PSX.SPU.Reset (SPU);
 
    Check (SPU.Control = 0, "SPU Control reset");
@@ -37,14 +37,14 @@ begin
 
    Check (SPU.IRQ_Address = 0, "SPU IRQ Address reset");
 
-   -- Verificar que la RAM del SPU está inicializada en cero
+   --  Verificar que la RAM del SPU está inicializada en cero
    Check (SPU.RAM (0) = 0, "SPU RAM address 0 reset");
 
    Check (SPU.RAM (16#0001_0000#) = 0, "SPU RAM address 0x10000 reset");
 
    Check (SPU.RAM (16#0007_FFFF#) = 0, "SPU RAM last address reset");
 
-   -- Escritura y lectura de la RAM
+   --  Escritura y lectura de la RAM
    SPU.RAM (16#0000_0000#) := 16#12#;
    SPU.RAM (16#0001_0000#) := 16#34#;
    SPU.RAM (16#0007_FFFF#) := 16#AB#;
@@ -56,12 +56,12 @@ begin
 
    Check (SPU.RAM (16#0007_FFFF#) = 16#AB#, "SPU RAM write/read last address");
 
-   -- Verificar que las posiciones son independientes
+   --  Verificar que las posiciones son independientes
    Check (SPU.RAM (16#0000_0001#) = 0, "SPU RAM independent address 1");
 
    Check (SPU.RAM (16#0001_0001#) = 0, "SPU RAM independent address 2");
 
-   -- Verificar los 24 canales
+   --  Verificar los 24 canales
 
    Check (SPU.Channels'Length = 24, "SPU has 24 channels");
 
@@ -86,7 +86,7 @@ begin
    Check
      (SPU.Channels (23).Start_Address = 0, "Channel 23 Start Address reset");
 
-   -- Verificar independencia entre canales
+   --  Verificar independencia entre canales
 
    SPU.Channels (0).Volume_Left := 16#1234#;
    SPU.Channels (23).Volume_Left := 16#ABCD#;
@@ -99,14 +99,14 @@ begin
 
    Check (SPU.Channels (22).Volume_Left = 0, "Channel 22 unaffected");
 
-   -- Voice 1
+   --  Voice 1
 
    PSX.SPU.Write_Register (SPU, 16#1F801C10#, 16#1111#);
 
    Check
      (SPU.Channels (1).Volume_Left = 16#1111#, "Voice 1 Volume Left register");
 
-   -- Voice 23
+   --  Voice 23
 
    PSX.SPU.Write_Register (SPU, 16#1F801D70#, 16#AAAA#);
 

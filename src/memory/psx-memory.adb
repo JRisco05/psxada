@@ -1,12 +1,9 @@
 with Interfaces;
 with Ada.Streams;
 with Ada.Streams.Stream_IO;
-with Ada.Text_IO;
-with PSX.Timers;
 
 package body PSX.Memory is
 
-   use type Interfaces.Unsigned_8;
    use type Interfaces.Unsigned_16;
    use type Interfaces.Unsigned_32;
 

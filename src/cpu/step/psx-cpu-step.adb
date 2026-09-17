@@ -3,7 +3,6 @@ with PSX.CPU.Execute;
 with PSX.CPU.Fetch;
 with PSX.CPU.Instruction;
 with PSX.DMA;
-with PSX.GPU;
 with PSX.Types;
 with PSX.Timers;
 with PSX.CPU.Cycles;
@@ -109,7 +108,7 @@ package body PSX.CPU.Step is
 
       end if;
 
-      -- Guardar el load pendiente de la instrucción anterior.
+      --  Guardar el load pendiente de la instrucción anterior.
       Load_To_Apply := CPU.Load_Pending;
 
       if Load_To_Apply then
@@ -120,7 +119,7 @@ package body PSX.CPU.Step is
       --  Execute instruction.
       PSX.CPU.Execute.Execute (CPU, Memory, Inst);
 
-      -- Guardar el load generado por la instrucción actual.
+      --  Guardar el load generado por la instrucción actual.
       New_Load_Pending := CPU.Load_Pending;
 
       if New_Load_Pending then
@@ -158,8 +157,8 @@ package body PSX.CPU.Step is
 
       end if;
 
-      -- Aplicar el resultado del load anterior
-      -- después de ejecutar la instrucción actual.
+      --  Aplicar el resultado del load anterior
+      --  después de ejecutar la instrucción actual.
       if Load_To_Apply then
          PSX.Register.Write
            (CPU.Registers, Load_Apply_Register, Load_Apply_Value);

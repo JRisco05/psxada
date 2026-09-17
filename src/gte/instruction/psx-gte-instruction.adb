@@ -1,8 +1,5 @@
-with Interfaces;
-
 package body PSX.GTE.Instruction is
 
-   use type Interfaces.Unsigned_32;
 
    function Command (Inst : Instruction) return Word32 is
    begin

@@ -34,33 +34,33 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   -- V0 = (100, 200, 300)
+   --  V0 = (100, 200, 300)
    PSX.GTE.Write_Data (GTE, 0, 16#00C8_0064#);
    PSX.GTE.Write_Data (GTE, 1, 300);
 
-   -- V1 = (400, 500, 600)
+   --  V1 = (400, 500, 600)
    PSX.GTE.Write_Data (GTE, 2, 16#01F4_0190#);
    PSX.GTE.Write_Data (GTE, 3, 600);
 
-   -- RT = identidad en formato Q12.
+   --  RT = identidad en formato Q12.
    PSX.GTE.Write_Control (GTE, 32, 16#0000_1000#);
    PSX.GTE.Write_Control (GTE, 33, 0);
    PSX.GTE.Write_Control (GTE, 34, 16#0000_1000#);
    PSX.GTE.Write_Control (GTE, 35, 0);
    PSX.GTE.Write_Control (GTE, 36, 4096);
 
-   -- TR = 0
+   --  TR = 0
    PSX.GTE.Write_Control (GTE, 37, 0);
    PSX.GTE.Write_Control (GTE, 38, 0);
    PSX.GTE.Write_Control (GTE, 39, 0);
 
-   -- MVMVA
-   -- command = 12
-   -- SF = 1
-   -- LM = 0
-   -- MX = 0 (RT)
-   -- V  = 1 (V1)
-   -- CV = 0 (TR)
+   --  MVMVA
+   --  command = 12
+   --  SF = 1
+   --  LM = 0
+   --  MX = 0 (RT)
+   --  V  = 1 (V1)
+   --  CV = 0 (TR)
    Inst.Raw := 16#0008_800C#;
 
    PSX.GTE.Execute.Execute (GTE, Inst);

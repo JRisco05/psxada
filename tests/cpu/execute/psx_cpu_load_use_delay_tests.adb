@@ -35,33 +35,33 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- R1 = 0x100
+   --  R1 = 0x100
    PSX.Register.Write (CPU.Registers, 1, 16#0000_0100#);
 
-   -- Memoria[0x100] = 10
+   --  Memoria[0x100] = 10
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 10);
 
-   -- LW R2, 0(R1)
+   --  LW R2, 0(R1)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#8C22_0000#);
 
-   -- ADD R3, R2, R0
+   --  ADD R3, R2, R0
    PSX.Memory.Write_32 (Memory, 16#0001_0004#, 16#0040_1820#);
 
    CPU.PC := 16#0001_0000#;
    CPU.Next_PC := 16#0001_0004#;
 
-   -- Ejecutar LW.
+   --  Ejecutar LW.
    PSX.CPU.Step.Step (CPU, Memory);
 
    Check ("LW result delayed", PSX.Register.Read (CPU.Registers, 2), 0);
 
-   -- Ejecutar ADD inmediatamente después del LW.
+   --  Ejecutar ADD inmediatamente después del LW.
    PSX.CPU.Step.Step (CPU, Memory);
 
-   -- El ADD debe haber visto el valor anterior de R2: 0.
+   --  El ADD debe haber visto el valor anterior de R2: 0.
    Check ("Load-use hazard", PSX.Register.Read (CPU.Registers, 3), 0);
 
-   -- El LW sí debe haberse aplicado después.
+   --  El LW sí debe haberse aplicado después.
    Check ("Loaded value available", PSX.Register.Read (CPU.Registers, 2), 10);
 
    Ada.Text_IO.Put_Line ("");

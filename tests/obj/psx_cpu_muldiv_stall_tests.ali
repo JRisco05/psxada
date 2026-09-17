@@ -67,15 +67,15 @@ D a-textio.ads		20260610194523 34ef47de ada.text_io%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
-D psx.ads		20260916234907 6f0a212e psx%s
+D psx.ads		20260917034516 6f0a212e psx%s
 D psx-cpu.ads		20260916234907 0eec9d9a psx.cpu%s
 D psx-cpu-step.ads	20260916234913 901c7255 psx.cpu.step%s
 D psx-gpu.ads		20260916234907 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
-D psx-register.ads	20260916234913 4d5fe43c psx.register%s
+D psx-register.ads	20260917034351 4d5fe43c psx.register%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_cpu_muldiv_stall_tests.adb  20260916234948 6e073641 psx_cpu_muldiv_stall_tests%b
+D psx_cpu_muldiv_stall_tests.adb  20260917035705 6e073641 psx_cpu_muldiv_stall_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -100,43 +100,43 @@ X 1 ada.ads
 18K9*Ada 22e8 21|1r6 9r8
 X 9 a-textio.ads
 58K13*Text_IO 785e16 21|1w10 9r12
-284U14*New_Line 21|27s4 104s4
-565U14*Put_Line 21|18s10 20s10 26s4 105s4
+284U14*New_Line 21|27s4 102s4
+565U14*Put_Line 21|18s10 20s10 26s4 103s4
 X 11 interfac.ads
 47K9*Interfaces 247e15 21|2w6 10r13
 92M9*Unsigned_32 21|10r24
 X 13 psx.ads
-1K9*PSX 3e8 21|3r6 4r6 5r6 12r13 13r13 33r4 34r4 48r4 51r4 54r4 56r4 62r4
-. 72r4 73r4 84r4 87r4 90r4 92r4 98r4
+1K9*PSX 3e8 21|3r6 4r6 5r6 12r13 13r13 33r4 34r4 47r4 50r4 53r4 55r4 61r4
+. 71r4 72r4 82r4 85r4 88r4 90r4 96r4
 X 14 psx-cpu.ads
-4K13*CPU 54e12 21|3w10 4r10 12r17 33r8 56r8 62r8 72r8 92r8 98r8
+4K13*CPU 54e12 21|3w10 4r10 12r17 33r8 55r8 61r8 71r8 90r8 96r8
 12R9*CPU_State 47e14 21|12r21
-13a7*Registers{18|9A9} 21|39m8 40m8 64r34 78m8 79m8 100r35
-16m7*PC{8M12} 21|36m8 75m8
-22m7*Next_PC{8M12} 21|37m8 76m8
-32b7*MulDiv_Busy{boolean} 21|58r27 66r36 94r28 102r37
-33i7*MulDiv_Cycles{natural} 21|60r39 96r40
-49U14*Reset 21|33s12 72s12
+13a7*Registers{18|9A9} 21|39m8 40m8 63r34 77m8 78m8 98r35
+16m7*PC{8M12} 21|36m8 74m8
+22m7*Next_PC{8M12} 21|37m8 75m8
+32b7*MulDiv_Busy{boolean} 21|57r27 65r36 92r28 100r37
+33i7*MulDiv_Cycles{natural} 21|59r39 94r40
+49U14*Reset 21|33s12 71s12
 X 15 psx-cpu-step.ads
-5K17*Step 15e17 21|4w14 56r12 62r12 92r12 98r12
-7U14*Step 21|56s17 62s17 92s17 98s17
+5K17*Step 15e17 21|4w14 55r12 61r12 90r12 96r12
+7U14*Step 21|55s17 61s17 90s17 96s17
 X 17 psx-memory.ads
-4K13*Memory 57e15 21|5w10 13r17 34r8 48r8 51r8 54r8 73r8 84r8 87r8 90r8
+4K13*Memory 57e15 21|5w10 13r17 34r8 47r8 50r8 53r8 72r8 82r8 85r8 88r8
 18R9*Memory_State 24e14 21|13r24
-26U14*Reset 21|34s15 73s15
-50U14*Write_32 21|48s15 51s15 54s15 84s15 87s15 90s15
+26U14*Reset 21|34s15 72s15
+50U14*Write_32 21|47s15 50s15 53s15 82s15 85s15 88s15
 X 18 psx-register.ads
 9A9*Register_Array(5M12)<7I9>
 X 21 psx_cpu_muldiv_stall_tests.adb
-7U11*Psx_CPU_MulDiv_Stall_Tests 7b11 107l5 107t31
-12r4 CPU{14|12R9} 33m19 36m4 37m4 39m4 40m4 56m23 56r23 58r23 60r35 62m23
-. 62r23 64r30 66r32 72m19 75m4 76m4 78m4 79m4 92m23 92r23 94r24 96r36 98m23
-. 98r23 100r31 102r33
-13r4 Memory{17|18R9} 34m22 48m25 48r25 51m25 51r25 54m25 54r25 56m28 56r28
-. 62m28 62r28 73m22 84m25 84r25 87m25 87r25 90m25 90r25 92m28 92r28 98m28
-. 98r28
-15U14 Check 15b14 15>21 15>36 22l8 22t13 58s4 60s4 64s4 66s4 94s4 96s4 100s4
-. 102s4
+7U11*Psx_CPU_MulDiv_Stall_Tests 7b11 105l5 105t31
+12r4 CPU{14|12R9} 33m19 36m4 37m4 39m4 40m4 55m23 55r23 57r23 59r35 61m23
+. 61r23 63r30 65r32 71m19 74m4 75m4 77m4 78m4 90m23 90r23 92r24 94r36 96m23
+. 96r23 98r31 100r33
+13r4 Memory{17|18R9} 34m22 47m25 47r25 50m25 50r25 53m25 53r25 55m28 55r28
+. 61m28 61r28 72m22 82m25 82r25 85m25 85r25 88m25 88r25 90m28 90r28 96m28
+. 96r28
+15U14 Check 15b14 15>21 15>36 22l8 22t13 57s4 59s4 63s4 65s4 92s4 94s4 98s4
+. 100s4
 15a21 Name{string} 18r31 20r31
 15b36 Condition{boolean} 17r10
 

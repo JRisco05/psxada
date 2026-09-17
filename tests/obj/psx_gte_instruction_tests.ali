@@ -65,11 +65,11 @@ D a-textio.ads		20260610194523 34ef47de ada.text_io%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
-D psx.ads		20260916234907 6f0a212e psx%s
-D psx-gte.ads		20260916234907 570875b6 psx.gte%s
-D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
+D psx.ads		20260917034516 6f0a212e psx%s
+D psx-gte.ads		20260917034501 570875b6 psx.gte%s
+D psx-gte-instruction.ads  20260917034455 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_gte_instruction_tests.adb  20260917002337 5a2bea0c psx_gte_instruction_tests%b
+D psx_gte_instruction_tests.adb  20260917034757 5a2bea0c psx_gte_instruction_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -106,7 +106,7 @@ X 11 interfac.ads
 X 13 psx.ads
 1K9*PSX 3e8 17|4r6 10r11 30r7 36r7 42r7 48r7 54r7 60r7
 X 14 psx-gte.ads
-4K13*GTE 139e12 17|4r10 10r15 30r11 36r11 42r11 48r11 54r11 60r11
+4K13*GTE 131e12 17|4r10 10r15 30r11 36r11 42r11 48r11 54r11 60r11
 X 15 psx-gte-instruction.ads
 3K17*Instruction 23e24 17|4w14 10r19 30r15 36r15 42r15 48r15 54r15 60r15
 7R9*Instruction 9e14 17|10r31

@@ -35,29 +35,29 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   -- Vector V0 = (100, 200, 300)
+   --  Vector V0 = (100, 200, 300)
    PSX.GTE.Write_Data (GTE, 0, 16#00C8_0064#);
    PSX.GTE.Write_Data (GTE, 1, 16#0000_012C#);
 
-   -- Identity rotation matrix.
+   --  Identity rotation matrix.
    PSX.GTE.Write_Control (GTE, 32, 16#0000_1000#); -- RT11=4096, RT12=0
    PSX.GTE.Write_Control (GTE, 33, 16#0000_0000#); -- RT13=0, RT21=0
    PSX.GTE.Write_Control (GTE, 34, 16#0000_1000#); -- RT22=4096, RT23=0
    PSX.GTE.Write_Control (GTE, 35, 16#0000_0000#); -- RT31=0, RT32=0
    PSX.GTE.Write_Control (GTE, 36, 16#0000_1000#); -- RT33=4096
 
-   -- No translation.
+   --  No translation.
    PSX.GTE.Write_Control (GTE, 37, 0); -- TRX
    PSX.GTE.Write_Control (GTE, 38, 0); -- TRY
    PSX.GTE.Write_Control (GTE, 39, 0); -- TRZ
 
-   -- MVMVA:
-   -- command = 12
-   -- SF = 1
-   -- MX = 0 (RT)
-   -- V  = 0 (V0)
-   -- CV = 0 (TR)
-   -- LM = 0
+   --  MVMVA:
+   --  command = 12
+   --  SF = 1
+   --  MX = 0 (RT)
+   --  V  = 0 (V0)
+   --  CV = 0 (TR)
+   --  LM = 0
    Inst.Raw := 16#0008_000C#;
 
    PSX.GTE.Execute.Execute (GTE, Inst);

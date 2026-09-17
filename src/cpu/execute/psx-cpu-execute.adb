@@ -4,7 +4,6 @@ with PSX.Types;
 with PSX.Register;
 with PSX.CPU.MulDiv;
 with PSX.Memory.Cycles;
-with Ada.Text_IO;
 
 package body PSX.CPU.Execute is
    use type Interfaces.Unsigned_8;
@@ -55,6 +54,7 @@ package body PSX.CPU.Execute is
    function To_Word32 is new
      Ada.Unchecked_Conversion (Interfaces.Integer_32, PSX.Types.Word32);
 
+   --  Evaluar la función Multiply_Signed
    function Multiply_Signed
      (Left : PSX.Types.Word32; Right : PSX.Types.Word32)
       return PSX.Types.Word64
@@ -662,7 +662,7 @@ package body PSX.CPU.Execute is
 
       end if;
 
-      -- BLTZAL
+      --  BLTZAL
       if Opcode_Value = 1 and PSX.CPU.Instruction.Rt (Inst) = 16 then
          PSX.Register.Write (CPU.Registers, 31, CPU.PC + 8);
 
@@ -677,7 +677,7 @@ package body PSX.CPU.Execute is
          end if;
       end if;
 
-      -- BGEZAL
+      --  BGEZAL
       if Opcode_Value = 1 and PSX.CPU.Instruction.Rt (Inst) = 17 then
          PSX.Register.Write (CPU.Registers, 31, CPU.PC + 8);
 
@@ -912,7 +912,7 @@ package body PSX.CPU.Execute is
 
       end if;
 
-      -- SWR
+      --  SWR
       if Opcode_Value = 46 then
 
          declare

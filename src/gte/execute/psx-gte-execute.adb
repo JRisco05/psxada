@@ -1,10 +1,6 @@
-with Interfaces;
 with PSX.Types;
-with PSX.GTE.Instruction;
 
 package body PSX.GTE.Execute is
-
-   use type Interfaces.Unsigned_32;
 
    subtype Word32 is PSX.Types.Word32;
 
@@ -212,7 +208,7 @@ package body PSX.GTE.Execute is
       GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
       GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
 
-      -- Desplazamiento del FIFO SZ.
+      --  Desplazamiento del FIFO SZ.
       GTE.SZ0 := GTE.SZ1;
       GTE.SZ1 := GTE.SZ2;
       GTE.SZ2 := GTE.SZ3;
@@ -225,7 +221,7 @@ package body PSX.GTE.Execute is
 
       Perspective := Divide_Perspective (GTE, H_Value, SZ3_Value);
 
-      -- FIFO SXY.
+      --  FIFO SXY.
       GTE.SX0 := GTE.SX1;
       GTE.SY0 := GTE.SY1;
 
@@ -351,12 +347,12 @@ package body PSX.GTE.Execute is
 
    begin
 
-      -- A new GTE command clears the calculation flags.
+      --  A new GTE command clears the calculation flags.
       GTE.FLAG := 0;
 
-      -- -------------------------------------------------------
-      -- Rotation + translation
-      -- -------------------------------------------------------
+      --  -------------------------------------------------------
+      --  Rotation + translation
+      --  -------------------------------------------------------
 
       MAC1_Raw := TRX * 16#1000# + RT11 * VX + RT12 * VY + RT13 * VZ;
 
@@ -376,9 +372,9 @@ package body PSX.GTE.Execute is
       GTE.MAC2 := To_Word32 (MAC2);
       GTE.MAC3 := To_Word32 (MAC3);
 
-      -- -------------------------------------------------------
-      -- IR registers
-      -- -------------------------------------------------------
+      --  -------------------------------------------------------
+      --  IR registers
+      --  -------------------------------------------------------
 
       GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
 
@@ -386,9 +382,9 @@ package body PSX.GTE.Execute is
 
       GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
 
-      -- -------------------------------------------------------
-      -- SZ FIFO
-      -- -------------------------------------------------------
+      --  -------------------------------------------------------
+      --  SZ FIFO
+      --  -------------------------------------------------------
 
       SZ3_Value := SAR (MAC3_Raw, 12);
 
@@ -400,15 +396,15 @@ package body PSX.GTE.Execute is
 
       SZ3_Value := Long_Long_Integer (GTE.SZ3 and 16#0000_FFFF#);
 
-      -- -------------------------------------------------------
-      -- Perspective division
-      -- -------------------------------------------------------
+      --  -------------------------------------------------------
+      --  Perspective division
+      --  -------------------------------------------------------
 
       Perspective := Divide_Perspective (GTE, H_Value, SZ3_Value);
 
-      -- -------------------------------------------------------
-      -- SX2
-      -- -------------------------------------------------------
+      --  -------------------------------------------------------
+      --  SX2
+      --  -------------------------------------------------------
 
       MAC0 := Perspective * Signed_16 (GTE.IR1) + OFX_Value;
 
@@ -421,9 +417,9 @@ package body PSX.GTE.Execute is
 
       GTE.SX2 := Saturate_Screen (GTE, SAR (MAC0, 16), 14);
 
-      -- -------------------------------------------------------
-      -- SY2
-      -- -------------------------------------------------------
+      --  -------------------------------------------------------
+      --  SY2
+      --  -------------------------------------------------------
 
       MAC0 := Perspective * Signed_16 (GTE.IR2) + OFY_Value;
 
@@ -431,9 +427,9 @@ package body PSX.GTE.Execute is
 
       GTE.SY2 := Saturate_Screen (GTE, SAR (MAC0, 16), 13);
 
-      -- -------------------------------------------------------
-      -- Depth cue
-      -- -------------------------------------------------------
+      --  -------------------------------------------------------
+      --  Depth cue
+      --  -------------------------------------------------------
 
       MAC0 := Perspective * DQA_Value + DQB_Value;
 
@@ -488,9 +484,9 @@ package body PSX.GTE.Execute is
    begin
       GTE.FLAG := 0;
 
-      -- ----------------------------------------------------
-      -- Matriz RT
-      -- ----------------------------------------------------
+      --  ----------------------------------------------------
+      --  Matriz RT
+      --  ----------------------------------------------------
 
       Matrix_11 := Signed_16 (GTE.RT11);
       Matrix_12 := Signed_16 (GTE.RT12);
@@ -504,12 +500,12 @@ package body PSX.GTE.Execute is
       Matrix_32 := Signed_16 (GTE.RT32);
       Matrix_33 := Signed_16 (GTE.RT33);
 
-      -- ----------------------------------------------------
-      -- Selección del vector
-      -- V=0 -> V0
-      -- V=1 -> V1
-      -- V=2 -> V2
-      -- ----------------------------------------------------
+      --  ----------------------------------------------------
+      --  Selección del vector
+      --  V=0 -> V0
+      --  V=1 -> V1
+      --  V=2 -> V2
+      --  ----------------------------------------------------
 
       case PSX.GTE.Instruction.V (Inst) is
 
@@ -535,17 +531,17 @@ package body PSX.GTE.Execute is
 
       end case;
 
-      -- ----------------------------------------------------
-      -- CV=0 -> vector de traslación
-      -- ----------------------------------------------------
+      --  ----------------------------------------------------
+      --  CV=0 -> vector de traslación
+      --  ----------------------------------------------------
 
       TX := Signed_32 (GTE.TRX);
       TY := Signed_32 (GTE.TRY);
       TZ := Signed_32 (GTE.TRZ);
 
-      -- ----------------------------------------------------
-      -- Multiplicación matriz * vector
-      -- ----------------------------------------------------
+      --  ----------------------------------------------------
+      --  Multiplicación matriz * vector
+      --  ----------------------------------------------------
 
       MAC1_Raw :=
         TX * 16#1000# + Matrix_11 * VX + Matrix_12 * VY + Matrix_13 * VZ;
@@ -556,11 +552,11 @@ package body PSX.GTE.Execute is
       MAC3_Raw :=
         TZ * 16#1000# + Matrix_31 * VX + Matrix_32 * VY + Matrix_33 * VZ;
 
-      -- ----------------------------------------------------
-      -- SF
-      -- SF=0 -> sin desplazamiento
-      -- SF=1 -> desplazamiento de 12 bits
-      -- ----------------------------------------------------
+      --  ----------------------------------------------------
+      --  SF
+      --  SF=0 -> sin desplazamiento
+      --  SF=1 -> desplazamiento de 12 bits
+      --  ----------------------------------------------------
 
       if SF then
          MAC1 := SAR (MAC1_Raw, 12);
@@ -572,17 +568,17 @@ package body PSX.GTE.Execute is
          MAC3 := MAC3_Raw;
       end if;
 
-      -- ----------------------------------------------------
-      -- MAC
-      -- ----------------------------------------------------
+      --  ----------------------------------------------------
+      --  MAC
+      --  ----------------------------------------------------
 
       GTE.MAC1 := To_Word32 (MAC1);
       GTE.MAC2 := To_Word32 (MAC2);
       GTE.MAC3 := To_Word32 (MAC3);
 
-      -- ----------------------------------------------------
-      -- IR
-      -- ----------------------------------------------------
+      --  ----------------------------------------------------
+      --  IR
+      --  ----------------------------------------------------
 
       GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
 

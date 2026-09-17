@@ -27,7 +27,7 @@ begin
    New_Line;
 
    ----------------------------------------------------------------
-   -- DIV
+   --  DIV
    ----------------------------------------------------------------
 
    PSX.CPU.Reset (CPU);
@@ -39,18 +39,17 @@ begin
    CPU.Registers (1) := 20;
    CPU.Registers (2) := 3;
 
-   -- DIV R1, R2
-   --
-   -- opcode = 0
-   -- rs     = 1
-   -- rt     = 2
-   -- funct  = 26
+   --  DIV R1, R2
+   --  opcode = 0
+   --  rs     = 1
+   --  rt     = 2
+   --  funct  = 26
    PSX.Memory.Write_32 (Memory, 16#0000_0000#, 16#0022_001A#);
 
-   -- MFLO R3
+   --  MFLO R3
    PSX.Memory.Write_32 (Memory, 16#0000_0004#, 16#0000_1812#);
 
-   -- MFHI R4
+   --  MFHI R4
    PSX.Memory.Write_32 (Memory, 16#0000_0008#, 16#0000_2010#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -66,7 +65,7 @@ begin
    Check ("DIV completed", not CPU.MulDiv_Busy);
 
    ----------------------------------------------------------------
-   -- DIVU
+   --  DIVU
    ----------------------------------------------------------------
 
    PSX.CPU.Reset (CPU);
@@ -78,15 +77,14 @@ begin
    CPU.Registers (1) := 20;
    CPU.Registers (2) := 3;
 
-   -- DIVU R1, R2
-   --
-   -- funct = 27
+   --  DIVU R1, R2
+   --  funct = 27
    PSX.Memory.Write_32 (Memory, 16#0000_0000#, 16#0022_001B#);
 
-   -- MFLO R3
+   --  MFLO R3
    PSX.Memory.Write_32 (Memory, 16#0000_0004#, 16#0000_1812#);
 
-   -- MFHI R4
+   --  MFHI R4
    PSX.Memory.Write_32 (Memory, 16#0000_0008#, 16#0000_2010#);
 
    PSX.CPU.Step.Step (CPU, Memory);

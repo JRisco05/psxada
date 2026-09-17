@@ -43,7 +43,7 @@ procedure Psx_Memory_Load_All_Cycle_Tests is
 
       CPU.Registers (1) := Address;
 
-      -- Load instruction at PC.
+      --  Load instruction at PC.
       PSX.Memory.Write_32 (Memory, 16#0000_0000#, Instruction);
    end Prepare_Load;
 
@@ -53,89 +53,89 @@ begin
    New_Line;
 
    ----------------------------------------------------------------
-   -- LB
+   --  LB
    ----------------------------------------------------------------
 
-   -- RAM
+   --  RAM
    Prepare_Load (16#0000_0100#, 16#8022_0000#);
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#0000_007F#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check ("LB RAM timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 7);
 
-   -- Scratchpad
+   --  Scratchpad
    Prepare_Load (16#1F80_0000#, 16#8022_0000#);
    PSX.Memory.Write_32 (Memory, 16#1F80_0000#, 16#0000_007F#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check
      ("LB Scratchpad timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 1);
 
-   -- I/O
+   --  I/O
    Prepare_Load (16#1F80_1108#, 16#8022_0000#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check ("LB I/O timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 5);
 
    ----------------------------------------------------------------
-   -- LBU
+   --  LBU
    ----------------------------------------------------------------
 
-   -- RAM
+   --  RAM
    Prepare_Load (16#0000_0100#, 16#9022_0000#);
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#0000_007F#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check ("LBU RAM timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 7);
 
-   -- Scratchpad
+   --  Scratchpad
    Prepare_Load (16#1F80_0000#, 16#9022_0000#);
    PSX.Memory.Write_32 (Memory, 16#1F80_0000#, 16#0000_007F#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check
      ("LBU Scratchpad timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 1);
 
-   -- I/O
+   --  I/O
    Prepare_Load (16#1F80_1108#, 16#9022_0000#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check ("LBU I/O timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 5);
 
    ----------------------------------------------------------------
-   -- LH
+   --  LH
    ----------------------------------------------------------------
 
-   -- RAM
+   --  RAM
    Prepare_Load (16#0000_0100#, 16#8422_0000#);
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#0000_1234#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check ("LH RAM timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 7);
 
-   -- Scratchpad
+   --  Scratchpad
    Prepare_Load (16#1F80_0000#, 16#8422_0000#);
    PSX.Memory.Write_32 (Memory, 16#1F80_0000#, 16#0000_1234#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check
      ("LH Scratchpad timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 1);
 
-   -- I/O
+   --  I/O
    Prepare_Load (16#1F80_1108#, 16#8422_0000#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check ("LH I/O timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 5);
 
    ----------------------------------------------------------------
-   -- LHU
+   --  LHU
    ----------------------------------------------------------------
 
-   -- RAM
+   --  RAM
    Prepare_Load (16#0000_0100#, 16#9422_0000#);
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#0000_1234#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check ("LHU RAM timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 7);
 
-   -- Scratchpad
+   --  Scratchpad
    Prepare_Load (16#1F80_0000#, 16#9422_0000#);
    PSX.Memory.Write_32 (Memory, 16#1F80_0000#, 16#0000_1234#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check
      ("LHU Scratchpad timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 1);
 
-   -- I/O
+   --  I/O
    Prepare_Load (16#1F80_1108#, 16#9422_0000#);
    PSX.CPU.Step.Step (CPU, Memory);
    Check ("LHU I/O timer", PSX.Timers.Read_Counter (Memory.Timers, 0), 5);

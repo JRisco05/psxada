@@ -52,11 +52,11 @@ W psx.cpu%s		psx-cpu.adb		psx-cpu.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
-D psx.ads		20260916234907 6f0a212e psx%s
+D psx.ads		20260917034516 6f0a212e psx%s
 D psx-cpu.ads		20260916234907 0eec9d9a psx.cpu%s
-D psx-cpu-instruction.ads  20260916234912 a548a6bb psx.cpu.instruction%s
-D psx-cpu-instruction.adb  20260916234912 d4f4ebbf psx.cpu.instruction%b
-D psx-register.ads	20260916234913 4d5fe43c psx.register%s
+D psx-cpu-instruction.ads  20260917034330 a548a6bb psx.cpu.instruction%s
+D psx-cpu-instruction.adb  20260917034327 d4f4ebbf psx.cpu.instruction%b
+D psx-register.ads	20260917034351 4d5fe43c psx.register%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
 G a e

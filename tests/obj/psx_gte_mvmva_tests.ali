@@ -69,12 +69,12 @@ D a-textio.ads		20260610194523 34ef47de ada.text_io%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
-D psx.ads		20260916234907 6f0a212e psx%s
-D psx-gte.ads		20260916234907 570875b6 psx.gte%s
-D psx-gte-execute.ads	20260916234913 40086954 psx.gte.execute%s
-D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
+D psx.ads		20260917034516 6f0a212e psx%s
+D psx-gte.ads		20260917034501 570875b6 psx.gte%s
+D psx-gte-execute.ads	20260917034447 40086954 psx.gte.execute%s
+D psx-gte-instruction.ads  20260917034455 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_gte_mvmva_tests.adb  20260916234911 2206e480 psx_gte_mvmva_tests%b
+D psx_gte_mvmva_tests.adb  20260917040032 2206e480 psx_gte_mvmva_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -94,23 +94,23 @@ D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_gte_mvmva_tests standard 7 11 none]
 G r c none [psx_gte_mvmva_tests standard 7 11 none] [reset psx__gte 119 14 none]
-G r c none [psx_gte_mvmva_tests standard 7 11 none] [write_data psx__gte 121 17 none]
-G r c none [psx_gte_mvmva_tests standard 7 11 none] [write_control psx__gte 130 14 none]
+G r c none [psx_gte_mvmva_tests standard 7 11 none] [write_data psx__gte 121 14 none]
+G r c none [psx_gte_mvmva_tests standard 7 11 none] [write_control psx__gte 126 14 none]
 G r c none [psx_gte_mvmva_tests standard 7 11 none] [execute psx__gte__execute 6 14 none]
 X 1 ada.ads
 18K9*Ada 22e8 18|1r6 9r8
 X 9 a-textio.ads
 58K13*Text_IO 785e16 18|1w10 9r12
 284U14*New_Line 18|34s4 75s4
-565U14*Put_Line 18|22s10 24s10 33s4 76s4
+565U14*Put_Line 18|19s10 21s10 33s4 76s4
 X 11 interfac.ads
 47K9*Interfaces 247e15 18|2w6 10r8
-92M9*Unsigned_32 18|17r18 18r18 26r30 27r28
+92M9*Unsigned_32 18|16r33 16r55 25r15 27r15
 X 13 psx.ads
 1K9*PSX 3e8 18|3r6 4r6 5r6 12r11 13r11 36r4 39r4 40r4 43r4 44r4 45r4 46r4
 . 47r4 50r4 51r4 52r4 63r4
 X 14 psx-gte.ads
-4K13*GTE 139e12 18|3w10 4r10 5r10 12r15 13r15 36r8 39r8 40r8 43r8 44r8 45r8
+4K13*GTE 131e12 18|3w10 4r10 5r10 12r15 13r15 36r8 39r8 40r8 43r8 44r8 45r8
 . 46r8 47r8 50r8 51r8 52r8 63r8
 9R9*GTE_State 117e14 18|12r19
 29m7*IR1{7M12} 18|65r27
@@ -121,10 +121,10 @@ X 14 psx-gte.ads
 52m7*MAC3{7M12} 18|71r28
 115m7*FLAG{7M12} 18|73r26
 119U14*Reset 18|36s12
-121U17*Write_Data 18|39s12 40s12
-130U14*Write_Control 18|43s12 44s12 45s12 46s12 47s12 50s12 51s12 52s12
+121U14*Write_Data 18|39s12 40s12
+126U14*Write_Control 18|43s12 44s12 45s12 46s12 47s12 50s12 51s12 52s12
 X 15 psx-gte-execute.ads
-4K17*Execute 10e20 18|4w14 63r12
+4K17*Execute 9e20 18|4w14 63r12
 6U14*Execute 18|63s20
 X 16 psx-gte-instruction.ads
 3K17*Instruction 23e24 18|5w14 13r19
@@ -136,9 +136,9 @@ X 18 psx_gte_mvmva_tests.adb
 . 45r27 46m27 46r27 47m27 47r27 50m27 50r27 51m27 51r27 52m27 52r27 63m29
 . 63r29 65r23 66r23 67r23 69r24 70r24 71r24 73r22
 13r4 Inst{16|7R9} 61m4 63r34
-15U14 Check 15b14 16>7 17>7 18>7 29l8 29t13 65s4 66s4 67s4 69s4 70s4 71s4
+15U14 Check 15b14 16>7 16>22 16>46 29l8 29t13 65s4 66s4 67s4 69s4 70s4 71s4
 . 73s4
-16a7 Name{string} 22r31 25r24
-17m7 Expected{11|92M9} 21r10 26r49
-18m7 Actual{11|92M9} 21r21 27r47
+16a7 Name{string} 19r31 23r15
+16m22 Expected{11|92M9} 18r10 25r34
+16m46 Actual{11|92M9} 18r21 27r34
 

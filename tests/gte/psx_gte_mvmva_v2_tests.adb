@@ -34,22 +34,22 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   -- V0 = (100, 200, 300)
+   --  V0 = (100, 200, 300)
    GTE.V0_X := 100;
    GTE.V0_Y := 200;
    GTE.V0_Z := 300;
 
-   -- V1 = (400, 500, 600)
+   --  V1 = (400, 500, 600)
    GTE.V1_X := 400;
    GTE.V1_Y := 500;
    GTE.V1_Z := 600;
 
-   -- V2 = (700, 800, 900)
+   --  V2 = (700, 800, 900)
    GTE.V2_X := 700;
    GTE.V2_Y := 800;
    GTE.V2_Z := 900;
 
-   -- Matriz identidad (4096 = 1.0 en formato 12.4)
+   --  Matriz identidad (4096 = 1.0 en formato 12.4)
    GTE.RT11 := 4096;
    GTE.RT12 := 0;
    GTE.RT13 := 0;
@@ -62,12 +62,12 @@ begin
    GTE.RT32 := 0;
    GTE.RT33 := 4096;
 
-   -- Sin traslación
+   --  Sin traslación
    GTE.TRX := 0;
    GTE.TRY := 0;
    GTE.TRZ := 0;
 
-   -- SF=1, V=2, LM=0, MX=0, CV=0, CMD=12
+   --  SF=1, V=2, LM=0, MX=0, CV=0, CMD=12
    Inst.Raw := 16#0009_000C#;
 
    PSX.GTE.Execute.Execute (GTE, Inst);

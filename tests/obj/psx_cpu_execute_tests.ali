@@ -73,16 +73,16 @@ D a-textio.ads		20260610194523 34ef47de ada.text_io%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
-D psx.ads		20260916234907 6f0a212e psx%s
+D psx.ads		20260917034516 6f0a212e psx%s
 D psx-cpu.ads		20260916234907 0eec9d9a psx.cpu%s
 D psx-cpu-execute.ads	20260916234912 4b6c299f psx.cpu.execute%s
 D psx-cpu-fetch.ads	20260916234912 1bdf6dc0 psx.cpu.fetch%s
-D psx-cpu-instruction.ads  20260916234912 a548a6bb psx.cpu.instruction%s
+D psx-cpu-instruction.ads  20260917034330 a548a6bb psx.cpu.instruction%s
 D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
-D psx-register.ads	20260916234913 4d5fe43c psx.register%s
+D psx-register.ads	20260917034351 4d5fe43c psx.register%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_cpu_execute_tests.adb  20260916234949 d488fb79 psx_cpu_execute_tests%b
+D psx_cpu_execute_tests.adb  20260917035401 d488fb79 psx_cpu_execute_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -102,7 +102,7 @@ D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_cpu_execute_tests standard 12 11 none]
 G r c none [psx_cpu_execute_tests standard 12 11 none] [reset psx__cpu 49 14 none]
-G r c none [psx_cpu_execute_tests standard 12 11 none] [write psx__register 15 14 none]
+G r c none [psx_cpu_execute_tests standard 12 11 none] [write psx__register 14 14 none]
 G r c none [psx_cpu_execute_tests standard 12 11 none] [execute psx__cpu__execute 7 14 none]
 G r c none [psx_cpu_execute_tests standard 12 11 none] [read psx__register 11 13 none]
 G r c none [psx_cpu_execute_tests standard 12 11 none] [reset psx__memory 26 14 none]
@@ -296,7 +296,7 @@ X 18 psx-memory.ads
 26U14*Reset 22|55s15 1835s15
 50U14*Write_32 22|1839s15
 X 19 psx-register.ads
-3K13*Register 20e17 22|6w10 38r8 46r11 57r8 64r16 74r8 81r16 91r8 99r11 109r8
+3K13*Register 19e17 22|6w10 38r8 46r11 57r8 64r16 74r8 81r16 91r8 99r11 109r8
 . 110r8 117r16 127r8 128r8 135r16 145r8 146r8 153r16 163r8 164r8 171r16 181r8
 . 182r8 189r16 199r8 200r8 207r16 217r8 218r8 226r11 236r8 237r8 244r16 254r8
 . 255r8 262r16 272r8 273r8 280r16 292r8 293r8 294r8 310r11 321r8 322r8 329r16
@@ -319,7 +319,7 @@ X 19 psx-register.ads
 . 428s20 447s20 466s20 485s20 504s20 545s20 564s25 573s25 597s20 616s25 637s20
 . 658s25 676s25 694s25 709s25 981s25 1000s25 1019s25 1039s25 1057s25 1075s25
 . 1094s20 1244s25 1261s25 1504s25 1521s25 1538s25 1555s25 1572s25 1590s20
-15U14*Write 22|38s17 57s17 74s17 91s17 109s17 110s17 127s17 128s17 145s17
+14U14*Write 22|38s17 57s17 74s17 91s17 109s17 110s17 127s17 128s17 145s17
 . 146s17 163s17 164s17 181s17 182s17 199s17 200s17 217s17 218s17 236s17 237s17
 . 254s17 255s17 272s17 273s17 292s17 293s17 294s17 321s17 322s17 339s17 340s17
 . 357s17 358s17 377s17 378s17 379s17 401s17 402s17 419s17 420s17 438s17 439s17

@@ -65,7 +65,7 @@ D a-textio.ads		20260610194523 34ef47de ada.text_io%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
-D psx.ads		20260916234907 6f0a212e psx%s
+D psx.ads		20260917034516 6f0a212e psx%s
 D psx-dma.ads		20260916234906 a2982fd6 psx.dma%s
 D psx-gpu.ads		20260916234907 5a2e71ed psx.gpu%s
 D psx-memory.ads	20260916234907 99b2f715 psx.memory%s

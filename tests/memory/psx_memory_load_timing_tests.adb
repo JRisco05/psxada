@@ -42,12 +42,12 @@ begin
    New_Line;
 
    ----------------------------------------------------------------
-   -- LB
+   --  LB
    ----------------------------------------------------------------
 
    Prepare_Load (16#0000_0100#, 16#8022_0000#);
 
-   -- 0x80 debe convertirse en 0xFFFFFF80.
+   --  0x80 debe convertirse en 0xFFFFFF80.
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#0000_0080#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -57,12 +57,12 @@ begin
    Check ("LB stall consumed", CPU.Memory_Stall_Cycles = 0);
 
    ----------------------------------------------------------------
-   -- LBU
+   --  LBU
    ----------------------------------------------------------------
 
    Prepare_Load (16#0000_0100#, 16#9022_0000#);
 
-   -- 0x80 debe convertirse en 0x00000080.
+   --  0x80 debe convertirse en 0x00000080.
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#0000_0080#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -72,12 +72,12 @@ begin
    Check ("LBU stall consumed", CPU.Memory_Stall_Cycles = 0);
 
    ----------------------------------------------------------------
-   -- LH
+   --  LH
    ----------------------------------------------------------------
 
    Prepare_Load (16#0000_0100#, 16#8422_0000#);
 
-   -- 0x8000 debe convertirse en 0xFFFF8000.
+   --  0x8000 debe convertirse en 0xFFFF8000.
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#0000_8000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -87,12 +87,12 @@ begin
    Check ("LH stall consumed", CPU.Memory_Stall_Cycles = 0);
 
    ----------------------------------------------------------------
-   -- LHU
+   --  LHU
    ----------------------------------------------------------------
 
    Prepare_Load (16#0000_0100#, 16#9422_0000#);
 
-   -- 0x8000 debe convertirse en 0x00008000.
+   --  0x8000 debe convertirse en 0x00008000.
    PSX.Memory.Write_32 (Memory, 16#0000_0100#, 16#0000_8000#);
 
    PSX.CPU.Step.Step (CPU, Memory);
@@ -102,7 +102,7 @@ begin
    Check ("LHU stall consumed", CPU.Memory_Stall_Cycles = 0);
 
    ----------------------------------------------------------------
-   -- LW
+   --  LW
    ----------------------------------------------------------------
 
    Prepare_Load (16#0000_0100#, 16#8C22_0000#);

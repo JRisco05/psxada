@@ -6,7 +6,6 @@ with Interfaces;
 with PSX.CPU.Step;
 with PSX.CPU.Fetch;
 with PSX.CPU.Instruction;
-with PSX.CPU.Step;
 with PSX.Timers;
 
 procedure Psx_Cpu_Step_Tests is

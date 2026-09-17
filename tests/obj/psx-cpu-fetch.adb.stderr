@@ -1,2 +1,1 @@
-psx-cpu-fetch.adb:1:06: warning: redundant with clause in body [-gnatwr]
 psx-cpu-fetch.ads:1:06: warning: unnecessary with of ancestor [-gnatwr]

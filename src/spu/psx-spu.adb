@@ -6,11 +6,13 @@ package body PSX.SPU is
       SPU.RAM := (others => 0);
 
       SPU.Control := 0;
-      SPU.Status := 0;if Address = 16#1F801D80# then
+      SPU.Status := 0;
+      
+      if Address = 16#1F801D80# then
 
-   SPU.Main_Volume_Left := Value;
+         SPU.Main_Volume_Left := Value;
 
-elsif Address = 16#1F801D82# then
+      elsif Address = 16#1F801D82# then
 
    SPU.Main_Volume_Right := Value;
 
@@ -73,23 +75,13 @@ end if;
             
             when 16#1F801D86# =>
                SPU.Reverb_Volume_Right := Value;
-            
-             when  =>
-               SPU.
 
             when others => 
                null;
 
          end case;
-      
-      
-      
-      
-
-
-elsif Address >= 16#1F801C00#
-  and then Address <= 16#1F801D7F#
-then
+      elsif;
+   elsif;
 
    
    end Write_Register;

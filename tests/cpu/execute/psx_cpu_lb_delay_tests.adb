@@ -35,17 +35,17 @@ begin
    PSX.CPU.Reset (CPU);
    PSX.Memory.Reset (Memory);
 
-   -- R1 = 0x100
+   --  R1 = 0x100
    PSX.Register.Write (CPU.Registers, 1, 16#0000_0100#);
 
-   -- Memoria[0x100] = 0x00000080
-   -- LB debe producir 0xFFFFFF80.
+   --  Memoria[0x100] = 0x00000080
+   --  LB debe producir 0xFFFFFF80.
    PSX.Memory.Write_8 (Memory, 16#0000_0100#, 16#80#);
 
-   -- LB R2, 0(R1)
+   --  LB R2, 0(R1)
    PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#8022_0000#);
 
-   -- NOP
+   --  NOP
    PSX.Memory.Write_32 (Memory, 16#0001_0004#, 16#0000_0000#);
 
    CPU.PC := 16#0001_0000#;
@@ -53,15 +53,15 @@ begin
 
    Check ("LB delay before", PSX.Register.Read (CPU.Registers, 2), 0);
 
-   -- Ejecutar LB.
+   --  Ejecutar LB.
    PSX.CPU.Step.Step (CPU, Memory);
 
    Check ("LB delay after LB", PSX.Register.Read (CPU.Registers, 2), 0);
 
-   -- Ejecutar NOP.
+   --  Ejecutar NOP.
    PSX.CPU.Step.Step (CPU, Memory);
 
-   -- LB debe quedar disponible después de la siguiente instrucción.
+   --  LB debe quedar disponible después de la siguiente instrucción.
    Check
      ("LB delay after next instruction",
       PSX.Register.Read (CPU.Registers, 2),

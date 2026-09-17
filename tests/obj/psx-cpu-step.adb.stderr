@@ -1,7 +1,2 @@
-psx-cpu-step.adb:6:06: warning: redundant with clause in body [-gnatwr]
-psx-cpu-step.adb:112:10: (style) space required [-gnatyc]
-psx-cpu-step.adb:123:10: (style) space required [-gnatyc]
-psx-cpu-step.adb:161:10: (style) space required [-gnatyc]
-psx-cpu-step.adb:162:10: (style) space required [-gnatyc]
-psx-cpu-step.adb:168:10: (style) space required [-gnatyc]
+psx-cpu-step.adb:167:10: (style) space required [-gnatyc]
 psx-cpu-step.ads:1:06: warning: unnecessary with of ancestor [-gnatwr]

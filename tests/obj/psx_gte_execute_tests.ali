@@ -65,12 +65,12 @@ D a-textio.ads		20260610194523 34ef47de ada.text_io%s
 D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
-D psx.ads		20260916234907 6f0a212e psx%s
-D psx-gte.ads		20260916234907 570875b6 psx.gte%s
-D psx-gte-execute.ads	20260916234913 40086954 psx.gte.execute%s
-D psx-gte-instruction.ads  20260916234913 33cfbd89 psx.gte.instruction%s
+D psx.ads		20260917034516 6f0a212e psx%s
+D psx-gte.ads		20260917034501 570875b6 psx.gte%s
+D psx-gte-execute.ads	20260917034447 40086954 psx.gte.execute%s
+D psx-gte-instruction.ads  20260917034455 33cfbd89 psx.gte.instruction%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
-D psx_gte_execute_tests.adb  20260917002337 d91532cf psx_gte_execute_tests%b
+D psx_gte_execute_tests.adb  20260917034751 d91532cf psx_gte_execute_tests%b
 D system.ads		20260610194523 8a611ac3 system%s
 D s-crtl.ads		20260610194523 823b6536 system.crtl%s
 D s-exctab.ads		20260610194523 91bef6ef system.exception_table%s
@@ -100,11 +100,11 @@ X 11 interfac.ads
 X 13 psx.ads
 1K9*PSX 3e8 18|2r6 3r6 4r6 8r11 9r11 15r4 19r4
 X 14 psx-gte.ads
-4K13*GTE 139e12 18|2w10 3r10 4r10 8r15 9r15 15r8 19r8
+4K13*GTE 131e12 18|2w10 3r10 4r10 8r15 9r15 15r8 19r8
 9R9*GTE_State 117e14 18|8r19
 119U14*Reset 18|15s12
 X 15 psx-gte-execute.ads
-4K17*Execute 10e20 18|3w14 19r12
+4K17*Execute 9e20 18|3w14 19r12
 6U14*Execute 18|19s20
 X 16 psx-gte-instruction.ads
 3K17*Instruction 23e24 18|4w14 9r19

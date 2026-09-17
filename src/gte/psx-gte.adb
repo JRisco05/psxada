@@ -1,8 +1,4 @@
-with Interfaces;
-
 package body PSX.GTE is
-
-   use type Interfaces.Unsigned_32;
 
    procedure Reset (GTE : out GTE_State) is
    begin
@@ -14,7 +10,7 @@ package body PSX.GTE is
    begin
       case Index is
 
-         -- V0
+         --  V0
 
          when 0      =>
             GTE.V0_X := Value and 16#0000_FFFF#;
@@ -23,7 +19,7 @@ package body PSX.GTE is
          when 1      =>
             GTE.V0_Z := Value;
 
-         -- V1
+         --  V1
 
          when 2      =>
             GTE.V1_X := Value and 16#0000_FFFF#;
@@ -41,17 +37,17 @@ package body PSX.GTE is
          when 5      =>
             GTE.V2_Z := Value;
 
-         -- Color
+         --  Color
 
          when 6      =>
             GTE.RGBC := Value;
 
-         -- OTZ
+         --  OTZ
 
          when 7      =>
             GTE.OTZ := Value;
 
-         -- IR
+         --  IR
 
          when 8      =>
             GTE.IR0 := Value;
@@ -65,7 +61,7 @@ package body PSX.GTE is
          when 11     =>
             GTE.IR3 := Value;
 
-         -- Screen XY FIFO
+         --  Screen XY FIFO
 
          when 12     =>
             GTE.SX0 := Value and 16#0000_FFFF#;
@@ -79,7 +75,7 @@ package body PSX.GTE is
             GTE.SX2 := Value and 16#0000_FFFF#;
             GTE.SY2 := Interfaces.Shift_Right (Value, 16);
 
-         -- SXYP: write causes FIFO movement
+         --  SXYP: write causes FIFO movement
 
          when 15     =>
             GTE.SX0 := GTE.SX1;
@@ -89,7 +85,7 @@ package body PSX.GTE is
             GTE.SX2 := Value and 16#0000_FFFF#;
             GTE.SY2 := Interfaces.Shift_Right (Value, 16);
 
-         -- SZ FIFO
+         --  SZ FIFO
 
          when 16     =>
             GTE.SZ0 := Value;
@@ -103,7 +99,7 @@ package body PSX.GTE is
          when 19     =>
             GTE.SZ3 := Value;
 
-         -- RGB FIFO
+         --  RGB FIFO
 
          when 20     =>
             GTE.RGB0 := Value;
@@ -114,7 +110,7 @@ package body PSX.GTE is
          when 22     =>
             GTE.RGB2 := Value;
 
-         -- MAC
+         --  MAC
 
          when 24     =>
             GTE.MAC0 := Value;
@@ -128,17 +124,17 @@ package body PSX.GTE is
          when 27     =>
             GTE.MAC3 := Value;
 
-         -- IRGB
+         --  IRGB
 
          when 28     =>
             GTE.IRGB := Value;
 
-         -- ORGB
+         --  ORGB
 
          when 29     =>
             GTE.ORGB := Value;
 
-         -- LZCS
+         --  LZCS
 
          when 30     =>
             GTE.LZCS := Value;
@@ -165,7 +161,7 @@ package body PSX.GTE is
                GTE.LZCR := Count;
             end;
 
-         -- LZCR is read-only.
+         --  LZCR is read-only.
 
          when 31     =>
             null;
@@ -311,7 +307,7 @@ package body PSX.GTE is
    begin
       case Index is
 
-         -- Rotation matrix
+         --  Rotation matrix
 
          when 32     =>
             GTE.RT11 := Sign_Extend_16 (Value);
@@ -332,7 +328,7 @@ package body PSX.GTE is
          when 36     =>
             GTE.RT33 := Sign_Extend_16 (Value);
 
-         -- Translation vector
+         --  Translation vector
 
          when 37     =>
             GTE.TRX := Value;
@@ -343,7 +339,7 @@ package body PSX.GTE is
          when 39     =>
             GTE.TRZ := Value;
 
-         -- Light matrix
+         --  Light matrix
 
          when 40     =>
             GTE.L11 := Value and 16#0000_FFFF#;
@@ -375,7 +371,7 @@ package body PSX.GTE is
          when 47     =>
             GTE.BBK := Value;
 
-         -- Light color matrix
+         --  Light color matrix
 
          when 48     =>
             GTE.LR1 := Value and 16#0000_FFFF#;
@@ -396,7 +392,7 @@ package body PSX.GTE is
          when 52     =>
             GTE.LB3 := Sign_Extend_16 (Value);
 
-         -- Far color
+         --  Far color
 
          when 53     =>
             GTE.RFC := Value;
@@ -407,7 +403,7 @@ package body PSX.GTE is
          when 55     =>
             GTE.BFC := Value;
 
-         -- Screen offset
+         --  Screen offset
 
          when 56     =>
             GTE.OFX := Value;
@@ -415,7 +411,7 @@ package body PSX.GTE is
          when 57     =>
             GTE.OFY := Value;
 
-         -- Projection / depth cue
+         --  Projection / depth cue
 
          when 58     =>
             GTE.H := Value and 16#0000_FFFF#;
@@ -432,7 +428,7 @@ package body PSX.GTE is
          when 62     =>
             GTE.ZSF4 := Sign_Extend_16 (Value);
 
-         -- FLAG is read-only.
+         --  FLAG is read-only.
 
          when 63     =>
             null;
@@ -447,7 +443,7 @@ package body PSX.GTE is
    begin
       case Index is
 
-         -- Rotation matrix
+         --  Rotation matrix
 
          when 32     =>
             return
@@ -472,7 +468,7 @@ package body PSX.GTE is
          when 36     =>
             return GTE.RT33 and 16#0000_FFFF#;
 
-         -- Translation vector
+         --  Translation vector
 
          when 37     =>
             return GTE.TRX;
@@ -483,7 +479,7 @@ package body PSX.GTE is
          when 39     =>
             return GTE.TRZ;
 
-         -- Light matrix
+         --  Light matrix
 
          when 40     =>
             return
@@ -508,7 +504,7 @@ package body PSX.GTE is
          when 44     =>
             return GTE.L33 and 16#0000_FFFF#;
 
-         -- Background color
+         --  Background color
 
          when 45     =>
             return GTE.RBK;
@@ -519,7 +515,7 @@ package body PSX.GTE is
          when 47     =>
             return GTE.BBK;
 
-         -- Light color matrix
+         --  Light color matrix
 
          when 48     =>
             return
@@ -544,7 +540,7 @@ package body PSX.GTE is
          when 52     =>
             return GTE.LB3 and 16#0000_FFFF#;
 
-         -- Far color
+         --  Far color
 
          when 53     =>
             return GTE.RFC;
@@ -555,7 +551,7 @@ package body PSX.GTE is
          when 55     =>
             return GTE.BFC;
 
-         -- Screen offset
+         --  Screen offset
 
          when 56     =>
             return GTE.OFX;
@@ -563,7 +559,7 @@ package body PSX.GTE is
          when 57     =>
             return GTE.OFY;
 
-         -- Projection / depth cue
+         --  Projection / depth cue
 
          when 58     =>
             return GTE.H and 16#0000_FFFF#;
@@ -580,7 +576,7 @@ package body PSX.GTE is
          when 62     =>
             return GTE.ZSF4 and 16#0000_FFFF#;
 
-         -- FLAG
+         --  FLAG
 
          when 63     =>
             return GTE.FLAG;

@@ -31,14 +31,14 @@ begin
 
    PSX.Timers.Reset (Timers);
 
-   -- Reset
+   --  Reset
    Check ("Timer 0 counter reset", 0, PSX.Timers.Read_Counter (Timers, 0));
 
    Check ("Timer 1 counter reset", 0, PSX.Timers.Read_Counter (Timers, 1));
 
    Check ("Timer 2 counter reset", 0, PSX.Timers.Read_Counter (Timers, 2));
 
-   -- Counter
+   --  Counter
    PSX.Timers.Write_Counter (Timers, 0, 16#1234#);
 
    Check
@@ -46,13 +46,13 @@ begin
       16#1234#,
       PSX.Timers.Read_Counter (Timers, 0));
 
-   -- Mode
+   --  Mode
    PSX.Timers.Write_Mode (Timers, 0, 16#0180#);
 
    Check
      ("Timer 0 mode write/read", 16#0180#, PSX.Timers.Read_Mode (Timers, 0));
 
-   -- Target
+   --  Target
    PSX.Timers.Write_Target (Timers, 0, 16#5678#);
 
    Check
@@ -60,7 +60,7 @@ begin
       16#5678#,
       PSX.Timers.Read_Target (Timers, 0));
 
-   -- Timer 1
+   --  Timer 1
    PSX.Timers.Write_Counter (Timers, 1, 16#1111#);
    PSX.Timers.Write_Mode (Timers, 1, 16#2222#);
    PSX.Timers.Write_Target (Timers, 1, 16#3333#);
@@ -71,7 +71,7 @@ begin
 
    Check ("Timer 1 target", 16#3333#, PSX.Timers.Read_Target (Timers, 1));
 
-   -- Timer 2
+   --  Timer 2
 
    PSX.Timers.Write_Counter (Timers, 2, 16#AAAA#);
 
@@ -85,7 +85,7 @@ begin
 
    Check ("Timer 2 target", 16#CCCC#, PSX.Timers.Read_Target (Timers, 2));
 
-   -- Timer tick
+   --  Timer tick
 
    PSX.Timers.Reset (Timers);
 
@@ -102,7 +102,7 @@ begin
       16#0400#,
       PSX.Timers.Read_Mode (Timers, 0) and 16#0400#);
 
-   -- Counter must remain 16-bit
+   --  Counter must remain 16-bit
 
    PSX.Timers.Reset (Timers);
 
@@ -111,14 +111,14 @@ begin
    Check
      ("Timer 0 counter 16-bit", 16#5678#, PSX.Timers.Read_Counter (Timers, 0));
 
-   -- Target must remain 16-bit
+   --  Target must remain 16-bit
 
    PSX.Timers.Write_Target (Timers, 0, 16#ABCD_1234#);
 
    Check
      ("Timer 0 target 16-bit", 16#1234#, PSX.Timers.Read_Target (Timers, 0));
 
-   -- Reset on target
+   --  Reset on target
 
    PSX.Timers.Reset (Timers);
 
@@ -126,7 +126,7 @@ begin
 
    PSX.Timers.Write_Target (Timers, 0, 10);
 
-   -- Bit 3: reset counter on target
+   --  Bit 3: reset counter on target
    PSX.Timers.Write_Mode (Timers, 0, 16#0008#);
 
    PSX.Timers.Tick (Timers, 0, 2);
@@ -138,7 +138,7 @@ begin
       16#0400#,
       PSX.Timers.Read_Mode (Timers, 0) and 16#0400#);
 
-   -- Overflow
+   --  Overflow
 
    PSX.Timers.Reset (Timers);
 
@@ -153,7 +153,7 @@ begin
       16#0800#,
       PSX.Timers.Read_Mode (Timers, 0) and 16#0800#);
 
-   -- Mode status flags are cleared when Mode is written
+   --  Mode status flags are cleared when Mode is written
 
    PSX.Timers.Reset (Timers);
 
@@ -175,14 +175,14 @@ begin
       0,
       PSX.Timers.Read_Mode (Timers, 0) and 16#0400#);
 
-   -- Timer MMIO through PSX.Memory
+   --  Timer MMIO through PSX.Memory
 
    declare
       Memory : PSX.Memory.Memory_State;
    begin
       PSX.Memory.Reset (Memory);
 
-      -- Timer 0 Counter: 0x1F801100
+      --  Timer 0 Counter: 0x1F801100
       PSX.Memory.Write_32 (Memory, 16#1F80_1100#, 16#0000_1234#);
 
       Check
@@ -190,7 +190,7 @@ begin
          16#0000_1234#,
          PSX.Memory.Read_32 (Memory, 16#1F80_1100#));
 
-      -- Timer 0 Mode: 0x1F801104
+      --  Timer 0 Mode: 0x1F801104
       PSX.Memory.Write_32 (Memory, 16#1F80_1104#, 16#0000_0180#);
 
       Check
@@ -198,7 +198,7 @@ begin
          16#0000_0180#,
          PSX.Memory.Read_32 (Memory, 16#1F80_1104#));
 
-      -- Timer 0 Target: 0x1F801108
+      --  Timer 0 Target: 0x1F801108
       PSX.Memory.Write_32 (Memory, 16#1F80_1108#, 16#0000_5678#);
 
       Check
@@ -206,7 +206,7 @@ begin
          16#0000_5678#,
          PSX.Memory.Read_32 (Memory, 16#1F80_1108#));
 
-      -- Timer 1 Counter: 0x1F801110
+      --  Timer 1 Counter: 0x1F801110
       PSX.Memory.Write_32 (Memory, 16#1F80_1110#, 16#0000_1111#);
 
       Check
@@ -214,7 +214,7 @@ begin
          16#0000_1111#,
          PSX.Memory.Read_32 (Memory, 16#1F80_1110#));
 
-      -- Timer 2 Counter: 0x1F801120
+      --  Timer 2 Counter: 0x1F801120
       PSX.Memory.Write_32 (Memory, 16#1F80_1120#, 16#0000_AAAA#);
 
       Check
