@@ -11,8 +11,7 @@ package body PSX.GTE.Execute.Saturation is
          return 16#0000_8000#;
 
       elsif Value < 0 then
-         return Word32
-           (Interfaces.Unsigned_32 (Value + 65536));
+         return Word32 (Interfaces.Unsigned_32 (Value + 65536));
 
       else
          return Word32 (Value);

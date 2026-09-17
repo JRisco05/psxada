@@ -14,16 +14,18 @@ procedure PSX_GTE_MVMVA_LM_Tests is
    procedure Check
      (Name     : String;
       Expected : Interfaces.Unsigned_32;
-      Actual   : Interfaces.Unsigned_32)
-   is
+      Actual   : Interfaces.Unsigned_32) is
    begin
       if Actual = Expected then
          Put_Line ("PASS: " & Name);
       else
          Put_Line
-           ("FAIL: " & Name &
-            " expected=0x" & Interfaces.Unsigned_32'Image (Expected) &
-            " actual=0x" & Interfaces.Unsigned_32'Image (Actual));
+           ("FAIL: "
+            & Name
+            & " expected=0x"
+            & Interfaces.Unsigned_32'Image (Expected)
+            & " actual=0x"
+            & Interfaces.Unsigned_32'Image (Actual));
       end if;
    end Check;
 
@@ -60,20 +62,11 @@ begin
 
    PSX.GTE.Execute.Execute (GTE, Inst);
 
-   Check
-     ("IR1 LM=1",
-      32767,
-      PSX.GTE.Read_Data (GTE, 9));
+   Check ("IR1 LM=1", 32767, PSX.GTE.Read_Data (GTE, 9));
 
-   Check
-     ("IR2 LM=1",
-      32767,
-      PSX.GTE.Read_Data (GTE, 10));
+   Check ("IR2 LM=1", 32767, PSX.GTE.Read_Data (GTE, 10));
 
-   Check
-     ("IR3 LM=1",
-      32767,
-      PSX.GTE.Read_Data (GTE, 11));
+   Check ("IR3 LM=1", 32767, PSX.GTE.Read_Data (GTE, 11));
 
    -- Saturation flags: IR1=24, IR2=23, IR3=22.
    Check

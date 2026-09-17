@@ -74,7 +74,7 @@ begin
    PSX.GPU.Reset (GPU);
    PSX.SPU.Reset (SPU);
    PSX.GTE.Reset (GTE);
-   
+
    -- 2. AGREGADO: Inicializamos los registros de tu DMA pasandole la memoria
    PSX.DMA.Reset (Memory);
 
@@ -117,21 +117,15 @@ begin
          Ada.Text_IO.Put_Line
            ("  El problema empezo cerca del PASO: "
             & Integer'Image (Step_Number - 100));
-         Print_Hex ("  PC antes de caer en el vacio = ",
-                    Prev_PC - (100 * 4));
-         Print_Hex ("  PC Actual en el colapso      = ",
-                    CPU.PC);
+         Print_Hex ("  PC antes de caer en el vacio = ", Prev_PC - (100 * 4));
+         Print_Hex ("  PC Actual en el colapso      = ", CPU.PC);
 
          Ada.Text_IO.New_Line;
          Ada.Text_IO.Put_Line ("=== DIAGNOSTICO DE REGISTROS ===");
-         Print_Hex ("  Reg RA (31) = ",
-                    PSX.Register.Read (CPU.Registers, 31));
-         Print_Hex ("  Reg SP (29) = ",
-                    PSX.Register.Read (CPU.Registers, 29));
-         Print_Hex ("  Reg T0 (8)  = ",
-                    PSX.Register.Read (CPU.Registers, 8));
-         Print_Hex ("  Reg T1 (9)  = ",
-                    PSX.Register.Read (CPU.Registers, 9));
+         Print_Hex ("  Reg RA (31) = ", PSX.Register.Read (CPU.Registers, 31));
+         Print_Hex ("  Reg SP (29) = ", PSX.Register.Read (CPU.Registers, 29));
+         Print_Hex ("  Reg T0 (8)  = ", PSX.Register.Read (CPU.Registers, 8));
+         Print_Hex ("  Reg T1 (9)  = ", PSX.Register.Read (CPU.Registers, 9));
 
          exit;
       end if;
@@ -177,12 +171,9 @@ begin
    Ada.Text_IO.New_Line;
    Ada.Text_IO.Put_Line
      ("-------------------------------------------------------");
-   Ada.Text_IO.Put_Line
-     ("Total steps executed: " & Integer'Image (Last_Step));
-   Ada.Text_IO.Put_Line
-     ("Times at 0x00000E28: " & Integer'Image (Loop_Count));
-   Ada.Text_IO.Put_Line
-     ("BIOS execution completed or hit step limit.");
+   Ada.Text_IO.Put_Line ("Total steps executed: " & Integer'Image (Last_Step));
+   Ada.Text_IO.Put_Line ("Times at 0x00000E28: " & Integer'Image (Loop_Count));
+   Ada.Text_IO.Put_Line ("BIOS execution completed or hit step limit.");
 
    Ada.Text_IO.New_Line;
    Ada.Text_IO.Put_Line ("=== ESTADO FINAL DE LA CPU ===");

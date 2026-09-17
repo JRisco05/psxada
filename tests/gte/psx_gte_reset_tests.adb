@@ -14,28 +14,19 @@ begin
 
    PSX.GTE.Reset (GTE);
 
-   if GTE.V0_X = 0
-     and then GTE.V0_Y = 0
-     and then GTE.V0_Z = 0
-   then
+   if GTE.V0_X = 0 and then GTE.V0_Y = 0 and then GTE.V0_Z = 0 then
       Put_Line ("PASS: GTE V0 reset");
    else
       Put_Line ("FAIL: GTE V0 reset");
    end if;
 
-   if GTE.V1_X = 0
-     and then GTE.V1_Y = 0
-     and then GTE.V1_Z = 0
-   then
+   if GTE.V1_X = 0 and then GTE.V1_Y = 0 and then GTE.V1_Z = 0 then
       Put_Line ("PASS: GTE V1 reset");
    else
       Put_Line ("FAIL: GTE V1 reset");
    end if;
 
-   if GTE.V2_X = 0
-     and then GTE.V2_Y = 0
-     and then GTE.V2_Z = 0
-   then
+   if GTE.V2_X = 0 and then GTE.V2_Y = 0 and then GTE.V2_Z = 0 then
       Put_Line ("PASS: GTE V2 reset");
    else
       Put_Line ("FAIL: GTE V2 reset");

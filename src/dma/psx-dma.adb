@@ -6,7 +6,7 @@ package body PSX.DMA is
 
    use type Interfaces.Unsigned_32;
 
-    DMA_BASE : constant Word32 := 16#1F80_1080#;
+   DMA_BASE : constant Word32 := 16#1F80_1080#;
 
    --  Nuevas Constantes para el Canal 2 (GPU)
    DMA2_MADR : constant Word32 := DMA_BASE + 16#20#;

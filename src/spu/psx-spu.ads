@@ -30,15 +30,15 @@ package PSX.SPU is
    type SPU_RAM_Array is array (Word32 range 0 .. SPU_RAM_SIZE - 1) of Word8;
 
    type SPU_State is record
-      Channels         : Channel_Array; -- ¡Agregado de vuelta!
-      RAM              : SPU_RAM_Array;
-      Control          : Word16;
-      Status           : Word16;
-      Transfer_Address : Word16;
-      Transfer_Control : Word16;
-      IRQ_Address      : Word16;
-      Main_Volume_Left   : Word16;
-      Main_Volume_Right  : Word16;
+      Channels          : Channel_Array; -- ¡Agregado de vuelta!
+      RAM               : SPU_RAM_Array;
+      Control           : Word16;
+      Status            : Word16;
+      Transfer_Address  : Word16;
+      Transfer_Control  : Word16;
+      IRQ_Address       : Word16;
+      Main_Volume_Left  : Word16;
+      Main_Volume_Right : Word16;
 
       Reverb_Volume_Left  : Word16;
       Reverb_Volume_Right : Word16;

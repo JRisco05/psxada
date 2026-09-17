@@ -1,9 +1,7 @@
 package body PSX.Register is
 
    function Read
-     (Registers : Register_Array;
-      Index     : Register_Index) return Word32
-   is
+     (Registers : Register_Array; Index : Register_Index) return Word32 is
    begin
       if Index = 0 then
          return 0;
@@ -12,12 +10,10 @@ package body PSX.Register is
       return Registers (Index);
    end Read;
 
-
    procedure Write
      (Registers : in out Register_Array;
       Index     : Register_Index;
-      Value     : Word32)
-   is
+      Value     : Word32) is
    begin
       if Index = 0 then
          return;

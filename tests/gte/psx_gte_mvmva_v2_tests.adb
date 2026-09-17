@@ -14,15 +14,14 @@ procedure PSX_GTE_MVMVA_V2_Tests is
    Inst : PSX.GTE.Instruction.Instruction;
 
    procedure Check
-     (Name     : String;
-      Expected : PSX.Types.Word32;
-      Actual   : PSX.Types.Word32) is
+     (Name : String; Expected : PSX.Types.Word32; Actual : PSX.Types.Word32) is
    begin
       if Expected = Actual then
          Put_Line ("PASS: " & Name);
       else
          Put_Line
-           ("FAIL: " & Name
+           ("FAIL: "
+            & Name
             & " expected=0x"
             & PSX.Types.Word32'Image (Expected)
             & " actual=0x"

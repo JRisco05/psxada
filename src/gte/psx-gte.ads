@@ -118,22 +118,14 @@ package PSX.GTE is
 
    procedure Reset (GTE : out GTE_State);
 
-      procedure Write_Data
-     (GTE   : in out GTE_State;
-      Index : Natural;
-      Value : Word32);
+   procedure Write_Data
+     (GTE : in out GTE_State; Index : Natural; Value : Word32);
 
-   function Read_Data
-     (GTE   : GTE_State;
-      Index : Natural) return Word32;
+   function Read_Data (GTE : GTE_State; Index : Natural) return Word32;
 
    procedure Write_Control
-     (GTE   : in out GTE_State;
-      Index : Natural;
-      Value : Word32);
+     (GTE : in out GTE_State; Index : Natural; Value : Word32);
 
-   function Read_Control
-     (GTE   : GTE_State;
-      Index : Natural) return Word32;
+   function Read_Control (GTE : GTE_State; Index : Natural) return Word32;
 
 end PSX.GTE;

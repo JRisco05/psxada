@@ -14,16 +14,18 @@ procedure PSX_GTE_MVMVA_V1_Tests is
    procedure Check
      (Name     : String;
       Expected : Interfaces.Unsigned_32;
-      Actual   : Interfaces.Unsigned_32)
-   is
+      Actual   : Interfaces.Unsigned_32) is
    begin
       if Actual = Expected then
          Put_Line ("PASS: " & Name);
       else
          Put_Line
-           ("FAIL: " & Name &
-            " expected=0x" & Interfaces.Unsigned_32'Image (Expected) &
-            " actual=0x" & Interfaces.Unsigned_32'Image (Actual));
+           ("FAIL: "
+            & Name
+            & " expected=0x"
+            & Interfaces.Unsigned_32'Image (Expected)
+            & " actual=0x"
+            & Interfaces.Unsigned_32'Image (Actual));
       end if;
    end Check;
 
@@ -59,45 +61,23 @@ begin
    -- MX = 0 (RT)
    -- V  = 1 (V1)
    -- CV = 0 (TR)
-    Inst.Raw := 16#0008_800C#;
+   Inst.Raw := 16#0008_800C#;
 
-    PSX.GTE.Execute.Execute (GTE, Inst);
+   PSX.GTE.Execute.Execute (GTE, Inst);
 
-   Check
-     ("IR1 V=1",
-      400,
-      PSX.GTE.Read_Data (GTE, 9));
+   Check ("IR1 V=1", 400, PSX.GTE.Read_Data (GTE, 9));
 
-   Check
-     ("IR2 V=1",
-      500,
-      PSX.GTE.Read_Data (GTE, 10));
+   Check ("IR2 V=1", 500, PSX.GTE.Read_Data (GTE, 10));
 
-   Check
-     ("IR3 V=1",
-      600,
-      PSX.GTE.Read_Data (GTE, 11));
+   Check ("IR3 V=1", 600, PSX.GTE.Read_Data (GTE, 11));
 
-   Check
-     ("MAC1 V=1",
-      400,
-      PSX.GTE.Read_Data (GTE, 25));
+   Check ("MAC1 V=1", 400, PSX.GTE.Read_Data (GTE, 25));
 
-   Check
-     ("MAC2 V=1",
-      500,
-      PSX.GTE.Read_Data (GTE, 26));
+   Check ("MAC2 V=1", 500, PSX.GTE.Read_Data (GTE, 26));
 
-   Check
-     ("MAC3 V=1",
-      600,
-      PSX.GTE.Read_Data (GTE, 27));
+   Check ("MAC3 V=1", 600, PSX.GTE.Read_Data (GTE, 27));
 
-   Check
-     ("FLAG V=1",
-      0,
-      PSX.GTE.Read_Control (GTE, 63));
-
+   Check ("FLAG V=1", 0, PSX.GTE.Read_Control (GTE, 63));
 
    Put_Line ("PSX GTE MVMVA V=1 tests finished.");
 end PSX_GTE_MVMVA_V1_Tests;

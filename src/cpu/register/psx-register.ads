@@ -9,8 +9,7 @@ package PSX.Register is
    type Register_Array is array (Register_Index) of Word32;
 
    function Read
-     (Registers : Register_Array;
-      Index     : Register_Index) return Word32;
+     (Registers : Register_Array; Index : Register_Index) return Word32;
 
    procedure Write
      (Registers : in out Register_Array;

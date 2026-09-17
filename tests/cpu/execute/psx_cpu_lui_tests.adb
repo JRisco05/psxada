@@ -14,9 +14,7 @@ procedure PSX_CPU_LUI_Tests is
    Memory : PSX.Memory.Memory_State;
 
    procedure Check
-     (Name     : String;
-      Expected : PSX.Types.Word32;
-      Actual   : PSX.Types.Word32) is
+     (Name : String; Expected : PSX.Types.Word32; Actual : PSX.Types.Word32) is
    begin
       if Actual = Expected then
          Put_Line ("PASS: " & Name);
@@ -37,37 +35,25 @@ begin
 
    --  LUI R3, 0x1234
    --  R3 = 0x12340000
-   PSX.Memory.Write_32
-     (Memory,
-      16#0001_0000#,
-      16#3C03_1234#);
+   PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#3C03_1234#);
 
    CPU.PC := 16#0001_0000#;
    CPU.Next_PC := 16#0001_0004#;
 
    PSX.CPU.Step.Step (CPU, Memory);
 
-   Check
-     ("LUI basic",
-      16#1234_0000#,
-      CPU.Registers (3));
+   Check ("LUI basic", 16#1234_0000#, CPU.Registers (3));
 
    --  LUI R3, 0xFFFF
    --  R3 = 0xFFFF0000
-   PSX.Memory.Write_32
-     (Memory,
-      16#0001_0000#,
-      16#3C03_FFFF#);
+   PSX.Memory.Write_32 (Memory, 16#0001_0000#, 16#3C03_FFFF#);
 
    CPU.PC := 16#0001_0000#;
    CPU.Next_PC := 16#0001_0004#;
 
    PSX.CPU.Step.Step (CPU, Memory);
 
-   Check
-     ("LUI upper bits",
-      16#FFFF_0000#,
-      CPU.Registers (3));
+   Check ("LUI upper bits", 16#FFFF_0000#, CPU.Registers (3));
 
    Put_Line ("");
    Put_Line ("PSX CPU LUI tests finished.");

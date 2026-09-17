@@ -64,7 +64,7 @@ begin
 
    PSX.CPU.Step.Step (CPU, Memory);
 
-   --  Como NO saltó, sigue en línea recta 
+   --  Como NO saltó, sigue en línea recta
    --  y el Next_PC final debe ser 0x0001_0008
    Check ("BLTZ not taken", 16#0001_0008#, CPU.Next_PC);
 
@@ -105,7 +105,7 @@ begin
 
    PSX.CPU.Step.Step (CPU, Memory);
 
-   --  Como NO saltó, sigue en línea recta 
+   --  Como NO saltó, sigue en línea recta
    --  y el Next_PC final debe ser 0x0001_0008
    Check ("BGEZ not taken", 16#0001_0008#, CPU.Next_PC);
 

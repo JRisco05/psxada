@@ -28,15 +28,13 @@ begin
       Put_Line ("FAIL: IR positive saturation");
    end if;
 
-   if PSX.GTE.Execute.Saturation.Saturate_IR (-32768) =
-      16#0000_8000# then
+   if PSX.GTE.Execute.Saturation.Saturate_IR (-32768) = 16#0000_8000# then
       Put_Line ("PASS: IR min");
    else
       Put_Line ("FAIL: IR min");
    end if;
 
-   if PSX.GTE.Execute.Saturation.Saturate_IR (-40000) =
-      16#0000_8000# then
+   if PSX.GTE.Execute.Saturation.Saturate_IR (-40000) = 16#0000_8000# then
       Put_Line ("PASS: IR negative saturation");
    else
       Put_Line ("FAIL: IR negative saturation");

@@ -20,9 +20,12 @@ procedure PSX_GTE_RTPT_Tests is
          Put_Line ("PASS: " & Name);
       else
          Put_Line
-           ("FAIL: " & Name &
-            " expected=0x" & Interfaces.Unsigned_32'Image (Expected) &
-            " actual=0x" & Interfaces.Unsigned_32'Image (Actual));
+           ("FAIL: "
+            & Name
+            & " expected=0x"
+            & Interfaces.Unsigned_32'Image (Expected)
+            & " actual=0x"
+            & Interfaces.Unsigned_32'Image (Actual));
       end if;
    end Check;
 
@@ -41,7 +44,7 @@ procedure PSX_GTE_RTPT_Tests is
       GTE.OFX := 0;
       GTE.OFY := 0;
 
-      GTE.H   := 1000;
+      GTE.H := 1000;
       GTE.DQA := 0;
       GTE.DQB := 0;
    end Setup_Identity;

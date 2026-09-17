@@ -13,18 +13,18 @@ procedure PSX_GTE_MVMVA_Tests is
    Inst : PSX.GTE.Instruction.Instruction;
 
    procedure Check
-     (Name     : String;
-      Expected : Unsigned_32;
-      Actual   : Unsigned_32)
-   is
+     (Name : String; Expected : Unsigned_32; Actual : Unsigned_32) is
    begin
       if Expected = Actual then
          Put_Line ("PASS: " & Name);
       else
          Put_Line
-           ("FAIL: " & Name &
-            " expected=0x" & Unsigned_32'Image (Expected) &
-            " actual=0x" & Unsigned_32'Image (Actual));
+           ("FAIL: "
+            & Name
+            & " expected=0x"
+            & Unsigned_32'Image (Expected)
+            & " actual=0x"
+            & Unsigned_32'Image (Actual));
       end if;
    end Check;
 
