@@ -581,12 +581,32 @@ package body PSX.GTE.Execute is
       end case;
 
       --  ----------------------------------------------------
-      --  CV=0 -> vector de traslación
+      --  Selección del vector de traslación
+      --  CV=0 -> TR
+      --  CV=1 -> BK
       --  ----------------------------------------------------
 
-      TX := Signed_32 (GTE.TRX);
-      TY := Signed_32 (GTE.TRY);
-      TZ := Signed_32 (GTE.TRZ);
+      case PSX.GTE.Instruction.Cv (Inst) is
+
+         when 0      =>
+            -- Translation vector
+            TX := Signed_32 (GTE.TRX);
+            TY := Signed_32 (GTE.TRY);
+            TZ := Signed_32 (GTE.TRZ);
+
+         when 1      =>
+            -- Background color vector
+            TX := Signed_32 (GTE.RBK);
+            TY := Signed_32 (GTE.GBK);
+            TZ := Signed_32 (GTE.BBK);
+
+         when others =>
+            -- CV=2/3 todavía no implementados
+            TX := 0;
+            TY := 0;
+            TZ := 0;
+
+      end case;
 
       --  ----------------------------------------------------
       --  Multiplicación matriz * vector

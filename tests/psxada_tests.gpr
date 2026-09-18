@@ -60,6 +60,7 @@ project Psxada_Tests extends "../psxada.gpr" is
       "psx_gte_mvmva_v3_tests.adb",
       "psx_gte_mvmva_mx_tests",
       "psx_gte_mvmva_mx2_tests",
+      "psx_gte_mvmva_cv_tests.adb",
       "psx_memory_tests.adb",
       "psx_memory_cycles_tests.adb",
       "psx_memory_store_cycle_tests.adb",
