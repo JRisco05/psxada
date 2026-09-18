@@ -1,0 +1,6 @@
+psx-spu.adb:15:10: (style) space required [-gnatyc]
+psx-spu.adb:36:17: (style) "in" should be omitted [-gnatyI]
+psx-spu.adb:37:17: (style) "in" should be omitted [-gnatyI]
+psx-spu.adb:74:13: (style) "in" should be omitted [-gnatyI]
+psx-spu.ads:53:13: (style) "in" should be omitted [-gnatyI]
+psx-spu.ads:56:41: (style) "in" should be omitted [-gnatyI]

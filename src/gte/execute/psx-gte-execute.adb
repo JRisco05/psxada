@@ -600,8 +600,19 @@ package body PSX.GTE.Execute is
             TY := Signed_32 (GTE.GBK);
             TZ := Signed_32 (GTE.BBK);
 
+         when 2      =>
+            -- Far color vector
+            TX := Signed_32 (GTE.RFC);
+            TY := Signed_32 (GTE.GFC);
+            TZ := Signed_32 (GTE.BFC);
+
+         when 3      =>
+            -- No translation vector
+            TX := 0;
+            TY := 0;
+            TZ := 0;
+
          when others =>
-            -- CV=2/3 todavía no implementados
             TX := 0;
             TY := 0;
             TZ := 0;

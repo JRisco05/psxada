@@ -42,14 +42,17 @@ package PSX.SPU is
 
       Reverb_Volume_Left  : Word16;
       Reverb_Volume_Right : Word16;
+
+      Key_On  : Word32;
+      Key_Off : Word32;
    end record;
 
    procedure Reset (SPU : out SPU_State);
 
    procedure Read_Register
-     (SPU : SPU_State; Address : Word32; Value : out Word16);
+     (SPU : in SPU_State; Address : in Word32; Value : out Word16);
 
    procedure Write_Register
-     (SPU : out SPU_State; Address : Word32; Value : Word16);
+     (SPU : in out SPU_State; Address : in Word32; Value : in Word16);
 
 end PSX.SPU;

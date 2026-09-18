@@ -1,9 +1,9 @@
 with PSX.GTE.Instruction;
-with Interfaces;
 with Ada.Text_IO;
 with PSX.Types;
 with PSX.GTE;
 with PSX.GTE.Execute;
+with Interfaces;
 
 procedure PSX_GTE_MVMVA_V3_Tests is
 
