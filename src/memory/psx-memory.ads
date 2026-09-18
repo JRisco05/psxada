@@ -1,5 +1,7 @@
 with PSX.Types;
 with PSX.Timers;
+with PSX.SIO;
+with PSX.CDROM;
 
 package PSX.Memory is
 
@@ -21,6 +23,9 @@ package PSX.Memory is
       BIOS          : BIOS_Array;
       DMA_Registers : DMA_Register_Array;
       Timers        : PSX.Timers.Timers_State;
+      Sio           : PSX.SIO.SIO_State;
+      Cdrom : PSX.CDROM.CDROM_State;
+
    end record;
 
    procedure Reset (Memory : out Memory_State);

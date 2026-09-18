@@ -18,6 +18,7 @@ project Psxada is
       "src/gpu/",
       "src/gte/",
       "src/sio/",
+      "src/cdrom/",
       "src/gte/instruction/",
       "src/gte/execute/",
       "src/spu/",
