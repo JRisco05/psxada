@@ -258,7 +258,7 @@ package ada_main is
    pragma Export (C, u00108, "system__file_control_blockS");
    u00109 : constant Version_32 := 16#6f0a212e#;
    pragma Export (C, u00109, "psxS");
-   u00110 : constant Version_32 := 16#7469ef46#;
+   u00110 : constant Version_32 := 16#3373b7f6#;
    pragma Export (C, u00110, "psx__spuB");
    u00111 : constant Version_32 := 16#21ea5df4#;
    pragma Export (C, u00111, "psx__spuS");

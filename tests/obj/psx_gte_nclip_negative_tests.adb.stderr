@@ -1,0 +1,7 @@
+psx_gte_nclip_negative_tests.adb:11:01: (style) trailing spaces not permitted [-gnatyb]
+psx_gte_nclip_negative_tests.adb:37:07: (style) space required [-gnatyc]
+psx_gte_nclip_negative_tests.adb:38:07: (style) space required [-gnatyc]
+psx_gte_nclip_negative_tests.adb:39:07: (style) space required [-gnatyc]
+psx_gte_nclip_negative_tests.adb:40:07: (style) space required [-gnatyc]
+psx_gte_nclip_negative_tests.adb:50:07: (style) space required [-gnatyc]
+psx_gte_nclip_negative_tests.adb:55:07: (style) space required [-gnatyc]

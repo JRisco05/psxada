@@ -31,12 +31,13 @@ package body PSX.SPU is
       end loop;
    end Reset;
 
-      procedure Write_Register
+   procedure Write_Register
      (SPU : in out SPU_State; Address : in Word32; Value : in Word16)
    is
       Voice_Index : Natural;
       Offset      : Word32;
-      Selector    : Natural; -- 🌟 Variable auxiliar para resolver el tipo del case
+      Selector    :
+        Natural; -- 🌟 Variable auxiliar para resolver el tipo del case
    begin
       --  1. Primero comprobamos las direcciones de volumen GLOBAL
       if Address = 16#1F801D80# then
@@ -54,34 +55,55 @@ package body PSX.SPU is
       elsif Address = 16#1F801DAA# then
          SPU.Control := Value;
 
+      --  Registros KON / KOFF
+      elsif Address = 16#1F801D88# then
+         SPU.Key_On := (SPU.Key_On and 16#FFFF_0000#) or Word32 (Value);
+
+      elsif Address = 16#1F801D8A# then
+         SPU.Key_On :=
+           (SPU.Key_On and 16#0000_FFFF#) or (Word32 (Value) * 16#1_0000#);
+
+      elsif Address = 16#1F801D8C# then
+         SPU.Key_Off := (SPU.Key_Off and 16#FFFF_0000#) or Word32 (Value);
+
+      elsif Address = 16#1F801D8E# then
+         SPU.Key_Off :=
+           (SPU.Key_Off and 16#0000_FFFF#) or (Word32 (Value) * 16#1_0000#);
+
       --  2. Si no es volumen global, comprobamos el rango de las 24 VOCES
       elsif Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
          Offset := Address - 16#1F801C00#;
          Voice_Index := Natural (Offset / 16#10#);
-         Selector    := Natural (Offset mod 16#10#); -- 🌟 Convertimos explícitamente a Natural
+         Selector :=
+           Natural
+             (Offset mod 16#10#); -- 🌟 Convertimos explícitamente a Natural
 
          case Selector is
             when 16#00# =>
                SPU.Channels (Voice_Index).Volume_Left := Value;
+
             when 16#02# =>
                SPU.Channels (Voice_Index).Volume_Right := Value;
+
             when 16#04# =>
                SPU.Channels (Voice_Index).Pitch := Value;
+
             when 16#06# =>
                SPU.Channels (Voice_Index).Start_Address := Value;
+
             when others =>
                null;
          end case;
       end if;
    end Write_Register;
 
-
    procedure Read_Register
      (SPU : in SPU_State; Address : in Word32; Value : out Word16)
    is
       Voice_Index : Natural;
       Offset      : Word32;
-      Selector    : Natural; -- 🌟 Variable auxiliar para resolver el tipo del case
+      Selector    :
+        Natural; -- 🌟 Variable auxiliar para resolver el tipo del case
    begin
       Value := 0; -- Valor de seguridad por defecto
 
@@ -101,21 +123,40 @@ package body PSX.SPU is
       elsif Address = 16#1F801DAE# then
          Value := SPU.Status;
 
+      --  Registros KON / KOFF
+      elsif Address = 16#1F801D88# then
+         Value := Word16 (SPU.Key_On and 16#0000_FFFF#);
+
+      elsif Address = 16#1F801D8A# then
+         Value := Word16 ((SPU.Key_On / 16#1_0000#) and 16#0000_FFFF#);
+
+      elsif Address = 16#1F801D8C# then
+         Value := Word16 (SPU.Key_Off and 16#0000_FFFF#);
+
+      elsif Address = 16#1F801D8E# then
+         Value := Word16 ((SPU.Key_Off / 16#1_0000#) and 16#0000_FFFF#);
+
       --  2. Si no, comprobamos si la CPU quiere leer los datos de las 24 VOCES
       elsif Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
          Offset := Address - 16#1F801C00#;
          Voice_Index := Natural (Offset / 16#10#);
-         Selector    := Natural (Offset mod 16#10#); -- 🌟 Convertimos explícitamente a Natural
+         Selector :=
+           Natural
+             (Offset mod 16#10#); -- 🌟 Convertimos explícitamente a Natural
 
          case Selector is
             when 16#00# =>
                Value := SPU.Channels (Voice_Index).Volume_Left;
+
             when 16#02# =>
                Value := SPU.Channels (Voice_Index).Volume_Right;
+
             when 16#04# =>
                Value := SPU.Channels (Voice_Index).Pitch;
+
             when 16#06# =>
                Value := SPU.Channels (Voice_Index).Start_Address;
+
             when others =>
                Value := 0;
          end case;

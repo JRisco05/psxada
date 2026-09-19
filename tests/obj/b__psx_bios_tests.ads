@@ -332,7 +332,7 @@ package ada_main is
    pragma Export (C, u00145, "psx__gteB");
    u00146 : constant Version_32 := 16#512ceb45#;
    pragma Export (C, u00146, "psx__gteS");
-   u00147 : constant Version_32 := 16#7469ef46#;
+   u00147 : constant Version_32 := 16#3373b7f6#;
    pragma Export (C, u00147, "psx__spuB");
    u00148 : constant Version_32 := 16#21ea5df4#;
    pragma Export (C, u00148, "psx__spuS");

@@ -1,7 +1,9 @@
 with PSX.Types;
+with Interfaces;
 
 package body PSX.GTE.Execute is
 
+   use type Interfaces.Integer_64;
    subtype Word32 is PSX.Types.Word32;
 
    function Signed_16 (Value : Word32) return Long_Long_Integer is
@@ -686,6 +688,92 @@ package body PSX.GTE.Execute is
 
    end Execute_MVMVA;
 
+   procedure Execute_NCLIP (GTE : in out PSX.GTE.GTE_State) is
+      -- Convertimos los registros SX y SY a enteros estándar de 32 bits con signo
+      X0 : constant Interfaces.Integer_32 :=
+        Interfaces.Integer_32 (Signed_16 (GTE.SX0));
+      Y0 : constant Interfaces.Integer_32 :=
+        Interfaces.Integer_32 (Signed_16 (GTE.SY0));
+
+      X1 : constant Interfaces.Integer_32 :=
+        Interfaces.Integer_32 (Signed_16 (GTE.SX1));
+      Y1 : constant Interfaces.Integer_32 :=
+        Interfaces.Integer_32 (Signed_16 (GTE.SY1));
+
+      X2 : constant Interfaces.Integer_32 :=
+        Interfaces.Integer_32 (Signed_16 (GTE.SX2));
+      Y2 : constant Interfaces.Integer_32 :=
+        Interfaces.Integer_32 (Signed_16 (GTE.SY2));
+
+      -- Usamos un entero de 64 bits para calcular el área intermedia sin perder datos
+      MAC0_Raw : Interfaces.Integer_64;
+   begin
+      -- Inicializamos el FLAG en 0 (NCLIP limpia banderas previas de geometría)
+      GTE.FLAG := 0;
+
+      -- Fórmula matemática nativa LLE de la PS1 para el producto cruzado 2D
+      MAC0_Raw :=
+        Interfaces.Integer_64 (X0) * Interfaces.Integer_64 (Y1)
+        + Interfaces.Integer_64 (X1) * Interfaces.Integer_64 (Y2)
+        + Interfaces.Integer_64 (X2) * Interfaces.Integer_64 (Y0)
+        - Interfaces.Integer_64 (X0) * Interfaces.Integer_64 (Y2)
+        - Interfaces.Integer_64 (X1) * Interfaces.Integer_64 (Y0)
+        - Interfaces.Integer_64 (X2) * Interfaces.Integer_64 (Y1);
+
+      -- Validación matemática estricta de saturación de 32 bits con signo
+      if MAC0_Raw > 2147483647 then
+         Set_Flag (GTE, 16); -- Activa el bit 16 en el FLAG
+         GTE.MAC0 := 16#7FFF_FFFF#;
+      elsif MAC0_Raw < -2147483648 then
+         Set_Flag (GTE, 16);
+         GTE.MAC0 := 16#8000_0000#;
+      else
+         -- Si no hay desbordamiento, hacemos el cast seguro a Word32
+         GTE.MAC0 := To_Word32 (Long_Long_Integer (MAC0_Raw));
+      end if;
+
+   end Execute_NCLIP;
+
+   procedure Execute_AVSZ3 (GTE : in out PSX.GTE.GTE_State) is
+      SZ1 : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.SZ1 and 16#0000_FFFF#);
+
+      SZ2 : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.SZ2 and 16#0000_FFFF#);
+
+      SZ3 : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.SZ3 and 16#0000_FFFF#);
+
+      ZSF3 : constant Long_Long_Integer := Signed_16 (GTE.ZSF3);
+
+      Sum       : Long_Long_Integer;
+      MAC0_Raw  : Long_Long_Integer;
+      OTZ_Value : Long_Long_Integer;
+
+   begin
+      GTE.FLAG := 0;
+
+      Sum := SZ1 + SZ2 + SZ3;
+
+      MAC0_Raw := ZSF3 * Sum;
+
+      GTE.MAC0 := To_Word32 (MAC0_Raw);
+
+      OTZ_Value := SAR (MAC0_Raw, 12);
+
+      if OTZ_Value < 0 then
+         OTZ_Value := 0;
+         Set_Flag (GTE, 18);
+
+      elsif OTZ_Value > 16#FFFF# then
+         OTZ_Value := 16#FFFF#;
+         Set_Flag (GTE, 18);
+      end if;
+
+      GTE.OTZ := To_Word32 (OTZ_Value);
+
+   end Execute_AVSZ3;
+
    procedure Execute
      (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
    is
@@ -697,6 +785,12 @@ package body PSX.GTE.Execute is
       case Command is
          when 1      =>
             Execute_RTPS (GTE, Inst);
+
+         when 2      =>
+            Execute_AVSZ3 (GTE);
+
+         when 6      =>
+            Execute_NCLIP (GTE);
 
          when 12     =>
             Execute_MVMVA (GTE, Inst);
