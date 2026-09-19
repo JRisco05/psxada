@@ -632,6 +632,24 @@ package body PSX.GTE.Execute is
       MAC3_Raw :=
         TZ * 16#1000# + Matrix_31 * VX + Matrix_32 * VY + Matrix_33 * VZ;
 
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 30);
+      end if;
+
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 29);
+      end if;
+
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 28);
+      end if;
+
       --  ----------------------------------------------------
       --  SF
       --  SF=0 -> sin desplazamiento

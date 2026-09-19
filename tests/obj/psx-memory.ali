@@ -49,7 +49,7 @@ RV NO_DEFAULT_INITIALIZATION
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx.memory%b		psx-memory.adb		b068690c NE OO PK IU
+U psx.memory%b		psx-memory.adb		3c9f460e NE OO PK IU
 W ada%s			ada.ads			ada.ali
 Z ada.exceptions%s	a-except.adb		a-except.ali
 W ada.streams%s		a-stream.adb		a-stream.ali
@@ -58,8 +58,10 @@ Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W interfaces%s		interfac.ads		interfac.ali
 W psx%s			psx.ads			psx.ali
 
-U psx.memory%s		psx-memory.ads		32abde0f EE NE OO PK IU
+U psx.memory%s		psx-memory.ads		3c7da857 EE NE OO PK IU
 W psx%s			psx.ads			psx.ali
+W psx.cdrom%s		psx-cdrom.adb		psx-cdrom.ali
+W psx.sio%s		psx-sio.adb		psx-sio.ali
 W psx.timers%s		psx-timers.adb		psx-timers.ali
 W psx.types%s		psx-types.ads		psx-types.ali
 
@@ -76,8 +78,10 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260917034516 6f0a212e psx%s
-D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
-D psx-memory.adb	20260917042023 60350bf2 psx.memory%b
+D psx-cdrom.ads		20260918170400 eebb682d psx.cdrom%s
+D psx-memory.ads	20260918150627 1545d817 psx.memory%s
+D psx-memory.adb	20260918155616 60350bf2 psx.memory%b
+D psx-sio.ads		20260918144210 6c9a3177 psx.sio%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
 D system.ads		20260610194523 8a611ac3 system%s
@@ -94,145 +98,150 @@ D s-stoele.ads		20260610194523 ccded4e8 system.storage_elements%s
 D s-traent.ads		20260610194523 c81cbf8c system.traceback_entries%s
 D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 G a e
-G c Z s b [reset psx__memory 26 14 none]
-G c Z s b [read_8 psx__memory 28 13 none]
-G c Z s b [read_16 psx__memory 32 13 none]
-G c Z s b [read_32 psx__memory 36 13 none]
-G c Z s b [write_8 psx__memory 40 14 none]
-G c Z s b [write_16 psx__memory 45 14 none]
-G c Z s b [write_32 psx__memory 50 14 none]
-G c Z s b [load_bios psx__memory 55 14 none]
-G c Z s s [Tdma_register_arrayBIP psx__memory 6 4 none]
-G c Z s s [Tmemory_arrayBIP psx__memory 9 4 none]
-G c Z s s [Tscratchpad_arrayBIP psx__memory 12 4 none]
-G c Z s s [Tbios_arrayBIP psx__memory 15 4 none]
-G c Z s s [memory_stateIP psx__memory 18 9 none]
+G c Z s b [reset psx__memory 31 14 none]
+G c Z s b [read_8 psx__memory 33 13 none]
+G c Z s b [read_16 psx__memory 37 13 none]
+G c Z s b [read_32 psx__memory 41 13 none]
+G c Z s b [write_8 psx__memory 45 14 none]
+G c Z s b [write_16 psx__memory 50 14 none]
+G c Z s b [write_32 psx__memory 55 14 none]
+G c Z s b [load_bios psx__memory 60 14 none]
+G c Z s s [Tdma_register_arrayBIP psx__memory 8 4 none]
+G c Z s s [Tmemory_arrayBIP psx__memory 11 4 none]
+G c Z s s [Tscratchpad_arrayBIP psx__memory 14 4 none]
+G c Z s s [Tbios_arrayBIP psx__memory 17 4 none]
+G c Z s s [memory_stateIP psx__memory 20 9 none]
 G c Z b b [translate_ram_address psx__memory 10 13 none]
 G c Z b b [is_bios_address psx__memory 30 13 none]
 G c Z b b [bios_offset psx__memory 37 13 none]
-G r c none [reset psx__memory 26 14 none] [reset psx__timers 22 14 none]
-G r c none [read_32 psx__memory 36 13 none] [read_counter psx__timers 30 13 none]
-G r c none [read_32 psx__memory 36 13 none] [read_mode psx__timers 36 13 none]
-G r c none [read_32 psx__memory 36 13 none] [read_target psx__timers 41 13 none]
-G r c none [write_32 psx__memory 50 14 none] [write_counter psx__timers 24 14 none]
-G r c none [write_32 psx__memory 50 14 none] [write_mode psx__timers 33 14 none]
-G r c none [write_32 psx__memory 50 14 none] [write_target psx__timers 38 14 none]
+G r c none [reset psx__memory 31 14 none] [reset psx__timers 22 14 none]
+G r c none [read_32 psx__memory 41 13 none] [read_counter psx__timers 30 13 none]
+G r c none [read_32 psx__memory 41 13 none] [read_mode psx__timers 36 13 none]
+G r c none [read_32 psx__memory 41 13 none] [read_target psx__timers 41 13 none]
+G r c none [write_32 psx__memory 55 14 none] [write_counter psx__timers 24 14 none]
+G r c none [write_32 psx__memory 55 14 none] [write_mode psx__timers 33 14 none]
+G r c none [write_32 psx__memory 55 14 none] [write_target psx__timers 38 14 none]
 X 1 ada.ads
-18K9*Ada 22e8 15|2r6 3r6 275r11 276r11
+18K9*Ada 22e8 16|2r6 3r6 275r11 276r11
 X 4 a-stream.ads
-36K13*Streams 90e16 15|2w10 3r10 275r15 276r15
+36K13*Streams 90e16 16|2w10 3r10 275r15 276r15
 42M9*Stream_Element
-44I9*Stream_Element_Offset<long_long_integer> 15|280r19 281r19 282r28
-54A9*Stream_Element_Array(42M9)<44I9> 15|279r19
+44I9*Stream_Element_Offset<long_long_integer> 16|280r19 281r19 282r28
+54A9*Stream_Element_Array(42M9)<44I9> 16|279r19
 X 5 a-ststio.ads
-39K21*Stream_IO 225e26 15|3w18 276r23
-44P9*File_Type 15|278r19
-48n23*In_File{48E9} 15|285r35
-75U14*Open 15|285s7
-76p7 File{44P9} 15|285r13
-77e7 Mode{48E9} 15|285r27
-78a7 Name{string} 15|285r44
-81U14*Close 15|294s16 307s7 316s13
-90V13*Is_Open{boolean} 15|315s13
-91V13*End_Of_File{boolean} 15|287s17
-105U14*Read 15|289s10
-106p7 File{44P9} 15|289r16
-107a7 Item{4|54A9} 15|289r30
-108i7 Last{4|44I9} 15|289r46
+39K21*Stream_IO 225e26 16|3w18 276r23
+44P9*File_Type 16|278r19
+48n23*In_File{48E9} 16|285r35
+75U14*Open 16|285s7
+76p7 File{44P9} 16|285r13
+77e7 Mode{48E9} 16|285r27
+78a7 Name{string} 16|285r44
+81U14*Close 16|294s16 307s7 316s13
+90V13*Is_Open{boolean} 16|315s13
+91V13*End_Of_File{boolean} 16|287s17
+105U14*Read 16|289s10
+106p7 File{44P9} 16|289r16
+107a7 Item{4|54A9} 16|289r30
+108i7 Last{4|44I9} 16|289r46
 X 11 interfac.ads
-47K9*Interfaces 247e15 15|1w6 7r13 8r13 93r21 154r18 155r18 156r18 202r27
+47K9*Interfaces 247e15 16|1w6 7r13 8r13 93r21 154r18 155r18 156r18 202r27
 . 255r32 258r32 261r32
 81M9*Unsigned_8
-84M9*Unsigned_16 15|7r24
-92M9*Unsigned_32 15|8r24
-129V13*Shift_Left{84M9} 15|93s32
-134V13*Shift_Right{84M9} 15|202s38
-154V13*Shift_Left{92M9} 15|154s29 155s29 156s29
-159V13*Shift_Right{92M9} 15|255s43 258s43 261s43
+84M9*Unsigned_16 16|7r24
+92M9*Unsigned_32 16|8r24
+129V13*Shift_Left{84M9} 16|93s32
+134V13*Shift_Right{84M9} 16|202s38
+154V13*Shift_Left{92M9} 16|154s29 155s29 156s29
+159V13*Shift_Right{92M9} 16|255s43 258s43 261s43
 X 13 psx.ads
-1K9*PSX 3e8 14|1r6 2r6 4r9 7r13 7r52 10r13 10r59 13r13 13r59 16r13 16r59
-. 23r23 29r40 30r14 33r40 34r14 37r40 38r14 42r17 43r17 47r17 48r17 52r17
-. 53r17 57r5 15|5r14 11r17 11r42 30r40 37r36 37r61 54r7 58r40 58r65 60r35
-. 84r40 85r14 87r22 88r9 90r23 91r9 97r40 98r14 100r29 101r29 103r27 104r27
-. 106r15 117r23 120r23 123r23 140r27 141r15 143r27 144r15 146r27 147r15 149r27
-. 150r15 165r17 166r17 168r35 194r17 195r17 197r33 202r10 207r17 208r17 210r29
-. 211r29 213r27 214r27 216r15 227r16 231r16 234r16 251r27 252r15 254r27 255r15
-. 257r27 258r15 260r27 261r15 298r26 299r15 322r5
-X 14 psx-memory.ads
-4K13*Memory 13|1k9 14|57l9 57e15 15|5b18 322l9 322t15
-6A9*DMA_Register_Array(17|7M12)<11|92M9> 22r23
-9A9*Memory_Array(17|5M12)<11|92M9> 19r23
-12A9*Scratchpad_Array(17|5M12)<11|92M9> 20r23
-15A9*BIOS_Array(17|5M12)<11|92M9> 21r23
-18R9*Memory_State 24e14 26r34 29r16 33r16 37r16 41r24 46r24 51r24 55r41 15|47r34
+1K9*PSX 3e8 15|1r6 2r6 3r6 4r6 6r9 9r13 9r52 12r13 12r59 15r13 15r59 18r13
+. 18r59 25r23 26r23 27r15 34r40 35r14 38r40 39r14 42r40 43r14 47r17 48r17
+. 52r17 53r17 57r17 58r17 62r5 16|5r14 11r17 11r42 30r40 37r36 37r61 54r7
+. 58r40 58r65 60r35 84r40 85r14 87r22 88r9 90r23 91r9 97r40 98r14 100r29
+. 101r29 103r27 104r27 106r15 117r23 120r23 123r23 140r27 141r15 143r27 144r15
+. 146r27 147r15 149r27 150r15 165r17 166r17 168r35 194r17 195r17 197r33 202r10
+. 207r17 208r17 210r29 211r29 213r27 214r27 216r15 227r16 231r16 234r16 251r27
+. 252r15 254r27 255r15 257r27 258r15 260r27 261r15 298r26 299r15 322r5
+X 14 psx-cdrom.ads
+3K13*CDROM 34e14 15|4w10 27r19
+11R9*CDROM_State 23e14 15|27r25
+X 15 psx-memory.ads
+6K13*Memory 13|1k9 15|62l9 62e15 16|5b18 322l9 322t15
+8A9*DMA_Register_Array(19|7M12)<11|92M9> 24r23
+11A9*Memory_Array(19|5M12)<11|92M9> 21r23
+14A9*Scratchpad_Array(19|5M12)<11|92M9> 22r23
+17A9*BIOS_Array(19|5M12)<11|92M9> 23r23
+20R9*Memory_State 29e14 31r34 34r16 38r16 42r16 46r24 51r24 56r24 60r41 16|47r34
 . 58r16 84r16 97r16 164r24 193r24 206r24 273r41
-19a7*Data{9A9} 15|49m14 66r24 174m17
-20a7*Scratchpad{12A9} 15|50m14 70r24 178m17
-21a7*BIOS{15A9} 15|51m14 74r24 298m20
-22a7*DMA_Registers{6A9} 15|52m14 134r24 245m17
-23r7*Timers{16|18R9} 15|54m32 117r55 120r52 123r54 228m26 231m46 234m48
-26U14*Reset 26<21 15|47b14 55l8 55t13
-26r21 Memory{18R9} 15|47b21 49m7 50m7 51m7 52m7 54m25 54r25
-28V13*Read_8{17|5M12} 29>7 29>30 15|57b13 81l8 81t14 88s27 91s27 141s33 144s33
+21a7*Data{11A9} 16|49m14 66r24 174m17
+22a7*Scratchpad{14A9} 16|50m14 70r24 178m17
+23a7*BIOS{17A9} 16|51m14 74r24 298m20
+24a7*DMA_Registers{8A9} 16|52m14 134r24 245m17
+25r7*Timers{18|18R9} 16|54m32 117r55 120r52 123r54 228m26 231m46 234m48
+26r7*Sio{17|8R9}
+27r7*Cdrom{14|11R9}
+31U14*Reset 31<21 16|47b14 55l8 55t13
+31r21 Memory{20R9} 16|47b21 49m7 50m7 51m7 52m7 54m25 54r25
+33V13*Read_8{19|5M12} 34>7 34>30 16|57b13 81l8 81t14 88s27 91s27 141s33 144s33
 . 147s33 150s33
-29r7 Memory{18R9} 15|58b7 66r17 70r17 74r17
-29m30 Address{17|7M12} 15|58b30 61r32 69r13 69r47 70r36 73r30 74r43
-32V13*Read_16{17|6M12} 33>7 33>30 15|83b13 94l8 94t15
-33r7 Memory{18R9} 15|84b7 88r35 91r35
-33m30 Address{17|7M12} 15|84b30 88r43 91r43
-36V13*Read_32{17|7M12} 37>7 37>30 15|96b13 161l8 161t15
-37r7 Memory{18R9} 15|97b7 117r48 120r45 123r47 134r17 141r41 144r41 147r41
+34r7 Memory{20R9} 16|58b7 66r17 70r17 74r17
+34m30 Address{19|7M12} 16|58b30 61r32 69r13 69r47 70r36 73r30 74r43
+37V13*Read_16{19|6M12} 38>7 38>30 16|83b13 94l8 94t15
+38r7 Memory{20R9} 16|84b7 88r35 91r35
+38m30 Address{19|7M12} 16|84b30 88r43 91r43
+41V13*Read_32{19|7M12} 42>7 42>30 16|96b13 161l8 161t15
+42r7 Memory{20R9} 16|97b7 117r48 120r45 123r47 134r17 141r41 144r41 147r41
 . 150r41
-37m30 Address{17|7M12} 15|97b30 110r10 110r41 112r20 114r16 131r13 131r42
+42m30 Address{19|7M12} 16|97b30 110r10 110r41 112r20 114r16 131r13 131r42
 . 133r20 141r49 144r49 147r49 150r49
-40U14*Write_8 41=7 42>7 43>7 15|163b14 190l8 190t15 197s7 199s7 263s13 264s13
+45U14*Write_8 46=7 47>7 48>7 16|163b14 190l8 190t15 197s7 199s7 263s13 264s13
 . 265s13 266s13
-41r7 Memory{18R9} 15|164b7 174m10 178m10
-42m7 Address{17|7M12} 15|165b7 169r32 177r13 177r47 178r29 182r30
-43m7 Value{17|5M12} 15|166b7 174r44 178r57
-45U14*Write_16 46=7 47>7 48>7 15|192b14 203l8 203t16
-46r7 Memory{18R9} 15|193b7 197m16 200m10
-47m7 Address{17|7M12} 15|194b7 197r24 201r10
-48m7 Value{17|6M12} 15|195b7 197r50 202r51
-50U14*Write_32 51=7 52>7 53>7 15|205b14 271l8 271t16
-51r7 Memory{18R9} 15|206b7 228m19 228r19 231m39 231r39 234m41 234r41 245m10
+46r7 Memory{20R9} 16|164b7 174m10 178m10
+47m7 Address{19|7M12} 16|165b7 169r32 177r13 177r47 178r29 182r30
+48m7 Value{19|5M12} 16|166b7 174r44 178r57
+50U14*Write_16 51=7 52>7 53>7 16|192b14 203l8 203t16
+51r7 Memory{20R9} 16|193b7 197m16 200m10
+52m7 Address{19|7M12} 16|194b7 197r24 201r10
+53m7 Value{19|6M12} 16|195b7 197r50 202r51
+55U14*Write_32 56=7 57>7 58>7 16|205b14 271l8 271t16
+56r7 Memory{20R9} 16|206b7 228m19 228r19 231m39 231r39 234m41 234r41 245m10
 . 263m22 264m22 265m22 266m22
-52m7 Address{17|7M12} 15|207b7 220r10 220r41 222r20 224r16 242r13 242r42
+57m7 Address{19|7M12} 16|207b7 220r10 220r41 222r20 224r16 242r13 242r42
 . 244r20 263r30 264r30 265r30 266r30
-53m7 Value{17|7M12} 15|208b7 228r51 231r71 234r73 245r42 252r32 255r56 258r56
+58m7 Value{19|7M12} 16|208b7 228r51 231r71 234r73 245r42 252r32 255r56 258r56
 . 261r56
-55U14*Load_BIOS 55=25 55>55 15|273b14 320l8 320t17
-55r25 Memory{18R9} 15|273b25 298m13
-55a55 Path{string} 15|273b55 285r52
-X 15 psx-memory.adb
-10V13 Translate_RAM_Address{17|7M12} 10b13 11>7 28l8 28t29 61s9 169s9
-11m7 Address{17|7M12} 14r10 15r17 18r13 18r47 19r18 22r13 22r47 23r18
+60U14*Load_BIOS 60=25 60>55 16|273b14 320l8 320t17
+60r25 Memory{20R9} 16|273b25 298m13
+60a55 Path{string} 16|273b55 285r52
+X 16 psx-memory.adb
+10V13 Translate_RAM_Address{19|7M12} 10b13 11>7 28l8 28t29 61s9 169s9
+11m7 Address{19|7M12} 14r10 15r17 18r13 18r47 19r18 22r13 22r47 23r18
 30V13 Is_BIOS_Address{boolean} 30b13 30>30 35l8 35t23 73s13 182s13
-30m30 Address{17|7M12} 33r10 33r44 34r18 34r52
-37V13 BIOS_Offset{17|7M12} 37b13 37>26 45l8 45t19 74s30
-37m26 Address{17|7M12} 39r10 39r44 40r17 43r17
-60m7 Physical_Address{17|7M12} 65r10 66r30
-87m7 Low{17|6M12} 93r14
-90m7 High{17|6M12} 93r44
-100m7 Timer_Base{17|7M12} 110r21 112r30 114r26
-101m7 Timer_End{17|7M12} 110r52
-103m7 DMA_Base{17|7M12} 131r24 133r30
-104m7 DMA_End{17|7M12} 131r53
-106m7 Index{17|7M12} 112m10 117r72 120r69 123r71 133m10 134r39
-140m13 B0{17|7M12} 153r15
-143m13 B1{17|7M12} 154r41
-146m13 B2{17|7M12} 155r41
-149m13 B3{17|7M12} 156r41
-168m7 Physical_Address{17|7M12} 173r10 174r23
-210m7 Timer_Base{17|7M12} 220r21 222r30 224r26
-211m7 Timer_End{17|7M12} 220r52
-213m7 DMA_Base{17|7M12} 242r24 244r30
-214m7 DMA_End{17|7M12} 242r53
-216m7 Index{17|7M12} 222m10 228r43 231r63 234r65 244m10 245r32
-251m13 B0{17|5M12} 263r39
-254m13 B1{17|5M12} 264r43
-257m13 B2{17|5M12} 265r43
-260m13 B3{17|5M12} 266r43
+30m30 Address{19|7M12} 33r10 33r44 34r18 34r52
+37V13 BIOS_Offset{19|7M12} 37b13 37>26 45l8 45t19 74s30
+37m26 Address{19|7M12} 39r10 39r44 40r17 43r17
+60m7 Physical_Address{19|7M12} 65r10 66r30
+87m7 Low{19|6M12} 93r14
+90m7 High{19|6M12} 93r44
+100m7 Timer_Base{19|7M12} 110r21 112r30 114r26
+101m7 Timer_End{19|7M12} 110r52
+103m7 DMA_Base{19|7M12} 131r24 133r30
+104m7 DMA_End{19|7M12} 131r53
+106m7 Index{19|7M12} 112m10 117r72 120r69 123r71 133m10 134r39
+140m13 B0{19|7M12} 153r15
+143m13 B1{19|7M12} 154r41
+146m13 B2{19|7M12} 155r41
+149m13 B3{19|7M12} 156r41
+168m7 Physical_Address{19|7M12} 173r10 174r23
+210m7 Timer_Base{19|7M12} 220r21 222r30 224r26
+211m7 Timer_End{19|7M12} 220r52
+213m7 DMA_Base{19|7M12} 242r24 244r30
+214m7 DMA_End{19|7M12} 242r53
+216m7 Index{19|7M12} 222m10 228r43 231r63 234r65 244m10 245r32
+251m13 B0{19|5M12} 263r39
+254m13 B1{19|5M12} 264r43
+257m13 B2{19|5M12} 265r43
+260m13 B3{19|5M12} 266r43
 278p7 File{5|44P9} 285m21 285r21 287r30 289r24 294m23 294r23 307m14 307r14
 . 315r22 316m20 316r20
 279a7 Buffer{4|54A9} 289m38 291r19 299r32
@@ -240,30 +249,33 @@ X 15 psx-memory.adb
 281i7 Position{4|44I9} 293r16 298r44 301m13 301r25 309r10
 282i7 BIOS_Size{4|44I9} 293r28 309r22
 291i14 I<long_long_integer> 299r40
-X 16 psx-timers.ads
-3K13*Timers 14|2w10 23r27 15|54r11 117r27 120r27 123r27 227r20 231r20 234r20
-. 16|43e15
-18R9*Timers_State 14|23r34 16|20e14
-22U14*Reset 15|54s18
-24U14*Write_Counter 15|227s27
-30V13*Read_Counter{5M12} 15|117s34
-33U14*Write_Mode 15|231s27
-36V13*Read_Mode{5M12} 15|120s34
-38U14*Write_Target 15|234s27
-41V13*Read_Target{5M12} 15|123s34
-X 17 psx-types.ads
-3K13*Types 14|1w10 7r17 7r56 10r17 10r63 13r17 13r63 16r17 16r63 29r44 30r18
-. 33r44 34r18 37r44 38r18 42r21 43r21 47r21 48r21 52r21 53r21 15|11r21 11r46
+X 17 psx-sio.ads
+3K13*SIO 15|3w10 26r27 17|27e12
+8R9*SIO_State 15|26r31 17|17e14
+X 18 psx-timers.ads
+3K13*Timers 15|2w10 25r27 16|54r11 117r27 120r27 123r27 227r20 231r20 234r20
+. 18|43e15
+18R9*Timers_State 15|25r34 18|20e14
+22U14*Reset 16|54s18
+24U14*Write_Counter 16|227s27
+30V13*Read_Counter{5M12} 16|117s34
+33U14*Write_Mode 16|231s27
+36V13*Read_Mode{5M12} 16|120s34
+38U14*Write_Target 16|234s27
+41V13*Read_Target{5M12} 16|123s34
+X 19 psx-types.ads
+3K13*Types 15|1w10 9r17 9r56 12r17 12r63 15r17 15r63 18r17 18r63 34r44 35r18
+. 38r44 39r18 42r44 43r18 47r21 48r21 52r21 53r21 57r21 58r21 16|11r21 11r46
 . 30r44 37r40 37r65 58r44 58r69 60r39 84r44 85r18 87r26 88r13 90r27 91r13
 . 97r44 98r18 100r33 101r33 103r31 104r31 106r19 140r31 141r19 143r31 144r19
 . 146r31 147r19 149r31 150r19 165r21 166r21 168r39 194r21 195r21 197r37 202r14
 . 207r21 208r21 210r33 211r33 213r31 214r31 216r19 251r31 252r19 254r31 255r19
-. 257r31 258r19 260r31 261r19 298r30 299r19 17|12e14
-5M12*Word8{11|81M9} 14|10r69 13r69 16r69 30r24 43r27 15|58r75 166r27 197r43
+. 257r31 258r19 260r31 261r19 298r30 299r19 19|12e14
+5M12*Word8{11|81M9} 15|12r69 15r69 18r69 35r24 48r27 16|58r75 166r27 197r43
 . 202r20 251r37 252r25 254r37 255r25 257r37 258r25 260r37 261r25 299r25
-6M12*Word16{11|84M9} 14|34r24 48r27 15|85r24 87r32 88r19 90r33 91r19 195r27
-7M12*Word32{11|92M9} 14|7r23 7r62 10r23 13r23 16r23 29r50 33r50 37r50 38r24
-. 42r27 47r27 52r27 53r27 15|11r27 11r52 30r50 37r46 37r71 58r50 60r45 84r50
+6M12*Word16{11|84M9} 15|39r24 53r27 16|85r24 87r32 88r19 90r33 91r19 195r27
+7M12*Word32{11|92M9} 15|9r23 9r62 12r23 15r23 18r23 34r50 38r50 42r50 43r24
+. 47r27 52r27 57r27 58r27 16|11r27 11r52 30r50 37r46 37r71 58r50 60r45 84r50
 . 97r50 98r24 100r39 101r39 103r37 104r37 106r25 140r37 141r25 143r37 144r25
 . 146r37 147r25 149r37 150r25 165r27 168r45 194r27 207r27 208r27 210r39 211r39
 . 213r37 214r37 216r25 298r36

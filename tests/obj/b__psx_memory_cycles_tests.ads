@@ -258,9 +258,9 @@ package ada_main is
    pragma Export (C, u00108, "system__file_control_blockS");
    u00109 : constant Version_32 := 16#6f0a212e#;
    pragma Export (C, u00109, "psxS");
-   u00110 : constant Version_32 := 16#b068690c#;
+   u00110 : constant Version_32 := 16#3c9f460e#;
    pragma Export (C, u00110, "psx__memoryB");
-   u00111 : constant Version_32 := 16#32abde0f#;
+   u00111 : constant Version_32 := 16#3c7da857#;
    pragma Export (C, u00111, "psx__memoryS");
    u00112 : constant Version_32 := 16#45bfb273#;
    pragma Export (C, u00112, "ada__streams__stream_ioB");
@@ -270,20 +270,28 @@ package ada_main is
    pragma Export (C, u00114, "system__communicationB");
    u00115 : constant Version_32 := 16#c51bd61d#;
    pragma Export (C, u00115, "system__communicationS");
-   u00116 : constant Version_32 := 16#5bdae43b#;
-   pragma Export (C, u00116, "psx__timersB");
-   u00117 : constant Version_32 := 16#ab19291a#;
-   pragma Export (C, u00117, "psx__timersS");
+   u00116 : constant Version_32 := 16#b3661e81#;
+   pragma Export (C, u00116, "psx__cdromB");
+   u00117 : constant Version_32 := 16#798e0f1f#;
+   pragma Export (C, u00117, "psx__cdromS");
    u00118 : constant Version_32 := 16#06249ef3#;
    pragma Export (C, u00118, "psx__typesS");
-   u00119 : constant Version_32 := 16#79ef05bb#;
-   pragma Export (C, u00119, "psx__memory__cyclesB");
-   u00120 : constant Version_32 := 16#1c223a08#;
-   pragma Export (C, u00120, "psx__memory__cyclesS");
-   u00121 : constant Version_32 := 16#a56a70fa#;
-   pragma Export (C, u00121, "system__memoryB");
-   u00122 : constant Version_32 := 16#92f586d9#;
-   pragma Export (C, u00122, "system__memoryS");
+   u00119 : constant Version_32 := 16#f04521cd#;
+   pragma Export (C, u00119, "psx__sioB");
+   u00120 : constant Version_32 := 16#fbaf5645#;
+   pragma Export (C, u00120, "psx__sioS");
+   u00121 : constant Version_32 := 16#5bdae43b#;
+   pragma Export (C, u00121, "psx__timersB");
+   u00122 : constant Version_32 := 16#ab19291a#;
+   pragma Export (C, u00122, "psx__timersS");
+   u00123 : constant Version_32 := 16#79ef05bb#;
+   pragma Export (C, u00123, "psx__memory__cyclesB");
+   u00124 : constant Version_32 := 16#90d5150a#;
+   pragma Export (C, u00124, "psx__memory__cyclesS");
+   u00125 : constant Version_32 := 16#a56a70fa#;
+   pragma Export (C, u00125, "system__memoryB");
+   u00126 : constant Version_32 := 16#92f586d9#;
+   pragma Export (C, u00126, "system__memoryS");
 
    --  BEGIN ELABORATION ORDER
    --  ada%s
@@ -401,6 +409,10 @@ package ada_main is
    --  ada.text_io%b
    --  psx%s
    --  psx.types%s
+   --  psx.cdrom%s
+   --  psx.cdrom%b
+   --  psx.sio%s
+   --  psx.sio%b
    --  psx.timers%s
    --  psx.timers%b
    --  psx.memory%s

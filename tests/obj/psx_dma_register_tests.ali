@@ -44,7 +44,7 @@ RN
 RV NO_IO
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_dma_register_tests%b  psx_dma_register_tests.adb  585276c1 NE OO SU IU
+U psx_dma_register_tests%b  psx_dma_register_tests.adb  d4a559c3 NE OO SU IU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -66,7 +66,9 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260917034516 6f0a212e psx%s
-D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
+D psx-cdrom.ads		20260918170400 eebb682d psx.cdrom%s
+D psx-memory.ads	20260918150627 1545d817 psx.memory%s
+D psx-sio.ads		20260918144210 6c9a3177 psx.sio%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
 D psx_dma_register_tests.adb  20260916234908 9c2179d7 psx_dma_register_tests%b
@@ -86,33 +88,33 @@ D s-unstyp.ads		20260610194523 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_dma_register_tests standard 6 11 none]
-G r c none [psx_dma_register_tests standard 6 11 none] [reset psx__memory 26 14 none]
-G r c none [psx_dma_register_tests standard 6 11 none] [write_32 psx__memory 50 14 none]
-G r c none [psx_dma_register_tests standard 6 11 none] [read_32 psx__memory 36 13 none]
+G r c none [psx_dma_register_tests standard 6 11 none] [reset psx__memory 31 14 none]
+G r c none [psx_dma_register_tests standard 6 11 none] [write_32 psx__memory 55 14 none]
+G r c none [psx_dma_register_tests standard 6 11 none] [read_32 psx__memory 41 13 none]
 X 1 ada.ads
-18K9*Ada 22e8 17|2r6 10r8
+18K9*Ada 22e8 19|2r6 10r8
 X 9 a-textio.ads
-58K13*Text_IO 785e16 17|2w10 10r12
-565U14*Put_Line 17|16s4 26s7 28s7 37s7 39s7 48s7 50s7 59s7 61s7 64s4
+58K13*Text_IO 785e16 19|2w10 10r12
+565U14*Put_Line 19|16s4 26s7 28s7 37s7 39s7 48s7 50s7 59s7 61s7 64s4
 X 11 interfac.ads
-47K9*Interfaces 247e15 17|1w6 8r13
-92M9*Unsigned_32 17|8r24
+47K9*Interfaces 247e15 19|1w6 8r13
+92M9*Unsigned_32 19|8r24
 X 13 psx.ads
-1K9*PSX 3e8 17|3r6 4r6 12r13 13r13 18r4 21r4 23r13 32r4 34r13 43r4 45r13
+1K9*PSX 3e8 19|3r6 4r6 12r13 13r13 18r4 21r4 23r13 32r4 34r13 43r4 45r13
 . 54r4 56r13
-X 14 psx-memory.ads
-4K13*Memory 57e15 17|3w10 12r17 18r8 21r8 23r17 32r8 34r17 43r8 45r17 54r8
+X 15 psx-memory.ads
+6K13*Memory 62e15 19|3w10 12r17 18r8 21r8 23r17 32r8 34r17 43r8 45r17 54r8
 . 56r17
-18R9*Memory_State 24e14 17|12r24
-26U14*Reset 17|18s15
-36V13*Read_32{16|7M12} 17|23s24 34s24 45s24 56s24
-50U14*Write_32 17|21s15 32s15 43s15 54s15
-X 16 psx-types.ads
-3K13*Types 12e14 17|4w10 13r17
-7M12*Word32{11|92M9} 17|13r23
-X 17 psx_dma_register_tests.adb
+20R9*Memory_State 29e14 19|12r24
+31U14*Reset 19|18s15
+41V13*Read_32{18|7M12} 19|23s24 34s24 45s24 56s24
+55U14*Write_32 19|21s15 32s15 43s15 54s15
+X 18 psx-types.ads
+3K13*Types 12e14 19|4w10 13r17
+7M12*Word32{11|92M9} 19|13r23
+X 19 psx_dma_register_tests.adb
 6U11*PSX_DMA_REGISTER_TESTS 6b11 66l5 66t27
-12r4 Memory{14|18R9} 18m22 21m25 21r25 23r33 32m25 32r25 34r33 43m25 43r25
+12r4 Memory{15|20R9} 18m22 21m25 21r25 23r33 32m25 32r25 34r33 43m25 43r25
 . 45r33 54m25 54r25 56r33
-13m4 Value{16|7M12} 23m4 25r7 34m4 36r7 45m4 47r7 56m4 58r7
+13m4 Value{18|7M12} 23m4 25r7 34m4 36r7 45m4 47r7 56m4 58r7
 

@@ -3,7 +3,6 @@ with PSX.SPU;
 with Ada.Text_IO;
 
 procedure PSX_SPU_Tests is
-
    use Ada.Text_IO;
    use type Interfaces.Unsigned_8;
    use type Interfaces.Unsigned_16;
@@ -156,6 +155,17 @@ begin
 
       Check (Value = 16#4444#, "Read Reverb Volume Right");
 
+   end;
+   --  🌟 Pruebas incrementales de registros de Control y Estado
+   declare
+      Control_Value : PSX.SPU.Word16;
+   begin
+      -- Escribimos un patrón de bits en el registro de Control
+      PSX.SPU.Write_Register (SPU, 16#1F801DAA#, 16#A5A5#);
+
+      -- Lo leemos de vuelta para verificar la línea de bus
+      PSX.SPU.Read_Register (SPU, 16#1F801DAA#, Control_Value);
+      Check (Control_Value = 16#A5A5#, "Write/Read SPU Control register");
    end;
 
    New_Line;

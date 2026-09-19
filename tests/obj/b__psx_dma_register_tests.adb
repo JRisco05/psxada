@@ -26,7 +26,9 @@ package body ada_main is
    E087 : Short_Integer; pragma Import (Ada, E087, "system__file_io_E");
    E113 : Short_Integer; pragma Import (Ada, E113, "ada__streams__stream_io_E");
    E074 : Short_Integer; pragma Import (Ada, E074, "ada__text_io_E");
-   E117 : Short_Integer; pragma Import (Ada, E117, "psx__timers_E");
+   E117 : Short_Integer; pragma Import (Ada, E117, "psx__cdrom_E");
+   E120 : Short_Integer; pragma Import (Ada, E120, "psx__sio_E");
+   E122 : Short_Integer; pragma Import (Ada, E122, "psx__timers_E");
    E111 : Short_Integer; pragma Import (Ada, E111, "psx__memory_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
@@ -209,6 +211,8 @@ package body ada_main is
       Ada.Text_Io'Elab_Body;
       E074 := E074 + 1;
       E117 := E117 + 1;
+      E120 := E120 + 1;
+      E122 := E122 + 1;
       E111 := E111 + 1;
    end adainit;
 
@@ -249,6 +253,8 @@ package body ada_main is
 --  BEGIN Object file/option list
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-types.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-cdrom.o
+   --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-sio.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-timers.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx-memory.o
    --   /Users/jonathanrisco/Projects/Ada/PSXADA/psxada/tests/obj/psx_dma_register_tests.o

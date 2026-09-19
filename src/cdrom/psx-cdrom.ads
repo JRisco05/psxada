@@ -6,29 +6,29 @@ package PSX.CDROM is
    subtype Word16 is PSX.Types.Word16;
    subtype Word32 is PSX.Types.Word32;
 
-   -- Estructura interna LLE para simular el chip controlador del CD-ROM
-   type CDROM_State is record
-      Index            :
-        Word8;  -- Registro de página actual (0..3) mapeado en 0x1F801800
-      Status_Reg       : Word8;  -- Registro de estado del chip
-      Interrupt_Enable : Word8;  -- Máscara de interrupciones permitidas
-      Interrupt_Flag   : Word8;  -- Banderas de interrupciones activas (IRQ 2)
+   type Buffer_16_Bytes is array (0 .. 15) of Word8;
 
-      -- Búferes FIFO para comandos y respuestas
-      Command_Param : array (0 .. 15) of Word8;
+   type CDROM_State is record
+      Index            : Word8;
+      Status_Reg       : Word8;
+      Interrupt_Enable : Word8;
+      Interrupt_Flag   : Word8;
+
+      Command_Param : Buffer_16_Bytes;
       Param_Count   : Natural;
 
-      Response_Buffer : array (0 .. 15) of Word8;
+      Response_Buffer : Buffer_16_Bytes;
       Response_Count  : Natural;
       Response_Index  : Natural;
    end record;
 
    procedure Reset (CD : out CDROM_State);
 
+   -- 🌟 CORREGIDO: Cambiado a procedure con 'in out' para poder vaciar la FIFO
    procedure Read_Register
-     (CD : in CDROM_State; Address : in Word32; Value : out Word8);
+     (CD : in out CDROM_State; Address : Word32; Value : out Word8);
 
    procedure Write_Register
-     (CD : in out CDROM_State; Address : in Word32; Value : in Word8);
+     (CD : in out CDROM_State; Address : Word32; Value : Word8);
 
 end PSX.CDROM;

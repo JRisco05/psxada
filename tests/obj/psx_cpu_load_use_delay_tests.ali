@@ -45,7 +45,7 @@ RV NO_IO
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 
-U psx_cpu_load_use_delay_tests%b  psx_cpu_load_use_delay_tests.adb  047392f0 NE OO SU
+U psx_cpu_load_use_delay_tests%b  psx_cpu_load_use_delay_tests.adb  8884bdf2 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -71,11 +71,13 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260917034516 6f0a212e psx%s
+D psx-cdrom.ads		20260918170400 eebb682d psx.cdrom%s
 D psx-cpu.ads		20260916234907 0eec9d9a psx.cpu%s
 D psx-cpu-step.ads	20260916234913 901c7255 psx.cpu.step%s
 D psx-gpu.ads		20260916234907 5a2e71ed psx.gpu%s
-D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
+D psx-memory.ads	20260918150627 1545d817 psx.memory%s
 D psx-register.ads	20260917034351 4d5fe43c psx.register%s
+D psx-sio.ads		20260918144210 6c9a3177 psx.sio%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
 D psx_cpu_load_use_delay_tests.adb  20260917035551 eb90d009 psx_cpu_load_use_delay_tests%b
@@ -98,47 +100,47 @@ D s-wchcon.ads		20260610194523 d9032363 system.wch_con%s
 G a e
 G c Z b b [psx_cpu_load_use_delay_tests standard 8 11 none]
 G r c none [psx_cpu_load_use_delay_tests standard 8 11 none] [reset psx__cpu 49 14 none]
-G r c none [psx_cpu_load_use_delay_tests standard 8 11 none] [reset psx__memory 26 14 none]
+G r c none [psx_cpu_load_use_delay_tests standard 8 11 none] [reset psx__memory 31 14 none]
 G r c none [psx_cpu_load_use_delay_tests standard 8 11 none] [write psx__register 14 14 none]
-G r c none [psx_cpu_load_use_delay_tests standard 8 11 none] [write_32 psx__memory 50 14 none]
+G r c none [psx_cpu_load_use_delay_tests standard 8 11 none] [write_32 psx__memory 55 14 none]
 G r c none [psx_cpu_load_use_delay_tests standard 8 11 none] [step psx__cpu__step 7 14 none]
 G r c none [psx_cpu_load_use_delay_tests standard 8 11 none] [read psx__register 11 13 none]
 X 1 ada.ads
-18K9*Ada 22e8 21|1r6 21r10 23r10 67r4 68r4
+18K9*Ada 22e8 23|1r6 21r10 23r10 67r4 68r4
 X 9 a-textio.ads
-58K13*Text_IO 785e16 21|1w10 21r14 23r14 67r8 68r8
-565U14*Put_Line 21|21s22 23s22 67s16 68s16
+58K13*Text_IO 785e16 23|1w10 21r14 23r14 67r8 68r8
+565U14*Put_Line 23|21s22 23s22 67s16 68s16
 X 11 interfac.ads
-47K9*Interfaces 247e15 21|2w6 10r13 17r18 18r18 27r15 29r15
-92M9*Unsigned_32 21|10r24 17r29 18r29 27r26 29r26
+47K9*Interfaces 247e15 23|2w6 10r13 17r18 18r18 27r15 29r15
+92M9*Unsigned_32 23|10r24 17r29 18r29 27r26 29r26
 X 13 psx.ads
-1K9*PSX 3e8 21|3r6 4r6 5r6 6r6 12r13 13r13 35r4 36r4 39r4 42r4 45r4 48r4
+1K9*PSX 3e8 23|3r6 4r6 5r6 6r6 12r13 13r13 35r4 36r4 39r4 42r4 45r4 48r4
 . 54r4 56r32 59r4 62r30 65r37
-X 14 psx-cpu.ads
-4K13*CPU 54e12 21|3w10 4r10 12r17 35r8 54r8 59r8
-12R9*CPU_State 47e14 21|12r21
-13a7*Registers{18|9A9} 21|39m28 56r55 62r53 65r60
-16m7*PC{8M12} 21|50m8
-22m7*Next_PC{8M12} 21|51m8
-49U14*Reset 21|35s12
-X 15 psx-cpu-step.ads
-5K17*Step 15e17 21|4w14 54r12 59r12
-7U14*Step 21|54s17 59s17
-X 17 psx-memory.ads
-4K13*Memory 57e15 21|5w10 13r17 36r8 42r8 45r8 48r8
-18R9*Memory_State 24e14 21|13r24
-26U14*Reset 21|36s15
-50U14*Write_32 21|42s15 45s15 48s15
-X 18 psx-register.ads
-3K13*Register 19e17 21|6w10 39r8 56r36 62r34 65r41
+X 15 psx-cpu.ads
+4K13*CPU 54e12 23|3w10 4r10 12r17 35r8 54r8 59r8
+12R9*CPU_State 47e14 23|12r21
+13a7*Registers{19|9A9} 23|39m28 56r55 62r53 65r60
+16m7*PC{8M12} 23|50m8
+22m7*Next_PC{8M12} 23|51m8
+49U14*Reset 23|35s12
+X 16 psx-cpu-step.ads
+5K17*Step 15e17 23|4w14 54r12 59r12
+7U14*Step 23|54s17 59s17
+X 18 psx-memory.ads
+6K13*Memory 62e15 23|5w10 13r17 36r8 42r8 45r8 48r8
+20R9*Memory_State 29e14 23|13r24
+31U14*Reset 23|36s15
+55U14*Write_32 23|42s15 45s15 48s15
+X 19 psx-register.ads
+3K13*Register 19e17 23|6w10 39r8 56r36 62r34 65r41
 9A9*Register_Array(5M12)<7I9>
-11V13*Read{5M12} 21|56s45 62s43 65s50
-14U14*Write 21|39s17
-X 21 psx_cpu_load_use_delay_tests.adb
+11V13*Read{5M12} 23|56s45 62s43 65s50
+14U14*Write 23|39s17
+X 23 psx_cpu_load_use_delay_tests.adb
 8U11*PSX_CPU_Load_Use_Delay_Tests 8b11 70l5 70t33
-12r4 CPU{14|12R9} 35m19 39m24 39r24 50m4 51m4 54m23 54r23 56r51 59m23 59r23
+12r4 CPU{15|12R9} 35m19 39m24 39r24 50m4 51m4 54m23 54r23 56r51 59m23 59r23
 . 62r49 65r56
-13r4 Memory{17|18R9} 36m22 42m25 42r25 45m25 45r25 48m25 48r25 54m28 54r28
+13r4 Memory{18|20R9} 36m22 42m25 42r25 45m25 45r25 48m25 48r25 54m28 54r28
 . 59m28 59r28
 15U14 Check 15b14 16>7 17>7 18>7 31l8 31t13 56s4 62s4 65s4
 16a7 Name{string} 21r43 25r15

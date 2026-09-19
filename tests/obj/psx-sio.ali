@@ -1,0 +1,93 @@
+V "GNAT Lib v16"
+A -Og
+A -gnatA
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -gnatwa
+A -gnatw.X
+A -gnatVa
+A -gnaty3
+A -gnatya
+A -gnatyA
+A -gnatyB
+A -gnatyb
+A -gnatyc
+A -gnaty-
+A -gnatyd
+A -gnatye
+A -gnatyf
+A -gnatyh
+A -gnatyi
+A -gnatyI
+A -gnatyk
+A -gnatyl
+A -gnatym
+A -gnatyn
+A -gnatyO
+A -gnatyp
+A -gnatyr
+A -gnatyS
+A -gnatyt
+A -gnatyu
+A -gnatyx
+A -gnatW8
+A -mmacosx-version-min=26.0.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U psx.sio%b		psx-sio.adb		f04521cd NE OO PK IU
+W psx%s			psx.ads			psx.ali
+
+U psx.sio%s		psx-sio.ads		fbaf5645 EE NE OO PK IU
+W psx%s			psx.ads			psx.ali
+W psx.types%s		psx-types.ads		psx-types.ali
+
+D interfac.ads		20260610194523 9111f9c1 interfaces%s
+D psx.ads		20260917034516 6f0a212e psx%s
+D psx-sio.ads		20260918144210 6c9a3177 psx.sio%s
+D psx-sio.adb		20260918144228 9cdf10ba psx.sio%b
+D psx-types.ads		20260916234908 f83f461c psx.types%s
+D system.ads		20260610194523 8a611ac3 system%s
+G a e
+G c Z s b [reset psx__sio 19 14 none]
+G c Z s b [read_register psx__sio 21 14 none]
+G c Z s b [write_register psx__sio 24 14 none]
+G c Z s s [sio_stateIP psx__sio 8 9 none]
+X 1 interfac.ads
+84M9*Unsigned_16
+92M9*Unsigned_32
+X 2 psx.ads
+1K9*PSX 3e8 3|1r6 3r9 5r22 6r22 27r5 4|1r14 80r5
+X 3 psx-sio.ads
+3K13*SIO 2|1k9 3|27l9 27e12 4|1b18 80l9 80t12
+5M12*Word16{5|6M12} 9r19 10r19 11r19 14r22 15r22 22r60 25r63 4|23r63 55r60
+6M12*Word32{5|7M12} 22r40 25r44 4|23r44 55r40
+8R9*SIO_State 17e14 19r31 22r16 25r20 4|6r31 23r20 55r16
+9m7*Status{5M12} 4|11m11 65r26
+10m7*Control{5M12} 4|12m11 40m17 69r26
+11m7*Baud_Rate{5M12} 4|13m11 44m17 73r26
+14m7*TX_Buffer{5M12} 4|14m11 28m17
+15m7*RX_Buffer{5M12} 4|15m11 60r26
+16i7*Command_Step{natural} 4|16m11
+19U14*Reset 19<21 4|6b14 17l8 17t13
+19r21 SIO{8R9} 4|6b21 11m7 12m7 13m7 14m7 15m7 16m7
+21U14*Read_Register 22>7 22>27 22<48 4|54b14 78l8 78t21
+22r7 SIO{8R9} 4|55b7 60r22 65r22 69r22 73r22
+22m27 Address{6M12} 4|55b27 57r12
+22m48 Value{5M12} 4|55b48 60m13 65m13 69m13 73m13 76m13
+24U14*Write_Register 25=7 25>31 25>52 4|22b14 49l8 49t22
+25r7 SIO{8R9} 4|23b7 28m13 40m13 44m13
+25m31 Address{6M12} 4|23b31 25r12
+25m52 Value{5M12} 4|23b52 28r30 40r28 44r30
+X 5 psx-types.ads
+3K13*Types 3|1w10 5r26 6r26 5|12e14
+6M12*Word16{1|84M9} 3|5r32
+7M12*Word32{1|92M9} 3|6r32
+

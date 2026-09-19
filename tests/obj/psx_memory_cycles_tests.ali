@@ -68,8 +68,10 @@ D a-unccon.ads		20260610194523 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20260610194523 9111f9c1 interfaces%s
 D i-cstrea.ads		20260610194523 ffd01b9d interfaces.c_streams%s
 D psx.ads		20260917034516 6f0a212e psx%s
-D psx-memory.ads	20260916234907 99b2f715 psx.memory%s
+D psx-cdrom.ads		20260918170400 eebb682d psx.cdrom%s
+D psx-memory.ads	20260918150627 1545d817 psx.memory%s
 D psx-memory-cycles.ads	20260916234907 7daf8b01 psx.memory.cycles%s
+D psx-sio.ads		20260918144210 6c9a3177 psx.sio%s
 D psx-timers.ads	20260916234908 3c2c4e28 psx.timers%s
 D psx-types.ads		20260916234908 f83f461c psx.types%s
 D psx_memory_cycles_tests.adb  20260916234911 252e0718 psx_memory_cycles_tests%b
@@ -93,21 +95,21 @@ G a e
 G c Z b b [psx_memory_cycles_tests standard 5 11 none]
 G r c none [psx_memory_cycles_tests standard 5 11 none] [load_cycles psx__memory__cycles 5 13 none]
 X 1 ada.ads
-18K9*Ada 22e8 18|1r6 7r8
+18K9*Ada 22e8 20|1r6 7r8
 X 9 a-textio.ads
-58K13*Text_IO 785e16 18|1w10 7r12
-284U14*New_Line 18|27s4 39s4
-565U14*Put_Line 18|12s10 14s10 26s4 40s4
+58K13*Text_IO 785e16 20|1w10 7r12
+284U14*New_Line 20|27s4 39s4
+565U14*Put_Line 20|12s10 14s10 26s4 40s4
 X 11 interfac.ads
-47K9*Interfaces 247e15 18|3w6
+47K9*Interfaces 247e15 20|3w6
 X 13 psx.ads
-1K9*PSX 3e8 18|2r6 29r25 31r18 33r18 35r25 37r25
-X 14 psx-memory.ads
-4K13*Memory 57e15 18|2r10 29r29 31r22 33r22 35r29 37r29
-X 15 psx-memory-cycles.ads
-3K20*Cycles 8e22 18|2w17 29r36 31r29 33r29 35r36 37r36
-5V13*Load_Cycles{natural} 18|29s43 31s36 33s36 35s43 37s43
-X 18 psx_memory_cycles_tests.adb
+1K9*PSX 3e8 20|2r6 29r25 31r18 33r18 35r25 37r25
+X 15 psx-memory.ads
+6K13*Memory 62e15 20|2r10 29r29 31r22 33r22 35r29 37r29
+X 16 psx-memory-cycles.ads
+3K20*Cycles 8e22 20|2w17 29r36 31r29 33r29 35r36 37r36
+5V13*Load_Cycles{natural} 20|29s43 31s36 33s36 35s43 37s43
+X 20 psx_memory_cycles_tests.adb
 5U11*Psx_Memory_Cycles_Tests 5b11 42l5 42t28
 9U14 Check 9b14 9>21 9>36 9>54 22l8 22t13 29s4 31s4 33s4 35s4 37s4
 9a21 Name{string} 12r31 16r15
