@@ -52,8 +52,10 @@ procedure PSX_GTE_RTPS_Tests is
    end Setup_Identity;
 
 begin
-
+   New_Line;
+   Put_Line ("=========================================================");
    Put_Line ("Testing PSX GTE RTPS...");
+   Put_Line ("=========================================================");
    New_Line;
 
    PSX.GTE.Reset (GTE);
@@ -276,9 +278,6 @@ begin
    PSX.GTE.Execute.Execute (GTE, Inst);
 
    Check ("SZ3 maximum valid", 16#0000_FFFF#, GTE.SZ3);
-
-   Put_Line ("");
-   Put_Line ("PSX GTE RTPS tests finished.");
 
    ------------------------------------------------------------------
    --  1. Valores negativos
