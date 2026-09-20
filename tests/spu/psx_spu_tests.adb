@@ -193,6 +193,32 @@ begin
       Check (Test_Value = 16#0081#, "KOFF high voices 16 and 23");
    end;
 
+   declare
+      Test_Value : PSX.SPU.Word16;
+   begin
+      -- 1. Escribimos y leemos ADSR1 (ADSR Low: 0x1F801C08)
+      PSX.SPU.Write_Register (SPU, 16#1F801C08#, 16#1234#);
+      PSX.SPU.Read_Register (SPU, 16#1F801C08#, Test_Value);
+      Check (Test_Value = 16#1234#, "Voice 0 ADSR1 register");
+
+      -- 2. Escribimos y leemos ADSR2 (ADSR High: 0x1F801C0A)
+      PSX.SPU.Write_Register (SPU, 16#1F801C0A#, 16#5678#);
+      PSX.SPU.Read_Register (SPU, 16#1F801C0A#, Test_Value);
+      Check (Test_Value = 16#5678#, "Voice 0 ADSR2 register");
+
+      -- 3. Verificación de Solo Lectura en ADSR_Level (0x1F801C0C)
+      -- Intentamos sabotear el registro escribiendo un valor
+      PSX.SPU.Write_Register (SPU, 16#1F801C0C#, 16#9ABC#);
+      PSX.SPU.Read_Register (SPU, 16#1F801C0C#, Test_Value);
+      Check (Test_Value = 0, "Voice 0 ADSR_Level is strict Read-Only");
+
+      -- 4. Escribimos y leemos Repeat/Current Address (0x1F801C0E)
+      PSX.SPU.Write_Register (SPU, 16#1F801C0E#, 16#2468#);
+      PSX.SPU.Read_Register (SPU, 16#1F801C0E#, Test_Value);
+      Check (Test_Value = 16#2468#, "Voice 0 Repeat Address register");
+   end;
+
+
    New_Line;
    Put_Line ("SPU basic tests completed.");
 

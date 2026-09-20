@@ -1,5 +1,12 @@
+with Interfaces;
+
 package body PSX.SPU is
 
+   use type Interfaces.Unsigned_16;
+
+   -------------
+   --  RESET  --
+   -------------
    procedure Reset (SPU : out SPU_State) is
    begin
       SPU.RAM := (others => 0);
@@ -12,7 +19,6 @@ package body PSX.SPU is
       SPU.Key_On := 0;
       SPU.Key_Off := 0;
 
-      -- 🌟 Inicialización limpia de volúmenes para evitar basura en los tests
       SPU.Main_Volume_Left := 0;
       SPU.Main_Volume_Right := 0;
       SPU.Reverb_Volume_Left := 0;
@@ -23,23 +29,25 @@ package body PSX.SPU is
          SPU.Channels (I).Volume_Right := 0;
          SPU.Channels (I).Pitch := 0;
          SPU.Channels (I).Start_Address := 0;
+         SPU.Channels (I).ADSR1 := 0;
+         SPU.Channels (I).ADSR2 := 0;
          SPU.Channels (I).ADSR_Level := 0;
-         SPU.Channels (I).ADSR := 0;
          SPU.Channels (I).Current_Address := 0;
          SPU.Channels (I).Key_On := False;
          SPU.Channels (I).Key_Off := False;
       end loop;
    end Reset;
 
+   --------------------
+   -- WRITE REGISTER --
+   --------------------
    procedure Write_Register
-     (SPU : in out SPU_State; Address : in Word32; Value : in Word16)
+     (SPU : in out SPU_State; Address : Word32; Value : Word16)
    is
       Voice_Index : Natural;
       Offset      : Word32;
-      Selector    :
-        Natural; -- 🌟 Variable auxiliar para resolver el tipo del case
+      Selector    : Natural;
    begin
-      --  1. Primero comprobamos las direcciones de volumen GLOBAL
       if Address = 16#1F801D80# then
          SPU.Main_Volume_Left := Value;
       elsif Address = 16#1F801D82# then
@@ -49,34 +57,31 @@ package body PSX.SPU is
       elsif Address = 16#1F801D86# then
          SPU.Reverb_Volume_Right := Value;
 
-      --  🌟 Registros de control globales
-      elsif Address = 16#1F801DA6# then
-         SPU.Transfer_Control := Value;
-      elsif Address = 16#1F801DAA# then
-         SPU.Control := Value;
-
-      --  Registros KON / KOFF
       elsif Address = 16#1F801D88# then
          SPU.Key_On := (SPU.Key_On and 16#FFFF_0000#) or Word32 (Value);
 
       elsif Address = 16#1F801D8A# then
          SPU.Key_On :=
-           (SPU.Key_On and 16#0000_FFFF#) or (Word32 (Value) * 16#1_0000#);
+           (SPU.Key_On and 16#0000_FFFF#)
+           or Interfaces.Shift_Left (Word32 (Value), 16);
 
       elsif Address = 16#1F801D8C# then
          SPU.Key_Off := (SPU.Key_Off and 16#FFFF_0000#) or Word32 (Value);
 
       elsif Address = 16#1F801D8E# then
          SPU.Key_Off :=
-           (SPU.Key_Off and 16#0000_FFFF#) or (Word32 (Value) * 16#1_0000#);
+           (SPU.Key_Off and 16#0000_FFFF#)
+           or Interfaces.Shift_Left (Word32 (Value), 16);
 
-      --  2. Si no es volumen global, comprobamos el rango de las 24 VOCES
+      elsif Address = 16#1F801DA6# then
+         SPU.Transfer_Control := Value;
+      elsif Address = 16#1F801DAA# then
+         SPU.Control := Value;
+
       elsif Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
          Offset := Address - 16#1F801C00#;
          Voice_Index := Natural (Offset / 16#10#);
-         Selector :=
-           Natural
-             (Offset mod 16#10#); -- 🌟 Convertimos explícitamente a Natural
+         Selector := Natural (Offset mod 16#10#);
 
          case Selector is
             when 16#00# =>
@@ -91,23 +96,33 @@ package body PSX.SPU is
             when 16#06# =>
                SPU.Channels (Voice_Index).Start_Address := Value;
 
+            when 16#08# =>
+               SPU.Channels (Voice_Index).ADSR1 := Value;
+
+            when 16#0A# =>
+               SPU.Channels (Voice_Index).ADSR2 := Value;
+
+            when 16#0E# =>
+               SPU.Channels (Voice_Index).Current_Address := Value;
+
             when others =>
                null;
          end case;
       end if;
    end Write_Register;
 
+   -------------------
+   -- READ REGISTER --
+   -------------------
    procedure Read_Register
-     (SPU : in SPU_State; Address : in Word32; Value : out Word16)
+     (SPU : SPU_State; Address : Word32; Value : out Word16)
    is
       Voice_Index : Natural;
       Offset      : Word32;
-      Selector    :
-        Natural; -- 🌟 Variable auxiliar para resolver el tipo del case
+      Selector    : Natural;
    begin
-      Value := 0; -- Valor de seguridad por defecto
+      Value := 0;
 
-      --  1. Primero comprobamos las lecturas de volumen GLOBAL
       if Address = 16#1F801D80# then
          Value := SPU.Main_Volume_Left;
       elsif Address = 16#1F801D82# then
@@ -117,32 +132,31 @@ package body PSX.SPU is
       elsif Address = 16#1F801D86# then
          Value := SPU.Reverb_Volume_Right;
 
-      --  🌟 Registros de control y Estado global
-      elsif Address = 16#1F801DAA# then
-         Value := SPU.Control;
-      elsif Address = 16#1F801DAE# then
-         Value := SPU.Status;
-
-      --  Registros KON / KOFF
       elsif Address = 16#1F801D88# then
          Value := Word16 (SPU.Key_On and 16#0000_FFFF#);
 
       elsif Address = 16#1F801D8A# then
-         Value := Word16 ((SPU.Key_On / 16#1_0000#) and 16#0000_FFFF#);
+         -- 🌟 SOLUCIÓN DEFINITIVA: El casteo envuelve TODA la operación de bits
+         Value :=
+           Word16 (Interfaces.Shift_Right (SPU.Key_On, 16) and 16#0000_FFFF#);
 
       elsif Address = 16#1F801D8C# then
          Value := Word16 (SPU.Key_Off and 16#0000_FFFF#);
 
       elsif Address = 16#1F801D8E# then
-         Value := Word16 ((SPU.Key_Off / 16#1_0000#) and 16#0000_FFFF#);
+         -- 🌟 SOLUCIÓN DEFINITIVA: El casteo envuelve TODA la operación de bits
+         Value :=
+           Word16 (Interfaces.Shift_Right (SPU.Key_Off, 16) and 16#0000_FFFF#);
 
-      --  2. Si no, comprobamos si la CPU quiere leer los datos de las 24 VOCES
+      elsif Address = 16#1F801DAA# then
+         Value := SPU.Control;
+      elsif Address = 16#1F801DAE# then
+         Value := SPU.Status;
+
       elsif Address >= 16#1F801C00# and then Address <= 16#1F801D7F# then
          Offset := Address - 16#1F801C00#;
          Voice_Index := Natural (Offset / 16#10#);
-         Selector :=
-           Natural
-             (Offset mod 16#10#); -- 🌟 Convertimos explícitamente a Natural
+         Selector := Natural (Offset mod 16#10#);
 
          case Selector is
             when 16#00# =>
@@ -156,6 +170,18 @@ package body PSX.SPU is
 
             when 16#06# =>
                Value := SPU.Channels (Voice_Index).Start_Address;
+
+            when 16#08# =>
+               Value := SPU.Channels (Voice_Index).ADSR1;
+
+            when 16#0A# =>
+               Value := SPU.Channels (Voice_Index).ADSR2;
+
+            when 16#0C# =>
+               Value := SPU.Channels (Voice_Index).ADSR_Level;
+
+            when 16#0E# =>
+               Value := SPU.Channels (Voice_Index).Current_Address;
 
             when others =>
                Value := 0;
