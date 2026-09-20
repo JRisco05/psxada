@@ -5,7 +5,7 @@ with PSX.GTE.Instruction;
 with PSX.Types;
 with Interfaces;
 
-procedure PSX_GTE_RTPS_Tests_Complete is
+procedure PSX_GTE_RTPS_Tests is
 
    use type Interfaces.Unsigned_32;
 
@@ -388,4 +388,4 @@ begin
    Check ("SF=0 IR2", 16#0000_7FFF#, GTE.IR2);
    Check ("SF=0 IR3", 16#0000_7FFF#, GTE.IR3);
 
-end PSX_GTE_RTPS_Tests_Complete;
+end PSX_GTE_RTPS_Tests;
