@@ -82,6 +82,44 @@ begin
 
    Check ("FLAG V=2", 0, GTE.FLAG);
 
+   -- Vector IR = (100, 200, 300)
+   GTE.IR1 := 100;
+   GTE.IR2 := 200;
+   GTE.IR3 := 300;
+
+   -- Matriz identidad
+   GTE.RT11 := 4096;
+   GTE.RT12 := 0;
+   GTE.RT13 := 0;
+
+   GTE.RT21 := 0;
+   GTE.RT22 := 4096;
+   GTE.RT23 := 0;
+
+   GTE.RT31 := 0;
+   GTE.RT32 := 0;
+   GTE.RT33 := 4096;
+
+   -- Sin traslación
+   GTE.TRX := 0;
+   GTE.TRY := 0;
+   GTE.TRZ := 0;
+
+   -- SF=1, V=3, MX=0, CV=0, LM=0, CMD=12
+   Inst.Raw := 16#0009_800C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   Check ("IR1 V=3", 100, GTE.IR1);
+   Check ("IR2 V=3", 200, GTE.IR2);
+   Check ("IR3 V=3", 300, GTE.IR3);
+
+   Check ("MAC1 V=3", 100, GTE.MAC1);
+   Check ("MAC2 V=3", 200, GTE.MAC2);
+   Check ("MAC3 V=3", 300, GTE.MAC3);
+
+   Check ("FLAG V=3", 0, GTE.FLAG);
+
    Put_Line ("PSX GTE MVMVA V=2 tests finished.");
 
 end PSX_GTE_MVMVA_V2_Tests;
