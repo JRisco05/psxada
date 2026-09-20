@@ -1,9 +1,0 @@
-psx-gte-rtps-edge-tests.adb:7:28: error: file "psx-gte-rtps-edge.ads" not found
-psx-gte-rtps-edge-tests.adb:56:07: (style) space required [-gnatyc]
-psx-gte-rtps-edge-tests.adb:74:07: (style) space required [-gnatyc]
-psx-gte-rtps-edge-tests.adb:94:07: (style) space required [-gnatyc]
-psx-gte-rtps-edge-tests.adb:110:07: (style) space required [-gnatyc]
-psx-gte-rtps-edge-tests.adb:126:07: (style) space required [-gnatyc]
-psx-gte-rtps-edge-tests.adb:135:07: (style) space required [-gnatyc]
-psx-gte-rtps-edge-tests.adb:145:07: (style) space required [-gnatyc]
-psx-gte-rtps-edge-tests.adb:154:07: (style) space required [-gnatyc]

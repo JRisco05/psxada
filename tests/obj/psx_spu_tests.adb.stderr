@@ -1,8 +1,0 @@
-psx_spu_tests.adb:163:10: (style) space required [-gnatyc]
-psx_spu_tests.adb:166:10: (style) space required [-gnatyc]
-psx_spu_tests.adb:199:10: (style) space required [-gnatyc]
-psx_spu_tests.adb:204:10: (style) space required [-gnatyc]
-psx_spu_tests.adb:209:10: (style) space required [-gnatyc]
-psx_spu_tests.adb:210:10: (style) space required [-gnatyc]
-psx_spu_tests.adb:215:10: (style) space required [-gnatyc]
-psx_spu_tests.adb:220:01: (style) multiple blank lines [-gnatyu]

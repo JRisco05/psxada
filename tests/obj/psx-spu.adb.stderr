@@ -1,4 +1,0 @@
-psx-spu.adb:1:06: warning: redundant with clause in body [-gnatwr]
-psx-spu.adb:5:04: warning: use clause for type "Interfaces.Unsigned_16" has no effect [-gnatwu]
-psx-spu.adb:139:13: (style) space required [-gnatyc]
-psx-spu.adb:147:13: (style) space required [-gnatyc]

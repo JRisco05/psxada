@@ -1,6 +1,0 @@
-psx-cpu-execute.adb:58:13: warning: function "Multiply_Signed" is not referenced [-gnatwu]
-psx-cpu-execute.adb:627:27: (style) "and then" required [-gnatyB]
-psx-cpu-execute.adb:647:27: (style) "and then" required [-gnatyB]
-psx-cpu-execute.adb:666:27: (style) "and then" required [-gnatyB]
-psx-cpu-execute.adb:681:27: (style) "and then" required [-gnatyB]
-psx-cpu-execute.ads:1:06: warning: unnecessary with of ancestor [-gnatwr]

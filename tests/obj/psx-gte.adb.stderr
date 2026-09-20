@@ -1,7 +1,0 @@
-psx-gte.adb:31:13: (style) space required [-gnatyc]
-psx-gte.adb:147:19: (style) space required [-gnatyc]
-psx-gte.adb:148:19: (style) space required [-gnatyc]
-psx-gte.adb:296:07: warning: "V" is not modified, could be declared constant [-gnatwk]
-psx-gte.adb:363:13: (style) space required [-gnatyc]
-psx-gte.ads:11:10: (style) space required [-gnatyc]
-psx-gte.ads:60:10: (style) space required [-gnatyc]
