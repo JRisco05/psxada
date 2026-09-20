@@ -75,6 +75,8 @@ project Psxada_Tests extends "../psxada.gpr" is
       "psx_gte_nclip_overflow_tests.adb",
       "psx_gte_avsz3_tests.adb",
       "psx_gte_avsz3_overflow_tests.adb",
+      "psx_gte_avsz4_tests.adb",
+      "psx_gte_avsz4_overflow_tests.adb",
       "psx_memory_tests.adb",
       "psx_memory_cycles_tests.adb",
       "psx_memory_store_cycle_tests.adb",

@@ -774,6 +774,49 @@ package body PSX.GTE.Execute is
 
    end Execute_AVSZ3;
 
+   procedure Execute_AVSZ4 (GTE : in out PSX.GTE.GTE_State) is
+      SZ0 : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.SZ0 and 16#0000_FFFF#);
+
+      SZ1 : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.SZ1 and 16#0000_FFFF#);
+
+      SZ2 : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.SZ2 and 16#0000_FFFF#);
+
+      SZ3 : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.SZ3 and 16#0000_FFFF#);
+
+      ZSF4 : constant Long_Long_Integer := Signed_16 (GTE.ZSF4);
+
+      Sum       : Long_Long_Integer;
+      MAC0_Raw  : Long_Long_Integer;
+      OTZ_Value : Long_Long_Integer;
+
+   begin
+      GTE.FLAG := 0;
+
+      Sum := SZ0 + SZ1 + SZ2 + SZ3;
+
+      MAC0_Raw := ZSF4 * Sum;
+
+      GTE.MAC0 := To_Word32 (MAC0_Raw);
+
+      OTZ_Value := SAR (MAC0_Raw, 12);
+
+      if OTZ_Value < 0 then
+         OTZ_Value := 0;
+         Set_Flag (GTE, 18);
+
+      elsif OTZ_Value > 16#FFFF# then
+         OTZ_Value := 16#FFFF#;
+         Set_Flag (GTE, 18);
+      end if;
+
+      GTE.OTZ := To_Word32 (OTZ_Value);
+
+   end Execute_AVSZ4;
+
    procedure Execute
      (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
    is
@@ -788,6 +831,9 @@ package body PSX.GTE.Execute is
 
          when 2      =>
             Execute_AVSZ3 (GTE);
+
+         when 3      =>
+            Execute_AVSZ4 (GTE);
 
          when 6      =>
             Execute_NCLIP (GTE);
