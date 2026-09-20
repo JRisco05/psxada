@@ -817,6 +817,76 @@ package body PSX.GTE.Execute is
 
    end Execute_AVSZ4;
 
+   procedure Execute_OP
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+
+      LM : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+
+      IR1 : constant Long_Long_Integer := Signed_16 (GTE.IR1);
+
+      IR2 : constant Long_Long_Integer := Signed_16 (GTE.IR2);
+
+      IR3 : constant Long_Long_Integer := Signed_16 (GTE.IR3);
+
+      RT11 : constant Long_Long_Integer := Signed_16 (GTE.RT11);
+      RT22 : constant Long_Long_Integer := Signed_16 (GTE.RT22);
+      RT33 : constant Long_Long_Integer := Signed_16 (GTE.RT33);
+
+      MAC1_Raw : Long_Long_Integer;
+      MAC2_Raw : Long_Long_Integer;
+      MAC3_Raw : Long_Long_Integer;
+
+      MAC1 : Long_Long_Integer;
+      MAC2 : Long_Long_Integer;
+      MAC3 : Long_Long_Integer;
+
+   begin
+      GTE.FLAG := 0;
+
+      MAC1_Raw := RT33 * IR2 - RT22 * IR3;
+      MAC2_Raw := RT11 * IR3 - RT33 * IR1;
+      MAC3_Raw := RT22 * IR1 - RT11 * IR2;
+
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 30);
+      end if;
+
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 29);
+      end if;
+
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 28);
+      end if;
+
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+
+   end Execute_OP;
+
    procedure Execute
      (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
    is
@@ -826,6 +896,10 @@ package body PSX.GTE.Execute is
    begin
 
       case Command is
+
+         when 0      =>
+            Execute_OP (GTE, Inst);
+
          when 1      =>
             Execute_RTPS (GTE, Inst);
 
