@@ -168,6 +168,31 @@ begin
       Check (Control_Value = 16#A5A5#, "Write/Read SPU Control register");
    end;
 
+   --  🌟 Verificación de registros KON/KOFF corregida para Ada
+   declare
+      Test_Value : PSX.SPU.Word16;
+   begin
+      --  KON low: voces 0 y 15
+      PSX.SPU.Write_Register (SPU, 16#1F801D88#, 16#8001#);
+      PSX.SPU.Read_Register (SPU, 16#1F801D88#, Test_Value);
+      Check (Test_Value = 16#8001#, "KON low voices 0 and 15");
+
+      --  KON high: voces 16 y 23
+      PSX.SPU.Write_Register (SPU, 16#1F801D8A#, 16#0081#);
+      PSX.SPU.Read_Register (SPU, 16#1F801D8A#, Test_Value);
+      Check (Test_Value = 16#0081#, "KON high voices 16 and 23");
+
+      --  KOFF low: voces 0 y 15
+      PSX.SPU.Write_Register (SPU, 16#1F801D8C#, 16#8001#);
+      PSX.SPU.Read_Register (SPU, 16#1F801D8C#, Test_Value);
+      Check (Test_Value = 16#8001#, "KOFF low voices 0 and 15");
+
+      --  KOFF high: voces 16 y 23
+      PSX.SPU.Write_Register (SPU, 16#1F801D8E#, 16#0081#);
+      PSX.SPU.Read_Register (SPU, 16#1F801D8E#, Test_Value);
+      Check (Test_Value = 16#0081#, "KOFF high voices 16 and 23");
+   end;
+
    New_Line;
    Put_Line ("SPU basic tests completed.");
 
