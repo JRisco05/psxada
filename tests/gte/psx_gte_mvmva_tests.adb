@@ -397,6 +397,313 @@ begin
       16#1000_0000#);
 
    New_Line;
+
+   --  V0 = (32767, 32767, 32767)
+   PSX.GTE.Write_Data (GTE, 0, 16#7FFF_7FFF#);
+   PSX.GTE.Write_Data (GTE, 1, 16#0000_7FFF#);
+
+   --  RT = diagonal 8192.
+   --  8192 = 2 * 4096.
+   PSX.GTE.Write_Control (GTE, 32, 16#0000_2000#);
+   PSX.GTE.Write_Control (GTE, 33, 0);
+   PSX.GTE.Write_Control (GTE, 34, 16#0000_2000#);
+   PSX.GTE.Write_Control (GTE, 35, 0);
+   PSX.GTE.Write_Control (GTE, 36, 8192);
+
+   --  TR = 0
+   PSX.GTE.Write_Control (GTE, 37, 0);
+   PSX.GTE.Write_Control (GTE, 38, 0);
+   PSX.GTE.Write_Control (GTE, 39, 0);
+
+   --  MVMVA
+   --  command = 12
+   --  SF = 1
+   --  LM = 1
+   --  MX = 0 (RT)
+   --  V  = 0 (V0)
+   --  CV = 0 (TR)
+   Inst.Raw := 16#0000_040C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   Check ("IR1 LM=1", 32767, PSX.GTE.Read_Data (GTE, 9));
+
+   Check ("IR2 LM=1", 32767, PSX.GTE.Read_Data (GTE, 10));
+
+   Check ("IR3 LM=1", 32767, PSX.GTE.Read_Data (GTE, 11));
+
+   --  Saturation flags: IR1=24, IR2=23, IR3=22.
+   Check
+     ("FLAG IR1 saturation",
+      16#0100_0000#,
+      PSX.GTE.Read_Control (GTE, 63) and 16#0100_0000#);
+
+   Check
+     ("FLAG IR2 saturation",
+      16#0080_0000#,
+      PSX.GTE.Read_Control (GTE, 63) and 16#0080_0000#);
+
+   Check
+     ("FLAG IR3 saturation",
+      16#0040_0000#,
+      PSX.GTE.Read_Control (GTE, 63) and 16#0040_0000#);
+
+   New_Line;
+   -- V0 = maximum positive signed 16-bit value
+   GTE.V0_X := 32767;
+   GTE.V0_Y := 32767;
+   GTE.V0_Z := 32767;
+
+   -- Slightly larger than identity
+   -- 8192 / 4096 = 2.0
+   GTE.RT11 := 8192;
+   GTE.RT22 := 8192;
+   GTE.RT33 := 8192;
+
+   -- CV=3: no translation
+   -- MX=0: rotation matrix
+   -- V=0: V0
+   -- SF=1
+   -- LM=0
+   Inst.Raw := 16#0008_600C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   -- 32767 * 2 = 65534 -> saturates to 32767.
+   Check ("IR1 positive overflow saturation", GTE.IR1, 32767);
+
+   Check ("IR2 positive overflow saturation", GTE.IR2, 32767);
+
+   Check ("IR3 positive overflow saturation", GTE.IR3, 32767);
+
+   -- Saturation flags.
+   Check
+     ("IR1 positive saturation FLAG bit 24",
+      GTE.FLAG and 16#0100_0000#,
+      16#0100_0000#);
+
+   Check
+     ("IR2 positive saturation FLAG bit 23",
+      GTE.FLAG and 16#0080_0000#,
+      16#0080_0000#);
+
+   Check
+     ("IR3 positive saturation FLAG bit 22",
+      GTE.FLAG and 16#0040_0000#,
+      16#0040_0000#);
+
+   New_Line;
+   -- V0 = large negative values
+   GTE.V0_X := 16#8000#;
+   GTE.V0_Y := 16#8000#;
+   GTE.V0_Z := 16#8000#;
+
+   -- Rotation matrix = identity
+   GTE.RT11 := 4096;
+   GTE.RT22 := 4096;
+   GTE.RT33 := 4096;
+
+   -- CV=3: no translation
+   -- MX=0: rotation matrix
+   -- V=0: V0
+   -- SF=1
+   -- LM=0: allow negative range down to -32768
+   Inst.Raw := 16#0008_600C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   -- Exact minimum representable IR value.
+   Check ("IR1 negative saturation", GTE.IR1, 16#FFFF_8000#);
+   Check ("IR2 negative saturation", GTE.IR2, 16#FFFF_8000#);
+   Check ("IR3 negative saturation", GTE.IR3, 16#FFFF_8000#);
+
+   -- No saturation should occur because -32768 is exactly the limit.
+   Check ("FLAG IR negative saturation", GTE.FLAG, 0);
+
+   New_Line;
+
+   -- V0 = -32768
+   GTE.V0_X := 16#8000#;
+   GTE.V0_Y := 16#8000#;
+   GTE.V0_Z := 16#8000#;
+
+   -- Rotation matrix slightly greater than 1.0
+   -- 4097 / 4096
+   GTE.RT11 := 4097;
+   GTE.RT22 := 4097;
+   GTE.RT33 := 4097;
+
+   -- CV=3: no translation
+   -- MX=0: rotation matrix
+   -- V=0: V0
+   -- SF=1
+   -- LM=0
+   Inst.Raw := 16#0008_600C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   -- Values below -32768 must saturate to -32768.
+   Check ("IR1 negative overflow saturation", GTE.IR1, 16#FFFF_8000#);
+
+   Check ("IR2 negative overflow saturation", GTE.IR2, 16#FFFF_8000#);
+
+   Check ("IR3 negative overflow saturation", GTE.IR3, 16#FFFF_8000#);
+
+   -- IR saturation flags:
+   -- IR1 -> bit 24
+   -- IR2 -> bit 23
+   -- IR3 -> bit 22
+   Check
+     ("IR1 saturation FLAG bit 24", GTE.FLAG and 16#0100_0000#, 16#0100_0000#);
+
+   Check
+     ("IR2 saturation FLAG bit 23", GTE.FLAG and 16#0080_0000#, 16#0080_0000#);
+
+   Check
+     ("IR3 saturation FLAG bit 22", GTE.FLAG and 16#0040_0000#, 16#0040_0000#);
+   New_Line;
+
+   -- Negative V0 values
+   GTE.V0_X := 16#8000#;
+   GTE.V0_Y := 16#8000#;
+   GTE.V0_Z := 16#8000#;
+
+   -- Identity rotation matrix
+   GTE.RT11 := 4096;
+   GTE.RT22 := 4096;
+   GTE.RT33 := 4096;
+
+   -- CV=3: no translation
+   -- MX=0: rotation matrix
+   -- V=0: V0
+   -- SF=1
+   -- LM=1: lower limit is 0
+   Inst.Raw := 16#0008_640C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   -- Negative results must saturate to zero.
+   Check ("IR1 LM=1 lower saturation", GTE.IR1, 0);
+
+   Check ("IR2 LM=1 lower saturation", GTE.IR2, 0);
+
+   Check ("IR3 LM=1 lower saturation", GTE.IR3, 0);
+
+   -- Saturation flags.
+   Check ("IR1 LM=1 FLAG bit 24", GTE.FLAG and 16#0100_0000#, 16#0100_0000#);
+
+   Check ("IR2 LM=1 FLAG bit 23", GTE.FLAG and 16#0080_0000#, 16#0080_0000#);
+
+   Check ("IR3 LM=1 FLAG bit 22", GTE.FLAG and 16#0040_0000#, 16#0040_0000#);
+
+   -- V0 = (100, 200, 300)
+   GTE.V0_X := 100;
+   GTE.V0_Y := 200;
+   GTE.V0_Z := 300;
+
+   -- RT = identity
+   GTE.RT11 := 4096;
+   GTE.RT22 := 4096;
+   GTE.RT33 := 4096;
+
+   -- BK = (1000, 2000, 3000)
+   GTE.RBK := 1000;
+   GTE.GBK := 2000;
+   GTE.BBK := 3000;
+
+   -- CV=1
+   -- MX=0
+   -- V=0
+   -- SF=1
+   -- LM=0
+   -- Command=MVMVA (12)
+   Inst.Raw := 16#0008_200C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   -- V0 + BK = (1100, 2200, 3300)
+   Check ("IR1 CV=1", GTE.IR1, 1100);
+   Check ("IR2 CV=1", GTE.IR2, 2200);
+   Check ("IR3 CV=1", GTE.IR3, 3300);
+
+   Check ("MAC1 CV=1", GTE.MAC1, 1100);
+   Check ("MAC2 CV=1", GTE.MAC2, 2200);
+   Check ("MAC3 CV=1", GTE.MAC3, 3300);
+
+   Check ("FLAG CV=1", GTE.FLAG, 0);
+
+   New_Line;
+
+   -- V0 = (100, 200, 300)
+   GTE.V0_X := 100;
+   GTE.V0_Y := 200;
+   GTE.V0_Z := 300;
+
+   -- RT = identity
+   GTE.RT11 := 4096;
+   GTE.RT22 := 4096;
+   GTE.RT33 := 4096;
+
+   -- Far Color = (1000, 2000, 3000)
+   GTE.RFC := 1000;
+   GTE.GFC := 2000;
+   GTE.BFC := 3000;
+
+   -- CV=2
+   -- MX=0
+   -- V=0
+   -- SF=1
+   -- LM=0
+   -- Command=MVMVA (12)
+   Inst.Raw := 16#0008_400C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   -- V0 + FC = (1100, 2200, 3300)
+   Check ("IR1 CV=2", GTE.IR1, 1100);
+   Check ("IR2 CV=2", GTE.IR2, 2200);
+   Check ("IR3 CV=2", GTE.IR3, 3300);
+
+   Check ("MAC1 CV=2", GTE.MAC1, 1100);
+   Check ("MAC2 CV=2", GTE.MAC2, 2200);
+   Check ("MAC3 CV=2", GTE.MAC3, 3300);
+
+   Check ("FLAG CV=2", GTE.FLAG, 0);
+
+   New_Line;
+
+   -- V0 = (100, 200, 300)
+   GTE.V0_X := 100;
+   GTE.V0_Y := 200;
+   GTE.V0_Z := 300;
+
+   -- RT = identity
+   GTE.RT11 := 4096;
+   GTE.RT22 := 4096;
+   GTE.RT33 := 4096;
+
+   -- CV=3 = no translation vector
+   -- MX=0
+   -- V=0
+   -- SF=1
+   -- LM=0
+   -- Command=MVMVA (12)
+   Inst.Raw := 16#0008_600C#;
+
+   PSX.GTE.Execute.Execute (GTE, Inst);
+
+   -- Result = V0
+   Check ("IR1 CV=3", GTE.IR1, 100);
+   Check ("IR2 CV=3", GTE.IR2, 200);
+   Check ("IR3 CV=3", GTE.IR3, 300);
+
+   Check ("MAC1 CV=3", GTE.MAC1, 100);
+   Check ("MAC2 CV=3", GTE.MAC2, 200);
+   Check ("MAC3 CV=3", GTE.MAC3, 300);
+
+   Check ("FLAG CV=3", GTE.FLAG, 0);
+
+   New_Line;
    Put_Line ("PSX GTE MVMVA tests finished.");
 
 end PSX_GTE_MVMVA_Tests;
