@@ -1,17 +1,19 @@
 with Ada.Text_IO;
+with PSX.Types;
 with PSX.GTE;
+with PSX.GTE.Execute;
+with PSX.GTE.Instruction;
 with Interfaces;
 
 procedure PSX_GTE_AVSZ4_Overflow_Tests is
 
    use type Interfaces.Unsigned_32;
 
-   use Ada.Text_IO;
-
-   GTE : PSX.GTE.GTE_State;
+   GTE  : PSX.GTE.GTE_State;
+   Inst : PSX.GTE.Instruction.Instruction;
 
 begin
-   Put_Line ("Testing PSX GTE AVSZ4 overflow...");
+   Ada.Text_IO.Put_Line ("Testing PSX GTE AVSZ4 overflow...");
 
    PSX.GTE.Reset (GTE);
 
@@ -22,22 +24,24 @@ begin
 
    GTE.ZSF4 := 16#7FFF#;
 
-   -- Inst.Raw := 16#0000_0003#;
+   Inst.Raw := 16#0000_0003#;
 
-   -- PSX.GTE.Execute.Execute (GTE, Inst);
+   PSX.GTE.Execute.Execute (GTE, Inst);
 
-   if GTE.OTZ = 16#FFFF# then
-      Put_Line ("PASS: AVSZ4 OTZ saturation");
+   if GTE.OTZ = 16#0000_FFFF# then
+      Ada.Text_IO.Put_Line ("PASS: AVSZ4 OTZ saturation");
    else
-      Put_Line ("FAIL: AVSZ4 OTZ saturation");
+      Ada.Text_IO.Put_Line
+        ("FAIL: AVSZ4 OTZ saturation expected=65535 actual="
+         & PSX.Types.Word32'Image (GTE.OTZ));
    end if;
 
    if (GTE.FLAG and 16#0004_0000#) /= 0 then
-      Put_Line ("PASS: AVSZ4 FLAG bit 18");
+      Ada.Text_IO.Put_Line ("PASS: AVSZ4 FLAG bit 18");
    else
-      Put_Line ("FAIL: AVSZ4 FLAG bit 18");
+      Ada.Text_IO.Put_Line ("FAIL: AVSZ4 FLAG bit 18");
    end if;
 
-   Put_Line ("PSX GTE AVSZ4 overflow tests finished.");
+   Ada.Text_IO.Put_Line ("PSX GTE AVSZ4 overflow tests finished.");
 
 end PSX_GTE_AVSZ4_Overflow_Tests;

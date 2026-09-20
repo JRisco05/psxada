@@ -40,7 +40,7 @@ package ada_main is
    pragma Export (C, main, "main");
 
    type Version_32 is mod 2 ** 32;
-   u00001 : constant Version_32 := 16#26945035#;
+   u00001 : constant Version_32 := 16#dc34a916#;
    pragma Export (C, u00001, "psx_gte_avsz4_overflow_testsB");
    u00002 : constant Version_32 := 16#b2cfab41#;
    pragma Export (C, u00002, "system__standard_libraryB");
@@ -264,10 +264,20 @@ package ada_main is
    pragma Export (C, u00111, "psx__gteS");
    u00112 : constant Version_32 := 16#06249ef3#;
    pragma Export (C, u00112, "psx__typesS");
-   u00113 : constant Version_32 := 16#a56a70fa#;
-   pragma Export (C, u00113, "system__memoryB");
-   u00114 : constant Version_32 := 16#92f586d9#;
-   pragma Export (C, u00114, "system__memoryS");
+   u00113 : constant Version_32 := 16#d8716e06#;
+   pragma Export (C, u00113, "psx__gte__executeB");
+   u00114 : constant Version_32 := 16#73c7d4dd#;
+   pragma Export (C, u00114, "psx__gte__executeS");
+   u00115 : constant Version_32 := 16#fece5866#;
+   pragma Export (C, u00115, "psx__gte__instructionB");
+   u00116 : constant Version_32 := 16#9cf88e23#;
+   pragma Export (C, u00116, "psx__gte__instructionS");
+   u00117 : constant Version_32 := 16#d13cd62d#;
+   pragma Export (C, u00117, "system__img_unsS");
+   u00118 : constant Version_32 := 16#a56a70fa#;
+   pragma Export (C, u00118, "system__memoryB");
+   u00119 : constant Version_32 := 16#92f586d9#;
+   pragma Export (C, u00119, "system__memoryS");
 
    --  BEGIN ELABORATION ORDER
    --  ada%s
@@ -303,6 +313,7 @@ package ada_main is
    --  system.wch_cnv%s
    --  system.wch_cnv%b
    --  system.img_int%s
+   --  system.img_uns%s
    --  system.traceback%s
    --  system.traceback%b
    --  system.secondary_stack%s
@@ -383,6 +394,10 @@ package ada_main is
    --  psx.types%s
    --  psx.gte%s
    --  psx.gte%b
+   --  psx.gte.instruction%s
+   --  psx.gte.instruction%b
+   --  psx.gte.execute%s
+   --  psx.gte.execute%b
    --  psx_gte_avsz4_overflow_tests%b
    --  END ELABORATION ORDER
 
