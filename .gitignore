@@ -4,4 +4,5 @@
 /bios/
 /config/
 /tests/
+/.vscode/
 trace_bios.txt
