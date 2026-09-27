@@ -1530,42 +1530,32 @@ package body PSX.GTE.Execute is
    end Execute_NCDS;
 
    procedure Execute_CDP
-     (GTE : in out PSX.GTE.GTE_State;
-      Inst : PSX.GTE.Instruction.Instruction)
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
    is
-      SF : constant Boolean :=
-        PSX.GTE.Instruction.Sf (Inst) /= 0;
+      SF : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
 
-      LM : constant Boolean :=
-        PSX.GTE.Instruction.Lm (Inst) /= 0;
+      LM : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
 
-      IR0 : constant Long_Long_Integer :=
-        Signed_16 (GTE.IR0);
+      IR0 : constant Long_Long_Integer := Signed_16 (GTE.IR0);
 
-      IR1 : constant Long_Long_Integer :=
-        Signed_16 (GTE.IR1);
+      IR1 : constant Long_Long_Integer := Signed_16 (GTE.IR1);
 
-      IR2 : constant Long_Long_Integer :=
-        Signed_16 (GTE.IR2);
+      IR2 : constant Long_Long_Integer := Signed_16 (GTE.IR2);
 
-      IR3 : constant Long_Long_Integer :=
-        Signed_16 (GTE.IR3);
+      IR3 : constant Long_Long_Integer := Signed_16 (GTE.IR3);
 
       R : constant Long_Long_Integer :=
         Long_Long_Integer (GTE.RGBC and 16#0000_00FF#);
 
       G : constant Long_Long_Integer :=
         Long_Long_Integer
-          (Interfaces.Shift_Right (GTE.RGBC, 8)
-           and 16#0000_00FF#);
+          (Interfaces.Shift_Right (GTE.RGBC, 8) and 16#0000_00FF#);
 
       B : constant Long_Long_Integer :=
         Long_Long_Integer
-          (Interfaces.Shift_Right (GTE.RGBC, 16)
-           and 16#0000_00FF#);
+          (Interfaces.Shift_Right (GTE.RGBC, 16) and 16#0000_00FF#);
 
-      CODE : constant Word32 :=
-        Interfaces.Shift_Right (GTE.RGBC, 24);
+      CODE : constant Word32 := Interfaces.Shift_Right (GTE.RGBC, 24);
 
       LR1 : constant Long_Long_Integer := Signed_16 (GTE.LR1);
       LR2 : constant Long_Long_Integer := Signed_16 (GTE.LR2);
@@ -1617,23 +1607,11 @@ package body PSX.GTE.Execute is
       GTE.FLAG := 0;
 
       -- Color matrix * IR + background color.
-      MAC1_Raw :=
-        RBK * 16#1000#
-        + LR1 * IR1
-        + LR2 * IR2
-        + LR3 * IR3;
+      MAC1_Raw := RBK * 16#1000# + LR1 * IR1 + LR2 * IR2 + LR3 * IR3;
 
-      MAC2_Raw :=
-        GBK * 16#1000#
-        + LG1 * IR1
-        + LG2 * IR2
-        + LG3 * IR3;
+      MAC2_Raw := GBK * 16#1000# + LG1 * IR1 + LG2 * IR2 + LG3 * IR3;
 
-      MAC3_Raw :=
-        BBK * 16#1000#
-        + LB1 * IR1
-        + LB2 * IR2
-        + LB3 * IR3;
+      MAC3_Raw := BBK * 16#1000# + LB1 * IR1 + LB2 * IR2 + LB3 * IR3;
 
       if MAC1_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 30);
@@ -1673,14 +1651,11 @@ package body PSX.GTE.Execute is
       MAC3_Raw := B * Signed_16 (GTE.IR3) * 16;
 
       -- Difference between far color and current color.
-      Delta1_Raw :=
-        RFC * 16#1000# - MAC1_Raw;
+      Delta1_Raw := RFC * 16#1000# - MAC1_Raw;
 
-      Delta2_Raw :=
-        GFC * 16#1000# - MAC2_Raw;
+      Delta2_Raw := GFC * 16#1000# - MAC2_Raw;
 
-      Delta3_Raw :=
-        BFC * 16#1000# - MAC3_Raw;
+      Delta3_Raw := BFC * 16#1000# - MAC3_Raw;
 
       if SF then
          Delta1 := SAR (Delta1_Raw, 12);
@@ -1788,7 +1763,7 @@ package body PSX.GTE.Execute is
       GTE.RGB1 := GTE.RGB2;
 
       New_RGB2 :=
-          Word32 (RGB_R)
+        Word32 (RGB_R)
         or Interfaces.Shift_Left (Word32 (RGB_G), 8)
         or Interfaces.Shift_Left (Word32 (RGB_B), 16)
         or Interfaces.Shift_Left (CODE, 24);
@@ -1797,7 +1772,1172 @@ package body PSX.GTE.Execute is
 
    end Execute_CDP;
 
+   procedure Execute_NCDT
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      Original_V0_X : constant Word32 := GTE.V0_X;
+      Original_V0_Y : constant Word32 := GTE.V0_Y;
+      Original_V0_Z : constant Word32 := GTE.V0_Z;
 
+      Saved_Flag : Word32 := 0;
+
+   begin
+      GTE.FLAG := 0;
+
+      -- Vertex V0.
+      Execute_NCDS (GTE, Inst);
+      Saved_Flag := GTE.FLAG;
+
+      -- Vertex V1.
+      GTE.V0_X := GTE.V1_X;
+      GTE.V0_Y := GTE.V1_Y;
+      GTE.V0_Z := GTE.V1_Z;
+
+      Execute_NCDS (GTE, Inst);
+      Saved_Flag := Saved_Flag or GTE.FLAG;
+
+      -- Vertex V2.
+      GTE.V0_X := GTE.V2_X;
+      GTE.V0_Y := GTE.V2_Y;
+      GTE.V0_Z := GTE.V2_Z;
+
+      Execute_NCDS (GTE, Inst);
+      Saved_Flag := Saved_Flag or GTE.FLAG;
+
+      -- NCDT does not modify the vertex registers.
+      GTE.V0_X := Original_V0_X;
+      GTE.V0_Y := Original_V0_Y;
+      GTE.V0_Z := Original_V0_Z;
+
+      GTE.FLAG := Saved_Flag;
+
+   end Execute_NCDT;
+
+   procedure Execute_NCCS
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+
+      LM : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+
+      VX : constant Long_Long_Integer := Signed_16 (GTE.V0_X);
+
+      VY : constant Long_Long_Integer := Signed_16 (GTE.V0_Y);
+
+      VZ : constant Long_Long_Integer := Signed_16 (GTE.V0_Z);
+
+      R : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.RGBC and 16#0000_00FF#);
+
+      G : constant Long_Long_Integer :=
+        Long_Long_Integer
+          (Interfaces.Shift_Right (GTE.RGBC, 8) and 16#0000_00FF#);
+
+      B : constant Long_Long_Integer :=
+        Long_Long_Integer
+          (Interfaces.Shift_Right (GTE.RGBC, 16) and 16#0000_00FF#);
+
+      CODE : constant Word32 := Interfaces.Shift_Right (GTE.RGBC, 24);
+
+      L11 : constant Long_Long_Integer := Signed_16 (GTE.L11);
+      L12 : constant Long_Long_Integer := Signed_16 (GTE.L12);
+      L13 : constant Long_Long_Integer := Signed_16 (GTE.L13);
+
+      L21 : constant Long_Long_Integer := Signed_16 (GTE.L21);
+      L22 : constant Long_Long_Integer := Signed_16 (GTE.L22);
+      L23 : constant Long_Long_Integer := Signed_16 (GTE.L23);
+
+      L31 : constant Long_Long_Integer := Signed_16 (GTE.L31);
+      L32 : constant Long_Long_Integer := Signed_16 (GTE.L32);
+      L33 : constant Long_Long_Integer := Signed_16 (GTE.L33);
+
+      LR1 : constant Long_Long_Integer := Signed_16 (GTE.LR1);
+      LR2 : constant Long_Long_Integer := Signed_16 (GTE.LR2);
+      LR3 : constant Long_Long_Integer := Signed_16 (GTE.LR3);
+
+      LG1 : constant Long_Long_Integer := Signed_16 (GTE.LG1);
+      LG2 : constant Long_Long_Integer := Signed_16 (GTE.LG2);
+      LG3 : constant Long_Long_Integer := Signed_16 (GTE.LG3);
+
+      LB1 : constant Long_Long_Integer := Signed_16 (GTE.LB1);
+      LB2 : constant Long_Long_Integer := Signed_16 (GTE.LB2);
+      LB3 : constant Long_Long_Integer := Signed_16 (GTE.LB3);
+
+      RBK : constant Long_Long_Integer := Signed_32 (GTE.RBK);
+      GBK : constant Long_Long_Integer := Signed_32 (GTE.GBK);
+      BBK : constant Long_Long_Integer := Signed_32 (GTE.BBK);
+
+      MAC1_Raw : Long_Long_Integer;
+      MAC2_Raw : Long_Long_Integer;
+      MAC3_Raw : Long_Long_Integer;
+
+      MAC1 : Long_Long_Integer;
+      MAC2 : Long_Long_Integer;
+      MAC3 : Long_Long_Integer;
+
+      RGB_Raw : Long_Long_Integer;
+      RGB_Gaw : Long_Long_Integer;
+      RGB_Baw : Long_Long_Integer;
+
+      RGB_R : Long_Long_Integer;
+      RGB_G : Long_Long_Integer;
+      RGB_B : Long_Long_Integer;
+
+      New_RGB2 : Word32;
+
+   begin
+      GTE.FLAG := 0;
+
+      -- Light matrix * V0.
+      MAC1_Raw := L11 * VX + L12 * VY + L13 * VZ;
+
+      MAC2_Raw := L21 * VX + L22 * VY + L23 * VZ;
+
+      MAC3_Raw := L31 * VX + L32 * VY + L33 * VZ;
+
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
+
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+
+      -- Background color + color matrix * IR.
+      MAC1_Raw :=
+        RBK * 16#1000# + LR1 * Signed_16 (GTE.IR1) + LR2 * Signed_16 (GTE.IR2)
+        + LR3 * Signed_16 (GTE.IR3);
+      MAC2_Raw :=
+        GBK * 16#1000# + LG1 * Signed_16 (GTE.IR1) + LG2 * Signed_16 (GTE.IR2)
+        + LG3 * Signed_16 (GTE.IR3);
+      MAC3_Raw :=
+        BBK * 16#1000# + LB1 * Signed_16 (GTE.IR1) + LB2 * Signed_16 (GTE.IR2)
+        + LB3 * Signed_16 (GTE.IR3);
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+      -- Primary color * IR, shifted left by 4.
+      MAC1_Raw := R * Signed_16 (GTE.IR1) * 16;
+      MAC2_Raw := G * Signed_16 (GTE.IR2) * 16;
+      MAC3_Raw := B * Signed_16 (GTE.IR3) * 16;
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+      -- Color FIFO.
+      RGB_Raw := SAR (MAC1, 4);
+      RGB_Gaw := SAR (MAC2, 4);
+      RGB_Baw := SAR (MAC3, 4);
+      if RGB_Raw < 0 then
+         RGB_R := 0;
+         Set_Flag (GTE, 21);
+      elsif RGB_Raw > 255 then
+         RGB_R := 255;
+         Set_Flag (GTE, 21);
+      else
+         RGB_R := RGB_Raw;
+      end if;
+      if RGB_Gaw < 0 then
+         RGB_G := 0;
+         Set_Flag (GTE, 20);
+      elsif RGB_Gaw > 255 then
+         RGB_G := 255;
+         Set_Flag (GTE, 20);
+      else
+         RGB_G := RGB_Gaw;
+      end if;
+      if RGB_Baw < 0 then
+         RGB_B := 0;
+         Set_Flag (GTE, 19);
+      elsif RGB_Baw > 255 then
+         RGB_B := 255;
+         Set_Flag (GTE, 19);
+      else
+         RGB_B := RGB_Baw;
+      end if;
+      GTE.RGB0 := GTE.RGB1;
+      GTE.RGB1 := GTE.RGB2;
+      New_RGB2 :=
+        Word32 (RGB_R)
+        or Interfaces.Shift_Left (Word32 (RGB_G), 8)
+        or Interfaces.Shift_Left (Word32 (RGB_B), 16)
+        or Interfaces.Shift_Left (CODE, 24);
+      GTE.RGB2 := New_RGB2;
+   end Execute_NCCS;
+
+   procedure Execute_CC
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF       : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+      LM       : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+      IR1      : constant Long_Long_Integer := Signed_16 (GTE.IR1);
+      IR2      : constant Long_Long_Integer := Signed_16 (GTE.IR2);
+      IR3      : constant Long_Long_Integer := Signed_16 (GTE.IR3);
+      R        : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.RGBC and 16#0000_00FF#);
+      G        : constant Long_Long_Integer :=
+        Long_Long_Integer
+          (Interfaces.Shift_Right (GTE.RGBC, 8) and 16#0000_00FF#);
+      B        : constant Long_Long_Integer :=
+        Long_Long_Integer
+          (Interfaces.Shift_Right (GTE.RGBC, 16) and 16#0000_00FF#);
+      CODE     : constant Word32 := Interfaces.Shift_Right (GTE.RGBC, 24);
+      LR1      : constant Long_Long_Integer := Signed_16 (GTE.LR1);
+      LR2      : constant Long_Long_Integer := Signed_16 (GTE.LR2);
+      LR3      : constant Long_Long_Integer := Signed_16 (GTE.LR3);
+      LG1      : constant Long_Long_Integer := Signed_16 (GTE.LG1);
+      LG2      : constant Long_Long_Integer := Signed_16 (GTE.LG2);
+      LG3      : constant Long_Long_Integer := Signed_16 (GTE.LG3);
+      LB1      : constant Long_Long_Integer := Signed_16 (GTE.LB1);
+      LB2      : constant Long_Long_Integer := Signed_16 (GTE.LB2);
+      LB3      : constant Long_Long_Integer := Signed_16 (GTE.LB3);
+      RBK      : constant Long_Long_Integer := Signed_32 (GTE.RBK);
+      GBK      : constant Long_Long_Integer := Signed_32 (GTE.GBK);
+      BBK      : constant Long_Long_Integer := Signed_32 (GTE.BBK);
+      MAC1_Raw : Long_Long_Integer;
+      MAC2_Raw : Long_Long_Integer;
+      MAC3_Raw : Long_Long_Integer;
+      MAC1     : Long_Long_Integer;
+      MAC2     : Long_Long_Integer;
+      MAC3     : Long_Long_Integer;
+      RGB_Raw  : Long_Long_Integer;
+      RGB_Gaw  : Long_Long_Integer;
+      RGB_Baw  : Long_Long_Integer;
+      RGB_R    : Long_Long_Integer;
+      RGB_G    : Long_Long_Integer;
+      RGB_B    : Long_Long_Integer;
+      New_RGB2 : Word32;
+   begin
+      GTE.FLAG := 0;
+      MAC1_Raw := RBK * 16#1000# + LR1 * IR1 + LR2 * IR2 + LR3 * IR3;
+      MAC2_Raw := GBK * 16#1000# + LG1 * IR1 + LG2 * IR2 + LG3 * IR3;
+      MAC3_Raw := BBK * 16#1000# + LB1 * IR1 + LB2 * IR2 + LB3 * IR3;
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+      MAC1_Raw := R * Signed_16 (GTE.IR1) * 16;
+      MAC2_Raw := G * Signed_16 (GTE.IR2) * 16;
+      MAC3_Raw := B * Signed_16 (GTE.IR3) * 16;
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+      RGB_Raw := SAR (MAC1, 4);
+      RGB_Gaw := SAR (MAC2, 4);
+      RGB_Baw := SAR (MAC3, 4);
+      if RGB_Raw < 0 then
+         RGB_R := 0;
+         Set_Flag (GTE, 21);
+      elsif RGB_Raw > 255 then
+         RGB_R := 255;
+         Set_Flag (GTE, 21);
+      else
+         RGB_R := RGB_Raw;
+      end if;
+      if RGB_Gaw < 0 then
+         RGB_G := 0;
+         Set_Flag (GTE, 20);
+      elsif RGB_Gaw > 255 then
+         RGB_G := 255;
+         Set_Flag (GTE, 20);
+      else
+         RGB_G := RGB_Gaw;
+      end if;
+      if RGB_Baw < 0 then
+         RGB_B := 0;
+         Set_Flag (GTE, 19);
+      elsif RGB_Baw > 255 then
+         RGB_B := 255;
+      else
+         RGB_B := RGB_Baw;
+      end if;
+      GTE.RGB0 := GTE.RGB1;
+      GTE.RGB1 := GTE.RGB2;
+      New_RGB2 :=
+        Word32 (RGB_R)
+        or Interfaces.Shift_Left (Word32 (RGB_G), 8)
+        or Interfaces.Shift_Left (Word32 (RGB_B), 16)
+        or Interfaces.Shift_Left (CODE, 24);
+      GTE.RGB2 := New_RGB2;
+   end Execute_CC;
+
+   procedure Execute_NCS
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF       : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+      LM       : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+      VX       : constant Long_Long_Integer := Signed_16 (GTE.V0_X);
+      VY       : constant Long_Long_Integer := Signed_16 (GTE.V0_Y);
+      VZ       : constant Long_Long_Integer := Signed_16 (GTE.V0_Z);
+      L11      : constant Long_Long_Integer := Signed_16 (GTE.L11);
+      L12      : constant Long_Long_Integer := Signed_16 (GTE.L12);
+      L13      : constant Long_Long_Integer := Signed_16 (GTE.L13);
+      L21      : constant Long_Long_Integer := Signed_16 (GTE.L21);
+      L22      : constant Long_Long_Integer := Signed_16 (GTE.L22);
+      L23      : constant Long_Long_Integer := Signed_16 (GTE.L23);
+      L31      : constant Long_Long_Integer := Signed_16 (GTE.L31);
+      L32      : constant Long_Long_Integer := Signed_16 (GTE.L32);
+      L33      : constant Long_Long_Integer := Signed_16 (GTE.L33);
+      LR1      : constant Long_Long_Integer := Signed_16 (GTE.LR1);
+      LR2      : constant Long_Long_Integer := Signed_16 (GTE.LR2);
+      LR3      : constant Long_Long_Integer := Signed_16 (GTE.LR3);
+      LG1      : constant Long_Long_Integer := Signed_16 (GTE.LG1);
+      LG2      : constant Long_Long_Integer := Signed_16 (GTE.LG2);
+      LG3      : constant Long_Long_Integer := Signed_16 (GTE.LG3);
+      LB1      : constant Long_Long_Integer := Signed_16 (GTE.LB1);
+      LB2      : constant Long_Long_Integer := Signed_16 (GTE.LB2);
+      LB3      : constant Long_Long_Integer := Signed_16 (GTE.LB3);
+      RBK      : constant Long_Long_Integer := Signed_32 (GTE.RBK);
+      GBK      : constant Long_Long_Integer := Signed_32 (GTE.GBK);
+      BBK      : constant Long_Long_Integer := Signed_32 (GTE.BBK);
+      CODE     : constant Word32 := Interfaces.Shift_Right (GTE.RGBC, 24);
+      MAC1_Raw : Long_Long_Integer;
+      MAC2_Raw : Long_Long_Integer;
+      MAC3_Raw : Long_Long_Integer;
+      MAC1     : Long_Long_Integer;
+      MAC2     : Long_Long_Integer;
+      MAC3     : Long_Long_Integer;
+      RGB_Raw  : Long_Long_Integer;
+      RGB_Gaw  : Long_Long_Integer;
+      RGB_Baw  : Long_Long_Integer;
+      RGB_R    : Long_Long_Integer;
+      RGB_G    : Long_Long_Integer;
+      RGB_B    : Long_Long_Integer;
+      New_RGB2 : Word32;
+   begin
+      GTE.FLAG := 0;
+      -- Light matrix * V0.
+      MAC1_Raw := L11 * VX + L12 * VY + L13 * VZ;
+      MAC2_Raw := L21 * VX + L22 * VY + L23 * VZ;
+      MAC3_Raw := L31 * VX + L32 * VY + L33 * VZ;
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+      -- Background color + color matrix * IR.
+      MAC1_Raw :=
+        RBK * 16#1000# + LR1 * Signed_16 (GTE.IR1) + LR2 * Signed_16 (GTE.IR2)
+        + LR3 * Signed_16 (GTE.IR3);
+      MAC2_Raw :=
+        GBK * 16#1000# + LG1 * Signed_16 (GTE.IR1) + LG2 * Signed_16 (GTE.IR2)
+        + LG3 * Signed_16 (GTE.IR3);
+      MAC3_Raw :=
+        BBK * 16#1000# + LB1 * Signed_16 (GTE.IR1) + LB2 * Signed_16 (GTE.IR2)
+        + LB3 * Signed_16 (GTE.IR3);
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+
+      -- Color FIFO receives MAC / 16.
+      RGB_Raw := SAR (MAC1, 4);
+      RGB_Gaw := SAR (MAC2, 4);
+      RGB_Baw := SAR (MAC3, 4);
+      if RGB_Raw < 0 then
+         RGB_R := 0;
+         Set_Flag (GTE, 21);
+      elsif RGB_Raw > 255 then
+         RGB_R := 255;
+         Set_Flag (GTE, 21);
+      else
+         RGB_R := RGB_Raw;
+      end if;
+      if RGB_Gaw < 0 then
+         RGB_G := 0;
+         Set_Flag (GTE, 20);
+      elsif RGB_Gaw > 255 then
+         RGB_G := 255;
+         Set_Flag (GTE, 20);
+      else
+         RGB_G := RGB_Gaw;
+      end if;
+      if RGB_Baw < 0 then
+         RGB_B := 0;
+         Set_Flag (GTE, 19);
+      elsif RGB_Baw > 255 then
+         RGB_B := 255;
+         Set_Flag (GTE, 19);
+      else
+         RGB_B := RGB_Baw;
+      end if;
+      GTE.RGB0 := GTE.RGB1;
+      GTE.RGB1 := GTE.RGB2;
+      New_RGB2 :=
+        Word32 (RGB_R)
+        or Interfaces.Shift_Left (Word32 (RGB_G), 8)
+        or Interfaces.Shift_Left (Word32 (RGB_B), 16)
+        or Interfaces.Shift_Left (CODE, 24);
+      GTE.RGB2 := New_RGB2;
+   end Execute_NCS;
+
+   procedure Execute_NCT
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      V0_X : constant Word32 := GTE.V0_X;
+      V0_Y : constant Word32 := GTE.V0_Y;
+      V0_Z : constant Word32 := GTE.V0_Z;
+
+      V1_X : constant Word32 := GTE.V1_X;
+      V1_Y : constant Word32 := GTE.V1_Y;
+      V1_Z : constant Word32 := GTE.V1_Z;
+
+      V2_X : constant Word32 := GTE.V2_X;
+      V2_Y : constant Word32 := GTE.V2_Y;
+      V2_Z : constant Word32 := GTE.V2_Z;
+
+      Saved_Flag : Word32 := 0;
+
+   begin
+      GTE.FLAG := 0;
+
+      GTE.V0_X := V0_X;
+      GTE.V0_Y := V0_Y;
+      GTE.V0_Z := V0_Z;
+
+      Execute_NCS (GTE, Inst);
+      Saved_Flag := GTE.FLAG;
+
+      GTE.V0_X := V1_X;
+      GTE.V0_Y := V1_Y;
+      GTE.V0_Z := V1_Z;
+
+      Execute_NCS (GTE, Inst);
+      Saved_Flag := Saved_Flag or GTE.FLAG;
+
+      GTE.V0_X := V2_X;
+      GTE.V0_Y := V2_Y;
+      GTE.V0_Z := V2_Z;
+
+      Execute_NCS (GTE, Inst);
+      Saved_Flag := Saved_Flag or GTE.FLAG;
+
+      GTE.V0_X := V0_X;
+      GTE.V0_Y := V0_Y;
+      GTE.V0_Z := V0_Z;
+
+      GTE.FLAG := Saved_Flag;
+
+   end Execute_NCT;
+
+   procedure Execute_NCCT
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      V0_X : constant Word32 := GTE.V0_X;
+      V0_Y : constant Word32 := GTE.V0_Y;
+      V0_Z : constant Word32 := GTE.V0_Z;
+
+      V1_X : constant Word32 := GTE.V1_X;
+      V1_Y : constant Word32 := GTE.V1_Y;
+      V1_Z : constant Word32 := GTE.V1_Z;
+
+      V2_X : constant Word32 := GTE.V2_X;
+      V2_Y : constant Word32 := GTE.V2_Y;
+      V2_Z : constant Word32 := GTE.V2_Z;
+
+      Saved_Flag : Word32 := 0;
+
+   begin
+      GTE.FLAG := 0;
+
+      GTE.V0_X := V0_X;
+      GTE.V0_Y := V0_Y;
+      GTE.V0_Z := V0_Z;
+
+      Execute_NCCS (GTE, Inst);
+      Saved_Flag := GTE.FLAG;
+
+      GTE.V0_X := V1_X;
+      GTE.V0_Y := V1_Y;
+      GTE.V0_Z := V1_Z;
+
+      Execute_NCCS (GTE, Inst);
+      Saved_Flag := Saved_Flag or GTE.FLAG;
+
+      GTE.V0_X := V2_X;
+      GTE.V0_Y := V2_Y;
+      GTE.V0_Z := V2_Z;
+
+      Execute_NCCS (GTE, Inst);
+      Saved_Flag := Saved_Flag or GTE.FLAG;
+
+      GTE.V0_X := V0_X;
+      GTE.V0_Y := V0_Y;
+      GTE.V0_Z := V0_Z;
+
+      GTE.FLAG := Saved_Flag;
+
+   end Execute_NCCT;
+
+   procedure Execute_SQR
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF       : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+      LM       : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+      IR1      : constant Long_Long_Integer := Signed_16 (GTE.IR1);
+      IR2      : constant Long_Long_Integer := Signed_16 (GTE.IR2);
+      IR3      : constant Long_Long_Integer := Signed_16 (GTE.IR3);
+      MAC1_Raw : Long_Long_Integer;
+      MAC2_Raw : Long_Long_Integer;
+      MAC3_Raw : Long_Long_Integer;
+      MAC1     : Long_Long_Integer;
+      MAC2     : Long_Long_Integer;
+      MAC3     : Long_Long_Integer;
+   begin
+      GTE.FLAG := 0;
+      MAC1_Raw := IR1 * IR1;
+      MAC2_Raw := IR2 * IR2;
+      MAC3_Raw := IR3 * IR3;
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      end if;
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      end if;
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      end if;
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+   end Execute_SQR;
+
+   procedure Execute_DCPL
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+
+      LM : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+
+      IR0 : constant Long_Long_Integer := Signed_16 (GTE.IR0);
+
+      IR1 : constant Long_Long_Integer := Signed_16 (GTE.IR1);
+
+      IR2 : constant Long_Long_Integer := Signed_16 (GTE.IR2);
+
+      IR3 : constant Long_Long_Integer := Signed_16 (GTE.IR3);
+
+      R : constant Long_Long_Integer :=
+        Long_Long_Integer (GTE.RGBC and 16#0000_00FF#);
+
+      G : constant Long_Long_Integer :=
+        Long_Long_Integer ((GTE.RGBC / 16#100#) and 16#0000_00FF#);
+
+      B : constant Long_Long_Integer :=
+        Long_Long_Integer ((GTE.RGBC / 16#10_000#) and 16#0000_00FF#);
+
+      Code : constant Word32 := GTE.RGBC and 16#FF00_0000#;
+
+      RFC : constant Long_Long_Integer := Signed_32 (GTE.RFC);
+
+      GFC : constant Long_Long_Integer := Signed_32 (GTE.GFC);
+
+      BFC : constant Long_Long_Integer := Signed_32 (GTE.BFC);
+
+      Base1 : Long_Long_Integer;
+      Base2 : Long_Long_Integer;
+      Base3 : Long_Long_Integer;
+
+      Delta1 : Long_Long_Integer;
+      Delta2 : Long_Long_Integer;
+      Delta3 : Long_Long_Integer;
+
+      MAC1_Raw : Long_Long_Integer;
+      MAC2_Raw : Long_Long_Integer;
+      MAC3_Raw : Long_Long_Integer;
+
+      MAC1 : Long_Long_Integer;
+      MAC2 : Long_Long_Integer;
+      MAC3 : Long_Long_Integer;
+
+      RGB_R : Long_Long_Integer;
+      RGB_G : Long_Long_Integer;
+      RGB_B : Long_Long_Integer;
+
+   begin
+      GTE.FLAG := 0;
+
+      -- RGB * IR << 4
+      Base1 := R * IR1 * 16;
+      Base2 := G * IR2 * 16;
+      Base3 := B * IR3 * 16;
+
+      -- FC * 1000h - MAC
+      Delta1 := RFC * 16#1000# - Base1;
+      Delta2 := GFC * 16#1000# - Base2;
+      Delta3 := BFC * 16#1000# - Base3;
+
+      -- The depth-cue interpolation operand is saturated
+      -- to signed 16 bits before multiplication by IR0.
+      if Delta1 > 32767 then
+         Delta1 := 32767;
+         Set_Flag (GTE, 30);
+      elsif Delta1 < -32768 then
+         Delta1 := -32768;
+         Set_Flag (GTE, 27);
+      end if;
+
+      if Delta2 > 32767 then
+         Delta2 := 32767;
+         Set_Flag (GTE, 29);
+      elsif Delta2 < -32768 then
+         Delta2 := -32768;
+         Set_Flag (GTE, 26);
+      end if;
+
+      if Delta3 > 32767 then
+         Delta3 := 32767;
+         Set_Flag (GTE, 28);
+      elsif Delta3 < -32768 then
+         Delta3 := -32768;
+         Set_Flag (GTE, 25);
+      end if;
+
+      MAC1_Raw := Base1 + Delta1 * IR0;
+      MAC2_Raw := Base2 + Delta2 * IR0;
+      MAC3_Raw := Base3 + Delta3 * IR0;
+
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+
+      -- Color FIFO receives MAC / 16.
+      RGB_R := MAC1 / 16;
+      RGB_G := MAC2 / 16;
+      RGB_B := MAC3 / 16;
+
+      if RGB_R < 0 then
+         RGB_R := 0;
+         Set_Flag (GTE, 21);
+      elsif RGB_R > 255 then
+         RGB_R := 255;
+         Set_Flag (GTE, 21);
+      end if;
+
+      if RGB_G < 0 then
+         RGB_G := 0;
+         Set_Flag (GTE, 20);
+      elsif RGB_G > 255 then
+         RGB_G := 255;
+         Set_Flag (GTE, 20);
+      end if;
+
+      if RGB_B < 0 then
+         RGB_B := 0;
+         Set_Flag (GTE, 19);
+      elsif RGB_B > 255 then
+         RGB_B := 255;
+         Set_Flag (GTE, 19);
+      end if;
+
+      GTE.RGB0 := GTE.RGB1;
+      GTE.RGB1 := GTE.RGB2;
+
+      GTE.RGB2 :=
+        Code
+        or Word32 (RGB_R)
+        or Interfaces.Shift_Left (Word32 (RGB_G), 8)
+        or Interfaces.Shift_Left (Word32 (RGB_B), 16);
+
+   end Execute_DCPL;
+
+   procedure Execute_DPCT
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+
+      LM : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+
+      IR0 : constant Long_Long_Integer := Signed_16 (GTE.IR0);
+
+      RFC : constant Long_Long_Integer := Signed_32 (GTE.RFC);
+
+      GFC : constant Long_Long_Integer := Signed_32 (GTE.GFC);
+
+      BFC : constant Long_Long_Integer := Signed_32 (GTE.BFC);
+
+      Saved_Flag : Word32 := 0;
+
+      procedure Process_Color (RGB : Word32) is
+         R : constant Long_Long_Integer :=
+           Long_Long_Integer (RGB and 16#0000_00FF#);
+
+         G : constant Long_Long_Integer :=
+           Long_Long_Integer ((RGB / 16#100#) and 16#0000_00FF#);
+
+         B : constant Long_Long_Integer :=
+           Long_Long_Integer ((RGB / 16#10_000#) and 16#0000_00FF#);
+
+         Code : constant Word32 := RGB and 16#FF00_0000#;
+
+         Base1 : Long_Long_Integer;
+         Base2 : Long_Long_Integer;
+         Base3 : Long_Long_Integer;
+
+         Delta1 : Long_Long_Integer;
+         Delta2 : Long_Long_Integer;
+         Delta3 : Long_Long_Integer;
+
+         MAC1_Raw : Long_Long_Integer;
+         MAC2_Raw : Long_Long_Integer;
+         MAC3_Raw : Long_Long_Integer;
+
+         MAC1 : Long_Long_Integer;
+         MAC2 : Long_Long_Integer;
+         MAC3 : Long_Long_Integer;
+
+         RGB_R : Long_Long_Integer;
+         RGB_G : Long_Long_Integer;
+         RGB_B : Long_Long_Integer;
+
+      begin
+         Base1 := R * 16#1000#;
+         Base2 := G * 16#1000#;
+         Base3 := B * 16#1000#;
+
+         Delta1 := RFC * 16#1000# - Base1;
+         Delta2 := GFC * 16#1000# - Base2;
+         Delta3 := BFC * 16#1000# - Base3;
+
+         if Delta1 > 32767 then
+            Delta1 := 32767;
+            Set_Flag (GTE, 30);
+         elsif Delta1 < -32768 then
+            Delta1 := -32768;
+            Set_Flag (GTE, 27);
+         end if;
+
+         if Delta2 > 32767 then
+            Delta2 := 32767;
+            Set_Flag (GTE, 29);
+         elsif Delta2 < -32768 then
+            Delta2 := -32768;
+            Set_Flag (GTE, 26);
+         end if;
+
+         if Delta3 > 32767 then
+            Delta3 := 32767;
+            Set_Flag (GTE, 28);
+         elsif Delta3 < -32768 then
+            Delta3 := -32768;
+            Set_Flag (GTE, 25);
+         end if;
+
+         MAC1_Raw := Base1 + Delta1 * IR0;
+         MAC2_Raw := Base2 + Delta2 * IR0;
+         MAC3_Raw := Base3 + Delta3 * IR0;
+
+         if SF then
+            MAC1 := SAR (MAC1_Raw, 12);
+            MAC2 := SAR (MAC2_Raw, 12);
+            MAC3 := SAR (MAC3_Raw, 12);
+         else
+            MAC1 := MAC1_Raw;
+            MAC2 := MAC2_Raw;
+            MAC3 := MAC3_Raw;
+         end if;
+
+         GTE.MAC1 := To_Word32 (MAC1);
+         GTE.MAC2 := To_Word32 (MAC2);
+         GTE.MAC3 := To_Word32 (MAC3);
+
+         GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+         GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+         GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+
+         RGB_R := MAC1 / 16;
+         RGB_G := MAC2 / 16;
+         RGB_B := MAC3 / 16;
+
+         if RGB_R < 0 then
+            RGB_R := 0;
+            Set_Flag (GTE, 21);
+         elsif RGB_R > 255 then
+            RGB_R := 255;
+            Set_Flag (GTE, 21);
+         end if;
+
+         if RGB_G < 0 then
+            RGB_G := 0;
+            Set_Flag (GTE, 20);
+         elsif RGB_G > 255 then
+            RGB_G := 255;
+            Set_Flag (GTE, 20);
+         end if;
+
+         if RGB_B < 0 then
+            RGB_B := 0;
+            Set_Flag (GTE, 19);
+         elsif RGB_B > 255 then
+            RGB_B := 255;
+            Set_Flag (GTE, 19);
+         end if;
+
+         GTE.RGB0 := GTE.RGB1;
+         GTE.RGB1 := GTE.RGB2;
+
+         GTE.RGB2 :=
+           Code
+           or Word32 (RGB_R)
+           or Interfaces.Shift_Left (Word32 (RGB_G), 8)
+           or Interfaces.Shift_Left (Word32 (RGB_B), 16);
+
+      end Process_Color;
+
+   begin
+      GTE.FLAG := 0;
+
+      Process_Color (GTE.RGB0);
+      Saved_Flag := GTE.FLAG;
+
+      Process_Color (GTE.RGB1);
+      Saved_Flag := Saved_Flag or GTE.FLAG;
+
+      Process_Color (GTE.RGB2);
+      Saved_Flag := Saved_Flag or GTE.FLAG;
+
+      GTE.FLAG := Saved_Flag;
+   end Execute_DPCT;
+
+   procedure Execute_GPL
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+
+      LM : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+
+      IR0 : constant Long_Long_Integer := Signed_16 (GTE.IR0);
+
+      IR1 : constant Long_Long_Integer := Signed_16 (GTE.IR1);
+
+      IR2 : constant Long_Long_Integer := Signed_16 (GTE.IR2);
+
+      IR3 : constant Long_Long_Integer := Signed_16 (GTE.IR3);
+
+      Previous_MAC1 : constant Long_Long_Integer := Signed_32 (GTE.MAC1);
+
+      Previous_MAC2 : constant Long_Long_Integer := Signed_32 (GTE.MAC2);
+
+      Previous_MAC3 : constant Long_Long_Integer := Signed_32 (GTE.MAC3);
+
+      MAC1_Raw : Long_Long_Integer;
+      MAC2_Raw : Long_Long_Integer;
+      MAC3_Raw : Long_Long_Integer;
+
+      MAC1 : Long_Long_Integer;
+      MAC2 : Long_Long_Integer;
+      MAC3 : Long_Long_Integer;
+
+   begin
+      GTE.FLAG := 0;
+
+      MAC1_Raw := Previous_MAC1 + IR0 * IR1;
+      MAC2_Raw := Previous_MAC2 + IR0 * IR2;
+      MAC3_Raw := Previous_MAC3 + IR0 * IR3;
+
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 30);
+      end if;
+
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 29);
+      end if;
+
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 28);
+      end if;
+
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+
+   end Execute_GPL;
+
+   procedure Execute_GPF
+     (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
+   is
+      SF : constant Boolean := PSX.GTE.Instruction.Sf (Inst) /= 0;
+
+      LM : constant Boolean := PSX.GTE.Instruction.Lm (Inst) /= 0;
+
+      IR0 : constant Long_Long_Integer := Signed_16 (GTE.IR0);
+
+      IR1 : constant Long_Long_Integer := Signed_16 (GTE.IR1);
+
+      IR2 : constant Long_Long_Integer := Signed_16 (GTE.IR2);
+
+      IR3 : constant Long_Long_Integer := Signed_16 (GTE.IR3);
+
+      MAC1_Raw : Long_Long_Integer;
+      MAC2_Raw : Long_Long_Integer;
+      MAC3_Raw : Long_Long_Integer;
+
+      MAC1 : Long_Long_Integer;
+      MAC2 : Long_Long_Integer;
+      MAC3 : Long_Long_Integer;
+
+   begin
+      GTE.FLAG := 0;
+
+      MAC1_Raw := IR0 * IR1;
+      MAC2_Raw := IR0 * IR2;
+      MAC3_Raw := IR0 * IR3;
+
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 30);
+      end if;
+
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 29);
+      end if;
+
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 28);
+      end if;
+
+      if SF then
+         MAC1 := SAR (MAC1_Raw, 12);
+         MAC2 := SAR (MAC2_Raw, 12);
+         MAC3 := SAR (MAC3_Raw, 12);
+      else
+         MAC1 := MAC1_Raw;
+         MAC2 := MAC2_Raw;
+         MAC3 := MAC3_Raw;
+      end if;
+
+      GTE.MAC1 := To_Word32 (MAC1);
+      GTE.MAC2 := To_Word32 (MAC2);
+      GTE.MAC3 := To_Word32 (MAC3);
+
+      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+
+   end Execute_GPF;
 
    procedure Execute
      (GTE : in out PSX.GTE.GTE_State; Inst : PSX.GTE.Instruction.Instruction)
@@ -1836,11 +2976,44 @@ package body PSX.GTE.Execute is
          when 16#13# =>
             Execute_NCDS (GTE, Inst);
 
-             when 16#14# =>
-            Execute_CDP (GTE, Inst); 
+         when 16#14# =>
+            Execute_CDP (GTE, Inst);
+
+         when 16#16# =>
+            Execute_NCDT (GTE, Inst);
+
+         when 16#1B# =>
+            Execute_NCCS (GTE, Inst);
+
+         when 16#1C# =>
+            Execute_CC (GTE, Inst);
+
+         when 16#1E# =>
+            Execute_NCS (GTE, Inst);
+
+         when 16#20# =>
+            Execute_NCT (GTE, Inst);
+
+         when 16#28# =>
+            Execute_SQR (GTE, Inst);
+
+         when 16#29# =>
+            Execute_DCPL (GTE, Inst);
+
+         when 16#2A# =>
+            Execute_DPCT (GTE, Inst);
 
          when 16#30# =>
             Execute_RTPT (GTE, Inst);
+
+         when 16#3D# =>
+            Execute_GPF (GTE, Inst);
+
+         when 16#3E# =>
+            Execute_GPL (GTE, Inst);
+
+         when 16#3F# =>
+            Execute_NCCT (GTE, Inst);
 
          when others =>
             null;

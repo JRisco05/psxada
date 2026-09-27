@@ -9,6 +9,25 @@ package PSX.SPU is
    subtype Word16 is PSX.Types.Word16;
    subtype Word32 is PSX.Types.Word32;
 
+   type Envelope_Phase is
+     (Envelope_Off,
+      Envelope_Attack,
+      Envelope_Decay,
+      Envelope_Sustain,
+      Envelope_Release);
+
+   type ADSR_Parameters is record
+      Attack_Rate         : Word8;
+      Attack_Exponential  : Boolean;
+      Decay_Rate          : Word8;
+      Sustain_Level       : Word8;
+      Sustain_Rate        : Word16;
+      Sustain_Exponential : Boolean;
+      Sustain_Direction   : Boolean;
+      Release_Exponential : Boolean;
+      Release_Rate        : Word8;
+   end record;
+
    type SPU_Channel is record
       Volume_Left     : Word16;
       Volume_Right    : Word16;
@@ -20,6 +39,7 @@ package PSX.SPU is
       Current_Address : Word16;
       Key_On          : Boolean;
       Key_Off         : Boolean;
+      Envelope        : Envelope_Phase;
    end record;
 
    type Channel_Array is array (0 .. 23) of SPU_Channel;

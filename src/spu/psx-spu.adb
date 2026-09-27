@@ -3,6 +3,7 @@ with Interfaces;
 package body PSX.SPU is
 
    use type Interfaces.Unsigned_16;
+   use type Interfaces.Unsigned_32;
 
    -------------
    --  RESET  --
@@ -35,6 +36,7 @@ package body PSX.SPU is
          SPU.Channels (I).Current_Address := 0;
          SPU.Channels (I).Key_On := False;
          SPU.Channels (I).Key_Off := False;
+         SPU.Channels (I).Envelope := Envelope_Off;
       end loop;
    end Reset;
 
@@ -58,20 +60,52 @@ package body PSX.SPU is
          SPU.Reverb_Volume_Right := Value;
 
       elsif Address = 16#1F801D88# then
+         -- Key_On Low (Voces 0..15)
          SPU.Key_On := (SPU.Key_On and 16#FFFF_0000#) or Word32 (Value);
+         for I in 0 .. 15 loop
+            if (Value and Interfaces.Shift_Left (1, I)) /= 0 then
+               SPU.Channels (I).Key_On := True;
+               SPU.Channels (I).Key_Off := False; -- Key_On apaga Key_Off
+               SPU.Channels (I).Envelope := Envelope_Attack;
+
+            end if;
+         end loop;
 
       elsif Address = 16#1F801D8A# then
+         -- Key_On High (Voces 16..23)
          SPU.Key_On :=
            (SPU.Key_On and 16#0000_FFFF#)
            or Interfaces.Shift_Left (Word32 (Value), 16);
+         for I in 0 .. 7 loop
+            if (Value and Interfaces.Shift_Left (1, I)) /= 0 then
+               SPU.Channels (16 + I).Key_On := True;
+               SPU.Channels (16 + I).Key_Off := False;
+               SPU.Channels (I + 16).Envelope := Envelope_Attack;
+            end if;
+         end loop;
 
       elsif Address = 16#1F801D8C# then
+         -- Key_Off Low (Voces 0..15)
          SPU.Key_Off := (SPU.Key_Off and 16#FFFF_0000#) or Word32 (Value);
+         for I in 0 .. 15 loop
+            if (Value and Interfaces.Shift_Left (1, I)) /= 0 then
+               SPU.Channels (I).Key_Off := True;
+               SPU.Channels (I).Key_On := False; -- Key_Off apaga Key_On
+
+            end if;
+         end loop;
 
       elsif Address = 16#1F801D8E# then
+         -- Key_Off High (Voces 16..23)
          SPU.Key_Off :=
            (SPU.Key_Off and 16#0000_FFFF#)
            or Interfaces.Shift_Left (Word32 (Value), 16);
+         for I in 0 .. 7 loop
+            if (Value and Interfaces.Shift_Left (1, I)) /= 0 then
+               SPU.Channels (16 + I).Key_Off := True;
+               SPU.Channels (16 + I).Key_On := False;
+            end if;
+         end loop;
 
       elsif Address = 16#1F801DA6# then
          SPU.Transfer_Control := Value;
@@ -136,7 +170,6 @@ package body PSX.SPU is
          Value := Word16 (SPU.Key_On and 16#0000_FFFF#);
 
       elsif Address = 16#1F801D8A# then
-         -- 🌟 SOLUCIÓN DEFINITIVA: El casteo envuelve TODA la operación de bits
          Value :=
            Word16 (Interfaces.Shift_Right (SPU.Key_On, 16) and 16#0000_FFFF#);
 
@@ -144,7 +177,6 @@ package body PSX.SPU is
          Value := Word16 (SPU.Key_Off and 16#0000_FFFF#);
 
       elsif Address = 16#1F801D8E# then
-         -- 🌟 SOLUCIÓN DEFINITIVA: El casteo envuelve TODA la operación de bits
          Value :=
            Word16 (Interfaces.Shift_Right (SPU.Key_Off, 16) and 16#0000_FFFF#);
 
