@@ -119,24 +119,67 @@ package body PSX.GTE.Execute is
       H   : Long_Long_Integer;
       SZ3 : Long_Long_Integer) return Long_Long_Integer
    is
+      Z      : Natural;
+      N      : Long_Long_Integer;
+      D      : Long_Long_Integer;
+      U      : Long_Long_Integer;
+      Result : Long_Long_Integer;
 
-      Numerator : Long_Long_Integer;
-      Result    : Long_Long_Integer;
+      function Count_Leading_Zeros (Value : Long_Long_Integer) return Natural
+      is
+         V     : Long_Long_Integer := Value;
+         Count : Natural := 0;
+      begin
+         while V < 16#8000# loop
+            V := V * 2;
+            Count := Count + 1;
+         end loop;
+
+         return Count;
+      end Count_Leading_Zeros;
+
+      function UNR_Table (Index : Natural) return Long_Long_Integer is
+         I     : constant Long_Long_Integer := Long_Long_Integer (Index);
+         Value : Long_Long_Integer;
+      begin
+         Value := ((16#40_000# / (I + 16#100#)) + 1) / 2 - 16#101#;
+
+         if Value < 0 then
+            return 0;
+         else
+            return Value;
+         end if;
+      end UNR_Table;
 
    begin
-      if SZ3 <= 0 then
+      -- Perspective division overflow.
+      -- The GTE overflows when H >= 2 * SZ3.
+      if SZ3 <= 0 or else H >= SZ3 * 2 then
          Set_Flag (GTE, 17);
          Set_Flag (GTE, 31);
          return 16#1_FFFF#;
       end if;
 
-      Numerator := H * 16#20_000#;
+      -- Normalize SZ3 to 8000h..FFFFh.
+      Z := Count_Leading_Zeros (SZ3);
 
-      Result := (Numerator / SZ3 + 1) / 2;
+      N := H * (2 ** Z);
+      D := SZ3 * (2 ** Z);
 
+      -- Initial reciprocal approximation.
+      U := UNR_Table (Natural ((D - 16#7FC0#) / 128)) + 16#101#;
+
+      -- First Newton-Raphson refinement.
+      D := (16#20_00080# - D * U) / 256;
+
+      -- Second Newton-Raphson refinement.
+      D := (16#000080# + D * U) / 256;
+
+      -- Final fixed-point multiplication.
+      Result := ((N * D) + 16#8000#) / 16#1_0000#;
+
+      -- The UNR result itself is saturated here.
       if Result > 16#1_FFFF# then
-         Set_Flag (GTE, 17);
-         Set_Flag (GTE, 31);
          Result := 16#1_FFFF#;
       end if;
 
