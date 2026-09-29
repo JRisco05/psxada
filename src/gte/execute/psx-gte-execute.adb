@@ -241,6 +241,25 @@ package body PSX.GTE.Execute is
 
       MAC3_Raw := TRZ * 16#1000# + RT31 * VX + RT32 * VY + RT33 * VZ;
 
+      -- MAC1..MAC3 overflow detection.
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
+
       MAC1 := SAR (MAC1_Raw, SF * 12);
       MAC2 := SAR (MAC2_Raw, SF * 12);
       MAC3 := SAR (MAC3_Raw, SF * 12);
@@ -404,6 +423,25 @@ package body PSX.GTE.Execute is
       MAC2_Raw := TRY * 16#1000# + RT21 * VX + RT22 * VY + RT23 * VZ;
 
       MAC3_Raw := TRZ * 16#1000# + RT31 * VX + RT32 * VY + RT33 * VZ;
+
+      -- MAC1..MAC3 overflow detection.
+      if MAC1_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 30);
+      elsif MAC1_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 27);
+      end if;
+
+      if MAC2_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 29);
+      elsif MAC2_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 26);
+      end if;
+
+      if MAC3_Raw > 16#7FF_FFFF_FFFF# then
+         Set_Flag (GTE, 28);
+      elsif MAC3_Raw < -16#800_0000_0000# then
+         Set_Flag (GTE, 25);
+      end if;
 
       -- -------------------------------------------------------
       -- MAC registers
