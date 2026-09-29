@@ -718,13 +718,13 @@ package body PSX.GTE.Execute is
       if MAC1_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 30);
       elsif MAC1_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 30);
+         Set_Flag (GTE, 27);
       end if;
 
       if MAC2_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 29);
       elsif MAC2_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 29);
+         Set_Flag (GTE, 26);
       end if;
 
       if MAC3_Raw > 16#7FF_FFFF_FFFF# then
@@ -933,19 +933,19 @@ package body PSX.GTE.Execute is
       if MAC1_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 30);
       elsif MAC1_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 30);
+         Set_Flag (GTE, 27);
       end if;
 
       if MAC2_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 29);
       elsif MAC2_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 29);
+         Set_Flag (GTE, 26);
       end if;
 
       if MAC3_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 28);
       elsif MAC3_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 28);
+         Set_Flag (GTE, 25);
       end if;
 
       if SF then
@@ -2917,19 +2917,19 @@ package body PSX.GTE.Execute is
       if MAC1_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 30);
       elsif MAC1_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 30);
+         Set_Flag (GTE, 27);
       end if;
 
       if MAC2_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 29);
       elsif MAC2_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 29);
+         Set_Flag (GTE, 26);
       end if;
 
       if MAC3_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 28);
       elsif MAC3_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 28);
+         Set_Flag (GTE, 25);
       end if;
 
       if SF then
@@ -2985,19 +2985,19 @@ package body PSX.GTE.Execute is
       if MAC1_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 30);
       elsif MAC1_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 30);
+         Set_Flag (GTE, 27);
       end if;
 
       if MAC2_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 29);
       elsif MAC2_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 29);
+         Set_Flag (GTE, 26);
       end if;
 
       if MAC3_Raw > 16#7FF_FFFF_FFFF# then
          Set_Flag (GTE, 28);
       elsif MAC3_Raw < -16#800_0000_0000# then
-         Set_Flag (GTE, 28);
+         Set_Flag (GTE, 25);
       end if;
 
       if SF then
