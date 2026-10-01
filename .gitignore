@@ -5,4 +5,5 @@
 /config/
 /tests/
 /.vscode/
+/ps1-tests/
 trace_bios.txt
