@@ -55,7 +55,6 @@ package body PSX.GTE.Execute is
       Bit   : Natural;
       LM    : Boolean) return Word32
    is
-
       Min_Value : constant Long_Long_Integer := (if LM then 0 else -32_768);
 
       Max_Value : constant Long_Long_Integer := 32_767;
@@ -74,6 +73,30 @@ package body PSX.GTE.Execute is
 
       return To_Word32 (Result);
    end Saturate_IR;
+
+   function Saturate_IR_RTPS_IR3
+     (GTE   : in out PSX.GTE.GTE_State;
+      Value : Long_Long_Integer;
+      Bit   : Natural;
+      LM    : Boolean) return Word32
+   is
+      Result : Long_Long_Integer := Value;
+
+   begin
+      -- El valor almacenado en IR3 respeta LM.
+      if Result > 32_767 then
+         Result := 32_767;
+      elsif Result < (if LM then 0 else -32_768) then
+         Result := (if LM then 0 else -32_768);
+      end if;
+
+      -- El FLAG.22 de RTPS/RTPT ignora LM.
+      if Value > 32_767 or else Value < -32_768 then
+         Set_Flag (GTE, Bit);
+      end if;
+
+      return To_Word32 (Result);
+   end Saturate_IR_RTPS_IR3;
 
    function Saturate_SZ3
      (GTE : in out PSX.GTE.GTE_State; Value : Long_Long_Integer) return Word32
@@ -463,7 +486,7 @@ package body PSX.GTE.Execute is
 
       GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
 
-      GTE.IR3 := Saturate_IR (GTE, MAC3, 22, LM);
+      GTE.IR3 := Saturate_IR_RTPS_IR3 (GTE, MAC3, 22, LM);
 
       --  -------------------------------------------------------
       --  SZ FIFO

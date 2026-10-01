@@ -37,6 +37,7 @@ project Psxada is
       "tests/timers/",
       "tests/gpu/",
       "tests/gte/",
+      "tests/gte/psx_gte_conformance_tests",
       "tests/dma/",
       "config/");
 
