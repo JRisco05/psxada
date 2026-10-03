@@ -8,6 +8,7 @@ package PSX.State is
       Memory : PSX.Memory.Memory_State;
    end record;
 
-   procedure Reset (System : in out PSX_State);
+   procedure Reset
+     (System : out PSX_State); -- Cambiado a 'out' para inicializar limpio
 
 end PSX.State;

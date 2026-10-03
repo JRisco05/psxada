@@ -133,6 +133,17 @@ package body PSX.Memory is
          Index := (Address - DMA_Base) / 4;
          return Memory.DMA_Registers (Index);
 
+      --  🌟 NUEVO: Mapeo de Lecturas de la GPU para la BIOS
+      elsif Address = 16#1F80_1814# then
+         -- GPUSTAT (Registro de Estado de la GPU).
+         -- Retornamos 16#1C00_0000# para simular que la GPU está encendida,
+         -- lista para recibir comandos (Bit 26, 27 y 28) y evitar que la BIOS se congele.
+         return 16#1C00_0000#;
+
+      elsif Address = 16#1F80_1810# then
+         -- GP0 Read (Lectura de datos de la VRAM al CPU)
+         return 0;
+
       --  RAM / BIOS / Scratchpad / Unmapped
       else
 
@@ -159,48 +170,6 @@ package body PSX.Memory is
       end if;
 
    end Read_32;
-
-   procedure Write_8
-     (Memory  : in out Memory_State;
-      Address : PSX.Types.Word32;
-      Value   : PSX.Types.Word8)
-   is
-      Physical_Address : constant PSX.Types.Word32 :=
-        Translate_RAM_Address (Address);
-   begin
-
-      --  RAM
-      if Physical_Address /= 16#FFFF_FFFF# then
-         Memory.Data (Physical_Address) := Value;
-
-      --  Scratchpad
-      elsif Address >= 16#1F80_0000# and then Address <= 16#1F80_03FF# then
-         Memory.Scratchpad (Address - 16#1F80_0000#) := Value;
-
-      --  BIOS
-      --  Escritura ignorada: la BIOS es ROM.
-      elsif Is_BIOS_Address (Address) then
-         null;
-
-      --  Unmapped
-      else
-         null;
-      end if;
-
-   end Write_8;
-
-   procedure Write_16
-     (Memory  : in out Memory_State;
-      Address : PSX.Types.Word32;
-      Value   : PSX.Types.Word16) is
-   begin
-      Write_8 (Memory, Address, PSX.Types.Word8 (Value and 16#00FF#));
-
-      Write_8
-        (Memory,
-         Address + 1,
-         PSX.Types.Word8 (Interfaces.Shift_Right (Value, 8)));
-   end Write_16;
 
    procedure Write_32
      (Memory  : in out Memory_State;
@@ -244,6 +213,13 @@ package body PSX.Memory is
          Index := (Address - DMA_Base) / 4;
          Memory.DMA_Registers (Index) := Value;
 
+      --  🌟 NUEVO: Capturar Escrituras de Comandos GPU enviados por la BIOS
+      elsif Address = 16#1F80_1810# or else Address = 16#1F80_1814# then
+         -- Por ahora evitamos que caiga al bloque de memoria general (unmapped).
+         -- En el siguiente paso, cuando reestructuremos el bus, pasaremos el objeto
+         -- GPU para conectarle: PSX.GPU.Write_GP0 (System.GPU, Value);
+         null;
+
       --  RAM / BIOS / Scratchpad / Unmapped
       else
 
@@ -269,6 +245,48 @@ package body PSX.Memory is
       end if;
 
    end Write_32;
+
+   procedure Write_8
+     (Memory  : in out Memory_State;
+      Address : PSX.Types.Word32;
+      Value   : PSX.Types.Word8)
+   is
+      Physical_Address : constant PSX.Types.Word32 :=
+        Translate_RAM_Address (Address);
+   begin
+
+      --  RAM
+      if Physical_Address /= 16#FFFF_FFFF# then
+         Memory.Data (Physical_Address) := Value;
+
+      --  Scratchpad
+      elsif Address >= 16#1F80_0000# and then Address <= 16#1F80_03FF# then
+         Memory.Scratchpad (Address - 16#1F80_0000#) := Value;
+
+      --  BIOS
+      --  Escritura ignorada: la BIOS es ROM.
+      elsif Is_BIOS_Address (Address) then
+         null;
+
+      --  Unmapped
+      else
+         null;
+      end if;
+
+   end Write_8;
+
+   procedure Write_16
+     (Memory  : in out Memory_State;
+      Address : PSX.Types.Word32;
+      Value   : PSX.Types.Word16) is
+   begin
+      Write_8 (Memory, Address, PSX.Types.Word8 (Value and 16#00FF#));
+
+      Write_8
+        (Memory,
+         Address + 1,
+         PSX.Types.Word8 (Interfaces.Shift_Right (Value, 8)));
+   end Write_16;
 
    procedure Load_BIOS (Memory : in out Memory_State; Path : String) is
 

@@ -2,6 +2,9 @@ with "config/psxada_config.gpr";
 
 project Psxada is
 
+   -- 🌟 OBLIGATORIO: Activar soporte para ambos lenguajes al inicio del proyecto
+   for Languages use ("Ada", "C"); 
+
    for Source_Dirs use
      ("src/psx/",
       "src/types/",
@@ -16,6 +19,7 @@ project Psxada is
       "src/cpu/muldiv",
       "src/cpu/step",
       "src/gpu/",
+      "src/display/",
       "src/gte/",
       "src/sio/",
       "src/cdrom/",
@@ -37,7 +41,7 @@ project Psxada is
       "tests/timers/",
       "tests/gpu/",
       "tests/gte/",
-      "tests/gte/psx_gte_conformance_tests",
+      "tests/gte/conformance",
       "tests/dma/",
       "config/");
 
@@ -49,17 +53,30 @@ project Psxada is
 
    for Main use ("psxada.adb");
 
+   -- 🌟 CORREGIDO: Todo lo relacionado a la compilación encapsulado aquí dentro
    package Compiler is
-      for Default_Switches ("Ada")
-      use Psxada_Config.Ada_Compiler_Switches;
+      for Default_Switches ("Ada") use Psxada_Config.Ada_Compiler_Switches;
+      
+      -- Obligamos a usar clang nativo de macOS para la arquitectura ARM64 de tu M2
+      for Driver ("C")             use "clang";
+      for Default_Switches ("C")   use ("-O2", "-x", "objective-c");
    end Compiler;
 
    package Binder is
       for Switches ("Ada") use ("-Es");
    end Binder;
 
+   package Linker is
+      -- Enlazamos las librerías nativas de tu Mac M2
+      for Default_Switches ("Ada") use ("-framework", "AppKit", "-framework", "Metal", "-framework", "QuartzCore");
+   end Linker;
+
    package Install is
       for Artifacts (".") use ("share");
    end Install;
+
+   package Naming is
+      for Body_Suffix ("C") use ".m"; -- Obliga a gprbuild a compilar los archivos .m con clang
+   end Naming;
 
 end Psxada;
