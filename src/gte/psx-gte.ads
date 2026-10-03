@@ -114,6 +114,8 @@ package PSX.GTE is
 
       FLAG : Word32;
 
+      RES1 : Word32;
+
    end record;
 
    procedure Reset (GTE : out GTE_State);

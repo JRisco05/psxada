@@ -5,6 +5,58 @@ package body PSX.GTE is
       GTE := (others => 0);
    end Reset;
 
+   function Sign_Extend_16 (Value : Word32) return Word32 is
+      V : Word32 := Value and 16#0000_FFFF#;
+   begin
+      if (V and 16#0000_8000#) /= 0 then
+         return V or 16#FFFF_0000#;
+      else
+         return V;
+      end if;
+   end Sign_Extend_16;
+
+   function Sign_Extend_16_Word (Value : Word32) return Word32 is
+   begin
+      if (Value and 16#0000_8000#) /= 0 then
+         return Value or 16#FFFF_0000#;
+      else
+         return Value and 16#0000_FFFF#;
+      end if;
+   end Sign_Extend_16_Word;
+
+   function Read_ORGB (GTE : GTE_State) return Word32 is
+      R : Word32;
+      G : Word32;
+      B : Word32;
+   begin
+      if (GTE.IR1 and 16#0000_8000#) /= 0 then
+         R := 0;
+      elsif GTE.IR1 >= 16#0000_0F80# then
+         R := 16#0000_001F#;
+      else
+         R := Interfaces.Shift_Right (GTE.IR1, 7);
+      end if;
+
+      if (GTE.IR2 and 16#0000_8000#) /= 0 then
+         G := 0;
+      elsif GTE.IR2 >= 16#0000_0F80# then
+         G := 16#0000_001F#;
+      else
+         G := Interfaces.Shift_Right (GTE.IR2, 7);
+      end if;
+
+      if (GTE.IR3 and 16#0000_8000#) /= 0 then
+         B := 0;
+      elsif GTE.IR3 >= 16#0000_0F80# then
+         B := 16#0000_001F#;
+      else
+         B := Interfaces.Shift_Right (GTE.IR3, 7);
+      end if;
+
+      return
+        R or Interfaces.Shift_Left (G, 5) or Interfaces.Shift_Left (B, 10);
+   end Read_ORGB;
+
    procedure Write_Data
      (GTE : in out GTE_State; Index : Natural; Value : Word32) is
    begin
@@ -17,7 +69,7 @@ package body PSX.GTE is
             GTE.V0_Y := Interfaces.Shift_Right (Value, 16);
 
          when 1      =>
-            GTE.V0_Z := Value;
+            GTE.V0_Z := Value and 16#0000_FFFF#;
 
          --  V1
 
@@ -26,7 +78,7 @@ package body PSX.GTE is
             GTE.V1_Y := Interfaces.Shift_Right (Value, 16);
 
          when 3      =>
-            GTE.V1_Z := Value;
+            GTE.V1_Z := Value and 16#0000_FFFF#;
 
          -- V2
 
@@ -35,7 +87,7 @@ package body PSX.GTE is
             GTE.V2_Y := Interfaces.Shift_Right (Value, 16);
 
          when 5      =>
-            GTE.V2_Z := Value;
+            GTE.V2_Z := Value and 16#0000_FFFF#;
 
          --  Color
 
@@ -45,21 +97,21 @@ package body PSX.GTE is
          --  OTZ
 
          when 7      =>
-            GTE.OTZ := Value;
+            GTE.OTZ := Value and 16#0000_FFFF#;
 
          --  IR
 
          when 8      =>
-            GTE.IR0 := Value;
+            GTE.IR0 := Value and 16#0000_FFFF#;
 
          when 9      =>
-            GTE.IR1 := Value;
+            GTE.IR1 := Value and 16#0000_FFFF#;
 
          when 10     =>
-            GTE.IR2 := Value;
+            GTE.IR2 := Value and 16#0000_FFFF#;
 
          when 11     =>
-            GTE.IR3 := Value;
+            GTE.IR3 := Value and 16#0000_FFFF#;
 
          --  Screen XY FIFO
 
@@ -88,16 +140,16 @@ package body PSX.GTE is
          --  SZ FIFO
 
          when 16     =>
-            GTE.SZ0 := Value;
+            GTE.SZ0 := Value and 16#0000_FFFF#;
 
          when 17     =>
-            GTE.SZ1 := Value;
+            GTE.SZ1 := Value and 16#0000_FFFF#;
 
          when 18     =>
-            GTE.SZ2 := Value;
+            GTE.SZ2 := Value and 16#0000_FFFF#;
 
          when 19     =>
-            GTE.SZ3 := Value;
+            GTE.SZ3 := Value and 16#0000_FFFF#;
 
          --  RGB FIFO
 
@@ -109,6 +161,9 @@ package body PSX.GTE is
 
          when 22     =>
             GTE.RGB2 := Value;
+
+         when 23     =>
+            GTE.RES1 := Value;
 
          --  MAC
 
@@ -127,12 +182,18 @@ package body PSX.GTE is
          --  IRGB
 
          when 28     =>
-            GTE.IRGB := Value;
+            GTE.IRGB := Value and 16#0000_7FFF#;
+
+            GTE.IR1 := Interfaces.Shift_Left (Value and 16#0000_001F#, 7);
+
+            GTE.IR2 := Interfaces.Shift_Left (Value and 16#0000_03E0#, 2);
+
+            GTE.IR3 := Interfaces.Shift_Right (Value and 16#0000_7C00#, 3);
 
          --  ORGB
 
          when 29     =>
-            GTE.ORGB := Value;
+            null;
 
          --  LZCS
 
@@ -182,7 +243,7 @@ package body PSX.GTE is
               or Interfaces.Shift_Left (GTE.V0_Y and 16#0000_FFFF#, 16);
 
          when 1      =>
-            return GTE.V0_Z;
+            return Sign_Extend_16_Word (GTE.V0_Z);
 
          when 2      =>
             return
@@ -190,7 +251,7 @@ package body PSX.GTE is
               or Interfaces.Shift_Left (GTE.V1_Y and 16#0000_FFFF#, 16);
 
          when 3      =>
-            return GTE.V1_Z;
+            return Sign_Extend_16_Word (GTE.V1_Z);
 
          when 4      =>
             return
@@ -198,25 +259,25 @@ package body PSX.GTE is
               or Interfaces.Shift_Left (GTE.V2_Y and 16#0000_FFFF#, 16);
 
          when 5      =>
-            return GTE.V2_Z;
+            return Sign_Extend_16_Word (GTE.V2_Z);
 
          when 6      =>
             return GTE.RGBC;
 
          when 7      =>
-            return GTE.OTZ;
+            return GTE.OTZ and 16#0000_FFFF#;
 
          when 8      =>
-            return GTE.IR0;
+            return Sign_Extend_16_Word (GTE.IR0);
 
          when 9      =>
-            return GTE.IR1;
+            return Sign_Extend_16_Word (GTE.IR1);
 
          when 10     =>
-            return GTE.IR2;
+            return Sign_Extend_16_Word (GTE.IR2);
 
          when 11     =>
-            return GTE.IR3;
+            return Sign_Extend_16_Word (GTE.IR3);
 
          when 12     =>
             return
@@ -239,16 +300,16 @@ package body PSX.GTE is
               or Interfaces.Shift_Left (GTE.SY2 and 16#0000_FFFF#, 16);
 
          when 16     =>
-            return GTE.SZ0;
+            return GTE.SZ0 and 16#0000_FFFF#;
 
          when 17     =>
-            return GTE.SZ1;
+            return GTE.SZ1 and 16#0000_FFFF#;
 
          when 18     =>
-            return GTE.SZ2;
+            return GTE.SZ2 and 16#0000_FFFF#;
 
          when 19     =>
-            return GTE.SZ3;
+            return GTE.SZ3 and 16#0000_FFFF#;
 
          when 20     =>
             return GTE.RGB0;
@@ -260,7 +321,7 @@ package body PSX.GTE is
             return GTE.RGB2;
 
          when 23     =>
-            return 0;
+            return GTE.RES1;
 
          when 24     =>
             return GTE.MAC0;
@@ -278,7 +339,7 @@ package body PSX.GTE is
             return GTE.IRGB;
 
          when 29     =>
-            return GTE.ORGB;
+            return Read_ORGB (GTE);
 
          when 30     =>
             return GTE.LZCS;
@@ -291,16 +352,6 @@ package body PSX.GTE is
 
       end case;
    end Read_Data;
-
-   function Sign_Extend_16 (Value : Word32) return Word32 is
-      V : Word32 := Value and 16#0000_FFFF#;
-   begin
-      if (V and 16#0000_8000#) /= 0 then
-         return V or 16#FFFF_0000#;
-      else
-         return V;
-      end if;
-   end Sign_Extend_16;
 
    procedure Write_Control
      (GTE : in out GTE_State; Index : Natural; Value : Word32) is
@@ -466,7 +517,7 @@ package body PSX.GTE is
               or Interfaces.Shift_Left (GTE.RT32 and 16#0000_FFFF#, 16);
 
          when 36     =>
-            return GTE.RT33 and 16#0000_FFFF#;
+            return Sign_Extend_16_Word (GTE.RT33);
 
          --  Translation vector
 
@@ -502,7 +553,7 @@ package body PSX.GTE is
               or Interfaces.Shift_Left (GTE.L32 and 16#0000_FFFF#, 16);
 
          when 44     =>
-            return GTE.L33 and 16#0000_FFFF#;
+            return Sign_Extend_16_Word (GTE.LB3);
 
          --  Background color
 
@@ -538,7 +589,7 @@ package body PSX.GTE is
               or Interfaces.Shift_Left (GTE.LB2 and 16#0000_FFFF#, 16);
 
          when 52     =>
-            return GTE.LB3 and 16#0000_FFFF#;
+            return Sign_Extend_16_Word (GTE.LB3);
 
          --  Far color
 
@@ -562,19 +613,19 @@ package body PSX.GTE is
          --  Projection / depth cue
 
          when 58     =>
-            return GTE.H and 16#0000_FFFF#;
+            return Sign_Extend_16_Word (GTE.H);
 
          when 59     =>
-            return GTE.DQA and 16#0000_FFFF#;
+            return Sign_Extend_16_Word (GTE.DQA);
 
          when 60     =>
             return GTE.DQB;
 
          when 61     =>
-            return GTE.ZSF3 and 16#0000_FFFF#;
+            return Sign_Extend_16_Word (GTE.ZSF3);
 
          when 62     =>
-            return GTE.ZSF4 and 16#0000_FFFF#;
+            return Sign_Extend_16_Word (GTE.ZSF4);
 
          --  FLAG
 
