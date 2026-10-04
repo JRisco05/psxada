@@ -42,6 +42,7 @@ project Psxada is
       "tests/gpu/",
       "tests/gte/",
       "tests/gte/conformance",
+      "tests/gte/conformance_data/",
       "tests/dma/",
       "config/");
 

@@ -482,7 +482,11 @@ package body PSX.GTE is
          --  FLAG is read-only.
 
          when 63     =>
-            null;
+            GTE.FLAG := Value and 16#7FFF_F000#;
+
+            if (GTE.FLAG and 16#7F87_E000#) /= 0 then
+               GTE.FLAG := GTE.FLAG or 16#8000_0000#;
+            end if;
 
          when others =>
             null;
@@ -553,7 +557,7 @@ package body PSX.GTE is
               or Interfaces.Shift_Left (GTE.L32 and 16#0000_FFFF#, 16);
 
          when 44     =>
-            return Sign_Extend_16_Word (GTE.LB3);
+            return Sign_Extend_16_Word (GTE.L33);
 
          --  Background color
 
