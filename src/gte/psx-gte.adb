@@ -336,7 +336,7 @@ package body PSX.GTE is
             return GTE.MAC3;
 
          when 28     =>
-            return GTE.IRGB;
+            return Read_ORGB (GTE);
 
          when 29     =>
             return Read_ORGB (GTE);

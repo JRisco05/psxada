@@ -1,5 +1,6 @@
 with PSX.Types;
 with Interfaces;
+with Ada.Text_IO;
 
 package body PSX.GTE.Execute is
 
@@ -34,13 +35,12 @@ package body PSX.GTE.Execute is
    function SAR
      (Value : Long_Long_Integer; Amount : Natural) return Long_Long_Integer
    is
-
       Divisor : constant Long_Long_Integer := 2 ** Amount;
    begin
       if Value >= 0 then
          return Value / Divisor;
       else
-         return -((-Value) / Divisor);
+         return -(((-Value) + Divisor - 1) / Divisor);
       end if;
    end SAR;
 
@@ -484,7 +484,7 @@ package body PSX.GTE.Execute is
 
       GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
 
-      GTE.IR2 := Saturate_IR (GTE, MAC2, 23, LM);
+      GTE.IR2 := Saturate_IR (GTE, Signed_32 (To_Word32 (MAC2)), 23, LM);
 
       GTE.IR3 := Saturate_IR_RTPS_IR3 (GTE, MAC3, 22, LM);
 
@@ -514,6 +514,12 @@ package body PSX.GTE.Execute is
 
       MAC0 := Perspective * Signed_16 (GTE.IR1) + OFX_Value;
 
+      if MAC0 > 2_147_483_647 then
+         Set_Flag (GTE, 16);
+      elsif MAC0 < -2_147_483_648 then
+         Set_Flag (GTE, 15);
+      end if;
+
       GTE.MAC0 := To_Word32 (MAC0);
 
       GTE.SX0 := GTE.SX1;
@@ -529,6 +535,12 @@ package body PSX.GTE.Execute is
 
       MAC0 := Perspective * Signed_16 (GTE.IR2) + OFY_Value;
 
+      if MAC0 > 2_147_483_647 then
+         Set_Flag (GTE, 16);
+      elsif MAC0 < -2_147_483_648 then
+         Set_Flag (GTE, 15);
+      end if;
+
       GTE.MAC0 := To_Word32 (MAC0);
 
       GTE.SY2 := Saturate_Screen (GTE, SAR (MAC0, 16), 13);
@@ -539,6 +551,12 @@ package body PSX.GTE.Execute is
 
       MAC0 := Perspective * DQA_Value + DQB_Value;
 
+      if MAC0 > 2_147_483_647 then
+         Set_Flag (GTE, 16);
+      elsif MAC0 < -2_147_483_648 then
+         Set_Flag (GTE, 15);
+      end if;
+
       GTE.MAC0 := To_Word32 (MAC0);
 
       GTE.IR0 :=
@@ -548,6 +566,14 @@ package body PSX.GTE.Execute is
 
       if SAR (MAC0, 12) < 0 or else SAR (MAC0, 12) > 16#1000# then
          Set_Flag (GTE, 12);
+      end if;
+
+      --  -------------------------------------------------------
+      --  FLAG global
+      --  -------------------------------------------------------
+
+      if (GTE.FLAG and 16#7F87_E000#) /= 0 then
+         GTE.FLAG := GTE.FLAG or 16#8000_0000#;
       end if;
 
    end Execute_RTPS;
@@ -860,6 +886,13 @@ package body PSX.GTE.Execute is
       Sum := SZ1 + SZ2 + SZ3;
 
       MAC0_Raw := ZSF3 * Sum;
+
+      -- MAC0 overflow
+      if MAC0_Raw > 2_147_483_647 then
+         Set_Flag (GTE, 16);
+      elsif MAC0_Raw < -2_147_483_648 then
+         Set_Flag (GTE, 15);
+      end if;
 
       GTE.MAC0 := To_Word32 (MAC0_Raw);
 
