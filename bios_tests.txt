@@ -1,0 +1,15 @@
+Testing PSX BIOS with full hardware chain...
+
+BIOS loaded successfully. Running in high-speed mode...
+-------------------------------------------------------
+
+-------------------------------------------------------
+Total steps executed:  20000000
+Times at 0x00000E28:  0
+BIOS execution completed or hit step limit.
+
+=== ESTADO FINAL DE LA CPU ===
+  PC Actual   = 0xBFC06804
+  Next PC     = 0xBFC03968
+  Registro V0 = 0x00000000
+  Registro T1 = 0x00000000

@@ -6,6 +6,7 @@
 /tests/
 /.vscode/
 /ps1-tests/
+/bios-tests/
 trace_bios.txt
 ps1_texts.txt
 texts.txt
