@@ -1,6 +1,6 @@
 with PSX.Types;
 with Interfaces;
-with Ada.Text_IO;
+with Ada.Text_IO; use Ada.Text_IO;
 
 package body PSX.GTE.Execute is
 
@@ -283,6 +283,10 @@ package body PSX.GTE.Execute is
          Set_Flag (GTE, 25);
       end if;
 
+      Put_Line ("DEBUG MAC1_Raw=" & Long_Long_Integer'Image (MAC1_Raw));
+      Put_Line ("DEBUG MAC2_Raw=" & Long_Long_Integer'Image (MAC2_Raw));
+      Put_Line ("DEBUG MAC3_Raw=" & Long_Long_Integer'Image (MAC3_Raw));
+
       MAC1 := SAR (MAC1_Raw, SF * 12);
       MAC2 := SAR (MAC2_Raw, SF * 12);
       MAC3 := SAR (MAC3_Raw, SF * 12);
@@ -437,6 +441,32 @@ package body PSX.GTE.Execute is
       --  A new GTE command clears the calculation flags.
       GTE.FLAG := 0;
 
+      if Inst.Raw = 16#000A2401# then
+         Put_Line ("===== DEBUG TEST 62 RTPS =====");
+         Put_Line ("SF  =" & Natural'Image (SF));
+         Put_Line ("LM  =" & Boolean'Image (LM));
+
+         Put_Line ("VX  =" & Long_Long_Integer'Image (VX));
+         Put_Line ("VY  =" & Long_Long_Integer'Image (VY));
+         Put_Line ("VZ  =" & Long_Long_Integer'Image (VZ));
+
+         Put_Line ("RT11=" & Long_Long_Integer'Image (RT11));
+         Put_Line ("RT12=" & Long_Long_Integer'Image (RT12));
+         Put_Line ("RT13=" & Long_Long_Integer'Image (RT13));
+
+         Put_Line ("RT21=" & Long_Long_Integer'Image (RT21));
+         Put_Line ("RT22=" & Long_Long_Integer'Image (RT22));
+         Put_Line ("RT23=" & Long_Long_Integer'Image (RT23));
+
+         Put_Line ("RT31=" & Long_Long_Integer'Image (RT31));
+         Put_Line ("RT32=" & Long_Long_Integer'Image (RT32));
+         Put_Line ("RT33=" & Long_Long_Integer'Image (RT33));
+
+         Put_Line ("TRX =" & Long_Long_Integer'Image (TRX));
+         Put_Line ("TRY =" & Long_Long_Integer'Image (TRY));
+         Put_Line ("TRZ =" & Long_Long_Integer'Image (TRZ));
+      end if;
+
       --  -------------------------------------------------------
       --  Rotation + translation
       --  -------------------------------------------------------
@@ -446,6 +476,13 @@ package body PSX.GTE.Execute is
       MAC2_Raw := TRY * 16#1000# + RT21 * VX + RT22 * VY + RT23 * VZ;
 
       MAC3_Raw := TRZ * 16#1000# + RT31 * VX + RT32 * VY + RT33 * VZ;
+
+      if Inst.Raw = 16#000A2401# then
+         Put_Line ("===== TEST 62 MAC =====");
+         Put_Line ("MAC1_Raw =" & Long_Long_Integer'Image (MAC1_Raw));
+         Put_Line ("MAC2_Raw =" & Long_Long_Integer'Image (MAC2_Raw));
+         Put_Line ("MAC3_Raw =" & Long_Long_Integer'Image (MAC3_Raw));
+      end if;
 
       -- MAC1..MAC3 overflow detection.
       if MAC1_Raw > 16#7FF_FFFF_FFFF# then
@@ -474,6 +511,13 @@ package body PSX.GTE.Execute is
       MAC2 := SAR (MAC2_Raw, SF * 12);
       MAC3 := SAR (MAC3_Raw, SF * 12);
 
+      if Inst.Raw = 16#000A2401# then
+         Put_Line ("===== TEST 62 MAC AFTER SAR =====");
+         Put_Line ("MAC1 =" & Long_Long_Integer'Image (MAC1));
+         Put_Line ("MAC2 =" & Long_Long_Integer'Image (MAC2));
+         Put_Line ("MAC3 =" & Long_Long_Integer'Image (MAC3));
+      end if;
+
       GTE.MAC1 := To_Word32 (MAC1);
       GTE.MAC2 := To_Word32 (MAC2);
       GTE.MAC3 := To_Word32 (MAC3);
@@ -482,11 +526,18 @@ package body PSX.GTE.Execute is
       --  IR registers
       --  -------------------------------------------------------
 
-      GTE.IR1 := Saturate_IR (GTE, MAC1, 24, LM);
+      GTE.IR1 := Saturate_IR (GTE, Signed_32 (To_Word32 (MAC1)), 24, LM);
 
       GTE.IR2 := Saturate_IR (GTE, Signed_32 (To_Word32 (MAC2)), 23, LM);
 
       GTE.IR3 := Saturate_IR_RTPS_IR3 (GTE, MAC3, 22, LM);
+
+      if Inst.Raw = 16#000A2401# then
+         Put_Line ("===== TEST 62 IR =====");
+         Put_Line ("IR1 =" & Long_Long_Integer'Image (Signed_32 (GTE.IR1)));
+         Put_Line ("IR2 =" & Long_Long_Integer'Image (Signed_32 (GTE.IR2)));
+         Put_Line ("IR3 =" & Long_Long_Integer'Image (Signed_32 (GTE.IR3)));
+      end if;
 
       --  -------------------------------------------------------
       --  SZ FIFO
