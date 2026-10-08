@@ -75,13 +75,13 @@ package body PSX.GTE.Execute is
    end Saturate_IR;
 
    function Saturate_IR_RTPS_IR3
-     (GTE   : in out PSX.GTE.GTE_State;
-      Value : Long_Long_Integer;
-      Bit   : Natural;
-      LM    : Boolean) return Word32
+     (GTE        : in out PSX.GTE.GTE_State;
+      Value      : Long_Long_Integer;
+      Flag_Value : Long_Long_Integer;
+      Bit        : Natural;
+      LM         : Boolean) return Word32
    is
       Result : Long_Long_Integer := Value;
-
    begin
       -- El valor almacenado en IR3 respeta LM.
       if Result > 32_767 then
@@ -90,8 +90,9 @@ package body PSX.GTE.Execute is
          Result := (if LM then 0 else -32_768);
       end if;
 
-      -- El FLAG.22 de RTPS/RTPT ignora LM.
-      if Value > 32_767 or else Value < -32_768 then
+      -- FLAG.22 en RTPS/RTPT se evalúa sobre el
+      -- resultado correspondiente a MAC3 SAR (SF*12).
+      if Flag_Value > 32_767 or else Flag_Value < -32_768 then
          Set_Flag (GTE, Bit);
       end if;
 
@@ -487,41 +488,24 @@ package body PSX.GTE.Execute is
       GTE.IR2 := Saturate_IR (GTE, Signed_32 (To_Word32 (MAC2)), 23, LM);
 
       GTE.IR3 :=
-        Saturate_IR_RTPS_IR3 (GTE, Signed_32 (To_Word32 (MAC3)), 22, LM);
-
-      if Inst.Raw = 16#0000C401# or else Inst.Raw = 16#000CA001# then
-         Put_Line ("===== DEBUG RTPS =====");
-         Put_Line ("OPCODE =" & PSX.Types.Word32'Image (Inst.Raw));
-
-         Put_Line
-           ("MAC1 =" & Long_Long_Integer'Image (Signed_32 (To_Word32 (MAC1))));
-
-         Put_Line
-           ("MAC2 =" & Long_Long_Integer'Image (Signed_32 (To_Word32 (MAC2))));
-
-         Put_Line
-           ("MAC3 =" & Long_Long_Integer'Image (Signed_32 (To_Word32 (MAC3))));
-
-         Put_Line ("IR1 =" & Long_Long_Integer'Image (Signed_32 (GTE.IR1)));
-
-         Put_Line ("IR2 =" & Long_Long_Integer'Image (Signed_32 (GTE.IR2)));
-
-         Put_Line ("IR3 =" & Long_Long_Integer'Image (Signed_32 (GTE.IR3)));
-
-         Put_Line ("FLAG after IR =" & PSX.Types.Word32'Image (GTE.FLAG));
-
-         Put_Line ("MAC3_Raw =" & Long_Long_Integer'Image (MAC3_Raw));
-
-         Put_Line
-           ("SZ3 before saturation ="
-            & Long_Long_Integer'Image (SAR (MAC3_Raw, 12)));
-      end if;
+        Saturate_IR_RTPS_IR3
+          (GTE,
+           Signed_32 (To_Word32 (MAC3)),
+           (if SF = 0
+            then SAR (MAC3_Raw, 12)
+            else Signed_32 (To_Word32 (MAC3))),
+           22,
+           LM);
 
       --  -------------------------------------------------------
       --  SZ FIFO
       --  -------------------------------------------------------
 
-      SZ3_Value := SAR (MAC3_Raw, 12);
+      if SF = 0 then
+         SZ3_Value := SAR (MAC3_Raw, 12);
+      else
+         SZ3_Value := Signed_32 (To_Word32 (MAC3));
+      end if;
 
       GTE.SZ0 := GTE.SZ1;
       GTE.SZ1 := GTE.SZ2;
