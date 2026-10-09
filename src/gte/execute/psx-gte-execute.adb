@@ -863,17 +863,8 @@ package body PSX.GTE.Execute is
         - Interfaces.Integer_64 (X1) * Interfaces.Integer_64 (Y0)
         - Interfaces.Integer_64 (X2) * Interfaces.Integer_64 (Y1);
 
-      -- Validación matemática estricta de saturación de 32 bits con signo
-      if MAC0_Raw > 2147483647 then
-         Set_Flag (GTE, 16); -- Activa el bit 16 en el FLAG
-         GTE.MAC0 := 16#7FFF_FFFF#;
-      elsif MAC0_Raw < -2147483648 then
-         Set_Flag (GTE, 16);
-         GTE.MAC0 := 16#8000_0000#;
-      else
-         -- Si no hay desbordamiento, hacemos el cast seguro a Word32
-         GTE.MAC0 := To_Word32 (Long_Long_Integer (MAC0_Raw));
-      end if;
+      -- NCLIP almacena los 32 bits bajos del resultado en MAC0.
+      GTE.MAC0 := To_Word32 (Long_Long_Integer (MAC0_Raw));
 
    end Execute_NCLIP;
 

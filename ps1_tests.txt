@@ -206,8 +206,7 @@ INPUT r[ 61] = 0xAC9E7936
 INPUT r[ 62] = 0x00009D8D
 INPUT r[ 63] = 0x0000838C
 FAIL Test 138 opcode=0x0007E406
-  r[ 24 ] expected=0x5F07EAB0 actual=0x80000000
-  r[ 63 ] expected=0x80008000 actual=0x00010000
+  r[ 63 ] expected=0x80008000 actual=0x00000000
 PASS Test 139 opcode=0x0004E406
 PASS Test 140 opcode=0x00076006
 PASS Test 141 opcode=0x00014406
