@@ -851,7 +851,7 @@ package body PSX.GTE.Execute is
       -- Usamos un entero de 64 bits para calcular el área intermedia sin perder datos
       MAC0_Raw : Interfaces.Integer_64;
    begin
-      -- Inicializamos el FLAG en 0 (NCLIP limpia banderas previas de geometría)
+      -- 🌟 SOLUCIÓN: Limpiamos el FLAG al entrar (Quitamos el valor estático)
       GTE.FLAG := 0;
 
       -- Fórmula matemática nativa LLE de la PS1 para el producto cruzado 2D
@@ -865,6 +865,20 @@ package body PSX.GTE.Execute is
 
       -- NCLIP almacena los 32 bits bajos del resultado en MAC0.
       GTE.MAC0 := To_Word32 (Long_Long_Integer (MAC0_Raw));
+
+      -- 🌟 EVALUACIÓN DE BANDERAS DINÁMICAS (Solo si el hardware real desborda):
+      -- Si el área calculada supera los límites físicos de 32 bits con signo,
+      -- entonces activamos los bits correspondientes en el FLAG de la PS1.
+      if MAC0_Raw > 2147483647 then
+         Set_Flag (GTE, 16); -- Bit 16: MAC0 Positive Overflow
+      elsif MAC0_Raw < -2147483648 then
+         Set_Flag (GTE, 15); -- Bit 15: MAC0 Negative Overflow
+      end if;
+
+      -- Si se levantó un error de desbordamiento, encendemos el bit 31 global
+      if GTE.FLAG /= 0 then
+         GTE.FLAG := GTE.FLAG or 16#8000_0000#;
+      end if;
 
    end Execute_NCLIP;
 
